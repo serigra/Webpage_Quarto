@@ -1,0 +1,41 @@
+---
+title: "Time trends in general practitioners' home visits for older patients: a retrospective cross-sectional study from Switzerland"
+author: "Stefan Neuner-Jehle, Sereina M. Graber, Ellen Keizer, Carola A. Huber, Eva Blozik, Thomas Rosemann, Oliver Senn"
+date: '2021-07-21'
+categories:
+- claims data   
+- GP home visits
+- Switzerland
+
+links:
+  - icon: doi
+    icon_pack: ai
+    name: Swiss medical weekly
+    url: https://smw.ch/index.php/smw/article/view/3032
+    
+output:
+  html_document:
+    df_print: paged
+---
+
+## Abstract
+
+**What is known on the subject, and what the study adds**:
+
+The number of home visits by general practitioners (GPs) has decreased in recent years, in contrast to the increasing number of frail and older patients in western countries. Current data on GP home visit numbers and rates are lacking for Switzerland. Our study provides new data on GP home visit numbers and rates, and their associations with patient characteristics.
+
+**Aim**
+
+Our study aimed at investigating the time trend of GP home visits to older patients from 2014 to 2018 in Switzerland, and associations between GP home visits and patient characteristics including healthcare utilisation and living situation.
+
+**Methods**
+
+Retrospective cross-sectional study of insurance claims data from 2014 to 2018 among patients aged ≥65 years (Nextrapolated = 2,095,102; Nraw = 339,301). We compared patient characteristics between patients with and without GP home visits using descriptive statistics. We performed logistic regression analyses to detect associations between patient characteristics and GP home visits, including subgroups of patients aged ≥80 and patients living in a nursing home. Regression models were adjusted for age and sex.
+
+**Results**
+
+The yearly GP home visit rate declined from 10.7% to 9.3% from 2014 to 2018 (p \<0.0001). Among patients aged ≥80, the rate declined from 26.1% to 23.1% (p \<0.0001), and among patients living in a nursing home from 68.7% to 65.8% (p \<0.0001). Regression analyses revealed increased health care utilisation and a higher burden of morbidity and mortality in patients receiving GP home visits.
+
+**Conclusion**
+
+There is an ongoing decline of GP home visits over the past years, with a potentially negative impact on the quality of care for older and frail patients.

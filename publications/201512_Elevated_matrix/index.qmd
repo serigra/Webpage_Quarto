@@ -1,0 +1,33 @@
+---
+title: "Elevated Matrix Metalloproteinase Levels in Bronchi Infected with Periodontopathogenic Bacteria"
+author: "Luca Bernasconi, Liza L. Ramenzoni, Ahmed Al-Majid, Gabrielo M. Tini, Sereina M. Graber, Patrick R. Schmidlin, Sarosh Irani"
+date: '2015-12-14'
+
+links:
+  - icon: doi
+    icon_pack: ai
+    name: PLoS ONE
+    url: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0144461
+    
+output:
+  html_document:
+    df_print: paged
+---
+
+## Abstract
+
+**Objectives**
+
+To determine whether bronchial colonisations/infections with periodontopathogenic bacteria are associated with elevated inflammatory markers such as MMPs, interleukins and Tumor necrosis factor alpha in the bronchial fluid.
+
+**Methods**
+
+Periodontal status was assessed in consecutive outpatients planned for elective bronchoscopies, and PCR for periodontopathogenic bacteria was performed from a protected specimen brush sample taken from the bronchial mucosa. Additionally, MMPs, interleukins and Tumor necrosis factor alpha were measured in the bronchial fluid.
+
+**Results**
+
+Out of the four species assessed, one species was found in 13 of 91 (14%) patients, and two in 12 (13%), three in 13 (14%) and all four in 1 (1%) patient, respectively. In multiple linear regression models the presence of Treponema denticola showed a consistent pattern of positive effects in bronchial fluid (Bonferroni adjusted p-values) on the levels of MMP9 (p adj.: 0.028) and MMP12 (p adj.: 0.029). Active smoking was independently associated with increased levels of aMMP8 (p adj.: 0.005) and MMP9 (p adj.: 0.009). Levels of IL-1 ß, IL-8 and Tumor necrosis factor alpha measured in the bronchial fluid were not affected by the presence of periodontopathogenic bacteria.
+
+**Conclusions**
+
+Bronchial colonisation/infection with Treponema denticola and smoking are independently associated with elevated MMPs (MMP9/MMP12 and MMP8/MMP9, respectively) in the bronchial fluid.

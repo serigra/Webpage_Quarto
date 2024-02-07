@@ -1,0 +1,37 @@
+---
+title: "Impact of intraoperative fluid administration on outcome in patients undergoing robotic-assisted laparoscopic prostatectomy – a retrospective analysis"
+author: Tobias Piegeler, Pamela Dreessen, Sereina M. Graber, Sarah R. Haile, Daniel M. Schmid, Beatrice Beck-Schimmer 
+date: '2014-07-30'
+alias:
+  - /publications
+categories:
+summary: ''
+subtitle: ''
+featured: yes
+
+links:
+  - icon: doi
+    icon_pack: ai
+    name: BMC Anesthesiology
+    url: https://bmcanesthesiol.biomedcentral.com/articles/10.1186/1471-2253-14-61
+    
+output:
+  html_document:
+    df_print: paged
+---
+
+**Background**
+
+Robotic-assisted laparoscopic prostatectomy (RALP) gained much popularity during the last decade. Although the influence of intraoperative fluid management on patients' outcome has been largely discussed in general, its impact on perioperative complications and length of hospitalization in patients undergoing RALP has not been examined so far. We hypothesized that a more restrictive fluid management might lead to a shortened length of hospitalization and a decreased rate of complications in our patients.
+
+**Methods**
+
+Retrospective analysis of data of 182 patients undergoing RALP at an University Hospital (first series of RALP performed at the center).
+
+**Results**
+
+The amount of fluid administered was initially normalized for body mass index of the patient and the duration of the operation and additionally corrected for age and the interaction of these variables. The application of crystalloids (multiple linear regression model, estimate = -0.044, p = 0.734) had no effect on the length of hospitalization, whereas a negative effect was found for colloids (estimate = -8.317, p = 0.021). Additionally, a significant interaction term between age and the amount of colloid applied (estimate = 0.129, p = 0.028) was calculated. Evaluation of the influence of intraoperative fluid administration using multiple logistic regression models corrected for body mass index, duration of the surgery and additionally for age revealed a negative effect of crystalloids on the incidence of an anastomotic leak between bladder and urethra (estimate = -23.860, p = 0.017), with a significant interaction term between age and the amount of crystalloids (estimate = 0.396, p = 0.0134). Colloids had no significant effect on this particular complication (estimate = 1.887, p = 0.524). Intraoperative blood loss did not alter the incidence of an anastomotic leak (estimate = 0.001, p = 0.086), nor did it affect the length of hospitalization (estimate = 0.0001, p = 0.351).
+
+**Conclusions**
+
+In accordance to the findings of our study, we suggest that a standardized, more restrictive fluid management might be beneficial in patients undergoing RALP. In older patients this measure would be able to shorten the length of hospitalization and to decrease the incidence of anastomosis leakage as a major complication.

@@ -1,0 +1,42 @@
+---
+title: 'Use of drugs to treat symptoms and acute conditions during pregnancy in outpatient care in Switzerland between 2014 and 2018: analysis of Swiss healthcare claims data'
+author: "Eva Gerbier, Sereina M. Graber, Marlene Rauch, Carole A. Marxer, Christoph R. Meier, David Baud, UrsulaWinterfel, Eva Blozik, Daniel Surbek, Julia Spoendlind, Alice Panchaud"
+date: '2021-11-28'
+categories:
+- claims data   
+- pregnancy
+- drugs
+- acute conditions
+
+links:
+  - icon: doi
+    icon_pack: ai
+    name: Swiss medical weekly
+    url: https://smw.ch/index.php/smw/article/view/3108
+    
+output:
+  html_document:
+    df_print: paged
+---
+
+## Abstract
+
+**Background**
+
+Evidence on the use of drugs during pregnancy in Switzerland is lacking.
+
+**Objectives**
+
+To evaluate utilisation of prescribed drugs during pregnancy in outpatient care in Switzerland, focusing on treatments for pain, infections, gastro-oesophageal reflux, nausea/vomiting, and constipation.
+
+**METHODS**
+
+We conducted a descriptive study using the Swiss Helsana claims database (2014--2018). We established a cohort of pregnancies by identifying deliveries and estimating the date of the last menstrual period. We identified claims for the following drugs during pregnancy; analgesics (opioids, paracetamol, and nonsteroidal anti-inflammatory drugs \[NSAIDs\]), oral antibiotics, antacids, proton pump inhibitors (PPIs), anti-nausea drugs (propulsives and 5HT3-antagonists), and laxatives. Within these drug groups we quantified exposure prevalence to the most prescribed drugs (to \>1% of pregnancies) during pregnancy as well as to specific potentially teratogenic or fetotoxic drugs during specific risk periods. Results were extrapolated relative to the demographic distribution of the Swiss population.
+
+**Results**
+
+We identified an extrapolated population of 369,371 pregnancies, with a weighted mean maternal age of 32.0 years (weighted standard deviation 5.1). Analgesics were claimed in 34.5% (95% confidence interval \[CI\] 33.9--35.0%) of pregnancies, most frequently paracetamol (30.3%, 29.8--30.8%), followed by NSAIDs (8.6%, 8.3--8.8%), and opioids (2.6%, 2.4--2.8%). NSAIDs were claimed in 1.3% (1.2--1.4%) of pregnancies after week 24, and opioids were claimed in 1.3% (1.2--1.4%) in trimester 3. Antibiotics were dispensed in 26.3% (25.8--26.8%) of pregnancies, most frequently amoxicillin (14.6%, 95% CI 14.2--14.9%). Claims for potentially teratogenic or fetotoxic antibiotics during risk periods were each recorded in \<0.6% of pregnancies. PPIs were claimed in 16.0% (15.6--16.3%) and antacids in 10.6% (10.3--11.0%) of pregnancies, but several antacid products are not reimbursed and thus not present in insurance claims. Anti-nausea drugs were claimed in 16.4% (16.0--16.7%) of pregnancies, most frequently metoclopramide in 14.4% (14.0--14.7%). Ondansetron was mainly dispensed in trimester 1, 1.0% (0.9--1.1%). In total, 6.4% (6.2--6.7%) of pregnancies had a claim for laxatives, most frequently for macrogol (2.4%, 95% CI 2.2--2.5%).
+
+**Conclusion**
+
+The observed pattern of claimed drugs during pregnancy is in line with existing treatment guidelines. Exposure to potentially teratogenic and fetotoxic drugs was small, but given the lack of recorded diagnosis, we cannot determine if their use was clinically indicated.

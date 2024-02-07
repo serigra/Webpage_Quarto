@@ -1,0 +1,19 @@
+---
+title: "The Ecology of Social Learning in Animals and its Link with Intelligence"
+author: "Carel van Schaik, Sereina M. Graber, Caroline Schuppli, Judith Burkart"
+date: '2017-01-09'
+
+links:
+  - icon: doi
+    icon_pack: ai
+    name: The Spanish Journal of Psychology
+    url: https://www.cambridge.org/core/journals/spanish-journal-of-psychology/article/abs/ecology-of-social-learning-in-animals-and-its-link-with-intelligence/928957B6AF798C78708CC23CEDA580CA
+    
+output:
+  html_document:
+    df_print: paged
+---
+
+## Abstract
+
+Classical ethology and behavioral ecology did not pay much attention to learning. However, studies of social learning in nature reviewed here reveal the near-ubiquity of reliance on social information for skill acquisition by developing birds and mammals. This conclusion strengthens the plausibility of the cultural intelligence hypothesis for the evolution of intelligence, which assumes that selection on social learning abilities automatically improves individual learning ability. Thus, intelligent species will generally be cultural species. Direct tests of the cultural intelligence hypothesis require good estimates of the amount and kind of social learning taking place in nature in a broad variety of species. These estimates are lacking so far. Here, we start the process of developing a functional classification of social learning, in the form of the social learning spectrum, which should help to predict the mechanisms of social learning involved. Once validated, the categories can be used to estimate the cognitive demands of social learning in the wild.

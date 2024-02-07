@@ -1,0 +1,23 @@
+---
+title: "The economics of brain size evolution in vertebrates"
+author: "Sandra A. Heldstab, Karin Isler, Sereina M. Graber, Carel P. van Schaik"
+date: '2022-06-20'
+alias:
+  - /publications
+categories:
+  - Evolutionary Biology
+  - brain size
+  - vertebrates
+publishDate: '2022-06-20T10:00:00-05:00'
+publication: 'Current Biology'
+
+links:
+- icon: doi
+  icon_pack: ai
+  name: Publication
+  url: https://www.cell.com/current-biology/fulltext/S0960-9822(22)00735-7?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0960982222007357%3Fshowall%3Dtrue
+---
+
+## Abstract
+
+Across the animal kingdom, we see remarkable variation in brain size. This variation has even increased over evolutionary time. Traditionally, studies aiming to explain brain size evolution have looked at the fitness benefits of increased brain size in relation to its increased cognitive performance in the social and/or ecological domain. However, brains are among the most energetically expensive tissues in the body and also require an uninterrupted energy supply. If not compensated, these energetic demands inevitably lead to a reduction in energy allocation to other vital functions. In this review, we summarize how an increasing number of studies show that to fully comprehend brain size evolution and the large variation in brain size across lineages, it is important to look at the economics of brains, including the different pathways through which the high energetic costs of brains can be offset. We further show how numerous studies converge on the conclusion that cognitive abilities can only drive brain size evolution in vertebrate lineages where they result in an improved energy balance through favourable ecological preconditions. Cognitive benefits that do not directly improve the organism's energy balance can only be selectively favoured when they produce such large improvements in reproduction or survival that they outweigh the negative energetic effects of the large brain.

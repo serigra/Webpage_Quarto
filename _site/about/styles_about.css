@@ -1,0 +1,76 @@
+/* title: Sereina M. Graber */
+.title {
+  font-family: "Petrona";
+  font-size: 2.5rem;
+  color: #235347;
+  font-weight: 500;
+  line-height: 1.1em !important;
+}
+
+/* subtitle: PhD  */
+.subtitle {
+  font-family: "Petrona";
+  color: #B2BEB5;
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+/* profile picture  */
+.about-image {
+  margin-top: 0.1em; /* image shifted a little bit to bottom*/
+  padding: 0 0em 0em 0;
+}
+
+
+/* text */
+.about-contents {
+  padding: 0 0 0 2em !important;
+  font-size: 1.1rem;
+  color: #666260;
+}
+
+
+/* # Background  */
+h1 {
+color: #235347;
+font-family: "Petrona";
+font-size: 2.5rem;
+font-weight: 500;
+margin-top: 0px;
+margin-bottom: 1px;
+}
+
+
+/* ## Experience, Education  */
+h2 {
+color: #B2BEB5;
+font-family: "Petrona";
+font-size: 1.5rem;
+font-weight: 500;
+margin-top: 0px;
+margin-bottom: 1px;
+}
+
+
+/* links */
+a {
+  font-family: "Petrona";
+  color: #FA2FBD;
+  font-size: 1.0em;
+  text-transform: lowercase;
+}
+
+/* social links: block of links */
+.about-entity .about-links {
+  justify-content: flex-end !important;
+  column-gap: 0em !important;
+  font-size: 1.4em !important;
+}
+
+/* social links: individual links */
+.about-entity .about-link {
+  padding: 0.25em 0.25em !important;
+  border: none !important;  
+}

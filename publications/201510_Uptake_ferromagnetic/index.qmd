@@ -1,0 +1,36 @@
+---
+title: "Uptake of ferromagnetic carbon-encapsulated metal nanoparticles in endothelial cells: Influence of shear stress and endothelial activation"
+author: "Melanie Jaboson, Birgit Roth Zgraggen, Sereina M. Graber, Christoph M. Schumacher, Wendelin J. Stark, Claudia Dumrese, Jose Maria Mateos, Caroline Aemisegger, Urs Ziegler, Martin Urner, Inge K. Herrmann, Beatrice Beck-Schimmer"
+date: "2015-10-05"
+
+alias:
+  - /publications
+
+links:
+  - icon: doi
+    icon_pack: ai
+    name: Nanomedicine
+    url: https://www.futuremedicine.com/doi/10.2217/nnm.15.172
+    
+output:
+  html_document:
+    df_print: paged
+---
+
+## Abstract
+
+**Aim**
+
+Magnetic field guided drug targeting holds promise for more effective cancer treatment. Intravascular application of magnetic nanoparticles, however, bears the risk of potentially important, yet poorly understood side effects, such as off-target accumulation in endothelial cells.
+
+**Materials & methods**
+
+Here, we investigated the influence of shear stress (0--3.22 dyn/cm2), exposure time (5--30 min) and endothelial activation on the uptake of ferromagnetic carbon-encapsulated iron carbide nanomagnets into endothelial cells in an in vitro flow cell model.
+
+**Results**
+
+We found that even moderate shear stresses typically encountered in the venous system strongly reduce particle uptake compared with static conditions. Interestingly, a pronounced particle uptake was observed in inflamed endothelial cells.
+
+**Conclusion**
+
+This study highlights the importance of relevant exposure scenarios accounting for physiological conditions when studying particle--cell interactions as, for example, shear stress and endothelial activation are major determinants of particle uptake. Such considerations are of particular importance with regard to successful translation of in vitro findings into (pre-)clinical end points.

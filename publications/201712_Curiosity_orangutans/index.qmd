@@ -1,0 +1,19 @@
+---
+title: "Curiosity boosts orang-utan problem-solving ability"
+author: "Laura A. Damerius, Sereina M. Graber, Erik P. Willems, Carel P. van Schaik"
+date: '2017-11-07'
+
+links:
+  - icon: doi
+    icon_pack: ai
+    name: Animal Behaviour
+    url: https://www.sciencedirect.com/science/article/abs/pii/S0003347217303299?via%3Dihub
+    
+output:
+  html_document:
+    df_print: paged
+---
+
+## Abstract
+
+Investigating the mechanisms underlying individual variation in cognitive performance is a crucial step towards understanding the structure and evolution of cognition. In this study, we investigated phenotypic plasticity of 61 Bornean, Pongo pygmaeus, and Sumatran, Pongo abelii, orang-utans to gain insight into how rearing history shapes problem-solving approaches. We first examined the determinants of an individual's response-and-exploration style, which we assessed using five independent novelty response and exploration tasks. Our findings revealed that both previous care by humans and social housing with conspecifics elicited a curious response-and-exploration style (characterized by a positive response to novelty and a high motivation to explore). Second, we investigated how the response-and-exploration style and previous experiences affected an individual's problem-solving performance in a variety of tasks aimed at assessing physical cognition, including reversal learning, inhibitory control, causal reasoning and tool use. We found curiosity to be the sole predictor of problem-solving performance. However, curiosity is strikingly rare in wild orang-utans, being mainly induced by contact with humans and living in a safe and stimulating physical and social environment. We therefore suggest that curiosity in orang-utans is an artefact of captivity, a potential only expressed under special conditions. The origin of curiosity in our own lineage may have been an important contributor to the rapid rise in the complexity of our ancestors' material culture.

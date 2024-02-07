@@ -1,0 +1,38 @@
+---
+title: "Shared microbiome in gums and the lung in an outpatient population"
+author: Patrick R. Schmidlin, Patrick Fachinger, Gabrielo Tini, Sereina M. Graber, Burkhardt Seifert, Sylke Dombrowa, Sarosh Irani
+date: '2014-10-14'
+categories:
+  - Microbiome
+  - Periodontitis
+  - Bronchial inflammation
+  - Periopathogens
+
+links:
+  - icon: doi
+    icon_pack: ai
+    name: The Journal of infection
+    url: https://www.journalofinfection.com/article/S0163-4453(14)00312-0/fulltext
+    
+output:
+  html_document:
+    df_print: paged
+---
+
+## Abstract
+
+**Objectives**
+
+Whether periopathogenic bacteria occur in the lung and gums simultaneously and what impact periodontitis has is unknown.
+
+**Methods**
+
+In consecutive outpatients scheduled for bronchoscopies we performed a periodontal screening index. PCR to determine four periopathogens and seven less pathogenic species in both the periodontal pocket and bronchial protected specimen brush was used. Activated MMP8 in saliva and bronchial fluid was measured.
+
+**Results**
+
+Periopathogens were detectable in gums and in the bronchial protected specimen brush in 75 (80%) and 27 (30%) of the cases, respectively. The concentration of activated MMP 8 was above 40 ng/ml in the saliva and in the bronchial fluid sample in six and 31 subjects, respectively. Significant agreement between the periodontal and bronchial compartment was found in three out of the four periopathogens. Patients with periopathogens in the lung suffered from periodontitis more frequently (p = 0.01). In patients with periopathogens detectable in the lung the concentration of aMMP8 tends to be more frequently above 40 ng/ml in the bronchial fluid (p = 0.09).
+
+**Conclusions**
+
+Agreement between periodontal and bronchial microbiome is more distinct for periopathogens than for less pathogenic species. Periodontitis itself represents a risk factor for pulmonary colonization with certain periopathogens. Pulmonary colonization with periopathogens seems to be associated with increased local inflammation.

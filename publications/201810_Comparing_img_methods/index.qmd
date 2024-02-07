@@ -1,0 +1,33 @@
+---
+title: "Comparing Two Imaging Methods for Follow-Up of Lung Cancer Treatment: A Randomized Pilot Study"
+author: "Franco Gambazzi, Lukas D. Frey, Matthias Bruehlmeier, Wolf-Dieter Janthur, Sereina M. Graber, Juerg Heuberger, Oliver S. Springer, Roland Zweifel, Bettina Boerner, Gabrielo M. Tini, Sarosh Irani"
+date: '2018-10-04'
+
+links:
+  - icon: doi
+    icon_pack: ai
+    name: The Annals of Thoracic Surgery
+    url: https://linkinghub.elsevier.com/retrieve/pii/S0003497518313584
+    
+output:
+  html_document:
+    df_print: paged
+---
+
+## Abstract
+
+**Background**
+
+Scientific data on the image modality to be used in postcurative treatment surveillance of non-small cell lung cancer patients are scarce. This prospective randomized pilot trial compared the performance of integrated 18F-fluorodeoxyglucose positron emission tomography-computed tomography (PET-CT) and contrast-enhanced computed tomography (CE-CT).
+
+**Methods**
+
+After termination of curative-intent treatment, patients were randomly assigned to the PET-CT or the CE-CT group. Imaging was performed every 6 months for 2 years. If suspicious radiologic findings were detected or patients became symptomatic, a diagnostic workup was initiated. Sensitivity, specificity, and positive predictive value for detecting cancer recurrence were calculated for both imaging procedures.
+
+**Results**
+
+The study enrolled 96 patients. In 14 of 50 patients (28%) in the PET-CT group and in 14 of 46 patients (30%) in the CE-CT group, a suspicious radiologic finding was confirmed as cancer recurrence after diagnostic workup. False-positive findings were detected in 11 patients (22%) of the PET-CT group and in 8 patients (17%) of the CE-CT group. The sensitivity, specificity, and positive predictive value for detecting cancer recurrence (95% confidence interval) were 0.88 (0.62 to 0.98), 0.62 (0.42 to 0.79), and 0.56 (0.35 to 0.76) for PET-CT and 0.93 (0.68 to 1.00), 0.72 (0.53 to 0.87), and 0.64 (0.41to 0.83) for CE-CT, respectively.
+
+**Conclusions**
+
+The results of our study suggest that PET-CT is not superior to CE-CT in detecting cancer recurrence during 2 years after curative-intent treatment of non-small cell lung cancer.

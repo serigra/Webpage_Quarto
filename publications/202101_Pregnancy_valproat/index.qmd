@@ -1,0 +1,34 @@
+---
+title: "Use of valproate in pregnancy and in women of childbearing age between 2014 and 2018 in Switzerland: a retrospective analysis of Swiss healthcare claims data"
+author: "Julia Spoendlin, Eva Blozik, Sereina M. Graber, Marlene Rauch, Carole A. Marxer, Stephan Rüegg, Christoph Meier, Ursula Winterfeld, Alice Panchaud"
+date: '2021-01-10'
+
+categories:
+- claims data   
+- pregnancy
+- valproat
+- anti-Epileptics
+- Switzerland
+
+links:
+  - icon: doi
+    icon_pack: ai
+    name: Swiss medical weekly
+    url: https://smw.ch/index.php/smw/article/view/2936
+    
+output:
+  html_document:
+    df_print: paged
+---
+
+## Abstract
+
+**AIMS OF THE STUDY**
+
+The prevalence of the use of valproate during pregnancy and by women of childbearing age in Switzerland is not known. We aimed to study the use of antiseizure drugs by these women in Switzerland, with a particular focus on valproate.
+
+**METHODS** We conducted a retrospective descriptive study using the healthcare claims database of the Swiss health insurance Helsana (2014--18). We established two separate study populations: (1) a cohort of pregnancies leading to a delivery, and (2) all women of childbearing age (15--45 years) who were insured with Helsana for at least one year during the study period. We identified the dispensation of valproate, lamotrigine, carbamazepine, levetiracetam, topiramate, pregabalin, gabapentin, phenobarbital, and phenytoin (1) between delivery and three months prior to the estimated date of the last menstrual period, and (2) by calendar year. We quantified exposure prevalence of each antiseizure drug as the number of women with ≥1 prescription fill per 10,000 (1) pregnancies, and (2) women by calendar year. Results were weighted for the demographic distribution of the Helsana population relative to the Swiss population.
+
+**RESULTS** We identified a weighted pregnancy population of 387,418 pregnancies, with a mean maternal age at delivery of 31.9 years (standard deviation 5.1). Lamotrigine was the most frequently dispensed antiseizure drug during pregnancy (20/10,000), followed by levetiracetam (11/10,000), and pregabalin (3.8/10,000). Valproate was dispensed to 1.9/10,000 women during pregnancy and to 1.3/10,000 women within 90 days prior to the last menstrual period but not during pregnancy. The weighted study population of women aged 15--45 years consisted of 2,781,151 women, of whom 74,080 (270/10,000) were exposed to ≥1 of the evaluated antiseizure drugs. Pregabalin was the most frequently dispensed antiseizure drug (64/10,000), followed by lamotrigine (46/10,000), topiramate (32/10,000), and valproate (25/10,000). The use of valproate decreased from 28/10,000 women in 2014 to 21/10,000 women in 2018.
+
+**CONCLUSIONS** The prevalence of exposure to valproate during pregnancy was comparable to Denmark and lower than in other European countries. Despite decreasing exposure prevalence, the use of valproate in women of childbearing age in Switzerland seems higher than the actual clinical need.

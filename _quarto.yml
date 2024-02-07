@@ -1,0 +1,41 @@
+project:
+  type: website
+
+website:
+  title: "Sereina"
+  favicon: home_polygon_1.png # image in root folder, same for "home" page
+  search:
+    location: navbar
+    type: overlay
+  navbar:
+    title: false # not using website title on left side of navbar...
+    search: true
+    logo: home_polygon_1.png # logo on top left, next to website title
+    right:
+      - href: index.qmd
+        text: home
+      - href: about/about.qmd
+        text: about
+      - href: blog/index.qmd
+        text: blog
+      - text: publications
+        aria-label: "Publications"
+        href: publications/index.qmd
+    tools:
+      - icon: github
+        menu:
+          - text: Source Code
+            url:  https://github.com/serigra/Webpage/tree/main
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    grid:
+      sidebar-width: 200px
+      body-width: 1100px
+      margin-width: 200px
+      gutter-width: 1.5rem
+
+editor: visual
+

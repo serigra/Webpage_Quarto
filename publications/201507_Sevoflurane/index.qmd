@@ -1,0 +1,33 @@
+---
+title: "Late Post-Conditioning with Sevoflurane after Cardiac Surgery--Are Surrogate Markers Associated with Clinical Outcome?"
+author: "John M. Bonvini, Beatrice Beck-Schimmer, Sonja J. Kuhn, Sereina M. Graber, Thomas A. Neff, Martin Schläpfer"
+date: '2015-07-21'
+
+links:
+  - icon: doi
+    icon_pack: ai
+    name: PLoS ONE
+    url: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0132165
+    
+output:
+  html_document:
+    df_print: paged
+---
+
+## Abstract
+
+**Introduction**
+
+In a recent randomized controlled trial our group has demonstrated in 102 patients that late post-conditioning with sevoflurane performed in the intensive care unit after surgery involving extracorporeal circulation reduced damage to cardiomyocytes exposed to ischemia reperfusion injury. On the first post-operative day the sevoflurane patients presented with lower troponin T values when compared with those undergoing propofol sedation. In order to assess possible clinical relevant long-term implications in patients enrolled in this study, we performed the current retrospective analysis focusing on cardiac and non-cardiac events during the first 6 months after surgery.
+
+**Methods**
+
+All patients who had successfully completed the late post-conditioning trial were included into this follow-up. Our primary and secondary endpoints were the proportion of patients experiencing cardiac and non-cardiac events, respectively. Additionally, we were interested in assessing therapeutic interventions such as initiation or change of drug therapy, interventional treatment or surgery.
+
+**Results**
+
+Of 102 patients analyzed in the primary study 94 could be included in this follow-up. In the sevoflurane group (with 41 patients) 16 (39%) experienced one or several cardiac events within 6 months after cardiac surgery, in the propofol group (with 53 patients) 19 (36%, p=0.75). Four patients (9%) with sevoflurane vs. 7 (13%) with propofol sedation had non-cardiac events (p=0.61). While a similar percentage of patients suffered from cardiac and/or non-cardiac events, only 12 patients in the sevoflurane group compared to 20 propofol patients needed a therapeutic intervention (OR: 0.24, 95% CI: 0.04-1.43, p=0.12). A similar result was found for hospital admissions: 2 patients in the sevoflurane group had to be re-admitted to the hospital compared to 8 in the propofol group (OR 0.23, 95% CI: 0.04-1.29, p=0.10).
+
+**Conclusions**
+
+Sevoflurane does not seem to provide protection with regard to the occurrence of cardiac and non-cardiac events in the 6-month period following cardiac surgery with the use of extracorporeal circulation. However, there was a clear trend towards fewer interventions (less need for treatment, fewer hospital admissions) associated with sevoflurane post-conditioning in patients experiencing any event. Such results might encourage launching large multicenter post-conditioning trials with clinical outcome defined as primary endpoint.

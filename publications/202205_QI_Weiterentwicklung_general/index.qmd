@@ -1,0 +1,33 @@
+---
+title: "Evidence-based indicators for the measurement of quality of primary care using health insurance claims data in Switzerland: update of the SQUIPRICA working group"
+author: "Eva Blozik, Renato Farcher, Sereina M. Graber, Carola A. Huber and Swiss Quality Indicator for Primary Care (SQIPRICA) Working Group"
+date: '2022-05-11'
+caetgories: 
+  - Health Services Research
+  - quality
+publishDate: '2022-05-11T10:00:00-05:00'
+publication: 'BMC Health Services Research'
+links:
+- icon: doi
+  icon_pack: ai
+  name: Publication
+  url: https://bmchealthservres.biomedcentral.com/articles/10.1186/s12913-022-07893-8
+---
+
+## Abstract
+
+**Background**
+
+The level of quality of care of ambulatory services in Switzerland is almost completely unknown. Since health insurance claims are the only nationwide applicable and available data source for this purpose, a set of 24 quality indicators (QI) for the measurement of quality of primary care has been previously developed and implemented. The present paper reports on an evidence-based update and extension of the initial QI set.
+
+**Methods**
+
+Established pragmatic 6-step process based on informal consensus and potential QI extracted from international medical practice guidelines and pre-existing QI for primary care. Experts rated potential QI based on strength of evidence, relevance for Swiss public health, and controllability in the Swiss primary care context. Feasibility of a preliminary set of potential new QI was tested using claims data of persons with basic mandatory health insurance at one of the largest Swiss health insurers. This test built the basis for expert consensus on the final set of new QI. Additionally, two diabetes indicators included in the previous QI set were re-evaluated.
+
+**Results**
+
+Of 23 potential new indicators, 19 of them were selected for feasibility testing. The expert group consented a final set of 9 additional QI covering the domains general aspects/efficiency (2 QI), diagnostic measures (1 QI), geriatric care (2 QI), osteoarthritis (1 QI), and drug safety (3 QI). Two pre-existing diabetes indicators were updated.
+
+**Conclusions**
+
+Additional QI relating to overuse and intersectoral care aspects extend the options of measuring quality of primary care in Switzerland based on claims data and complement the initial QI set.

@@ -1,0 +1,33 @@
+---
+title: "Significant improvement of olfactory performance in sleep apnea patients after three months of nasal CPAP therapy – Observational study and randomized trial"
+author: "Bettina Boerner, Gabrielo M. Tini, Patrick Fachinger, Sereina M. Graber, Sarosh Irani"
+date: '2017-02-03'
+
+links:
+  - icon: doi
+    icon_pack: ai
+    name: PLoS ONE
+    url: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0171087
+    
+output:
+  html_document:
+    df_print: paged
+---
+
+## Abstract
+
+**Objectives**
+
+The olfactory function highly impacts quality of life (QoL). Continuous positive airway pressure is an effective treatment for obstructive sleep apnea (OSA) and is often applied by nasal masks (nCPAP). The influence of nCPAP on the olfactory performance of OSA patients is unknown. The aim of this study was to assess the sense of smell before initiation of nCPAP and after three months treatment, in moderate and severe OSA patients.
+
+**Methods**
+
+The sense of smell was assessed in 35 patients suffering from daytime sleepiness and moderate to severe OSA (apnea/hypopnea index ≥ 15/h), with the aid of a validated test battery (Sniffin' Sticks) before initiation of nCPAP therapy and after three months of treatment. Additionally, adherent subjects were included in a double-blind randomized three weeks CPAP-withdrawal trial (sub-therapeutic CPAP pressure).
+
+**Results**
+
+Twenty five of the 35 patients used the nCPAP therapy for more than four hours per night, and for more than 70% of nights (adherent group). The olfactory performance of these patients improved significantly (p = 0.007) after three months of nCPAP therapy. When considering the entire group of patients, olfaction also improved significantly (p = 0.001). In the randomized phase the sense of smell of six patients deteriorated under sub-therapeutic CPAP pressure (p = 0.046) whereas five patients in the maintenance CPAP group showed no significant difference (p = 0.501).
+
+**Conclusions**
+
+Olfactory performance improved significantly after three months of nCPAP therapy in patients suffering from moderate and severe OSA. It seems that this effect of nCPAP is reversible under sub-therapeutic CPAP pressure.

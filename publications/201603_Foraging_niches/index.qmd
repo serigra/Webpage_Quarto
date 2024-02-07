@@ -1,0 +1,19 @@
+---
+title: "Life history, cognition and the evolution of complex foraging niches"
+author: "Caroline Schuppli, Sereina M. Graber, Karin Isler, Carel P. van Schaik"
+date: '2016-03-03'
+
+links:
+  - icon: doi
+    icon_pack: ai
+    name: Journal of Human Evolution 
+    url: https://www.sciencedirect.com/science/article/abs/pii/S004724841500278X?via%3Dihub
+    
+output:
+  html_document:
+    df_print: paged
+---
+
+## Abstract
+
+Animal species that live in complex foraging niches have, in general, improved access to energy-rich and seasonally stable food sources. Because human food procurement is uniquely complex, we ask here which conditions may have allowed species to evolve into such complex foraging niches, and also how niche complexity is related to relative brain size. To do so, we divided niche complexity into a knowledge-learning and a motor-learning dimension. Using a sample of 78 primate and 65 carnivoran species, we found that two life-history features are consistently correlated with complex niches: slow, conservative development or provisioning of offspring over extended periods of time. Both act to buffer low energy yields during periods of learning, and may thus act as limiting factors for the evolution of complex niches. Our results further showed that the knowledge and motor dimensions of niche complexity were correlated with pace of development in primates only, and with the length of provisioning in only carnivorans. Accordingly, in primates, but not carnivorans, living in a complex foraging niche requires enhanced cognitive abilities, i.e., a large brain. The patterns in these two groups of mammals show that selection favors evolution into complex niches (in either the knowledge or motor dimension) in species that either develop more slowly or provision their young for an extended period of time. These findings help to explain how humans constructed by far the most complex niche: our ancestors managed to combine slow development (as in other primates) with systematic provisioning of immatures and even adults (as in carnivorans). This study also provides strong support for the importance of ecological factors in brain size evolution.

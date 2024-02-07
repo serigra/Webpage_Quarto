@@ -1,0 +1,20 @@
+---
+title: "Parental provisioning drives brain size in birds"
+author: "Michael Griesser, Szymon M. Drobniak, Sereina M. Graber, Carel P. van Schaik"
+date: '2023-01-06'
+alias:
+  - /publications
+
+publishDate: '2023-01-06T10:00:00-05:00'
+publication: 'PNAS Proceedings of the National Academy of Sciences'
+
+links:
+- icon: doi
+  icon_pack: ai
+  name: Publication
+  url: https://www.pnas.org/doi/10.1073/pnas.2121467120
+---
+
+## Abstract
+
+Large brains support numerous cognitive adaptations and therefore may appear to be highly beneficial. Nonetheless, the high energetic costs of brain tissue may have prevented the evolution of large brains in many species. This problem may also have a developmental dimension: juveniles, with their immature and therefore poorly performing brains, would face a major energetic hurdle if they were to pay for the construction of their own brain, especially in larger-brained species. Here, we explore the possible role of parental provisioning for the development and evolution of adult brain size in birds. A comparative analysis of 1,176 bird species shows that various measures of parental provisioning (precocial vs. altricial state at hatching, relative egg mass, time spent provisioning the young) strongly predict relative brain size across species. The parental provisioning hypothesis also provides an explanation for the well-documented but so far unexplained pattern that altricial birds have larger brains than precocial ones. We therefore conclude that the evolution of parental provisioning allowed species to overcome the seemingly insurmountable energetic constraint on growing large brains, which in turn enabled bird species to increase survival and population stability. Because including adult eco- and socio-cognitive predictors only marginally improved the explanatory value of our models, these findings also suggest that the traditionally assessed cognitive abilities largely support successful parental provisioning. Our results therefore indicate that the cognitive adaptations underlying successful parental provisioning also provide the behavioral flexibility facilitating reproductive success and survival.

@@ -1,0 +1,23 @@
+---
+title: "Use of Prescribed Drugs to Treat Chronic Diseases during Pregnancy in Outpatient Care in Switzerland between 2014 and 2018: Descriptive Analysis of Swiss Health Care Claims Data"
+author: "Eva Gerbier, Sereina M. Graber, Marlene Rauch, Carole Marxer, Christoph Meier, David Baud, U. Winterfeld, Eva Blozik, Daniel Surbek, Julia Spoendlin, Alice Panchaud"
+date: '2022-01-27'
+alias:
+  - /publications
+categories:
+  - Health Services Research
+  - quality
+doi: ''
+publishDate: '2022-01-27T10:00:00-05:00'
+publication: 'International Journal of Environmental Research and Public Health'
+
+links:
+- icon: doi
+  icon_pack: ai
+  name: Publication
+  url: https://www.mdpi.com/1660-4601/19/3/1456
+---
+
+## Abstract
+
+Evidence on the use of drugs during pregnancy in Switzerland is lacking. We aimed to evaluate the utilisation of drugs to treat chronic diseases during pregnancy in Switzerland. We identified all pregnancies (excluding abortions) in Swiss Helsana claims data (2014--2018). In those, we identified all claims for drugs to treat a chronic disease, which typically affects women of childbearing age. Potentially teratogenic/fetotoxic drugs were evaluated during specific risk periods. Results were demographically weighted relative to the Swiss population. We identified claims for ≥1 drug of interest during 22% of 369,371 weighted pregnancies. Levothyroxine was most frequently claimed (6.6%). Antihypertensives were claimed during 5.3% (3.9% nifedipine in T3). Renin--Angiotensin--Aldosterone System (RAAS) inhibitors were dispensed to 0.3/10,000 pregnancies during trimester 2 (T2) or trimester 3 (T3). Insulin was claimed during 3.5% of pregnancies, most frequently in T3 (3.3%). Exposure to psychotropic drugs was 3.8% (mostly Selective serotonin reuptake inhibitors (SSRIs)) and to drugs for obstructive airway diseases 3.6%. Traditional immunosuppressants (excluding corticosteroids) were claimed during 0.5% (mainly azathioprine and hydroxychloroquine), biologic immunosuppressants (Tumour necrosis factor-alpha (TNF-alpha) inhibitors and interleukin inhibitors) during 0.2%, and drugs to treat multiple sclerosis during 0.09% of pregnancies. Antiretrovirals were claimed during 0.15% of pregnancies. Patterns of drug claims were in line with treatment recommendations, but relatively rare events of in utero exposure to teratogenic drugs may have had severe implications for those involved.

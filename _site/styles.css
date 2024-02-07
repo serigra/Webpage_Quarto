@@ -1,0 +1,92 @@
+/* title */
+.title {
+  font-family: "Petrona";
+  font-size: 4.7rem;
+  color: #235347;
+  font-weight: 500;
+  line-height: 1.1em !important;
+}
+
+/* subtitle + Learn More About Me */
+.subtitle {
+  font-family: "Petrona";
+  color: #FA2FBD;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* heading, subtitle, and blurb */
+.entity-contents {
+  text-align: right !important;
+  padding: 0 2em 0 2em;
+}
+
+/* blurb */
+.about-contents {
+  padding: 0 0 0 2em !important;
+  font-size: 1.2rem;
+  color: #666260;
+}
+
+/* social links: block of links */
+.about-entity .about-links {
+  justify-content: flex-end !important;
+  column-gap: 0em !important;
+  font-size: 1.6em !important;
+}
+
+/* social links: individual links */
+.about-entity .about-link {
+  padding: 0.25em 0.25em !important;
+  border: none !important;  
+}
+
+/* normal links */
+a {
+  font-family: "Petrona";
+  color: #235347;
+  font-size: 1.05em;
+  text-transform: uppercase;
+}
+
+/* About Me (arrow)*/
+.about-links.subtitle {
+  color: #235347;
+  font-size: 1em !important;
+  font-family: "Petrona";
+  justify-content: flex-end !important;
+}
+
+/* image  on home page*/
+.about-image {
+  margin-top: 2em; /* image shifted a little bit to bottom*/
+  margin-left: 1.2em;
+  padding: 0.5em 2em 0em 0;
+}
+
+
+/* Navbar */
+
+/* header */
+.navbar {
+  background: transparent;
+}
+
+
+/* links */
+.navbar-nav .nav-link {
+    color: #235347 !important;
+    text-transform: uppercase;
+    letter-spacing: .1em; 
+    border-bottom: 0px hidden;    
+    margin: 0px 10px 0px 10px; 
+    padding: 2px 2px 4px 2px !important;
+
+    &:hover {
+      border-bottom: 1px solid !important;
+      padding: 2px 2px 0px 2px !important;
+      color: #FA2FBD;
+    }
+}

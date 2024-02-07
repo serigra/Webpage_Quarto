@@ -1,0 +1,31 @@
+---
+title: "Grüezi. Hi there!" #title of "home" page
+pagetitle: "Sereina M. Graber - Home" # appears on top of browser window
+subtitle: "STATISTICS AND DATA SCIENCE USING R"
+image: home_polygon_1.png # in root folder
+backgroundcolor: "#f8faf7"
+about:
+  template: solana
+  image-width: 26em
+  id: hero-heading
+  links:
+    - icon: github
+      aria-label: GitHub
+      href: https://github.com/serigra
+    - icon: linkedin
+      aria-label: "LinkedIn"
+      href: https://www.linkedin.com/in/sereina-maria-graber-078701bb/
+    - text: "{{< ai researchgate >}}"
+      aria-label: ResearchGate
+      href: https://www.researchgate.net/profile/Sereina-Graber
+      
+page-layout: full
+---
+
+::: {#hero-heading}
+I am a data scientist and part of the health services research team of one of the biggest health insurance companies in Switzerland. By training, I am a biostatistician and biologist. My passion lies in R programming and expressing quantitative information using numbers, models and visual displays. This website serves as a documentation of various topics around statistics, visualizations and data science, which are certainly of interest to my later self, but possibly also to others.
+
+[About →](about/about.qmd)
+:::
+
+<!-- hero-heading -->

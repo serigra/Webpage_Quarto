@@ -1,0 +1,34 @@
+---
+title: "Does hospital volume affect outcomes after abdominal cancer surgery: an analysis of Swiss health insurance claims data"
+author: "Kevin Wirth, Markus Näpflin, Sereina M. Graber and Eva Blozik "
+date: '2022-02-26'
+alias:
+  - /publications
+
+publishDate: '2022-02-26T10:00:00-05:00'
+publication: 'BMC Health Services Research'
+
+links:
+- icon: doi
+  icon_pack: ai
+  name: Publication
+  url: https://bmchealthservres.biomedcentral.com/articles/10.1186/s12913-022-07513-5
+---
+
+## Abstract
+
+**Background**
+
+Medical treatment quality has been shown to be better in high volume than in low volume hospitals. However, this relationship has not yet been confirmed in abdominal cancer in Switzerland and is relevant for referral of patients and healthcare planning. Thus, the present study investigates the association between hospital volumes for surgical resections of colon, gastric, rectal, and pancreatic carcinomas and outcomes.
+
+**Methods**
+
+This retrospective analysis is based on anonymized claims data of patients with mandatory health insurance at Helsana Group, a leading health insurance in Switzerland. Outcome parameters were length of hospital stay, mortality and cost during the inpatient stay as well as at 1-year follow-up. Hospital volume information was derived from the Quality Indicators dataset provided by the Swiss Federal Office of Public Health. The impact of hospital volume on the different treatment outcomes was statistically tested using generalized estimating equations (GEE) models, taking into account the non-independence of observations from the same hospital.
+
+**Results**
+
+The studies included 2′859 resections in patients aged 18 years and older who were hospitalized for abdominal cancer surgery between 2014 and 2018. Colon resections were the most common procedures (n = 1′690), followed by rectal resections (n = 709). For rectal, colon and pancreatic resections, an increase in the mean number of interventions per hospital and a reduction of low volume hospitals could be observed. For the relationship between hospital volume and outcomes, we did not observe a clear dose-response relationship, as no significantly better outcomes were observed in the higher-volume category than in the lower-volume category. Even though a positive "routine effect" cannot be excluded, our results suggest that even hospitals with low volumes are able to achieve comparable treatment outcomes to larger hospitals.
+
+**Conclusions**
+
+In summary, this study increases transparency on the relationship between hospital volume and treatment success. It shows that simple measures such as defining a minimum number of procedures only might not lead to the intended effects if other factors such as infrastructure, the operating team or aggregation level of the available data are not taken into account.

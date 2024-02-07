@@ -1,0 +1,19 @@
+---
+title: "Geographical Origin, Delayed Implantation, and Induced Ovulation Explain Reproductive Seasonality in the Carnivora"
+author: "Sandra A. Heldstab, Dennis W. H. Müller, Sereina M. Graber, Laurie Bingaman Lackey, Eberhard Rensch, Jean-Michel Hatt, Philipp Zerbe, Marcus Clauss"
+date: '2018-05-07'
+
+links:
+  - icon: doi
+    icon_pack: ai
+    name: Journal of Biological Rhythms
+    url: https://journals.sagepub.com/doi/10.1177/0748730418773620
+    
+output:
+  html_document:
+    df_print: paged
+---
+
+## Abstract
+
+Patterns of reproductive seasonality in the Carnivora are difficult to study comparatively, due to limited numbers of species for which information is available. Long-term databases of captive populations could overcome this difficulty. We apply a categorical description and a quantitative high-resolution measure (birth peak breadth, the number of days in which 80% of all births occur) based on daily observations in captivity to characterize the degree of reproductive seasonality in the Carnivora for 114 species with on average 1357 births per species. We find that the majority of species retained the birth seasonality displayed in the wild. Latitude of natural origin, delayed implantation, and induced ovulation were the main factors influencing reproductive seasonality. Most species were short-day breeders, but there was no evidence of an absolute photoperiodic signal for the timing of mating or conception. The length of the gestation period (corrected for body mass) generally decreased with birth seasonality but increased in species with delayed implantation. Birth seasons become shorter with increasing latitude of geographical origin, likely because the length of the favorable season declines with increasing latitude, exerting a strong selective pressure on fitting both the reproductive cycle and the interval offspring needs for growth following the termination of parental care into the short time window of optimal environmental conditions. Species with induced ovulation exhibit a less seasonal reproductive pattern, potentially because mates do not have to meet during a short time window of a fixed ovulation. Seasonal species of Carnivora shorten their gestation period so reproduction can occur during the short time window of optimal environmental conditions. Alternatively, other Carnivora species lengthen their gestation periods in order to bridge long winters. Interestingly, this occurs not by decelerating intrauterine growth but by delaying implantation.
