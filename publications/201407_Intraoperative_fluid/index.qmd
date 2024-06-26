@@ -2,22 +2,18 @@
 title: "Impact of intraoperative fluid administration on outcome in patients undergoing robotic-assisted laparoscopic prostatectomy – a retrospective analysis"
 author: Tobias Piegeler, Pamela Dreessen, Sereina M. Graber, Sarah R. Haile, Daniel M. Schmid, Beatrice Beck-Schimmer 
 date: '2014-07-30'
-alias:
-  - /publications
+image: featured-pdf.jpeg
+publication: 
 categories:
-summary: ''
-subtitle: ''
-featured: yes
-
-links:
-  - icon: doi
-    icon_pack: ai
-    name: BMC Anesthesiology
-    url: https://bmcanesthesiol.biomedcentral.com/articles/10.1186/1471-2253-14-61
-    
-output:
-  html_document:
-    df_print: paged
+  - "retrospective analysis"
+  - "prostatectomy"
+  - "intraoperative fluid" 
+url_source: https://bmcanesthesiol.biomedcentral.com/articles/10.1186/1471-2253-14-61
+url_preprint: 
+journ: "BMC Anesthesiology"
+issue: 14(61)
+page: 
+year: 2014
 ---
 
 **Background**

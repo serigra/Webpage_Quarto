@@ -2,16 +2,18 @@
 title: "Late Post-Conditioning with Sevoflurane after Cardiac Surgery--Are Surrogate Markers Associated with Clinical Outcome?"
 author: "John M. Bonvini, Beatrice Beck-Schimmer, Sonja J. Kuhn, Sereina M. Graber, Thomas A. Neff, Martin Schläpfer"
 date: '2015-07-21'
-
-links:
-  - icon: doi
-    icon_pack: ai
-    name: PLoS ONE
-    url: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0132165
-    
-output:
-  html_document:
-    df_print: paged
+image: featured-pdf.png
+publication: 
+categories:
+  - "RCT"
+  - "Sevoflurane"
+  - "cardiac surgery"
+url_source: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0132165
+url_preprint: 
+journ: "PLoS ONE"
+issue:
+page: 
+year: 2015
 ---
 
 ## Abstract

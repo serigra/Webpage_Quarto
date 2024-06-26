@@ -1,0 +1,64 @@
+/* title of page "publications*/
+.title {
+  font-family: "Petrona";
+  font-size: 3rem;
+  color: #FA2FBD;
+  font-weight: 500;
+  line-height: 3em !important; /*that there is more space around title*/
+  text-align: center;
+}
+
+/* subtitle of page: "Publications In Evolutionary Biology, Clinical Trials And Health Services Research" */
+.subtitle {
+  font-family: 'Bebas Neue', sans-serif;
+  color: #666260;
+  text-transform: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  /* letter-spacing: 0.1em; */
+  text-align: center !important;
+  padding-left: 16rem;
+  padding-right: 16rem;
+  margin-bottom: 7em !important;
+}
+
+
+
+
+/* -- single publications in list --*/
+
+.listing-title-link {
+  font-family: 'Bebas Neue', sans-serif;
+  color: #B2BEB5;  /*Ensure the link inherits the color of the surrounding text */
+  text-decoration: none; /* Remove underline */
+  text-transform: none;
+  font-size: 18px;
+  font-weight: 700; 
+}
+
+.listing-title-link:hover {
+  text-transform: none;
+  text-decoration: underline; /* Add underline on hover for better UX */
+}
+
+
+
+.listing-pub-author {
+  color: #757883;
+  font-size: 15px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  /*line-height: 1.5;*/
+}
+
+
+.listing-pub-journal {
+  color: #757883;
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+.listing-pub-url {
+  font-size: 13px;
+
+}

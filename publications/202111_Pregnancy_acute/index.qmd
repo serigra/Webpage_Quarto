@@ -2,21 +2,18 @@
 title: 'Use of drugs to treat symptoms and acute conditions during pregnancy in outpatient care in Switzerland between 2014 and 2018: analysis of Swiss healthcare claims data'
 author: "Eva Gerbier, Sereina M. Graber, Marlene Rauch, Carole A. Marxer, Christoph R. Meier, David Baud, UrsulaWinterfel, Eva Blozik, Daniel Surbek, Julia Spoendlind, Alice Panchaud"
 date: '2021-11-28'
+image: featured-pdf.png
+publication: 
 categories:
-- claims data   
-- pregnancy
-- drugs
-- acute conditions
-
-links:
-  - icon: doi
-    icon_pack: ai
-    name: Swiss medical weekly
-    url: https://smw.ch/index.php/smw/article/view/3108
-    
-output:
-  html_document:
-    df_print: paged
+  - "health services research"
+  - "medications"
+  - "pregnancy" 
+url_source: https://smw.ch/index.php/smw/article/view/3108
+url_preprint: 
+journ: "Swiss Medical Weekly"
+issue: 151(4748)
+page: 
+year: 2021
 ---
 
 ## Abstract

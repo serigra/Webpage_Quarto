@@ -2,20 +2,18 @@
 title: "The economics of brain size evolution in vertebrates"
 author: "Sandra A. Heldstab, Karin Isler, Sereina M. Graber, Carel P. van Schaik"
 date: '2022-06-20'
-alias:
-  - /publications
+image: featured-pdf.png
+publication: "Current Biology"
 categories:
-  - Evolutionary Biology
-  - brain size
-  - vertebrates
-publishDate: '2022-06-20T10:00:00-05:00'
-publication: 'Current Biology'
-
-links:
-- icon: doi
-  icon_pack: ai
-  name: Publication
-  url: https://www.cell.com/current-biology/fulltext/S0960-9822(22)00735-7?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0960982222007357%3Fshowall%3Dtrue
+  - "evolutionary biology"
+  - "brain size"
+  - "vertebrates" 
+url_source: https://www.cell.com/current-biology/fulltext/S0960-9822(22)00735-7?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0960982222007357%3Fshowall%3Dtrue
+url_preprint: 
+journ: "Current Biology"
+issue: 32(12)
+page: 697-708
+year: 2022
 ---
 
 ## Abstract

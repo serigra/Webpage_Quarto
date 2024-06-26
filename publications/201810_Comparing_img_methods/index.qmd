@@ -2,16 +2,18 @@
 title: "Comparing Two Imaging Methods for Follow-Up of Lung Cancer Treatment: A Randomized Pilot Study"
 author: "Franco Gambazzi, Lukas D. Frey, Matthias Bruehlmeier, Wolf-Dieter Janthur, Sereina M. Graber, Juerg Heuberger, Oliver S. Springer, Roland Zweifel, Bettina Boerner, Gabrielo M. Tini, Sarosh Irani"
 date: '2018-10-04'
-
-links:
-  - icon: doi
-    icon_pack: ai
-    name: The Annals of Thoracic Surgery
-    url: https://linkinghub.elsevier.com/retrieve/pii/S0003497518313584
-    
-output:
-  html_document:
-    df_print: paged
+image: featured-pdf.png
+publication: 
+categories:
+  - "prospective randomized trial"
+  - "imaging methods"
+  - "lung cancer" 
+url_source: https://linkinghub.elsevier.com/retrieve/pii/S0003497518313584
+url_preprint: 
+journ: "The Annals of Thoracic Surgery"
+issue: 107(2)
+page: 430-435
+year: 2019
 ---
 
 ## Abstract

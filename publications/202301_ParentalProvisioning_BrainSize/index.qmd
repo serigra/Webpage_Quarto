@@ -2,17 +2,17 @@
 title: "Parental provisioning drives brain size in birds"
 author: "Michael Griesser, Szymon M. Drobniak, Sereina M. Graber, Carel P. van Schaik"
 date: '2023-01-06'
-alias:
-  - /publications
-
-publishDate: '2023-01-06T10:00:00-05:00'
-publication: 'PNAS Proceedings of the National Academy of Sciences'
-
-links:
-- icon: doi
-  icon_pack: ai
-  name: Publication
-  url: https://www.pnas.org/doi/10.1073/pnas.2121467120
+image: featured-pdf.png
+publication: "PNAS, **Vol. 120**, No. 2 (2023)."
+categories:
+  - "evolutionary biology"
+  - "brain size" 
+url_source: https://www.pnas.org/doi/10.1073/pnas.2121467120
+url_preprint: 
+journ: "PNAS Proceedings of the National Academy of Sciences"
+issue: 120(2)
+page: 
+year: 2023
 ---
 
 ## Abstract

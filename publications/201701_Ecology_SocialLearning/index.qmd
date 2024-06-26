@@ -2,16 +2,17 @@
 title: "The Ecology of Social Learning in Animals and its Link with Intelligence"
 author: "Carel van Schaik, Sereina M. Graber, Caroline Schuppli, Judith Burkart"
 date: '2017-01-09'
-
-links:
-  - icon: doi
-    icon_pack: ai
-    name: The Spanish Journal of Psychology
-    url: https://www.cambridge.org/core/journals/spanish-journal-of-psychology/article/abs/ecology-of-social-learning-in-animals-and-its-link-with-intelligence/928957B6AF798C78708CC23CEDA580CA
-    
-output:
-  html_document:
-    df_print: paged
+image: featured-pdf.png
+publication: 
+categories:
+  - "evolutionary biology"
+  - "social learning"
+url_source: https://www.cambridge.org/core/journals/spanish-journal-of-psychology/article/abs/ecology-of-social-learning-in-animals-and-its-link-with-intelligence/928957B6AF798C78708CC23CEDA580CA
+url_preprint: 
+journ: "The Spanish Journal of Psychology"
+issue: 19
+page: 
+year: 2017
 ---
 
 ## Abstract

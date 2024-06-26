@@ -2,21 +2,19 @@
 title: "Shared microbiome in gums and the lung in an outpatient population"
 author: Patrick R. Schmidlin, Patrick Fachinger, Gabrielo Tini, Sereina M. Graber, Burkhardt Seifert, Sylke Dombrowa, Sarosh Irani
 date: '2014-10-14'
+image: featured-pdf.jpeg
+publication: 
 categories:
   - Microbiome
   - Periodontitis
   - Bronchial inflammation
   - Periopathogens
-
-links:
-  - icon: doi
-    icon_pack: ai
-    name: The Journal of infection
-    url: https://www.journalofinfection.com/article/S0163-4453(14)00312-0/fulltext
-    
-output:
-  html_document:
-    df_print: paged
+url_source: https://www.journalofinfection.com/article/S0163-4453(14)00312-0/fulltext
+url_preprint: 
+journ: "The Journal of Infection"
+issue: 70(3)
+page: 255-263
+year: 2015
 ---
 
 ## Abstract

@@ -2,18 +2,17 @@
 title: 'Immer weniger Hausbesuche trotz zunehmendem Bedarf'
 author: "PD Dr. Carola A. Huber, Dr. Sereina M. Graber"
 date: '2022-02-01'
-alias:
-  - /publications
-
-links:
-  - icon: file-pdf
-    icon_pack: fa
-    name: PDF
-    url: pdf/standpunkt_2022_1.pdf # saved under static/pdf
-  - icon: link
-    icon_pack: fas
-    name: Helsana Standpunkt
-    url: https://www.helsana.ch/de/helsana-gruppe/medien-publikationen/standpunkt.html
+image: featured-pdf.png
+publication: "Helsana Standpunkt"
+categories:
+  - "health services research"
+  - "gp home visits" 
+url_source: https://www.helsana.ch/de/helsana-gruppe/medien-publikationen/standpunkt.html
+url_preprint: 
+journ: "Helsana Standpunkt"
+issue: Nr. 1 (Februar)
+page: 14-15
+year: 2022
 ---
 
 ## Summary

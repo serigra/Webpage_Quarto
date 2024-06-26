@@ -2,16 +2,18 @@
 title: "Geographical Origin, Delayed Implantation, and Induced Ovulation Explain Reproductive Seasonality in the Carnivora"
 author: "Sandra A. Heldstab, Dennis W. H. Müller, Sereina M. Graber, Laurie Bingaman Lackey, Eberhard Rensch, Jean-Michel Hatt, Philipp Zerbe, Marcus Clauss"
 date: '2018-05-07'
-
-links:
-  - icon: doi
-    icon_pack: ai
-    name: Journal of Biological Rhythms
-    url: https://journals.sagepub.com/doi/10.1177/0748730418773620
-    
-output:
-  html_document:
-    df_print: paged
+image: featured-pdf.png
+publication: 
+categories:
+  - "evolutionary biology"
+  - "seasonality"
+  - "carnivora" 
+url_source: https://journals.sagepub.com/doi/10.1177/0748730418773620
+url_preprint: 
+journ: "Journal of Biological Rhythms"
+issue: 33(4)
+page: 
+year: 2018
 ---
 
 ## Abstract

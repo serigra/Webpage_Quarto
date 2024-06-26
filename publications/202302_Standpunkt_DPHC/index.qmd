@@ -2,14 +2,19 @@
 title: '«Dear Doctor»: Kommen Sicherheitswarnungen an?'
 author: "Dr. med. Sabrina M. Stollberg, Dr. Sereina M. Graber"
 date: '2023-02-01'
-
+image: featured-pdf.png
 categories:
-links:
-  - icon: doi
-    name: Publication
-    url: https://www.helsana.ch/de/helsana-gruppe/medien-publikationen/standpunkt.html
+  - "health services research"
+  - "DHPC" 
+publication:
+url_source: https://www.helsana.ch/de/helsana-gruppe/medien-publikationen/standpunkt.html
+url_preprint: 
+journ: "Helsana Standpunkt"
+issue: Nr. 1 (Februar)
+page: 12-13
+year: 2023
 ---
 
-## Summary
+## Abstract
 
 Wenn sich das Sicherheitsprofil eines Medikaments ändert, versenden die Arzneimittelhersteller auf Anordnung der Swissmedic sogenannte «Dear Doctor Letters». Doch kommen diese Schreiben bei den Ärztinnen und Ärzten an und findet ein Praxistransfer statt?

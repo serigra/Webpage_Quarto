@@ -2,23 +2,19 @@
 title: "Use of valproate in pregnancy and in women of childbearing age between 2014 and 2018 in Switzerland: a retrospective analysis of Swiss healthcare claims data"
 author: "Julia Spoendlin, Eva Blozik, Sereina M. Graber, Marlene Rauch, Carole A. Marxer, Stephan Rüegg, Christoph Meier, Ursula Winterfeld, Alice Panchaud"
 date: '2021-01-10'
-
+image: featured-pdf.png
+publication: 
 categories:
-- claims data   
-- pregnancy
-- valproat
-- anti-Epileptics
-- Switzerland
-
-links:
-  - icon: doi
-    icon_pack: ai
-    name: Swiss medical weekly
-    url: https://smw.ch/index.php/smw/article/view/2936
-    
-output:
-  html_document:
-    df_print: paged
+  - "health services research"
+  - "medications"
+  - "pregnancy"
+  - "valproat" 
+url_source: https://smw.ch/index.php/smw/article/view/2936
+url_preprint: 
+journ: "Swiss Medical Weekly"
+issue: 151(0102)
+page: 
+year: 2021
 ---
 
 ## Abstract

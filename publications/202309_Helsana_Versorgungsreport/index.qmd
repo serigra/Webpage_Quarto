@@ -1,0 +1,23 @@
+---
+title: 'Helsana-Report: <br> Versorgung - Qualitätswettbewerb als zentraler Erfolgsfaktor'
+author: "Andrea Bischof, Renato Farcher, Sereina M. Graber"
+date: '2023-09-01'
+publication: "Helsana Report (2023)"
+image: featured-pdf.png
+css: styles_publications_individual.css
+categories:
+  - "health services research"
+  - "quality" 
+url_source: https://reports.helsana.ch/versorgung/
+url_preprint:
+journ: "Helsana report"
+year: 2023
+#links:
+#  - icon: doi
+#    name: Publication
+#    url: https://reports.helsana.ch/versorgung/
+---
+
+## Abstract
+
+Der Schweiz wird ein erstklassiges Gesundheitswesen attestiert. Doch welche Belege gibt’s für diese Sichtweise? Landesweite Instrumente zur Messung von Qualität medizinischer Leistungen sind rar. Im Kontext der im schweizerischen Gesundheitssystem tief verankerten Wahlfreiheit ist die Befähigung von Patientinnen und Patienten für eine informierte Wahl von eminenter Bedeutung. Deshalb gilt es auch Transparenz über die medizinische Behandlungsqualität für Patientinnen und Patienten zu stärken. So kann der Qualitätswettbewerb im Gesundheitswesen endlich greifen.

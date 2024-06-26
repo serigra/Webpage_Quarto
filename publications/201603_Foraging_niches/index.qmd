@@ -2,16 +2,18 @@
 title: "Life history, cognition and the evolution of complex foraging niches"
 author: "Caroline Schuppli, Sereina M. Graber, Karin Isler, Carel P. van Schaik"
 date: '2016-03-03'
-
-links:
-  - icon: doi
-    icon_pack: ai
-    name: Journal of Human Evolution 
-    url: https://www.sciencedirect.com/science/article/abs/pii/S004724841500278X?via%3Dihub
-    
-output:
-  html_document:
-    df_print: paged
+image: featured-pdf.png
+publication: 
+categories:
+  - "evolutionary biology"
+  - "cognition"
+  - "foraging niches" 
+url_source: https://www.sciencedirect.com/science/article/abs/pii/S004724841500278X?via%3Dihub
+url_preprint: 
+journ: "Journal of Human Evolution"
+issue: 92
+page: 91-100
+year: 2016
 ---
 
 ## Abstract

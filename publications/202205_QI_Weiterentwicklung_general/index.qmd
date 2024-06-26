@@ -2,16 +2,17 @@
 title: "Evidence-based indicators for the measurement of quality of primary care using health insurance claims data in Switzerland: update of the SQUIPRICA working group"
 author: "Eva Blozik, Renato Farcher, Sereina M. Graber, Carola A. Huber and Swiss Quality Indicator for Primary Care (SQIPRICA) Working Group"
 date: '2022-05-11'
-caetgories: 
-  - Health Services Research
-  - quality
-publishDate: '2022-05-11T10:00:00-05:00'
-publication: 'BMC Health Services Research'
-links:
-- icon: doi
-  icon_pack: ai
-  name: Publication
-  url: https://bmchealthservres.biomedcentral.com/articles/10.1186/s12913-022-07893-8
+image: featured-pdf.png
+publication: "BMC Health Services Research"
+categories:
+  - "health services research"
+  - "quality" 
+url_source: https://bmchealthservres.biomedcentral.com/articles/10.1186/s12913-022-07893-8
+url_preprint: 
+journ: "BMC Health Services Research"
+issue: 22(628)
+page: 
+year: 2022
 ---
 
 ## Abstract

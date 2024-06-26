@@ -1,0 +1,33 @@
+---
+title: 'Real-world treatment patterns and medical costs of prostate cancer patients in Switzerland - A claims data analysis'
+author: "Michael Stucki, Stephanie Dosch, Markus Gnädinger, Sereina M. Graber, Carola A. Huber, Golda Lenzin, Räto T. Strebel, Daniel R. Zwahlen, Aurelius Omlin, Simon Wieser"
+date: '2024-04-01'
+publication: "Helsana Report (2023)"
+image: featured-pdf.png
+css: styles_publications_individual.css
+categories:
+  - "health services research"
+  - "treatment patterns"
+  - "prostate cancer" 
+url_source: https://www.ejcancer.com/article/S0959-8049(24)00728-7/fulltext
+url_preprint:
+journ: "European Journal of Cancer"
+issue: 204(114072)
+page: 
+year: 2024
+---
+
+## Abstract
+
+**Background**
+Prostate cancer (PC) is the most prevalent cancer in men in Switzerland. However, evidence on the real-world health care use of PC patients is scarce. The aim of this study is to describe health care utilization, treatment patterns, and medical costs in PC patients over a period of five years (2014–2018).
+
+**Method**
+We used routinely collected longitudinal individual-level claims data from a major provider of mandatory health insurance in Switzerland. Due to the lack of diagnostic coding in the claims data, we identified treated PC patients based on the treatments received. We described health care utilization and treatment pathways for patients with localized and metastatic PC. Costs were calculated from a health care system perspective.
+
+**Results**
+A total of 5591 PC patients met the inclusion criteria. Between 2014 and 2018, 1741 patients had outpatient radiotherapy for localized or metastatic PC and 1579 patients underwent radical prostatectomy. 3502 patients had an androgen deprivation therapy (ADT). 9.5% of these patients had a combination therapy with docetaxel, and 11.0% had a combination with abiraterone acetate. Docetaxel was the most commonly used chemotherapy (first-line; n = 413, 78.4% of all patients in chemotherapy). Total medical costs of PC in Switzerland were estimated at CHF 347 m (95% CI 323–372) in 2018.
+
+**Conclusion**
+Most PC patients in this study were identified based on the use of ADT. Medical costs of PC in Switzerland amounted to 0.45% of total health care spending in 2018. Treatment of metastatic PC accounted for about two thirds of spending.
+

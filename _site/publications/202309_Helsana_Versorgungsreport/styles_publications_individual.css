@@ -1,0 +1,65 @@
+/* title of publications */
+.title {
+  font-family: "Petrona";
+  font-size: 2rem;
+  color: #235347;
+  font-weight: 500;
+  margin-bottom: 1.2em !important;
+  /*text-align: center;*/
+}
+
+
+
+/*  */
+h2 {
+color: #B2BEB5;
+font-family: "Petrona";
+font-size: 1.2rem;
+font-weight: 500;
+margin-top: 1.2rem;
+margin-bottom: 0.9rem;
+}
+
+
+/* text */
+.about-contents {
+  padding: 0 4em 0 2em !important;
+  font-size: 1rem;
+  color: #666260;
+}
+
+
+
+
+
+
+
+/* links */
+a {
+  font-family: "Petrona";
+  color: #FA2FBD;
+  font-size: 1.0em;
+  text-transform: lowercase;
+}
+
+
+
+.listing .listing-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.listing .listing-item .listing-item-title {
+    margin-bottom: 0.5em; /* Adjust as needed for spacing */
+}
+
+.listing .listing-item .listing-item-meta {
+    margin-top: 0.5em; /* Adjust as needed for spacing */
+    display: flex;
+    flex-direction: column;
+}
+
+.listing .listing-item .listing-item-meta .listing-item-date,
+.listing .listing-item .listing-item-meta .listing-item-author {
+    margin-top: 0.25em; /* Adjust as needed for spacing */
+}

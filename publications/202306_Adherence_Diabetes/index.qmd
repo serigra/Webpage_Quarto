@@ -1,0 +1,35 @@
+---
+title: 'Does the implementation of an incentive scheme increase adherence to diabetes guidelines? A retrospective cohort study of managed care enrollees'
+author: "Renato Farcher, Sereina M. Graber, Nicole Thüring, Eva Blozik, Carola A. Huber"
+date: '2023-06-01'
+image: featured-pdf.png
+publication: "BMC Health Services Research, **23**, _707_ (2023)."
+categories:
+  - "health services research"
+  - "diabetes"
+  - "adherence" 
+url_source: https://bmchealthservres.biomedcentral.com/articles/10.1186/s12913-023-09694-z#:~:text=care%20in%20Switzerland.-,Conclusion,care%20among%20patients%20with%20diabetes
+url_preprint: 
+journ: "BMC Health Services Research"
+issue: 23
+page: 
+year: 2023
+---
+
+## Abstract
+
+**Background**
+
+A novel incentive scheme based on a joint agreement of a large Swiss health insurance with 56 physi-cian networks was implemented in 2018. This study evaluated the effect of its implementation on adherence toevidence-based guidelines among patients with diabetes in managed care models.
+
+**Methods**
+
+We performed a retrospective cohort study, using health care claims data from patients with diabetes enrolled in a managed care plan (2016–2019). Guideline adherence was assessed by four evidence-based performance measures and four hierarchically constructed adherence levels. Generalized multilevel models were used to examine the effect of the incentive scheme on guideline adherence.
+
+**Results**
+
+A total of 6′273 patients with diabetes were included in this study. The raw descriptive statistics showed minor improvements in guideline adherence after the implementation. After adjusting for underlying patient characteristics and potential differences between physician networks, the likelihood of receiving a test was moderately but consistently higher after the implementation of the incentive scheme for most performance measures, ranging from18% (albuminuria: OR, 1.18; 95%-CI, 1.05–1.33) to 58% (HDL cholesterol: OR, 1.58; 95%-CI, 1.40–1.78). Full adherence was more likely after implementation of the incentive scheme (OR, 1.37; 95%-CI, 1.20–1.55), whereas level 1 significantly decreased (OR, 0.74; 95%-CI, 0.65 – 0.85). The proportions of the other adherence levels were stable.
+
+**Conclusion**
+
+Incentive schemes including transparency of the achieved performance may be able to improve guide-line adherence in patients with diabetes and are promising to increase quality of care in this patient population

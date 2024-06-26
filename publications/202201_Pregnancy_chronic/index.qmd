@@ -2,20 +2,18 @@
 title: "Use of Prescribed Drugs to Treat Chronic Diseases during Pregnancy in Outpatient Care in Switzerland between 2014 and 2018: Descriptive Analysis of Swiss Health Care Claims Data"
 author: "Eva Gerbier, Sereina M. Graber, Marlene Rauch, Carole Marxer, Christoph Meier, David Baud, U. Winterfeld, Eva Blozik, Daniel Surbek, Julia Spoendlin, Alice Panchaud"
 date: '2022-01-27'
-alias:
-  - /publications
+image: featured-pdf.png
+publication: "BMC Health Services Research, **23**, _707_ (2023)."
 categories:
-  - Health Services Research
-  - quality
-doi: ''
-publishDate: '2022-01-27T10:00:00-05:00'
-publication: 'International Journal of Environmental Research and Public Health'
-
-links:
-- icon: doi
-  icon_pack: ai
-  name: Publication
-  url: https://www.mdpi.com/1660-4601/19/3/1456
+  - "health services research"
+  - "medications"
+  - "pregnancy" 
+url_source: https://www.mdpi.com/1660-4601/19/3/1456
+url_preprint: 
+journ: "International Journal of Environmental Research and Public Health"
+issue: 19(3)
+page: 
+year: 2022
 ---
 
 ## Abstract

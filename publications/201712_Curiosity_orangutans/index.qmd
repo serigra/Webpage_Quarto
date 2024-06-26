@@ -2,16 +2,18 @@
 title: "Curiosity boosts orang-utan problem-solving ability"
 author: "Laura A. Damerius, Sereina M. Graber, Erik P. Willems, Carel P. van Schaik"
 date: '2017-11-07'
-
-links:
-  - icon: doi
-    icon_pack: ai
-    name: Animal Behaviour
-    url: https://www.sciencedirect.com/science/article/abs/pii/S0003347217303299?via%3Dihub
-    
-output:
-  html_document:
-    df_print: paged
+image: featured-pdf.png
+publication: 
+categories:
+  - "evolutionary biology"
+  - "cognition"
+  - "orang-utan" 
+url_source: https://www.sciencedirect.com/science/article/abs/pii/S0003347217303299?via%3Dihub
+url_preprint: 
+journ: "Animal Behaviour"
+issue: 134
+page: 57-70
+year: 2017
 ---
 
 ## Abstract
