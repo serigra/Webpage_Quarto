@@ -1,4 +1,14 @@
-/* title */
+/* width of the whole body of the page*/
+body {
+  background-color: #f8faf7; /* background color of whole website */
+  max-width: 2000px;  /* Set your desired maximum width */
+  margin: 0 auto;    /* Center the content */
+  margin-left: 4em;
+  margin-right: 3em;
+  padding: 6px;     /* Optional: add some padding for better appearance */
+}
+
+/* title: "Grüezi. Hi there!" */
 .title {
   font-family: "Petrona";
   font-size: 4.7rem;
@@ -7,7 +17,7 @@
   line-height: 1.1em !important;
 }
 
-/* subtitle + Learn More About Me */
+/* subtitle: "Statistics and Data Science in R" */
 .subtitle {
   font-family: "Petrona";
   color: #FA2FBD;
@@ -17,11 +27,12 @@
   letter-spacing: 0.1em;
 }
 
-/* heading, subtitle, and blurb */
+/* so that heading, subtitle are right aligned*/
 .entity-contents {
   text-align: right !important;
-  padding: 0 2em 0 2em;
+  padding: 0 3em 0 0em;
 }
+
 
 /* blurb */
 .about-contents {

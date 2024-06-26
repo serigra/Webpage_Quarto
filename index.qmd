@@ -6,7 +6,7 @@ image: home_polygon_1.png # in root folder
 backgroundcolor: "#f8faf7"
 about:
   template: solana
-  image-width: 26em
+  image-width: 28em
   id: hero-heading
   links:
     - icon: github

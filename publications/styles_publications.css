@@ -26,8 +26,8 @@ body {
   font-weight: 500;
   /* letter-spacing: 0.1em; */
   text-align: center !important;
-  /*padding-left: 16rem;*/
-  /*padding-right: 16rem;*/
+  padding-left: 8rem;
+  padding-right: 8rem;
   margin-bottom: 5em !important;
 }
 

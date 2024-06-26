@@ -26,7 +26,7 @@ html:
 
 <br>
 
-##  Experience
+## Experience
 
 **since 2019 \| Data Scientist \@ Helsana insurance group**\
 Lead, design and implementation of data analyses for internal projects and scientific studies at the health science department, with a focus on understanding the effectiveness and the quality of treatment in the Swiss health care system. See our publications [here]('https://www.helsana.ch/de/helsana-gruppe/medien-publikationen/wissenschaftliche-publikationen.html').
@@ -49,5 +49,3 @@ Epidemiology, Biostatistics and Prevention Institute, University of Zurich.
 
 **2012 \| Master of Science in Anthropology**\
 Anthropological Institute and Museum, University of Zurich.
-
-
