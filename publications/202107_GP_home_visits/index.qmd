@@ -2,6 +2,7 @@
 title: "Time trends in general practitioners' home visits for older patients: a retrospective cross-sectional study from Switzerland"
 author: "Stefan Neuner-Jehle, Sereina M. Graber, Ellen Keizer, Carola A. Huber, Eva Blozik, Thomas Rosemann, Oliver Senn"
 date: '2021-07-21'
+css: "../styles_publications_individual.css"
 image: featured-pdf.png
 publication: 
 categories:

@@ -2,6 +2,7 @@
 title: "Late Post-Conditioning with Sevoflurane after Cardiac Surgery--Are Surrogate Markers Associated with Clinical Outcome?"
 author: "John M. Bonvini, Beatrice Beck-Schimmer, Sonja J. Kuhn, Sereina M. Graber, Thomas A. Neff, Martin Schläpfer"
 date: '2015-07-21'
+css: "../styles_publications_individual.css"
 image: featured-pdf.png
 publication: 
 categories:

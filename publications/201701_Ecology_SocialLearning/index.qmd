@@ -2,6 +2,7 @@
 title: "The Ecology of Social Learning in Animals and its Link with Intelligence"
 author: "Carel van Schaik, Sereina M. Graber, Caroline Schuppli, Judith Burkart"
 date: '2017-01-09'
+css: "../styles_publications_individual.css"
 image: featured-pdf.png
 publication: 
 categories:

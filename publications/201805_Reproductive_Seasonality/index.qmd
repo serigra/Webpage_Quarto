@@ -2,6 +2,7 @@
 title: "Geographical Origin, Delayed Implantation, and Induced Ovulation Explain Reproductive Seasonality in the Carnivora"
 author: "Sandra A. Heldstab, Dennis W. H. Müller, Sereina M. Graber, Laurie Bingaman Lackey, Eberhard Rensch, Jean-Michel Hatt, Philipp Zerbe, Marcus Clauss"
 date: '2018-05-07'
+css: "../styles_publications_individual.css"
 image: featured-pdf.png
 publication: 
 categories:

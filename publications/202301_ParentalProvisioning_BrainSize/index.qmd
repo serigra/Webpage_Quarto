@@ -2,6 +2,7 @@
 title: "Parental provisioning drives brain size in birds"
 author: "Michael Griesser, Szymon M. Drobniak, Sereina M. Graber, Carel P. van Schaik"
 date: '2023-01-06'
+css: "../styles_publications_individual.css"
 image: featured-pdf.png
 publication: "PNAS, **Vol. 120**, No. 2 (2023)."
 categories:

@@ -1,3 +1,12 @@
+/* width of the listing/ body*/
+body {
+  max-width: 1150px;  /* Set your desired maximum width */
+  margin: 0 auto;    /* Center the content */
+  margin-left: 10em;
+  padding: 20px;     /* Optional: add some padding for better appearance */
+}
+
+
 /* title of page "publications*/
 .title {
   font-family: "Petrona";
@@ -17,9 +26,9 @@
   font-weight: 500;
   /* letter-spacing: 0.1em; */
   text-align: center !important;
-  padding-left: 16rem;
-  padding-right: 16rem;
-  margin-bottom: 7em !important;
+  /*padding-left: 16rem;*/
+  /*padding-right: 16rem;*/
+  margin-bottom: 5em !important;
 }
 
 
@@ -28,11 +37,11 @@
 /* -- single publications in list --*/
 
 .listing-title-link {
-  font-family: 'Bebas Neue', sans-serif;
-  color: #B2BEB5;  /*Ensure the link inherits the color of the surrounding text */
+  font-family: 'Petrona';
+  color: #235347 !important;  /*Ensure the link inherits the color of the surrounding text */
   text-decoration: none; /* Remove underline */
   text-transform: none;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700; 
 }
 

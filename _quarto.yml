@@ -25,7 +25,7 @@ website:
       - icon: github
         menu:
           - text: Source Code
-            url:  https://github.com/serigra/Webpage/tree/main
+            url:  https://github.com/serigra/Webpage_Quarto
 format:
   html:
     theme: cosmo

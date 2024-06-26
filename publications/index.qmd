@@ -1,6 +1,6 @@
 ---
 title: Publications
-subtitle: "Publications in evolutionary biology, clinical trials and health services research"
+subtitle: "Publications in health services research, clinical trials and evolutionary biology"
 css: styles_publications.css
 listing: 
   contents: 
@@ -11,11 +11,8 @@ listing:
   sort-ui: false
   filter-ui: false
   image-align: right
-  # image-height: 10em
+  image-height: 8em
   page-size: 7
 
-#format: 
-# html: 
-#    page-layout: full
 title-block-banner: false
 ---

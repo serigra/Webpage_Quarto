@@ -2,6 +2,7 @@
 title: "Curiosity boosts orang-utan problem-solving ability"
 author: "Laura A. Damerius, Sereina M. Graber, Erik P. Willems, Carel P. van Schaik"
 date: '2017-11-07'
+css: "../styles_publications_individual.css"
 image: featured-pdf.png
 publication: 
 categories:

@@ -2,6 +2,7 @@
 title: "Uptake of ferromagnetic carbon-encapsulated metal nanoparticles in endothelial cells: Influence of shear stress and endothelial activation"
 author: "Melanie Jaboson, Birgit Roth Zgraggen, Sereina M. Graber, Christoph M. Schumacher, Wendelin J. Stark, Claudia Dumrese, Jose Maria Mateos, Caroline Aemisegger, Urs Ziegler, Martin Urner, Inge K. Herrmann, Beatrice Beck-Schimmer"
 date: "2015-10-05"
+css: "../styles_publications_individual.css"
 image: featured-pdf.png
 publication: 
 categories:

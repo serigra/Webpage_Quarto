@@ -4,7 +4,7 @@ author: "Andrea Bischof, Renato Farcher, Sereina M. Graber"
 date: '2023-09-01'
 publication: "Helsana Report (2023)"
 image: featured-pdf.png
-css: styles_publications_individual.css
+css: "../styles_publications_individual.css"
 categories:
   - "health services research"
   - "quality" 

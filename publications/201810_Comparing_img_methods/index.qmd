@@ -2,6 +2,7 @@
 title: "Comparing Two Imaging Methods for Follow-Up of Lung Cancer Treatment: A Randomized Pilot Study"
 author: "Franco Gambazzi, Lukas D. Frey, Matthias Bruehlmeier, Wolf-Dieter Janthur, Sereina M. Graber, Juerg Heuberger, Oliver S. Springer, Roland Zweifel, Bettina Boerner, Gabrielo M. Tini, Sarosh Irani"
 date: '2018-10-04'
+css: "../styles_publications_individual.css"
 image: featured-pdf.png
 publication: 
 categories:

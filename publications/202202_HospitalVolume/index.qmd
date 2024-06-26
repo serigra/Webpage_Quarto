@@ -2,6 +2,7 @@
 title: "Does hospital volume affect outcomes after abdominal cancer surgery: an analysis of Swiss health insurance claims data"
 author: "Kevin Wirth, Markus Näpflin, Sereina M. Graber and Eva Blozik "
 date: '2022-02-26'
+css: "../styles_publications_individual.css"
 image: featured-pdf.png
 publication:
 categories:

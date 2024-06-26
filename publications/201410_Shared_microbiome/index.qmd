@@ -2,6 +2,7 @@
 title: "Shared microbiome in gums and the lung in an outpatient population"
 author: Patrick R. Schmidlin, Patrick Fachinger, Gabrielo Tini, Sereina M. Graber, Burkhardt Seifert, Sylke Dombrowa, Sarosh Irani
 date: '2014-10-14'
+css: "../styles_publications_individual.css"
 image: featured-pdf.jpeg
 publication: 
 categories:

@@ -2,6 +2,7 @@
 title: "Significant improvement of olfactory performance in sleep apnea patients after three months of nasal CPAP therapy – Observational study and randomized trial"
 author: "Bettina Boerner, Gabrielo M. Tini, Patrick Fachinger, Sereina M. Graber, Sarosh Irani"
 date: '2017-02-03'
+css: "../styles_publications_individual.css"
 image: featured-pdf.png
 publication: 
 categories:

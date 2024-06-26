@@ -2,6 +2,7 @@
 title: "Use of valproate in pregnancy and in women of childbearing age between 2014 and 2018 in Switzerland: a retrospective analysis of Swiss healthcare claims data"
 author: "Julia Spoendlin, Eva Blozik, Sereina M. Graber, Marlene Rauch, Carole A. Marxer, Stephan Rüegg, Christoph Meier, Ursula Winterfeld, Alice Panchaud"
 date: '2021-01-10'
+css: "../styles_publications_individual.css"
 image: featured-pdf.png
 publication: 
 categories:

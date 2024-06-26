@@ -2,6 +2,7 @@
 title: 'Does the implementation of an incentive scheme increase adherence to diabetes guidelines? A retrospective cohort study of managed care enrollees'
 author: "Renato Farcher, Sereina M. Graber, Nicole Thüring, Eva Blozik, Carola A. Huber"
 date: '2023-06-01'
+css: "../styles_publications_individual.css"
 image: featured-pdf.png
 publication: "BMC Health Services Research, **23**, _707_ (2023)."
 categories:

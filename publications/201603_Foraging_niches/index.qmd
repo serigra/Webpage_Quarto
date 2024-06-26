@@ -2,6 +2,7 @@
 title: "Life history, cognition and the evolution of complex foraging niches"
 author: "Caroline Schuppli, Sereina M. Graber, Karin Isler, Carel P. van Schaik"
 date: '2016-03-03'
+css: "../styles_publications_individual.css"
 image: featured-pdf.png
 publication: 
 categories:
