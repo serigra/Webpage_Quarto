@@ -1,0 +1,33 @@
+---
+title: 'Prescriber-level surveillance of outpatient antimicrobial consumption to enable targeted antimicrobial stewardship: a nationwide observational study, Switzerland, 2015 to 2022'
+author: "Sereina M. Graber, Sabrina M. Stollberg, Catherine Plüss-Suard, Carola A. Huber, Andreas Kronenberg, Oliver Senn, Stefan Neuner-Jehle, Andreas Plate"
+date: '2024-09-12'
+publication: "Helsana Report (2023)"
+image: featured-pdf.png
+css: "../styles_publications_individual.css"
+categories:
+  - "antibiotics"
+  - "AMR"
+  - "treatment patterns"
+  - "health services research"
+url_source: https://www.eurosurveillance.org/content/10.2807/1560-7917.ES.2024.29.37.2300734
+url_preprint:
+journ: "Eurosurveillance"
+issue: 29 (37)
+page: 
+year: 2024
+---
+
+## Abstract
+
+**What did you want to address in this study and why?**
+
+With increasing use, the effectiveness of antibiotics to tackle bacterial infections can be compromised as bacteria become drug resistant. Antimicrobial resistance contributes yearly to around 5 million deaths worldwide, and thus surveillance of antibiotic consumption, especially in the outpatient setting, is important. We wished to identify which group of physicians (primary care, specialists, hospital outpatient) prescribes the most antibiotics.
+
+**What have we learnt from this study?**
+
+Antibiotic prescriptions by 49 groups of physicians in the outpatient setting declined by 12.4% from 2015 to 2022 in Switzerland. With ca 66% in 2022, the largest prescriber group of primary care physicians (family medicine, general practice and internal medicine, gynaecology, paediatrics) contributed less than expected, whereas hospital-affiliated outpatient care was the second most important prescriber group with ca 20%.
+
+**What are the implications of your findings for public health?**
+
+The study shows that it is possible to analyse detailed antibiotic prescribing patterns on a prescriber level. This type of surveillance builds the basis for sharing information with specific groups of physicians, which can help to improve the responsible use of antibiotics and address the rise of resistance.

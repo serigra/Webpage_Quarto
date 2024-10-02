@@ -1,0 +1,36 @@
+---
+title: 'Dispensed drugs during pregnancy in outpatient care between 2015 and 2021 in Switzerland: a retrospective analysis of Swiss healthcare claims data'
+author: "Carole A. Marxer, Sereina M. Graber, Daniel Surbek, Alice Panchaud, Christoph R. Meier, Julia Spoendlin"
+date: '2024-08-12'
+publication: ""
+image: featured-pdf.png
+css: "../styles_publications_individual.css"
+categories:
+  - "integrated care"
+  - "drug safety"
+  - "health services research"
+url_source: https://smw.ch/index.php/smw/article/view/3616
+url_preprint:
+journ: "Swiss Medical Weekyl"
+issue: 154 (8)
+page: 
+year: 2024
+---
+
+## Abstract
+
+#### AIM OF THE STUDY
+
+We aimed to evaluate the utilisation of all prescribed drugs during pregnancy dispensed in outpatient care in Switzerland between 2015 and 2021.
+
+#### METHODS
+
+We conducted a descriptive study using the Swiss Helsana claims database (2015-2021). We established a cohort of pregnancies by identifying deliveries and estimating the date of the last menstrual period. We analysed the drug burden during a 270-day pre-pregnancy period, during pregnancy (overall and by trimester), and during a 270-day postpartum period. Subsequently, we quantified 1) the median number of drug dispensations (total vs. unique drug claims); and 2) the prevalence of exposure to at least one dispensed drug and the number of dispensed drugs (0, 1, 2, 3, 4, and ≥5); and 3) the 15 most frequently dispensed drugs were identified during each period, overall and stratified by maternal age.
+
+#### RESULTS
+
+Among 34,584 pregnant women (5.6% of all successful pregnancies in Switzerland), 87.5% claimed at least one drug (not including vitamins, supplements, and vaccines), and 33.3% claimed at least five drugs during pregnancy. During trimester 1 alone, 8.2% of women claimed at least five distinct drugs. The proportion of women who claimed prescribed drugs was lower pre-pregnancy (69.1%) and similar postpartum (85.6%) when compared to during pregnancy (87.5%). The most frequently claimed drugs during pregnancy were meaningfully different during pregnancy than before and after.
+
+#### CONCLUSIONS
+
+This study suggests that 8 of 10 women in Switzerland are exposed to prescribed drugs during pregnancy. Most drugs dispensed during pregnancy are comparatively well investigated and are considered safe. However, the high drug burden in this vulnerable patient population underlines the importance of evidence on the benefit-risk profile of individual drugs taken during pregnancy.
