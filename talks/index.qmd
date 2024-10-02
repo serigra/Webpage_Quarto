@@ -1,0 +1,18 @@
+---
+title: Talks
+subtitle: "Talks about health services research and evolutionary biology"
+css: styles_talks.css
+listing: 
+  contents: 
+    - "**/index.qmd"
+  template: _ejs/talks.ejs
+  fields: [title, author, date, conf, location, description, image, html, pdf]
+  sort: "date desc"
+  sort-ui: false
+  filter-ui: false
+  image-align: right
+  image-height: 15em
+  page-size: 7
+
+title-block-banner: false
+---

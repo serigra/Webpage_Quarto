@@ -1,0 +1,83 @@
+```{=html}
+<div class="list quarto-listing-default">
+    <% for (const item of items) { %>
+    
+    <div class="quarto-post image-right" <%= metadataAttrs(item) %> >
+        <div class="thumbnail">
+         
+         <!-- <a href="<%- item.path %>"> -->
+
+         <p>
+         <% if (item.image) { %>
+         <img alt="<%= item.title %>" src="<%= item.image %>" class="thumbnail-image">
+         <% } %>
+         </p>
+      
+        <!-- </a> -->
+        
+        </div>
+        <div class="body">
+            
+            <!-- <a href="<%- item.path %>"> -->
+            <div class="no-anchor listing-talk-title listing-title">
+            <a href="<%= item.path %>" class="listing-title-link"><%= item.title %></a>
+            </div>
+            
+            
+            <!-- </a> -->
+            
+            
+            <!-- <a href="<%- item.path %>"> -->
+            <div class="listing-talk-author listing-author">
+            <%= item.author %><br> 
+            </div>
+                
+           <div class="metadata-value listing-talk-conf listing-conf">
+           <% if (item.conf) { %>
+           <i><%= item.conf %></i><% if (item.date) { %>, <b><%= item.date %></b><% } %><% if (item.location) { %>, <%= item.location %><% } %><br>
+           <% } %>
+                        
+           </div>
+  
+
+           <!-- </a> -->
+            
+          <% if (item.html) { %>
+          <div class="listing-html">
+          <a href="<%- item.html %>">
+          <p style="color:#FA2FBD;">HTML <i class="bi bi-filetype-html"></i></p>
+          </a>
+          </div>
+          <% } %>
+           
+            
+          <% if (item.pdf) { %>
+          <div class="listing-pdf">
+          <a href="<%- item.pdf %>">
+          <p style="color:#FA2FBD;">PDF <i class="bi bi-filetype-pdf"></i></p>
+          </a>
+          </div>
+          
+        <% } %>
+
+        </div>        
+                        
+                        
+        </div>
+                    
+                    
+                    
+            <!-- </a> -->
+ <!--               <div class="listing-categories">
+                <% for (const category of item.categories) { %>
+                <div class="listing-category" onclick="window.quartoListingCategory('<%=category%>'); return false;"><%= category %></div>
+                <% } %>
+                </div>
+                -->
+        
+    </div>
+    
+    <% } %>
+    </div>
+
+```

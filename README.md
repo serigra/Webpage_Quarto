@@ -19,9 +19,38 @@
 - in "_quarto.yml": see `grid:` with `sidebar-width: 200px` etc.
 
 
+
+## Listing Layout (Publications, Talks)
+
+Quarto offers 3 type of built in listings. However, none of these fit my needs for publications and talks site of my webpage. 
+Therefore, I built a [custom display listing](https://quarto.org/docs/websites/website-listings-custom.html) using .ejs templates. Ejs stands for embedded java script, and these files offer a possbility 
+to loop through a list of files and display them all in the same mamner.
+These files are located `publications/_ejs/pulbications.ejs` and `talks/_ejs/talks.ejs`.
+I did not build these files from scratch but rather browsed through the [quarto gallery](https://quarto.org/docs/gallery/#websites) and 
+let myself inspire by different websites and looked up the underlying code.
+
+Here are few things I wanna point out:
+
+- the icons for linking the underlying HTML or PDF file of the talks are included, for pdf for example:
+``` 
+<a href="<%- item.pdf %>">
+<p style="color:#FA2FBD;">PDF <i class="bi bi-filetype-pdf"></i></p>
+</a>
+``` 
+
+More items and their codes can be found here: https://icons.getbootstrap.com/
+
+
+
+## Icons
+
+For icons embedded in the .ejs files (e.g. pdf, html or link item): look up code here https://icons.getbootstrap.com/
+
+
+
 ## Academicons
 
-To be able to use non-built-in "academicons" --\> navigate to your root folder of website and install the extension in the particular project:
+To be able to use non-built-in ["academicons"](https://jpswalsh.github.io/academicons/)--\> navigate to your root folder of website and install the extension in the particular project:
 
 In terminal:
 

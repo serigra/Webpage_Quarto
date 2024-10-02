@@ -1,0 +1,69 @@
+/* width of the listing/ body*/
+body {
+  max-width: 1150px;  /* Set your desired maximum width */
+  margin: 0 auto;    /* Center the content */
+  margin-left: 10em;
+  padding: 20px;     /* Optional: add some padding for better appearance */
+}
+
+
+/* title of page "talks*/
+.title {
+  font-family: "Petrona";
+  font-size: 3rem;
+  color: #FA2FBD;
+  font-weight: 500;
+  line-height: 3em !important; /*that there is more space around title*/
+  text-align: center;
+}
+
+/* subtitle of page: "Talks about Evolutionary Biology, Clinical Trials And Health Services Research" */
+.subtitle {
+  font-family: 'Bebas Neue', sans-serif;
+  color: #666260;
+  text-transform: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  /* letter-spacing: 0.1em; */
+  text-align: center !important;
+  padding-left: 8rem;
+  padding-right: 8rem;
+  margin-bottom: 5em !important;
+}
+
+
+
+
+/* -- single talks in list --*/
+
+.listing-talk-title {
+  font-family: 'Petrona';
+  color: #235347 !important;  /*Ensure the link inherits the color of the surrounding text */
+  text-transform: none;
+  font-size: 20px;
+  font-weight: 700; 
+}
+
+
+.listing-talk-author {
+  color: #757883;
+  font-size: 15px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  /*line-height: 1.5;*/
+}
+
+
+.listing-talk-conf {
+  color: #757883;
+  font-size: 15px;
+  margin-bottom: 12px;
+}
+
+
+.listing-description {
+  margin-top: 0.5em;
+  font-size: 0.9em;
+  color: #666;
+  margin-bottom: 30px;
+}

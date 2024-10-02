@@ -18,7 +18,9 @@ about:
     - text: "{{< ai researchgate >}}"
       aria-label: ResearchGate
       href: https://www.researchgate.net/profile/Sereina-Graber
-      
+    - text: "{{< ai orcid >}}"
+      aria-label: ORCID ID
+      href: https://orcid.org/0009-0005-2128-0827
 page-layout: full
 ---
 

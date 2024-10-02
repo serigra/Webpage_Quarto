@@ -1,0 +1,42 @@
+```{=html}
+<div class="list quarto-listing-default">
+  <% for (const item of items) { %>
+  <div class="quarto-post image-right" <%= metadataAttrs(item) %>>
+    <div class="thumbnail">
+      <% if (item.image) { %>
+        <img alt="<%= item.title %>" src="<%= item.image %>" class="thumbnail-image">
+      <% } %>
+    </div>
+    <div class="body">
+      <div class="no-anchor listing-talk-title listing-title">
+        <a href="<%= item.path %>" class="listing-title-link"><%= item.title %></a>
+      </div>
+      <div class="metadata-value listing-talk-conf listing-conf">
+        <% if (item.conf) { %>
+          <i><%= item.conf %></i><% if (item.date) { %>, <b><%= item.date %></b><% } %><% if (item.location) { %>, <%= item.location %><% } %>
+        <% } %>
+      </div>
+      <% if (item.description) { %>
+        <div class="listing-description">
+          <%= item.description %>
+        </div>
+      <% } %>
+      <% if (item.html || item.pdf) { %>
+        <div class="listing-links">
+          <% if (item.html) { %>
+          <a href="<%- item.html %>">
+            <p style="color:#FA2FBD;">HTML <i class="bi bi-filetype-html"></i></p>
+            </a>
+          <% } %>
+          <% if (item.pdf) { %>
+           <a href="<%- item.pdf %>">
+            <p style="color:#FA2FBD;">PDF <i class="bi bi-filetype-pdf"></i></p>
+            </a>
+          <% } %>
+        </div>
+      <% } %>
+    </div>
+  </div>
+  <% } %>
+</div>
+```

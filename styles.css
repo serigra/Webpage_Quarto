@@ -21,7 +21,7 @@ body {
 .subtitle {
   font-family: "Petrona";
   color: #FA2FBD;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -56,17 +56,17 @@ body {
 
 /* normal links */
 a {
-  font-family: "Petrona";
-  color: #235347;
-  font-size: 1.05em;
-  text-transform: uppercase;
+  font-family: "Petrona" !important; /*'Bebas Neue', sans-serif;*/
+  color: #235347 !important;
+  font-size: 1em;
+  text-transform: none;
 }
 
 /* About Me (arrow)*/
 .about-links.subtitle {
-  color: #235347;
-  font-size: 1em !important;
   font-family: "Petrona";
+  color: #235347;
+  font-size: 0.8em !important;
   justify-content: flex-end !important;
 }
 
@@ -88,6 +88,7 @@ a {
 
 /* links */
 .navbar-nav .nav-link {
+    font-family: 'Bebas Neue', sans-serif;
     color: #235347 !important;
     text-transform: uppercase;
     letter-spacing: .1em; 

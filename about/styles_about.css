@@ -45,7 +45,7 @@ margin-bottom: 1px;
 
 /* ## Experience, Education  */
 h2 {
-color: #B2BEB5;
+color: #7F8A80;
 font-family: "Petrona";
 font-size: 1.5rem;
 font-weight: 500;
@@ -53,18 +53,18 @@ margin-top: 0px;
 margin-bottom: 1px;
 }
 
-
 /* links */
 a {
-  font-family: "Petrona";
+  font-family: "Petrona" !important;
   color: #FA2FBD;
   font-size: 1.0em;
-  text-transform: lowercase;
+  text-transform: none;
 }
 
 /* social links: block of links */
 .about-entity .about-links {
   justify-content: flex-end !important;
+  color: #235347 !important;
   column-gap: 0em !important;
   font-size: 1.4em !important;
 }

@@ -7,6 +7,9 @@ website:
   search:
     location: navbar
     type: overlay
+  page-footer: 
+        background: "#f8faf7"
+        center: © 2024  &middot; Made with [![](https://www.r-project.org/Rlogo.png){fig-alt="R" width=25px}](https://www.r-project.org/)  and [![](https://quarto.org/quarto.png){fig-alt="Quarto" width=65px}](https://quarto.org/) 
   navbar:
     title: false # not using website title on left side of navbar...
     search: true
@@ -16,16 +19,20 @@ website:
         text: home
       - href: about/about.qmd
         text: about
-      - href: blog/index.qmd
-        text: blog
       - text: publications
         aria-label: "Publications"
         href: publications/index.qmd
+      - href: talks/index.qmd
+        text: talks
+        aria-label: "Talks"
+      - href: blog/index.qmd
+        text: blog
     tools:
       - icon: github
         menu:
           - text: Source Code
             url:  https://github.com/serigra/Webpage_Quarto
+    
 format:
   html:
     theme: cosmo
