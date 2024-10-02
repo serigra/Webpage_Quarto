@@ -1,0 +1,48 @@
+---
+title: ""
+title-block-banner: useR_banner.png
+author: "Sereina M. Graber"
+date: "2024-07-11"
+css: "../styles_blog_individual.css"
+image: useR.png
+---
+
+<br><br>
+
+The [useR! conference series](https://www.r-project.org/conferences/) is *the* conference for R enthusiasts. This annual event fosters a vibrant and diverse community where data scientists, statisticians, and developers can network, learn, and contribute to the growing ecosystem of R. This years event was hold in Salzburg, Austria, the home of Mozart.
+
+This years program encompassed one day of half-day **workshops**, where I grabbed the opportunity learn more about Data Anonymization for Open Science Data and, in the afternoon, running survival analyses using tidymodels. The rest of the conference was filled with many inspiring talks (see blog post [useR! talks](/blog/07_userR!_talks/)), and many things to take home, below are just a few snapshots of some of my personal highlights and take home messages.
+
+<br><br>
+
+# useR! 2024 · Workshops
+
+<br>
+
+## Data Anonymization for Open Science Data · [Jiří Novák, Marko Miletic, Oscar Thees, Alžběta Beranová]{style="color:#7F8A80;"}
+
+All the material of the workshop you find in the [GitHub repository](https://github.com/Kyoshido/useR2024-Data-Anonymisation-for-Open-Science).
+
+This workshop started out with a general methodological overview and key concepts of what is known as the field of **Statistical Disclosure Control (SDC)**. We learned about different forms of disclosure (re-identification), the risk-utility trade-off, and the different disclosure methods. These methods correspond basically to two approaches:
+
+1.  Altering original data using non-perturbative or perturbative masking.
+
+2.  Generating synthetic data based on models trained on real world data.
+
+Considering approach (1), we learned about the functionalities of the [sdcMicro](https://sdctools.github.io/sdcMicro/) package by Matthias Templ and colleagues. It allows you not only to actually anonymise data sets, but in addition offers tools to calculate global as well as individual risk propabilities of subjects being re-identifiable. This allows you to monitor and compare the "degree of anonymization", which might be especially helpful for establishing a structured and streamlined process in the context of making sensitive data publicly available to others.
+
+Main take home message for myself are that there is more to data anonymization than altering/ aggregating/ suppression the original data, but that one should also think of synthesizing data sets.
+
+<br><br>
+
+## Surival Analysis with Tidymodels · [Hannah Frick & Max Kuhn, Posit]{style="color:#7F8A80;"}
+
+This workshop was definitely worthwhile and one of my personal highlights from the conference. The accompanying documentation in the [GitHub repository](https://hfrick.github.io/tidymodels-survival-workshop/) speaking for itself.
+
+The course guided participants through the entire process, from splitting data into training and test sets to verifying model performance (using AUC and Brier Score), and showcased the highly user-friendly functions at each step, based on the [tidymodels](https://www.tidymodels.org/) framework.
+
+As an overview and cheat-sheet for myself I pasted the functions in to their workflow figure:
+
+![Modified from: https://hfrick.github.io/tidymodels-survival-workshop/](images/tidymodel_process_2.png){fig-align="center" width="840"}
+
+<br>

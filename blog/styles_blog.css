@@ -1,0 +1,71 @@
+/* width of the listing/ body*/
+body {
+  max-width: 1150px;  /* Set your desired maximum width */
+  margin: 0 auto;    /* Center the content */
+  margin-left: 10em;
+  padding: 20px;     /* Optional: add some padding for better appearance */
+}
+
+
+/* title of page "Notes · Thoughts · Blog"*/
+.title {
+  font-family: "Petrona";
+  font-size: 3rem;
+  color: #FA2FBD;
+  font-weight: 500;
+  line-height: 3em !important; /*that there is more space around title*/
+  text-align: center;
+}
+
+/* subtitle of page: "Structured notes on different topics..." */
+.subtitle {
+  font-family: 'Bebas Neue', sans-serif;
+  color: #666260;
+  text-transform: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  /* letter-spacing: 0.1em; */
+  text-align: center !important;
+  padding-left: 11rem;
+  padding-right: 11rem;
+  margin-bottom: 5em !important;
+}
+
+
+
+
+/* -- single posts in list --*/
+
+/* --for title of listing, .listing-title does not work coz its a link --*/
+h3.no-anchor.listing-title {
+  font-family: "Petrona"; /*'Bebas Neue', sans-serif;*/
+  color: #235347 !important; 
+  font-size: 20px;
+  text-transform: none;
+  text-decoration: none !important; 
+}
+
+h3.no-anchor.listing-title:hover {
+  text-decoration: underline; 
+}
+
+.listing-date {
+  color: #7F8A80;
+  text-decoration: none !important; 
+}
+
+.listing-author {
+  color: #98A399;
+  text-transform: none;
+  text-decoration: none !important; 
+  font-size: 15px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  /*line-height: 1.5;*/
+}
+
+
+div.listing img.listing-image {
+  width: 150px !important; /* Set the desired width */
+  height: auto !important; /* Maintain aspect ratio */
+}

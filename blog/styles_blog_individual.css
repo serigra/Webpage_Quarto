@@ -1,0 +1,84 @@
+/* title of blog */
+.title {
+  font-family: "Petrona";
+  font-size: 3rem;
+  color: #FA2FBD;
+  font-weight: 500;
+  margin-bottom: 1.2em !important;
+  /*text-align: center;*/
+}
+
+
+h1 {
+color: #7F8A80;
+font-family: "Petrona";
+font-size: 1.9rem;
+font-weight: 500;
+margin-top: 1.2rem;
+margin-bottom: 0.9rem;
+}
+
+
+/*  */
+h2 {
+color: #235347; 
+font-family: "Petrona";
+font-size: 1.4rem;
+font-weight: 500;
+margin-top: 1.2rem;
+margin-bottom: 0.9rem;
+}
+
+
+h3 {
+color: #7F8A80; 
+font-family: "Petrona";
+font-size: 1.2rem;
+font-weight: 500;
+margin-top: 1.2rem;
+margin-bottom: 0.9rem;
+}
+
+
+
+
+
+/* Customize the ToC section points (on right hand side of each blog post) */
+
+/* all non-selected sections*/
+.sidebar nav[role="doc-toc"] ul > li > a {
+    font-family: "Petrona";
+    color: #98A399 !important;
+    text-transform: none;
+}
+
+/* selected section*/
+.sidebar nav[role="doc-toc"] ul > li > a.active {
+    font-family: "Petrona";
+    color: #235347 !important;
+    font-weight: bold;
+    text-transform: none;
+}
+
+/* when hovering over section*/
+.sidebar nav[role="doc-toc"] ul > li > a:hover {
+    color: #FA2FBD !important;
+    font-family: "Petrona";
+    text-transform: none;
+}
+
+
+/* Customize the size of output */
+
+.teenytiny-code{
+  font-size: 65%  
+}
+
+.tiny-code{
+  font-size: 85%  
+}
+
+.tinyer-code{
+  font-size: 72%  
+}
+

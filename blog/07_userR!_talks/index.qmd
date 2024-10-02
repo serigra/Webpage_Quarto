@@ -1,0 +1,134 @@
+---
+title: ""
+title-block-banner: useR_banner.png
+author: "Sereina M. Graber"
+date: "2024-07-11"
+css: "../styles_blog_individual.css"
+image: useR.png
+---
+
+<br><br>
+
+The [useR! conference series](https://www.r-project.org/conferences/) is *the* conference for R enthusiasts. This annual event fosters a vibrant and diverse community where data scientists, statisticians, and developers can network, learn, and contribute to the growing ecosystem of R. This years event was hold in Salzburg, Austria, the home of Mozart.
+
+The conference was filled with many inspiring **talks**, and many things to take home, below are just a few snapshots of some of my personal highlights and take home messages. The program also encompassed one day of half-day workshops (see former blog post on [useR! workshops](/blog/07_userR!_workshops/)), where I grabbed the opportunity learn more about Data Anonymization for Open Science Data and, in the afternoon, running survival analyses using tidymodels.
+
+<br><br>
+
+# useR! 2024 · Talks
+
+<br>
+
+## Interpret Statistical Models Using the `marginaleffects` Package · [Vincent Arel-Bundock, Université de Montréal]{style="color:#7F8A80;"}
+
+::: columns
+::: {.column width="60%"}
+This [marginaleffects](https://marginaleffects.com/) package offers a great range of tools that help make raw parameter estimates easier to understand, and more interpretable. Rather than getting lost in technical jargon, these functions help bridge the gap between statistical output and real-world application.
+
+In general, I believe marginal effects are underutilized, and should be used more often also in scientific publications. They provide clear insights into how variables impact outcomes, making them essential for more transparent and actionable research findings. A very helpful beginners guide can be found [here](https://library.virginia.edu/data/articles/a-beginners-guide-to-marginal-effects).
+
+I also wrote a blog post on marginal effects using the `marginaleffects` package: [see here](/blog/08_Marginal_Effects/).
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="35%"}
+<br> ![](images/marginal_zoo.png){fig-align="center" width="300"}
+:::
+:::
+
+<br><br>
+
+## Dynamic Prediction with Numerous Longitudinal Covariates · [Mirko Signorelli, Leiden University]{style="color:#7F8A80;"}
+
+::: columns
+::: {.column width="27%"}
+<br> ![](images/pencal_hex.png){fig-align="center" width="260"}
+:::
+
+::: {.column width="73%"}
+<br><br> The [`pencal`](https://cran.r-project.org/web/packages/pencal/index.html) package offers dynamic predictions of survival outcomes based on longitudinal data, thereby allowing to update predictions as new information becomes available. In particular, it handles datasets with many predictors where traditional methods fail. Find the slides [here](https://static.sched.com/hosted_files/userconf2024/0b/UseR2024Talk_pencal_Signorelli.pdf).
+
+![](images/pencal_long.png){fig-align="center" width="450"}
+:::
+:::
+
+<br><br>
+
+## Quarto - Elevating R Markdown for Advanced Publishing · [Christophe Dervieux, Posit PBC]{style="color:#7F8A80;"}
+
+::: columns
+::: {.column width="63%"}
+<br>
+
+I was excited to discover some of the latest features of quarto, here are a few of the highlights that caught my attention:
+
+-   **New PDF Output with [Typst](https://typst.app/)**: Quarto now supports PDF rendering through Typst, an exciting new open-source typesetting system. Typst blends the best features of LaTeX, Google Docs, and Word, allowing users to create stunning reports, especially in scientific contexts.
+
+-   **Quarto Extensions**: I experimented with the fancy-text extension, which enables fun formatting options, like a stylish written version of LaTeX, typing `{{ < latex > }}` results in {{< latex >}}. It's a small but neat way to add flair to your content.
+
+-   **Quarto Dashboards**: With [Quarto Dashboards](https://quarto.org/docs/dashboards/), creating interactive, data-driven dashboards has never been easier.
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="35%"}
+![](images/quarto.png){fig-align="center" width="170"}
+
+![](images/typst.png){fig-align="center" width="300"}
+:::
+:::
+
+<br><br>
+
+## Keep R Weird · [Kelly Bodwin, Cal Poly State University]{style="color:#7F8A80;"}
+
+::: columns
+::: {.column width="30%"}
+<br> ![](images/R_weird_1.png){width="290"}
+:::
+
+::: {.column width="70%"}
+<br><br><br> Fantastic keynote by Kelly Bodwin. She encouraged the community to "Keep R Weird," highlighting how the language thrives on creativity and inclusivity. R is not just a tool but a vibrant community, driven by passion and collaboration. Check out the [slides](https://kbodwin.github.io/useR_2024/#0) and watch the [recording](https://www.youtube.com/watch?v=KOQBfC1WPwM) of the talk — it's definitely worthwhile!
+:::
+:::
+
+<br><br>
+
+## Shinydraw: Quickly wireframe Shiny apps in Excalidraw · [Mike Page, cynkra]{style="color:#7F8A80;"}
+
+::: columns
+::: {.column width="65%"}
+In this lightning talk, I got to know about [Excalidraw](https://excalidraw.com/), which is an open-source, web-based tool for creating collaborative, hand-drawn-like diagrams and sketches. It is designed to be simple and intuitive, allowing users to create quick, informal drawings that resemble sketches made on a whiteboard or paper. The tool is especially popular among developers, educators, and designers for its minimalistic approach and ease of use.
+
+Michael has developed an Excalidraw library named shinydraw, which provides ready-to-use sketches of Shiny components. This library makes it easy to prototype Shiny apps with minimal effort. To get started, visit his [shinydraw GitHub page](https://github.com/MikeJohnPage/shinydraw).
+
+Find the slides of the talk [here](https://static.sched.com/hosted_files/userconf2024/3a/slides-16-9.pdf?_gl=1*fyi128*_gcl_au*MTY3NTQ1Mjk2Mi4xNzI1NjM2MzY4*FPAU*MTY3NTQ1Mjk2Mi4xNzI1NjM2MzY4). All slides are done using Excalidraw.
+:::
+
+::: {.column width="35%"}
+![](images/shinydraw.png){width="370"}
+:::
+:::
+
+<br><br>
+
+## How your code might get rusty, and what you can do about this · [Maëlle Salmon, rOpenSicence & cynkra]{style="color:#7F8A80;"}
+
+So what can you do? tips I am taking home:
+
+-   Have tests! Tip: the [covr](https://covr.r-lib.org/index.html) package for R allows to measure code coverage in R projects. It provides tools to assess how much of your R code is being exected during testing, helping you identify untested code and improve test coverage.
+-   Get rid of "owwies", step by step, easiest first (i.e. bad naming, overly complicated logic)
+-   Use tools which help you improve your code, such as [styler](https://styler.r-lib.org/) or [lintr](https://lintr.r-lib.org/index.html)
+-   Code reviews, see [Tidyteam code review principles](https://code-review.tidyverse.org/) or [The code review anxiety workbook](https://developer-success-lab.gitbook.io/code-review-anxiety-workbook-1)
+-   Git, git, git! Small commits with informative messages! see [Blog post](https://masalmon.eu/2024/06/03/small-commits/), but also the [saperlipopette](https://maelle.github.io/saperlipopette/) package, which is developed to accompany <https://ohshitgit.com/>.
+
+Find the slides of the presentation [here](https://user-maelle.netlify.app/#/). Some of the things mentioned in the talk and many more interesting content can be found on Maëlle's [website](https://masalmon.eu/). Browsing through her blog posts was very inspiring and not only made my list of good intentions for my coding projects much longer, but also enriched my list of books I wanna read (e.g. [The programmer's Brain](https://www.manning.com/books/the-programmers-brain)).
+
+<br><br>
+
+## R in the Age of LLMs: Redefining the Role of Programming and Analysis · [Hilary Parker, Stoneway Data]{style="color:#7F8A80;"}
+
+Unfortunately, I missed Hilary Parker's keynote, which I heard was a very visionary and polarising talk. However, I got to hear her thoughts on the topic through her podcast, [NOT SO STANDARD DEVIATIONS](https://nssdeviations.com/189-llms-and-data-science), which she co-hosts with Roger Peng.
