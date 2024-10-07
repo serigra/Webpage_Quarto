@@ -1,0 +1,86 @@
+---
+title: "Twisted polygon"
+---
+
+<br><br>
+
+![](home_polygon_1.png){width=400 fig-align="center"}
+
+<br>
+
+The function below is based on a random process, and thus, results in a different output each time.
+
+
+Libraries:
+```{r}
+library(ggplot2)
+```
+
+
+
+
+Function:
+
+```{r}
+random_polygons <- function(n_edges = 4, n_polygons = 10, range_values = c(-10,10), 
+                            colors = c('#FA2FBD', RColorBrewer::brewer.pal(5, name = 'Pastel1'), '#235347'), 
+                            coord_polar = TRUE){
+  
+  # Generates random polygons
+  # inspired by @venpopov from twitter
+  #
+  # Args:
+  #   n_edges: number of edges of polygons 
+  #   n_polygons: number of random generated polygons
+  #   range_values: range of values for color coding the polygons
+  #   colors: color palette based on ggplot2 color brewer colors, e.g. 'Pastel1'
+  #   coord_polar: polar coordinates TRUE/FALSE
+  # 
+  # Returns:
+  #   Plot of random polygons with emtpy background theme
+  #   
+  # v1.0 SG, 31.12.2019
+  
+  n_edges <-  as.numeric(n_edges)
+  n_polygons <- as.numeric(n_polygons)
+  ids <- rep(1:n_polygons, each = n_edges)
+  values <-  rep(runif(n_polygons, -10, 10), each = n_edges)
+  x_coord <- runif(n_edges*n_polygons, 1, 10)
+  y_coord <- runif(n_edges*n_polygons, 1, 10)
+  df_polygons <- data.frame(id = ids,
+                            value = values,
+                            x = x_coord,
+                            y = y_coord)
+  
+  img <- ggplot2::ggplot(df_polygons, aes(x = x, y = y)) +
+    geom_polygon(aes(fill = value, group = id)) +
+    scale_fill_gradientn(colors = colors) + # different color palettes: see ?scale_fill_distiller
+    theme_void() + # no background/grid/axes
+    theme(legend.position = "none", 
+          panel.background = element_rect(fill = "#f8faf7", color = NA),
+          plot.background = element_rect(fill = "#f8faf7", color = NA)
+          )
+  
+  if (coord_polar == TRUE){
+    # structure + match.call to save call of the function
+    structure(img + coord_polar(), CALL = match.call() ) 
+  } else { 
+    structure(img, CALL = match.call() ) 
+  }
+}
+```
+
+
+
+<br>
+
+Apply function:
+
+```{r}
+custom_colors <- c('#FA2FBD', RColorBrewer::brewer.pal(5, name = 'Pastel1'), '#235347')
+
+random_polygons(n_edges = 5,
+                n_polygons = 8,
+                coord_polar = TRUE,
+                colors = custom_colors)
+```

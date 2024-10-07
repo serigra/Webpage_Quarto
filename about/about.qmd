@@ -31,10 +31,10 @@ html:
 
 ## Experience
 
-**since 2019 \| Data Scientist \@ Helsana insurance group**\
-Lead, design and implementation of data analyses for internal projects and scientific studies at the health science department, with a focus on understanding the effectiveness and the quality of treatment in the Swiss health care system. See our publications [here]('https://www.helsana.ch/de/helsana-gruppe/medien-publikationen/wissenschaftliche-publikationen.html').
+**since 2019 \| Data Scientist \@ Health Sciences, Helsana insurance grp.**\
+Lead, design and implementation of data analyses for internal projects and scientific studies at the health science department, with a focus on understanding the effectiveness and the quality of treatment in the Swiss health care system. Find all the research group's publications [here](https://www.helsana.ch/de/helsana-gruppe/medien-publikationen/wissenschaftliche-publikationen.html), and my individual publications [here](/publications/index.qmd).
 
-**2017 - 2019 \| Data Scientist \@ Sanitas insurance group**\
+**2017 - 2019 \| Data Scientist \@ Advanced Analytics, Sanitas insurance grp.**\
 Lead, design and implementation of advanced analytical projects. In-house consulting and teaching of statistical and analytical skills.
 
 **2012 - 2016 \| projectwise \| Biostatistican \@ University Hospital Zurich, Cantonal Hospital Aarau**\
@@ -45,10 +45,12 @@ Design, implementation of and consulting on statistics and data analyses for cli
 ## Education
 
 **2017 \| PhD in Evolutionary Biology**\
-Anthropological Institute and Museum, University of Zurich. Comparative analysis on social & ecological factors driving brain size evolution.
+Anthropological Institute and Museum, University of Zurich.\
+[Thesis](files/Dissertation.pdf): Comparative analysis on social & ecological factors driving brain size evolution.
 
 **2015 \| Master of Science in Biostatistics**\
-Epidemiology, Biostatistics and Prevention Institute, University of Zurich.
+Epidemiology, Biostatistics and Prevention Institute, University of Zurich.\
+[Thesis](files/Msc_Thesis_Biostats.pdf): Phylogenetic comparative methods for discrete responses in evolutionary biology.
 
 **2012 \| Master of Science in Anthropology**\
 Anthropological Institute and Museum, University of Zurich.

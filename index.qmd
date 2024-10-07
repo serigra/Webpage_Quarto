@@ -30,4 +30,8 @@ I am a data scientist and part of the health services research team of one of th
 [About →](about/about.qmd)
 :::
 
-<!-- hero-heading -->
+<!-- Add the image and explanation link -->
+
+<p style="font-size: small; color: #757883; margin-top: 1px;text-align: right;">
+Check out the R code for the twisted polygon <a href="twisted_polygon.qmd">here</a>.
+</p>
