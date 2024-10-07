@@ -3,7 +3,7 @@ title: "Impact of intraoperative fluid administration on outcome in patients und
 author: Tobias Piegeler, Pamela Dreessen, Sereina M. Graber, Sarah R. Haile, Daniel M. Schmid, Beatrice Beck-Schimmer 
 date: '2014-07-30'
 css: "../styles_publications_individual.css"
-image: featured-pdf.jpeg
+image: featured-pdf.png
 publication: 
 categories:
   - "retrospective analysis"

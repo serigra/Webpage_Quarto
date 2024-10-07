@@ -1,6 +1,6 @@
 ---
 title: 'Immer weniger Hausbesuche trotz zunehmendem Bedarf'
-author: "PD Dr. Carola A. Huber, Dr. Sereina M. Graber"
+author: "Carola A. Huber, Sereina M. Graber"
 date: '2022-02-01'
 css: "../styles_publications_individual.css"
 image: featured-pdf.png

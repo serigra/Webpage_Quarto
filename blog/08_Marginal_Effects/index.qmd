@@ -228,8 +228,8 @@ This shift from a positive to a negative relationship as age increases illustrat
 
 We've just taken a deep dive into the concept of *Marginal Effects at Representative Values (MER)*. But there's more! Two other concepts can shed light on our data (depending on context and data, one or the other make more sense): MEM and AME. Let's break these three down in more detail:
 
-::: columns
-::: {.column width="55%"}
+:::::: columns
+:::: {.column width="55%"}
 <br><br> **Marginal Effect at Representative Values (MER)**:
 
 This represents the dy/dx at very specific, representative values of x (age in the example above).
@@ -239,15 +239,15 @@ This represents the dy/dx at very specific, representative values of x (age in t
 slopes(quadratic_model, newdata = datagrid(age = c(30, 60)))
 ```
 :::
-:::
+::::
 
 ::: {.column width="45%"}
 ![](images/MER_continuous.png){width="400"}
 :::
-:::
+::::::
 
-::: columns
-::: {.column width="55%"}
+:::::: columns
+:::: {.column width="55%"}
 <br><br>
 
 **Marginal Effect at the Mean (MEM)**:
@@ -259,15 +259,15 @@ This represents the dy/dx at the mean value of x (age in the example above).
 slopes(quadratic_model, newdata = "mean")
 ```
 :::
-:::
+::::
 
 ::: {.column width="45%"}
 ![](images/MEM_continuous.png){width="400"}
 :::
-:::
+::::::
 
-::: columns
-::: {.column width="55%"}
+:::::: columns
+:::: {.column width="55%"}
 <br><br> **Average Marginal Effect (AME)**:
 
 This is the mean of all observation-specific marginal effects. It's calculated by determining dy/dx at each value of x and then taking the average. Based on the example above, this might not be very helpful though.
@@ -277,15 +277,14 @@ This is the mean of all observation-specific marginal effects. It's calculated b
 avg_slopes(quadratic_model)
 ```
 :::
-:::
+::::
 
 ::: {.column width="45%"}
 ![](images/AME_continuous.png){width="400"}
 :::
-:::
+::::::
 
 <br><br>
-
 
 ## Unravelling Logistic Regression and Marginal Effects
 
@@ -361,26 +360,26 @@ While these interpretations are technically correct, they're not very intuitive.
 
 Therefore lets look at marginal effects, which offer a more accessible way to interpret our results. They show how changes in our predictors affect the probability (not odds!) of the outcome. First thing we could do, is to get individual *risk differences*: predict the probability of diabetes for a given subject based on their current age, and the probability for one year older (+1), and calculate the difference between the two. Analogously for the binary variable, predict the probability of diabetes for each subject, once treating the subject to be above average massed, and once below averaged massed, and take the difference thereof. We could do this by hand, but the `comparisons()` function from the `marginaleffects` does this for us (which is the analogue function to `slopes()` for the continuous relationship from above).
 
-::: columns
-::: {.column width="48.75%"}
+:::::::: columns
+:::: {.column width="48.75%"}
 ::: tinyer-code
 ```{r}
 comparisons(logit_model, variable = 'age') -> rr.age; rr.age
 ```
 :::
-:::
+::::
 
 ::: {.column width="2.5%"}
 :::
 
-::: {.column width="48.75%"}
+:::: {.column width="48.75%"}
 ::: tinyer-code
 ```{r}
 comparisons(logit_model, variable = 'mass_fg') -> rr.mass; rr.mass
 ```
 :::
-:::
-:::
+::::
+::::::::
 
 <br>
 
@@ -388,30 +387,30 @@ comparisons(logit_model, variable = 'mass_fg') -> rr.mass; rr.mass
 
 Furthermore, to get a population-level perspective, we can average these individual effects using `avg_comparisons()`
 
-::: columns
-::: {.column width="48.75%"}
+:::::::: columns
+:::: {.column width="48.75%"}
 ::: tinyer-code
 ```{r}
 avg_comparisons(logit_model, variable = 'age')
 ```
 :::
-:::
+::::
 
 ::: {.column width="2.5%"}
 :::
 
-::: {.column width="48.75%"}
+:::: {.column width="48.75%"}
 ::: tinyer-code
 ```{r}
 avg_comparisons(logit_model, variable = 'mass_fg')
 ```
 :::
-:::
-:::
+::::
+::::::::
 
-So what do these risk differences, or population averaged risk differences, tell us? 
+So what do these risk differences, or population averaged risk differences, tell us?
 
--   On average, for each year increase in age, the probability of diabetes increases by 0.9 percentage points. 
+-   On average, for each year increase in age, the probability of diabetes increases by 0.9 percentage points.
 -   For changing from below-averaged body mass to above-averaged body mass increases the probability of diabetes, again on average across all subjects, by 23% percentage points.
 
 *Note*: If you prefer risk ratios instead of risk differences, you can easily add the argument `comparison = "ratio"` to the `comparisons()` function.
@@ -421,7 +420,6 @@ These marginal effects provide a much more intuitive interpretation than the raw
 We can further refine our analysis by exploring *Marginal Effects at the Mean (MEA)* and *Marginal Effects at Representative Values (MER)*.
 
 <br><br>
-
 
 ### Marginal Effects at the Mean (MEA)
 
@@ -458,16 +456,14 @@ p1-p0
 -   For someone with above-average body mass, turning 34 compared to 33 increases the probability of diabetes by 1 percentage point.
 -   For someone aged 33, changing from below-average to above-average body mass increases the probability of diabetes by 24 percentage points.
 
-
 <br><br>
-
 
 ### Marginal Effects at Representative Values (MER)
 
 We can also examine how marginal effects change across different ages:
 
-::: columns
-::: {.column width="58.75%"}
+:::::::: columns
+:::: {.column width="58.75%"}
 <br>
 
 ::: teenytiny-code
@@ -476,12 +472,12 @@ We can also examine how marginal effects change across different ages:
 comparisons(logit_model, variable = 'mass_fg', newdata = data.frame(age = seq(20, 80, by=10))) -> c; c
 ```
 :::
-:::
+::::
 
 ::: {.column width="2.5%"}
 :::
 
-::: {.column width="38.75%"}
+:::: {.column width="38.75%"}
 ::: tinyer-code
 ```{r}
 #| code-fold: true
@@ -499,8 +495,8 @@ plot_comparisons(logit_model, variable = 'mass_fg',
   my_theme()
 ```
 :::
-:::
-:::
+::::
+::::::::
 
 This analysis suggests that the risk difference peaks around age 50, however, notice that the confidence intervals are relatively broad.
 

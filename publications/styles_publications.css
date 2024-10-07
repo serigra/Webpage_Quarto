@@ -38,8 +38,8 @@ body {
 
 .listing-title-link {
   font-family: 'Petrona';
-  color: #235347 !important;  /*Ensure the link inherits the color of the surrounding text */
-  text-decoration: none; /* Remove underline */
+  color: #235347 !important;
+  text-decoration: none;
   text-transform: none;
   font-size: 20px;
   font-weight: 700; 
@@ -47,7 +47,7 @@ body {
 
 .listing-title-link:hover {
   text-transform: none;
-  text-decoration: underline; /* Add underline on hover for better UX */
+  text-decoration: underline;
 }
 
 .listing-pub-author {
@@ -55,16 +55,23 @@ body {
   font-size: 15px;
   margin-top: 8px;
   margin-bottom: 8px;
-  /*line-height: 1.5;*/
 }
 
 .listing-pub-journal {
   color: #757883;
   font-size: 15px;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
+}
+
+.listing-description {
+  margin-top: 0.5em;
+  font-size: 1em;
+  color: #666;
+  margin-bottom: 0.5em;
+  text-align: justify;
 }
 
 .listing-pub-url {
   font-size: 13px;
-
+  margin-bottom: 0;
 }

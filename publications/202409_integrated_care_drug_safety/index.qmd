@@ -2,9 +2,10 @@
 title: 'Are integrated care models associated with improved drug safety in Swiss primary care? an observational analysis using healthcare claims data'
 author: "Renato Farcher, Sereina M. Graber, Stefan Boes, Carola A. Huber"
 date: '2024-09-26'
-publication: "Helsana Report (2023)"
+publication: ""
 image: featured-pdf.png
 css: "../styles_publications_individual.css"
+description: "This observational study investigates drug safety in integrated care models (ICM) in comparison to standard care models (SCM) in Swiss primary care. The study found that ICM patients had significantly lower odds of receiving inappropriate prescriptions, such as proton pump inhibitors or opioids, compared to SCM patients. These results suggest that integrated care models may improve drug safety and patient outcomes."
 categories:
   - "integrated care"
   - "drug safety"

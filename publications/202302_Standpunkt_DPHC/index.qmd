@@ -1,6 +1,6 @@
 ---
 title: '«Dear Doctor»: Kommen Sicherheitswarnungen an?'
-author: "Dr. med. Sabrina M. Stollberg, Dr. Sereina M. Graber"
+author: "Sabrina M. Stollberg, Sereina M. Graber"
 date: '2023-02-01'
 css: "../styles_publications_individual.css"
 image: featured-pdf.png
