@@ -4,20 +4,17 @@ title: "Twisted polygon"
 
 <br><br>
 
-![](home_polygon_1.png){width=400 fig-align="center"}
+![](home_polygon_1.png){width="350" fig-align="center"}
 
 <br>
 
 The function below is based on a random process, and thus, results in a different output each time.
 
-
 Libraries:
+
 ```{r}
 library(ggplot2)
 ```
-
-
-
 
 Function:
 
@@ -69,8 +66,6 @@ random_polygons <- function(n_edges = 4, n_polygons = 10, range_values = c(-10,1
   }
 }
 ```
-
-
 
 <br>
 

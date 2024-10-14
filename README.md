@@ -1,24 +1,16 @@
-# Instructions
+# Tipps & Tricks
 
 
-## Styles, Fonts and Colors
+## Layout, Fonts and Colors
 
-Über .css Files kann die Website und jede Subsite beliebig angepasst/ formattiert werden.
+The website and each subsite can be customised/formatted as required using .css files as well as the .ejs (embedded java script files).
 
-- für "**HOME**"-Page: im root folder im File "styles.css"" können title, subtitles etc. formatiert werden.
-- für "**ABOUT**"-Page: separates .css-File: "about/styles_about.css" --> muss ebenfalls im about.qmd file mit `css: styles_about.css` referenziert werden.
-- "**PUBLICATIONS**": 
-    - on this site, all publications are listed based on a "listing"-layout, as defined in the yaml-header. Instead of using one of the three build in type of listings, I used customized display of the items, which is defined in the publications/_ejs/publications.ejs (ejs = embedded java script). Here you arrange the displayed items (title, author, journal, URL Link, image, etc.) according to your own needs. It is important to refer to the .ejs file in the index.qmd file using `template: _ejs/publications.ejs` in the yaml-header under `listing`.
+- **HOME**-subpage: in the root folder in the file ‘styles.css’’ title, subtitles etc. can be formatted.
+- **ABOUT**-subpage: separate .css file: ‘about/styles_about.css’ --> must also be referenced in the about.qmd file with `css: styles_about.css`.
+- **PUBLICATIONS**-subpage: 
+    - on this site, all publications are listed based on a "listing"-layout, as defined in the yaml-header. Instead of using one of the three build in type of listings, I used customized display of the items .ejs files (ejs = embedded java script). See more below. 
     - the style, fonts and colors of the listing page are defined in the `publications/styles_publications.css` file.
     - the style, fonts and colors of the individual sites of each publication (i.e. abstracts), are defined in `styles_publications_individual.css`
-
-
-
-## Page Layout/ Widths of Columns
-
-- in "_quarto.yml": see `grid:` with `sidebar-width: 200px` etc.
-
-
 
 ## Listing Layout (Publications, Talks)
 
@@ -27,7 +19,7 @@ Therefore, I built a [custom display listing](https://quarto.org/docs/websites/w
 to loop through a list of files and display them all in the same mamner.
 These files are located `publications/_ejs/pulbications.ejs` and `talks/_ejs/talks.ejs`.
 I did not build these files from scratch but rather browsed through the [quarto gallery](https://quarto.org/docs/gallery/#websites) and 
-let myself inspire by different websites and looked up the underlying code.
+let myself inspire by different websites and looked up the underlying code, and using help from LLMs (ChatGPT, Claude and Perplexity).
 
 Here are few things I wanna point out:
 
@@ -41,14 +33,24 @@ Here are few things I wanna point out:
 More items and their codes can be found here: https://icons.getbootstrap.com/
 
 
+## Page Layout/ Widths of Columns
+
+- in "_quarto.yml": see `grid:` with `sidebar-width: 200px` etc.
+
 
 ## Icons
+
+### Icons in the .ejs files
 
 For icons embedded in the .ejs files (e.g. pdf, html or link item): look up code here https://icons.getbootstrap.com/
 
 
+### Font Awesome Icons Extension for Quarto
 
-## Academicons
+Follow the instructions here: https://github.com/quarto-ext/fontawesome#readme
+
+
+### Academicons
 
 To be able to use non-built-in ["academicons"](https://jpswalsh.github.io/academicons/)--\> navigate to your root folder of website and install the extension in the particular project:
 
