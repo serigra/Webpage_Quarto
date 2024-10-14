@@ -8,7 +8,7 @@ image: featured-pdf.png
 publication: "BMC Health Services Research"
 categories:
   - "health services research"
-  - "quality" 
+  - "quality of care" 
 url_source: https://bmchealthservres.biomedcentral.com/articles/10.1186/s12913-022-07893-8
 url_preprint: 
 pdf_file: "paper.pdf"

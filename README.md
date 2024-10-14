@@ -71,4 +71,16 @@ Example to add Icon:
   href: https://www.researchgate.net/profile/Sereina-Graber
 ```
 
+## Comments
 
+Quarto enables [commenting](https://quarto.org/docs/output-formats/html-basics.html#commenting) via 3 options.
+I decided to go with [Utterances](https://utteranc.es/) commenting for my blog posts. To do so, first, 
+I needed to make my Webpage_Quarto repository public. Second, I installed the utterances app on the repo.
+Third, I added a `_metadata.yml` file with the codes lines below, and added in the `blog/index.qmd` `comments: false`. 
+This makes sure that the comments are only allowed for individual blog posts, and not on the main blog page.
+
+```
+comments:
+  utterances:
+    repo: serigra/Webpage_Quarto
+```

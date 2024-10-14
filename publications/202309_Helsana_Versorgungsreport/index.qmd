@@ -8,7 +8,7 @@ image: featured-pdf.png
 css: "../styles_publications_individual.css"
 categories:
   - "health services research"
-  - "quality" 
+  - "quality of care" 
 url_source: https://reports.helsana.ch/versorgung/
 url_preprint:
 pdf_file: "Helsana_Versorgungsreport.pdf"

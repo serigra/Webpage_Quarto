@@ -13,6 +13,6 @@ listing:
   image-align: left
   #image-height: 150px
   page-size: 5
-
+comments: false
 title-block-banner: false
 ---
