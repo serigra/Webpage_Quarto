@@ -2,15 +2,16 @@
 title: 'Real-world treatment patterns and medical costs of prostate cancer patients in Switzerland - A claims data analysis'
 author: "Michael Stucki, Stephanie Dosch, Markus Gnädinger, Sereina M. Graber, Carola A. Huber, Golda Lenzin, Räto T. Strebel, Daniel R. Zwahlen, Aurelius Omlin, Simon Wieser"
 date: '2024-04-01'
-publication: "Helsana Report (2023)"
+description: "This study examined healthcare utilization, treatment patterns, and medical costs for prostate cancer (PC) patients in Switzerland from 2014 to 2018 using insurance claims data. It found that androgen deprivation therapy (ADT) was the most common treatment, with 9.5% of patients receiving combination therapy with docetaxel, the most frequently used chemotherapy. Total medical costs for PC in 2018 were CHF 347 million, with treatment for metastatic PC accounting for about two-thirds of the total expenditure."
+publication: ""
 image: featured-pdf.png
 css: "../styles_publications_individual.css"
 categories:
   - "health services research"
-  - "treatment patterns"
-  - "prostate cancer" 
+  - "prostate cancer"
 url_source: https://www.ejcancer.com/article/S0959-8049(24)00728-7/fulltext
 url_preprint:
+pdf_file: "paper.pdf"
 journ: "European Journal of Cancer"
 issue: 204(114072)
 page: 

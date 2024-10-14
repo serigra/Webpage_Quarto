@@ -2,15 +2,16 @@
 title: "The economics of brain size evolution in vertebrates"
 author: "Sandra A. Heldstab, Karin Isler, Sereina M. Graber, Carel P. van Schaik"
 date: '2022-06-20'
+description: "Across the animal kingdom, brain size varies remarkably. This review summarizes how an increasing number of studies show that to fully comprehend brain size evolution and the large variation in brain size across lineages, it is important to look at the economics of brains, including the different pathways through which the high energetic costs of brains can be offset. "
 css: "../styles_publications_individual.css"
 image: featured-pdf.png
 publication: "Current Biology"
 categories:
   - "evolutionary biology"
   - "brain size"
-  - "vertebrates" 
 url_source: https://www.cell.com/current-biology/fulltext/S0960-9822(22)00735-7?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0960982222007357%3Fshowall%3Dtrue
 url_preprint: 
+pdf_file: "paper.pdf"
 journ: "Current Biology"
 issue: 32(12)
 page: 697-708

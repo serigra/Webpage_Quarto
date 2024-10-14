@@ -2,15 +2,17 @@
 title: "Life history, cognition and the evolution of complex foraging niches"
 author: "Caroline Schuppli, Sereina M. Graber, Karin Isler, Carel P. van Schaik"
 date: '2016-03-03'
+description: "This research explored the relationship between life history traits, cognitive abilities, and foraging niche complexity in mammals, particularly primates and carnivorans. The study found that slow development and extended parental care are key factors enabling species to thrive in complex niches. In primates only, complex foraging is linked to enhanced cognitive abilities, supporting theories on ecological factors and the brain size evolution."
 css: "../styles_publications_individual.css"
 image: featured-pdf.png
 publication: 
 categories:
   - "evolutionary biology"
   - "cognition"
-  - "foraging niches" 
+  - "brain size"
 url_source: https://www.sciencedirect.com/science/article/abs/pii/S004724841500278X?via%3Dihub
 url_preprint: 
+# pdf_file: "paper.pdf" # not publicly available...
 journ: "Journal of Human Evolution"
 issue: 92
 page: 91-100

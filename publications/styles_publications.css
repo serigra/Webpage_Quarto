@@ -1,9 +1,12 @@
 /* width of the listing/ body*/
 body {
-  max-width: 1150px;  /* Set your desired maximum width */
+  max-width: 1200px;  /* Set your desired maximum width */
   margin: 0 auto;    /* Center the content */
   margin-left: 10em;
   padding: 20px;     /* Optional: add some padding for better appearance */
+  flex-grow: 1;  /* Allow body to take up remaining space */
+  display: flex;
+  flex-direction: column;
 }
 
 
@@ -28,43 +31,46 @@ body {
   text-align: center !important;
   padding-left: 8rem;
   padding-right: 8rem;
-  margin-bottom: 5em !important;
+  margin-bottom: 3em !important;
 }
 
+.category-filters {
+  margin-bottom: 3em !important;/* Adds space below the category buttons */
+  text-align: center;
+}
+
+
+.content-container.listing-pagination {
+  display: none;
+}
 
 
 
 /* -- single publications in list --*/
 
-.listing-title-link {
+.listing-pub-title {
   font-family: 'Petrona';
-  color: #235347 !important;
-  text-decoration: none;
+  color: #235347 !important;  /*Ensure the link inherits the color of the surrounding text */
   text-transform: none;
   font-size: 20px;
   font-weight: 700; 
 }
 
-.listing-title-link:hover {
-  text-transform: none;
-  text-decoration: underline;
-}
-
 .listing-pub-author {
   color: #757883;
   font-size: 15px;
-  margin-top: 8px;
+  margin-top: 5px;
   margin-bottom: 8px;
 }
 
 .listing-pub-journal {
   color: #757883;
   font-size: 15px;
-  margin-bottom: 4px;
+  margin-bottom: 5px;
 }
 
 .listing-description {
-  margin-top: 0.5em;
+  margin-top: 10px;
   font-size: 1em;
   color: #666;
   margin-bottom: 0.5em;
@@ -73,5 +79,31 @@ body {
 
 .listing-pub-url {
   font-size: 13px;
-  margin-bottom: 0;
+  margin-bottom: 10px;
+  display: flex;  /* Ensure URL and category buttons align in flexbox */
+  align-items: center;
 }
+
+/* Ensure Flexbox Layout Doesn't Break After Filtering */
+.publication-item {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+/* Styling for filter and category buttons */
+.category-button {
+    padding: 4px 7px;
+    background-color: #f8faf7;
+    color: #235347;
+    border: 0.3px solid #235347;  /* Add green border */
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 0.6em;
+    margin-bottom: 3px; /* braucht ein bisschen weniger Abstand als pdf link um aligned zu sein */
+}
+
+.category-button:hover {
+    background-color: #e8ece4;
+}
+

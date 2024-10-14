@@ -2,6 +2,7 @@
 title: "Time trends in general practitioners' home visits for older patients: a retrospective cross-sectional study from Switzerland"
 author: "Stefan Neuner-Jehle, Sereina M. Graber, Ellen Keizer, Carola A. Huber, Eva Blozik, Thomas Rosemann, Oliver Senn"
 date: '2021-07-21'
+description: "This study investigated the time trend of GP home visits to older patients from 2014 to 2018 in Switzerland, and its associations with patient characteristics including healthcare utilisation and living situation. The results revealed increased health care utilisation, higher morbidity and mortality in patients receiving GP home visits, and an ongoing decline of GP home visits over the past years, which has a potentially negative impact on the quality of care for older and frail patients."
 css: "../styles_publications_individual.css"
 image: featured-pdf.png
 publication: 
@@ -10,6 +11,7 @@ categories:
   - "GP home visits"
 url_source: https://smw.ch/index.php/smw/article/view/3032
 url_preprint: 
+pdf_file: "paper.pdf"
 journ: "Swiss Medical Weekly"
 issue: 151(2728)
 page: 

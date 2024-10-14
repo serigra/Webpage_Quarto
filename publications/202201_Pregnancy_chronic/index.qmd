@@ -2,15 +2,17 @@
 title: "Use of Prescribed Drugs to Treat Chronic Diseases during Pregnancy in Outpatient Care in Switzerland between 2014 and 2018: Descriptive Analysis of Swiss Health Care Claims Data"
 author: "Eva Gerbier, Sereina M. Graber, Marlene Rauch, Carole Marxer, Christoph Meier, David Baud, U. Winterfeld, Eva Blozik, Daniel Surbek, Julia Spoendlin, Alice Panchaud"
 date: '2022-01-27'
+description: "This study evaluated the use of drugs to treat chronic diseases during pregnancy in Switzerland using healthcare claims data from 2014 to 2018. Drugs were claimed in 22% of pregnancies, with levothyroxine (6.6%) and antihypertensives (5.3%) being the most frequently prescribed. Patterns of drug claims were in line with treatment recommendations, but relatively rare events of in utero exposure to teratogenic drugs may have had severe implications for those involved."
 css: "../styles_publications_individual.css"
 image: featured-pdf.png
 publication: "BMC Health Services Research, **23**, _707_ (2023)."
 categories:
   - "health services research"
-  - "medications"
   - "pregnancy" 
+  - "drug safety"
 url_source: https://www.mdpi.com/1660-4601/19/3/1456
 url_preprint: 
+pdf_file: "paper.pdf"
 journ: "International Journal of Environmental Research and Public Health"
 issue: 19(3)
 page: 

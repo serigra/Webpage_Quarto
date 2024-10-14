@@ -2,16 +2,16 @@
 title: 'Prescriber-level surveillance of outpatient antimicrobial consumption to enable targeted antimicrobial stewardship: a nationwide observational study, Switzerland, 2015 to 2022'
 author: "Sereina M. Graber, Sabrina M. Stollberg, Catherine Plüss-Suard, Carola A. Huber, Andreas Kronenberg, Oliver Senn, Stefan Neuner-Jehle, Andreas Plate"
 date: '2024-09-12'
+description: "This study analyzed antibiotic consumption (AMC) in the outpatient setting in Switzerland, focusing on the contributions of different prescriber groups. Overall, antibiotic prescriptions declined by 12.4% from 2015 to 2022. With ca 66% in 2022, the largest prescriber group of primary care physicians contributed less than expected, whereas hospital-affiliated outpatient care emerged as an important prescriber group with ca 20%. This type of surveillance builds the basis for sharing information with specific groups of physicians, which can help to improve the responsible use of antibiotics and address the rise of resistance."
 publication: "Helsana Report (2023)"
 image: featured-pdf.png
 css: "../styles_publications_individual.css"
 categories:
-  - "antibiotics"
-  - "AMR"
-  - "treatment patterns"
   - "health services research"
+  - "antibiotics"
 url_source: https://www.eurosurveillance.org/content/10.2807/1560-7917.ES.2024.29.37.2300734
 url_preprint:
+pdf_file: "paper.pdf"
 journ: "Eurosurveillance"
 issue: 29 (37)
 page: 

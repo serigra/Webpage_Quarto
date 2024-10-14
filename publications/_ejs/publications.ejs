@@ -9,10 +9,32 @@ function formatAuthors(authorString) {
       : author.trim()
   ).join(', ');
 }
+
+// Collect all unique categories
+const allCategories = new Set();
+items.forEach(item => {
+  if (item.categories) {
+    item.categories.forEach(category => allCategories.add(category));
+  }
+});
 %>
+
+<!-- Category filter buttons -->
+<div class="category-filters" style="margin-bottom: 20px;">
+  <button class="category-button" onclick="filterCategory('all')" style="margin-right: 5px;">Show All</button>
+  <% for (const category of allCategories) { %>
+    <button class="category-button" onclick="filterCategory('<%= category %>')" style="margin-right: 5px;">
+      <%= category %>
+    </button>
+  <% } %>
+</div>
+
+
 <div class="list quarto-listing-default">
     <% for (const item of items) { %>
-    <div class="quarto-post image-right" <%= metadataAttrs(item) %>>
+    <div class="quarto-post image-right publication-item" 
+         data-categories="<%= item.categories ? item.categories.join(',') : '' %>" 
+         <%= metadataAttrs(item) %>>
         <div class="thumbnail">
             <p>
                 <% if (item.image) { %>
@@ -21,44 +43,85 @@ function formatAuthors(authorString) {
             </p>
         </div>
         <div class="body">
+        
             <div class="no-anchor listing-pub-title listing-title">
-                <a href="<%= item.path %>" class="listing-title-link"><%= item.title %></a>
+               <%= item.title %>
             </div>
+            
             <div class="listing-pub-author listing-author">
                 <%= formatAuthors(item.author) %>
             </div>
+            
             <div class="metadata-value listing-pub-journal listing-publication">
                 <% if (item.journ) { %>
-                    <i><%= item.journ %></i><% if (item.issue) { %>, <%= item.issue %><% } %><% if (item.page) { %>, <%= item.page %><% } %><% if (item.year) { %>, <%= item.year %><% } %>
+                    <i><%= item.journ %></i><% if (item.issue) { %>, <%= item.issue %><% } %><% if (item.page) { %>, <%= item.page %><% } %><% if (item.year) { %>, <b><%= item.year %></b><% } %>
                 <% } %>
-            </div>
-            <div class="metadata">
+              </div>
+              <div class="metadata">
                 <div class="listing-pub-number">
                     <%= item.pub_number %>
                 </div>
+                
                 <% if (item.description) { %>
                 <div class="listing-description">
                     <%= item.description %>
                 </div>
                 <% } %>
-                <% if (item.url_source) { %>
-                <div class="listing-pub-url">
-                    <a href="<%- item.url_source %>">
-                        <p style="color:#FA2FBD;">URL <i class="bi bi-box-arrow-up-right"></i></p>
+                
+                <!-- URL Links for Source, Preprint, PDF, and Categories -->
+                <% if (item.url_source || item.url_preprint || item.pdf_file) { %>
+                <div class="listing-pub-url" style="display: flex; align-items: center;">
+                    <% if (item.url_source) { %>
+                    <a href="<%- item.url_source %>" style="margin-right: 15px;">
+                        <p style="color:#FA2FBD; display: inline;">URL <i class="bi bi-box-arrow-up-right"></i></p>
                     </a>
+                    <% } %>
+                    
+                    <!-- URL Link for preprint -->
+                    <% if (item.url_preprint) { %>
+                    <a href="<%- item.url_preprint %>" style="margin-right: 15px;">
+                        <p style="color:#FA2FBD; display: inline;">Preprint URL <i class="bi bi-box-arrow-up-right"></i></p>
+                    </a>
+                    <% } %>
+
+                    <!-- PDF Link -->
+                    <% if (item.pdf_file) { %>
+                    <a href="<%= item.path.replace(/index\.qmd$/, '') + item.pdf_file %>" style="margin-right: 15px;">
+                        <p style="color:#FA2FBD; display: inline;">PDF <i class="bi bi-file-earmark-pdf"></i></p>
+                    </a>
+                    <% } %>
+
+                    <!-- Categories as buttons (next to PDF link) -->
+                    <% if (item.categories && item.categories.length > 0) { %>
+                    <div class="listing-pub-categories" style="margin-left: 15px;">
+                        <% for (const category of item.categories) { %>
+                        <button class="category-button" onclick="filterCategory('<%= category %>')" style="margin-right: 5px;">
+                            <%= category %>
+                        </button>
+                        <% } %>
+                    </div>
+                    <% } %>
                 </div>
                 <% } %>
-                <% if (item.url_preprint) { %>
-                <div class="listing-pub-url">
-                    <a href="<%- item.url_preprint %>">
-                        <p style="color:#FA2FBD;">preprint URL <i class="bi bi-box-arrow-up-right"></i></p>
-                    </a>
-                </div>
-                <% } %>
+                
             </div>
         </div>
     </div>
     <% } %>
 </div>
 
+<script>
+// Function to filter publications by category
+function filterCategory(category) {
+    const publications = document.querySelectorAll('.publication-item');
+    publications.forEach(item => {
+        const categories = item.getAttribute('data-categories').split(',');
+        if (category === 'all' || categories.includes(category)) {
+            item.style.display = 'flex';  // Change to flex to maintain layout
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+</script>
 ```

@@ -2,15 +2,16 @@
 title: 'Does the implementation of an incentive scheme increase adherence to diabetes guidelines? A retrospective cohort study of managed care enrollees'
 author: "Renato Farcher, Sereina M. Graber, Nicole Thüring, Eva Blozik, Carola A. Huber"
 date: '2023-06-01'
+description: "This study evaluated the impact of a new incentive scheme introduced in 2018 on adherence to guidelines for diabetes care in Swiss managed care models. The analysis of 6,273 diabetic patients showed moderate but consistent improvements in guideline adherence across several performance measures, with the odds of receiving specific tests increasing by 18% to 58% after the incentive's implementation. The findings suggest that such incentive schemes, which promote transparency in performance, may enhance the quality of care for diabetes patients."
 css: "../styles_publications_individual.css"
 image: featured-pdf.png
 publication: "BMC Health Services Research, **23**, _707_ (2023)."
 categories:
   - "health services research"
   - "diabetes"
-  - "adherence" 
 url_source: https://bmchealthservres.biomedcentral.com/articles/10.1186/s12913-023-09694-z#:~:text=care%20in%20Switzerland.-,Conclusion,care%20among%20patients%20with%20diabetes
 url_preprint: 
+pdf_file: "paper.pdf"
 journ: "BMC Health Services Research"
 issue: 23
 page: 

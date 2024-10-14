@@ -2,14 +2,16 @@
 title: '«Dear Doctor»: Kommen Sicherheitswarnungen an?'
 author: "Sabrina M. Stollberg, Sereina M. Graber"
 date: '2023-02-01'
+description: "Die Swissmedic kann bei neuen Sicherheitsbedenken zu Medikamenten Hersteller dazu anweisen, sogenannte “Direct Healthcare Professional Communications” (DHPC) an Ärzte zu versenden, um wichtige Informationen weiterzugeben. Eine Auswertung von Helsana-Daten für zwei DHPCs zu Fluorchinolonen (Antibiotika) und Valproat (Epilepsiemedikament) zeigt einen signifikanten Rückgang der Verschreibungen nach Versand der Mitteilungen. Trotz des Rückgangs lässt sich jedoch kein direkter kausaler Zusammenhang ableiten. Die Kurzanalyse regt zur Diskussion über die Optimierung von Sicherheitswarnungen an."
 css: "../styles_publications_individual.css"
 image: featured-pdf.png
 categories:
   - "health services research"
-  - "DHPC" 
+  - "drug safety"
 publication:
 url_source: https://www.helsana.ch/de/helsana-gruppe/medien-publikationen/standpunkt.html
 url_preprint: 
+pdf_file: "PDF.pdf"
 journ: "Helsana Standpunkt"
 issue: Nr. 1 (Februar)
 page: 12-13

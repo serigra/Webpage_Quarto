@@ -2,13 +2,13 @@
 title: "Curiosity boosts orang-utan problem-solving ability"
 author: "Laura A. Damerius, Sereina M. Graber, Erik P. Willems, Carel P. van Schaik"
 date: '2017-11-07'
+description: "This study investigated phenotypic plasticity of 61 Bornean and Sumatran orang-utans to gain insight into how rearing history shapes problem-solving approaches. The findings suggest that previous human care and social housing with other orangutans fostered curiosity, and that curiosity is the strongest predictor of problem-solving performance. However, curiosity is rare in wild orangutans, suggesting it may be an artefact of captivity. The origin of curiosity in our own lineage may have been an important contributor to the rapid rise in the complexity of our ancestors’ material culture. "
 css: "../styles_publications_individual.css"
 image: featured-pdf.png
 publication: 
 categories:
   - "evolutionary biology"
   - "cognition"
-  - "orang-utan" 
 url_source: https://www.sciencedirect.com/science/article/abs/pii/S0003347217303299?via%3Dihub
 url_preprint: 
 journ: "Animal Behaviour"

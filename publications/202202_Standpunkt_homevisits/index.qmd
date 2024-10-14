@@ -2,14 +2,16 @@
 title: 'Immer weniger Hausbesuche trotz zunehmendem Bedarf'
 author: "Carola A. Huber, Sereina M. Graber"
 date: '2022-02-01'
+description: "Hausbesuche von HausärztInnen sind in der Schweiz ein wichtiger Bestandteil der Versorgung, besonders für ältere und gebrechliche PatientInnen, deren Bedarf aufgrund der demografischen Entwicklung steigt. Trotz dieses wachsenden Bedarfs ist die Anzahl der Hausbesuche zwischen 2014 und 2018 leicht rückläufig, was auf Faktoren wie Zeitmangel, unzureichende Vergütung und telemedizinische Alternativen zurückzuführen ist. Die Resultate aus einer aktuellen Studie deuten auf eine potenzielle Versorgungslücke hin, die möglicherweise durch zusätzliches Gesundheitspersonal oder bessere Vergütungsmodelle geschlossen werden könnte."
 css: "../styles_publications_individual.css"
 image: featured-pdf.png
 publication: "Helsana Standpunkt"
 categories:
   - "health services research"
-  - "gp home visits" 
-url_source: https://www.helsana.ch/de/helsana-gruppe/medien-publikationen/standpunkt.html
+  - "GP home visits" 
+url_source: https://standpunkt.helsana.ch/de/startseite
 url_preprint: 
+pdf_file: "PDF.pdf"
 journ: "Helsana Standpunkt"
 issue: Nr. 1 (Februar)
 page: 14-15

@@ -1,16 +1,16 @@
 ---
-title: "Late Post-Conditioning with Sevoflurane after Cardiac Surgery--Are Surrogate Markers Associated with Clinical Outcome?"
+title: "Late Post-Conditioning with Sevoflurane after Cardiac Surgery - Are Surrogate Markers Associated with Clinical Outcome?"
 author: "John M. Bonvini, Beatrice Beck-Schimmer, Sonja J. Kuhn, Sereina M. Graber, Thomas A. Neff, Martin Schläpfer"
 date: '2015-07-21'
+description: "The study evaluated the long-term outcomes of 94 patients who underwent late post-conditioning with sevoflurane after cardiac surgery. While no significant difference was observed in cardiac or non-cardiac events between the sevoflurane and propofol groups, patients treated with sevoflurane required fewer therapeutic interventions and hospital readmissions, if they experienced an event."
 css: "../styles_publications_individual.css"
 image: featured-pdf.png
 publication: 
 categories:
-  - "RCT"
-  - "Sevoflurane"
-  - "cardiac surgery"
+  - "clinical study"
 url_source: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0132165
 url_preprint: 
+pdf_file: "paper.pdf"
 journ: "PLoS ONE"
 issue:
 page: 

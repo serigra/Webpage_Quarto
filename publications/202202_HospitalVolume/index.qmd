@@ -2,15 +2,16 @@
 title: "Does hospital volume affect outcomes after abdominal cancer surgery: an analysis of Swiss health insurance claims data"
 author: "Kevin Wirth, Markus Näpflin, Sereina M. Graber, Eva Blozik"
 date: '2022-02-26'
+description: "The study explores the relationship between hospital volume and outcomes for abdominal cancer surgeries in Switzerland. Analyzing health insurance claims data, the research found no significant correlation between higher hospital volumes and improved outcomes. Even though a positive “routine effect” cannot be excluded, the results suggest that even hospitals with low volumes are able to achieve comparable treatment outcomes to larger hospitals."
 css: "../styles_publications_individual.css"
 image: featured-pdf.png
 publication:
 categories:
   - "health services research"
-  - "claims data"
   - "hospital volume" 
 url_source: https://bmchealthservres.biomedcentral.com/articles/10.1186/s12913-022-07513-5
 url_preprint: 
+pdf_file: "paper.pdf"
 journ: "BMC Health Services Research"
 issue: 22(262)
 page: 

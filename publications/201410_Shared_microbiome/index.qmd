@@ -2,14 +2,13 @@
 title: "Shared microbiome in gums and the lung in an outpatient population"
 author: Patrick R. Schmidlin, Patrick Fachinger, Gabrielo Tini, Sereina M. Graber, Burkhardt Seifert, Sylke Dombrowa, Sarosh Irani
 date: '2014-10-14'
+description: "This study investigated the simultaneous occurrence of periopathogenic bacteria in the lungs and gums, and the impact of periodontitis. The results suggest that the agreement between periodontal and bronchial microbiome is more distinct for periopathogens than for less pathogenic species. And further, that periodontitis itself represents a risk factor for pulmonary colonization with certain periopathogens."
 css: "../styles_publications_individual.css"
 image: featured-pdf.jpeg
 publication: 
 categories:
-  - Microbiome
-  - Periodontitis
-  - Bronchial inflammation
-  - Periopathogens
+  - "clinical study" 
+  - "periopathogens"
 url_source: https://www.journalofinfection.com/article/S0163-4453(14)00312-0/fulltext
 url_preprint: 
 journ: "The Journal of Infection"

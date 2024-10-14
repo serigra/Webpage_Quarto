@@ -2,15 +2,16 @@
 title: "Significant improvement of olfactory performance in sleep apnea patients after three months of nasal CPAP therapy – Observational study and randomized trial"
 author: "Bettina Boerner, Gabrielo M. Tini, Patrick Fachinger, Sereina M. Graber, Sarosh Irani"
 date: '2017-02-03'
+description: "The study assessed olfactory performance in 35 patients with moderate to severe obstructive sleep apnea (OSA) before and after three months of therapy continuous positive airway pressure with nasal masks (nCPAP). Results showed a significant improvement in the sense of smell in patients adhering to the therapy. This suggests that CPAP therapy not only treats sleep apnea but also improves olfaction, enhancing patients' quality of life."
 css: "../styles_publications_individual.css"
 image: featured-pdf.png
 publication: 
 categories:
-  - "double-blind randomized trial"
+  - "clinical study"
   - "olfaction"
-  - "sleep apnea" 
 url_source: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0171087
 url_preprint: 
+pdf_file: "paper.pdf"
 journ: "PLoS ONE"
 issue: 
 page: 

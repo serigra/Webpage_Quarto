@@ -4,13 +4,14 @@ author: "Melanie Jaboson, Birgit Roth Zgraggen, Sereina M. Graber, Christoph M. 
 date: "2015-10-05"
 css: "../styles_publications_individual.css"
 image: featured-pdf.png
+description: "This study investigated the uptake of magnetic nanoparticles in endothelial cells under varying conditions of shear stress and endothelial activation. It found that even moderate shear stress reduced nanoparticle uptake, and that inflamed endothelial cells showed higher particle absorption. These findings underscore the importance of considering physiological conditions in designing nanoparticle-based drug delivery systems."
 publication: 
 categories:
+  - "clinical study"
   - "in vitro flow cell model"
-  - "cellalar uptake" 
-  - "inflammation"
 url_source: https://www.futuremedicine.com/doi/10.2217/nnm.15.172
 url_preprint: 
+# pdf_file: "paper.pdf" # not publicly available
 journ: "Nanomedicine"
 issue: 10(24)
 page: 3537-3546

@@ -2,15 +2,15 @@
 title: "Comparing Two Imaging Methods for Follow-Up of Lung Cancer Treatment: A Randomized Pilot Study"
 author: "Franco Gambazzi, Lukas D. Frey, Matthias Bruehlmeier, Wolf-Dieter Janthur, Sereina M. Graber, Juerg Heuberger, Oliver S. Springer, Roland Zweifel, Bettina Boerner, Gabrielo M. Tini, Sarosh Irani"
 date: '2018-10-04'
+description: "This pilot study compared the effectiveness of PET-CT and contrast-enhanced CT (CE-CT) for detecting lung cancer recurrence during post-curative treatment surveillance. The results showed no significant difference between the two imaging methods in identifying cancer recurrence. Both methods demonstrated similar sensitivity and specificity, suggesting that CE-CT remains a reliable and cost-effective option for follow-up in lung cancer patients."
 css: "../styles_publications_individual.css"
 image: featured-pdf.png
 publication: 
 categories:
-  - "prospective randomized trial"
-  - "imaging methods"
-  - "lung cancer" 
+  - "clinical study"
 url_source: https://linkinghub.elsevier.com/retrieve/pii/S0003497518313584
 url_preprint: 
+pdf_file: "paper.pdf"
 journ: "The Annals of Thoracic Surgery"
 issue: 107(2)
 page: 430-435

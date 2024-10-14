@@ -2,6 +2,7 @@
 title: "Parental provisioning drives brain size in birds"
 author: "Michael Griesser, Szymon M. Drobniak, Sereina M. Graber, Carel P. van Schaik"
 date: '2023-01-06'
+description: "Large brains, while seemingly advantageous due to cognitive adaptations, are energetically costly and may have limited the evolution of larger brain size in many species. In this comparative analysis of 1,176 bird species, various measures of parental provisioning were found to strongly predict relative brain size, indicating that parental care may be a strategy to overcome the energetic limitations of brain growth."
 css: "../styles_publications_individual.css"
 image: featured-pdf.png
 publication: "PNAS, **Vol. 120**, No. 2 (2023)."
@@ -10,6 +11,7 @@ categories:
   - "brain size" 
 url_source: https://www.pnas.org/doi/10.1073/pnas.2121467120
 url_preprint: 
+pdf_file: "paper.pdf"
 journ: "PNAS Proceedings of the National Academy of Sciences"
 issue: 120(2)
 page: 

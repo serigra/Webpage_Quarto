@@ -2,15 +2,16 @@
 title: "Impact of intraoperative fluid administration on outcome in patients undergoing robotic-assisted laparoscopic prostatectomy – a retrospective analysis"
 author: Tobias Piegeler, Pamela Dreessen, Sereina M. Graber, Sarah R. Haile, Daniel M. Schmid, Beatrice Beck-Schimmer 
 date: '2014-07-30'
+description: "This study retrospectively analyzed 182 patients undergoing robotic-assisted laparoscopic prostatectomy (RALP) to assess the effects of intraoperative fluid management on perioperative outcomes. Results suggest that a more restrictive fluid management strategy may reduce the risk of complications, and shorten the length of hospitalization."
 css: "../styles_publications_individual.css"
 image: featured-pdf.png
 publication: 
 categories:
-  - "retrospective analysis"
-  - "prostatectomy"
-  - "intraoperative fluid" 
+  - "clinical study"
+  - "perioperative care" 
 url_source: https://bmcanesthesiol.biomedcentral.com/articles/10.1186/1471-2253-14-61
 url_preprint: 
+pdf_file: "paper.pdf"
 journ: "BMC Anesthesiology"
 issue: 14(61)
 page: 

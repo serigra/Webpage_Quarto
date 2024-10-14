@@ -2,15 +2,17 @@
 title: 'Use of drugs to treat symptoms and acute conditions during pregnancy in outpatient care in Switzerland between 2014 and 2018: analysis of Swiss healthcare claims data'
 author: "Eva Gerbier, Sereina M. Graber, Marlene Rauch, Carole A. Marxer, Christoph R. Meier, David Baud, UrsulaWinterfel, Eva Blozik, Daniel Surbek, Julia Spoendlind, Alice Panchaud"
 date: '2021-11-28'
+description: "This study analyzed the use of prescribed drugs during pregnancy in outpatient care in Switzerland from 2014 to 2018, focusing on treatments for pain, infections, gastrointestinal issues, and nausea. Paracetamol was the most commonly claimed analgesic (30.3% of pregnancies), antibiotics were dispensed in 26.3% of cases. Proton-pump-inhibitors and anti-nausea drugs were both claimed in around 16% of all pregnancies. While drug use largely followed treatment guidelines, exposure to potentially harmful drugs was minimal, though the lack of diagnosis data made it difficult to assess if their use was clinically justified."
 css: "../styles_publications_individual.css"
 image: featured-pdf.png
 publication: 
 categories:
   - "health services research"
-  - "medications"
   - "pregnancy" 
+  - "drug safety"
 url_source: https://smw.ch/index.php/smw/article/view/3108
 url_preprint: 
+pdf_file: "paper.pdf"
 journ: "Swiss Medical Weekly"
 issue: 151(4748)
 page: 

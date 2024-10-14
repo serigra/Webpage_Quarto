@@ -2,6 +2,7 @@
 title: 'Helsana-Report: <br> Versorgung - Qualitätswettbewerb als zentraler Erfolgsfaktor'
 author: "Andrea Bischof, Renato Farcher, Sereina M. Graber"
 date: '2023-09-01'
+description: "Der Helsana-Versorgungsreport analysiert das Schweizer Gesundheitssystem mit Fokus auf Versorgungsqualität, insbesondere in den Bereichen Prävention, chronische Krankheiten und Medikamentensicherheit. Der Bericht hebt hervor, dass mehr Transparenz und der gezielte Einsatz von Krankenversicherungsdaten dazu beitragen können, Fehlversorgung und Versorgungslücken zu erkennen, wodurch sowohl für Versicherte als auch für das gesamte Gesundheitssystem ein erheblicher Mehrwert geschaffen werden kann."
 publication: "Helsana Report (2023)"
 image: featured-pdf.png
 css: "../styles_publications_individual.css"
@@ -10,7 +11,8 @@ categories:
   - "quality" 
 url_source: https://reports.helsana.ch/versorgung/
 url_preprint:
-journ: "Helsana report"
+pdf_file: "Helsana_Versorgungsreport.pdf"
+journ: "Helsana Versorgungsreport"
 year: 2023
 #links:
 #  - icon: doi

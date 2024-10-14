@@ -2,16 +2,18 @@
 title: 'Dispensed drugs during pregnancy in outpatient care between 2015 and 2021 in Switzerland: a retrospective analysis of Swiss healthcare claims data'
 author: "Carole A. Marxer, Sereina M. Graber, Daniel Surbek, Alice Panchaud, Christoph R. Meier, Julia Spoendlin"
 date: '2024-08-12'
+description: "This study assessed the use of prescribed drugs during pregnancy in Switzerland between 2015 and 2021 using data from the Helsana claims database. It found that almost 90% of pregnant women claimed at least one drug (excluding vitamins and vaccines), with one third claiming at least five distinct drugs during pregnancy. The study highlights that while most drugs used during pregnancy are well-researched and considered safe, the high drug burden in pregnant women emphasizes the need for robust evidence on the benefit-risk profile of medications taken during this vulnerable period."
 publication: ""
 image: featured-pdf.png
 css: "../styles_publications_individual.css"
 categories:
-  - "integrated care"
-  - "drug safety"
   - "health services research"
+  - "pregnancy"
+  - "drug safety"
 url_source: https://smw.ch/index.php/smw/article/view/3616
 url_preprint:
-journ: "Swiss Medical Weekyl"
+pdf_file: "paper.pdf"
+journ: "Swiss Medical Weekly"
 issue: 154 (8)
 page: 
 year: 2024

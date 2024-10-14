@@ -1,18 +1,18 @@
 ---
 title: Publications
-subtitle: "Publications in health services research, clinical trials and evolutionary biology"
+subtitle: "Publications in health services research, clinical studies and evolutionary biology"
 css: styles_publications.css
 listing: 
   contents: 
     - "**/index.qmd"
   template: _ejs/publications.ejs
-  fields: [title, author, publication, image]
+  fields: [title, author, publication, image, description, categories]
   sort: "date desc"
   sort-ui: false
   filter-ui: false
   image-align: right
   image-height: 8em
-  page-size: 7
-
+  page-size: 1000
+  
 title-block-banner: false
 ---
