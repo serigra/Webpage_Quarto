@@ -1,0 +1,16 @@
+---
+title: 'Cooperative breeding and hominin brain size evolution - Evidence from a comparative study in birds'
+author: "Sereina M. Graber"
+date: '2012-04-09'
+image: figure.png
+categories:
+  - "evolutionary biology"
+  - "brain size evolution"
+conf: "Poster @ American Association of Physical Anthropologists Meeting"
+location: "Portland, USA"
+description: "In mammals, allomaternal energy inputs correlate with either large brains or increased reproductive rates. In this study we investigated the effects of allomaternal care on brain size and life history in birds. First, we showed that energetic input during breeding correlates with relative brain size. Second, we found that helpers in birds do not increase brain size or reproduction but rather increase the survival rates of parents. These findings in birds enhance our understanding of how cooperative breeding may have shaped hominin evolution."
+html:
+pdf: "files/AAPA_2012.pdf"
+---
+
+## 

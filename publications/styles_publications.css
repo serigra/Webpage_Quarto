@@ -95,8 +95,8 @@ body {
 .category-button {
     padding: 4px 7px;
     background-color: #f8faf7;
-    color: #235347;
-    border: 0.3px solid #235347;  /* Add green border */
+    color: #235347 !important;
+    border: 0.3px solid #B2BEB5!important;  /* Add green border */
     cursor: pointer;
     border-radius: 5px;
     font-size: 0.6em;

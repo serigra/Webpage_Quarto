@@ -1,0 +1,16 @@
+---
+title: 'Seasonality and Brain Size - Cognitive Buffering is Unique to Anthropoid Primates'
+author: "Sereina M. Graber"
+date: '2016-04-15'
+image: title-slide.png
+categories:
+  - "evolutionary biology"
+  - "brain size evolution"
+conf: "Talk @ American Association of Physical Anthropologists Meeting"
+location: "Atlanta, USA"
+description: "The expensive brain hypothesis suggests that seasonal environments impose energetic limits on brain size evolution, while the cognitive buffering hypothesis suggests that larger-brained species are better able to adapt to seasonal challenges. In a study of 41 non-primate mammals, species with higher seasonality had smaller brain sizes, confirming the patterns seen in primates, but finding weak support for cognitive buffering. Overall, energetic constraints appear to play a key role in the evolution of brain size, with cognitive buffering appearing to be more pronounced in large-brained species, especially anthropoid primates."
+html:
+pdf: "files/AAPA_2016.pdf"
+---
+
+## 

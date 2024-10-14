@@ -1,6 +1,6 @@
 ---
-title: Talks
-subtitle: "Talks about health services research and evolutionary biology"
+title: Talks & Posters
+subtitle: "A selection of talks & posters from research in public health and evolutionary biology"
 css: styles_talks.css
 listing: 
   contents: 

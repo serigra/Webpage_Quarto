@@ -1,11 +1,10 @@
 /* width of the listing/ body*/
 body {
-  max-width: 1150px;  /* Set your desired maximum width */
+  max-width: 1180px;  /* Set your desired maximum width */
   margin: 0 auto;    /* Center the content */
   margin-left: 10em;
   padding: 20px;     /* Optional: add some padding for better appearance */
 }
-
 
 /* title of page "talks*/
 .title {
@@ -45,25 +44,23 @@ body {
 }
 
 
-.listing-talk-author {
+.listing-talk-conf {
   color: #757883;
   font-size: 15px;
   margin-top: 8px;
   margin-bottom: 8px;
-  /*line-height: 1.5;*/
-}
-
-
-.listing-talk-conf {
-  color: #757883;
-  font-size: 15px;
-  margin-bottom: 12px;
 }
 
 
 .listing-description {
   margin-top: 0.5em;
-  font-size: 0.9em;
+  font-size: 0.8em;
   color: #666;
   margin-bottom: 30px;
+  text-align: justify;
+}
+
+
+.listing-links {
+  font-size: 0.8em; /* Adjust this value as needed */
 }

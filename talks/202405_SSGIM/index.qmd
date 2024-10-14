@@ -1,0 +1,16 @@
+---
+title: 'Contribution of the different medical specialties to the overall antimicrobial consumption in the Swiss outpatient setting: Who are the most relevant prescribers?'
+author: "Sereina M. Graber"
+date: '2024-05-29'
+image: figure.png
+categories:
+  - "health services research"
+  - "antibiotics"
+conf: "Poster @ Congress of Swiss Society of General internal Medicine"
+location: "Basel, Switzerland"
+description: "Antibiotic consumption is the main driver for increasing antimicrobial resistance rates. Antibiotics are predominantly prescribed in the outpatient setting, which consists of primary care, specialist care and hospital-affiliated outpatient care. In Switzerland, current surveillance takes place at aggregated levels and the contribution of the different prescribers to the overall consumption remains unknown. This study aimed to determine the contribution of the different prescribers."
+html: 
+pdf:
+---
+
+## 

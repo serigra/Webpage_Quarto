@@ -7,8 +7,8 @@ categories:
   - "evolutionary biology"
   - "brain size evolution"
 conf: "PhD Defence"
-location: "Anthropological Institute and Museum, University of Zurich"
-description: "My PhD thesis showed that only where ecology favors the energetic requirements of the evolution of increased brain sizes, higher levels of cognition can evolve. The results suggested that opportunities for social learning further facilitate the coevolutionary process between ecological preconditions and brain size, which is fully consistent with the evolutionary history of the hominin lineage. Thereby, this thesis yields important insights in the evolution of brain size across vertebrates and ultimately helps to further understand the evolutionary history of our own species."
+location: "University of Zurich, Switzerland"
+description: "In my PhD thesis I could show that only where ecology favors the energetic requirements of the evolution of increased brain sizes, higher levels of cognition can evolve. The results suggested that opportunities for social learning further facilitate the coevolutionary process between ecological preconditions and brain size, which is fully consistent with the evolutionary history of the hominin lineage. Thereby, this thesis yields important insights in the evolution of brain size across vertebrates and ultimately helps to further understand the evolutionary history of our own species."
 html:
 pdf: "files/PhD_defence_SGraber.pdf"
 ---

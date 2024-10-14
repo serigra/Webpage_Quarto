@@ -1,0 +1,16 @@
+---
+title: 'Ecological vs. Social Complexity  - Drivers and Consequences of Enlarged Brains in Primates'
+author: "Sereina M. Graber"
+date: '2016-08-23'
+image: title-slide.png
+categories:
+  - "evolutionary biology"
+  - "brain size evolution"
+conf: "Talk @ International Primatological Society Meeting"
+location: "Chicago, USA"
+description: "This talk explored the factors driving brain size variation in primates, challenging the prevailing Social Brain Hypothesis. The study distinguishes between selective drivers and evolutionary consequences, revealing that ecological factors, rather than social complexity, are key to brain expansion. High levels of social complexity in primates emerged as a consequence of large brains, which were enabled by favorable ecological conditions."
+html:
+pdf: "files/IPS_2016.pdf"
+---
+
+## 

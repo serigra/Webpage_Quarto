@@ -7,9 +7,9 @@ image: title-slide.png
 categories:
   - "health services research"
   - "antibiotics"
-conf: "Zürich R User group, Meetup"
-location: "Dübendorf, Zurich"
-description: "In this talk I explored how pre-packaged antibiotic packages in Switzerland often fail to match treatment guidelines. The leftover pills from these packages can lead to improper disposal or self-medication, contributing to antibiotic resistance. A retrospective study based on claims data revealed significant overprescribing of antibiotics compared to recommended guidelines."
+conf: "Talk @ Zürich R User Group Meetup"
+location: "Zurich, Switzerland"
+description: "Pre-packaged antibiotic packages in Switzerland often fail to match treatment guidelines. The leftover pills from these packages can lead to improper disposal or self-medication, contributing to antibiotic resistance. A retrospective study based on claims data revealed significant overprescribing of antibiotics compared to recommended guidelines."
 html: "files/RMeetup_antibiotics.html"
 pdf:
 ---
