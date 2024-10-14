@@ -27,7 +27,13 @@ html:
 
 # Background
 
-<br>
+
+<div style="margin-bottom: 0.9em;"></div>
+
+[{{< fa file-pdf >}} CV](files/CV.pdf){.cv-link}
+
+<div style="margin-bottom: 1.1em;"></div>
+
 
 ## Experience
 
@@ -46,11 +52,12 @@ Design, implementation of and consulting on statistics and data analyses for cli
 
 **2017 \| PhD in Evolutionary Biology**\
 Anthropological Institute and Museum, University of Zurich.\
-[Thesis](files/Dissertation.pdf): Comparative analysis on social & ecological factors driving brain size evolution.
+[Thesis](files/Dissertation.pdf): Comparative Analysis on Social & Ecological Factors Driving Brain Size Evolution.
 
 **2015 \| Master of Science in Biostatistics**\
 Epidemiology, Biostatistics and Prevention Institute, University of Zurich.\
-[Thesis](files/Msc_Thesis_Biostats.pdf): Phylogenetic comparative methods for discrete responses in evolutionary biology.
+[Thesis](files/Msc_Thesis_Biostats.pdf): Phylogenetic Comparative Methods for Discrete Responses in Evolutionary Biology.
 
 **2012 \| Master of Science in Anthropology**\
-Anthropological Institute and Museum, University of Zurich.
+Anthropological Institute and Museum, University of Zurich.\
+[Thesis](files/Msc_Thesis_Biology.pdf): Cooperative Breeding and the Evolution of Brain Size in Birds.
