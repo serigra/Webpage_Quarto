@@ -1,6 +1,6 @@
 ---
 title: "Notes · Thoughts · Blog"
-subtitle: "Structured notes on different topics around statistics · visualizations · R programming"
+subtitle: "This blog serves as my personal repository of various topics related to statistics, R programming and visualizations. It's my way of transforming gained knowledge into well-structured and accessible notes. Although I create it primarily for myself, I hope it may also be useful to others. "
 css: styles_blog.css
 listing: 
   contents: 

@@ -7,8 +7,6 @@ css: "../styles_blog_individual.css"
 image: useR.png
 ---
 
-<br><br>
-
 The [useR! conference series](https://www.r-project.org/conferences/) is *the* conference for R enthusiasts. This annual event fosters a vibrant and diverse community where data scientists, statisticians, and developers can network, learn, and contribute to the growing ecosystem of R. This years event was hold in Salzburg, Austria, the home of Mozart.
 
 This years program encompassed one day of half-day **workshops**, where I grabbed the opportunity learn more about Data Anonymization for Open Science Data and, in the afternoon, running survival analyses using tidymodels. The rest of the conference was filled with many inspiring talks (see blog post [useR! talks](/blog/07_userR!_talks/)), and many things to take home, below are just a few snapshots of some of my personal highlights and take home messages.

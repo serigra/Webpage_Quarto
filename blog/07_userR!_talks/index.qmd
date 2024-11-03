@@ -7,7 +7,7 @@ css: "../styles_blog_individual.css"
 image: useR.png
 ---
 
-<br><br>
+
 
 The [useR! conference series](https://www.r-project.org/conferences/) is *the* conference for R enthusiasts. This annual event fosters a vibrant and diverse community where data scientists, statisticians, and developers can network, learn, and contribute to the growing ecosystem of R. This years event was hold in Salzburg, Austria, the home of Mozart.
 
@@ -21,7 +21,7 @@ The conference was filled with many inspiring **talks**, and many things to take
 
 ## Interpret Statistical Models Using the `marginaleffects` Package · [Vincent Arel-Bundock, Université de Montréal]{style="color:#7F8A80;"}
 
-::: columns
+:::::: columns
 ::: {.column width="60%"}
 This [marginaleffects](https://marginaleffects.com/) package offers a great range of tools that help make raw parameter estimates easier to understand, and more interpretable. Rather than getting lost in technical jargon, these functions help bridge the gap between statistical output and real-world application.
 
@@ -36,13 +36,13 @@ I also wrote a blog post on marginal effects using the `marginaleffects` package
 ::: {.column width="35%"}
 <br> ![](images/marginal_zoo.png){fig-align="center" width="300"}
 :::
-:::
+::::::
 
 <br><br>
 
 ## Dynamic Prediction with Numerous Longitudinal Covariates · [Mirko Signorelli, Leiden University]{style="color:#7F8A80;"}
 
-::: columns
+::::: columns
 ::: {.column width="27%"}
 <br> ![](images/pencal_hex.png){fig-align="center" width="260"}
 :::
@@ -52,13 +52,13 @@ I also wrote a blog post on marginal effects using the `marginaleffects` package
 
 ![](images/pencal_long.png){fig-align="center" width="450"}
 :::
-:::
+:::::
 
 <br><br>
 
 ## Quarto - Elevating R Markdown for Advanced Publishing · [Christophe Dervieux, Posit PBC]{style="color:#7F8A80;"}
 
-::: columns
+:::::: columns
 ::: {.column width="63%"}
 <br>
 
@@ -79,13 +79,13 @@ I was excited to discover some of the latest features of quarto, here are a few 
 
 ![](images/typst.png){fig-align="center" width="300"}
 :::
-:::
+::::::
 
 <br><br>
 
 ## Keep R Weird · [Kelly Bodwin, Cal Poly State University]{style="color:#7F8A80;"}
 
-::: columns
+::::: columns
 ::: {.column width="30%"}
 <br> ![](images/R_weird_1.png){width="290"}
 :::
@@ -93,13 +93,13 @@ I was excited to discover some of the latest features of quarto, here are a few 
 ::: {.column width="70%"}
 <br><br><br> Fantastic keynote by Kelly Bodwin. She encouraged the community to "Keep R Weird," highlighting how the language thrives on creativity and inclusivity. R is not just a tool but a vibrant community, driven by passion and collaboration. Check out the [slides](https://kbodwin.github.io/useR_2024/#0) and watch the [recording](https://www.youtube.com/watch?v=KOQBfC1WPwM) of the talk — it's definitely worthwhile!
 :::
-:::
+:::::
 
 <br><br>
 
 ## Shinydraw: Quickly wireframe Shiny apps in Excalidraw · [Mike Page, cynkra]{style="color:#7F8A80;"}
 
-::: columns
+::::: columns
 ::: {.column width="65%"}
 In this lightning talk, I got to know about [Excalidraw](https://excalidraw.com/), which is an open-source, web-based tool for creating collaborative, hand-drawn-like diagrams and sketches. It is designed to be simple and intuitive, allowing users to create quick, informal drawings that resemble sketches made on a whiteboard or paper. The tool is especially popular among developers, educators, and designers for its minimalistic approach and ease of use.
 
@@ -111,7 +111,7 @@ Find the slides of the talk [here](https://static.sched.com/hosted_files/usercon
 ::: {.column width="35%"}
 ![](images/shinydraw.png){width="370"}
 :::
-:::
+:::::
 
 <br><br>
 

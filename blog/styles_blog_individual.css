@@ -1,4 +1,4 @@
-/* title of blog */
+/* ===================== titles and subtitles of blog ======================= */
 .title {
   font-family: "Petrona";
   font-size: 3rem;
@@ -41,9 +41,7 @@ margin-bottom: 0.9rem;
 
 
 
-
-
-/* Customize the ToC section points (on right hand side of each blog post) */
+/* ============= ToC section points (right side of blog post) =============== */
 
 /* all non-selected sections*/
 .sidebar nav[role="doc-toc"] ul > li > a {
@@ -68,17 +66,81 @@ margin-bottom: 0.9rem;
 }
 
 
-/* Customize the size of output */
+
+/* ======= Customize the size of title block banner (useR! blog posts) ====== */
+.quarto-title-block .quarto-title-banner {
+  background-size: cover;
+  background-position: center;
+  height: auto;
+  min-height: 230px; /* Adjust this value as needed */
+}
+
+
+
+
+/* =============== Customize the size of code input/ output ================= */
+
+pre.sourceCode {
+  background-color: #f8f9f8;
+  border: 0.9px solid #ddd;
+  border-radius: 4px;
+  padding: 1em;
+}
+
+code.sourceCode {
+  font-family: 'Courier New', monospace;
+  font-size: 1em;
+}
+
+
+.cell-output {
+  background-color: #f8f9f8;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0.5em;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+  /*white-space: pre-wrap;
+  word-wrap: break-word;*/
+}
+
+
 
 .teenytiny-code{
   font-size: 65%  
 }
 
+
+.tinyer-code{
+  font-size: 72%  
+}
+
+
 .tiny-code{
   font-size: 85%  
 }
 
-.tinyer-code{
-  font-size: 72%  
+
+.callout-note {
+  border-left-color: #235347 !important;
+}
+
+.callout-note .callout-header {
+  background-color: #B2BEB5 !important;
+}
+
+
+
+/* Suppress references (as part of quarto appendices) at the end of blog post */
+
+#quarto-bibliography {
+  display: none; /* suppress the reference list at the end of a blog post*/
+}
+
+#quarto-appendix {
+  /* coz the quarto appendix (=bibliography) leaves a small box --> 
+  hide with same background color as rest of site*/
+  background-color: #FBFAF9!important; 
+  border-color: #FBFAF9!important;
 }
 

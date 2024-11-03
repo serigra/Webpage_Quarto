@@ -9,17 +9,17 @@ code-summary: "R Code"
 
 <br><br>
 
-Raw parameter estimates from complex models, particularly those involving non-linear terms or interactions, often prove challenging to interpret and may lack real-world context. This difficulty is especially pronounced for non-statisticians, who are often the very individuals interested in these effects and tasked with translating results into practical solutions.\
-The term "marginal effects" carries slightly different meanings across different fields and contexts. For an in-depth exploration of this terminology, I recommend to read [Andrew Heiss's blog post](https://www.andrewheiss.com/blog/2022/05/20/marginalia/). For the following, I'll adhere to the following general concept of marginal effects: Marginal effects illustrate how a one-unit change in the independent variable influences the dependent variable, while holding other factors or covariates constant. This concept manifests differently across model types:
+Raw parameter estimates from complex models, particularly those involving non-linear terms or interactions, are often challenging to interpret and may lack real-world context. This difficulty is especially pronounced for non-statisticians, who are often the ones tasked with translating results into practical solutions. In this regard, marginal effects can be useful, as they provide a clearer and more interpretable view of the relationships within a statistical model.\
+The term "marginal effects" carries slightly different meanings across different fields and contexts. For an in-depth exploration of this terminology, I recommend to read [Andrew Heiss's blog post](https://www.andrewheiss.com/blog/2022/05/20/marginalia/). For the following, I'll adhere to the following general concept: Marginal effects illustrate how a one-unit change in the independent variable influences the dependent variable, while holding other factors or covariates constant. This concept manifests differently across model types:
 
 -   **Linear Regression Models**: Here, coefficients themselves already represent (constant) marginal effects, due to the linear nature of the relationship. For instance, in a model predicting salary based on years of experience, a coefficient of 500 for experience indicates that each additional year increases salary by 500 units.
 -   **Non-linear Models**: In models such as logit, probit, Poisson, or those involving quadratic/ polynomial terms, marginal effects are not constant. They must be calculated for specific values of the independent variable. For example, in a logistic regression model predicting diabetes based on glucose levels, the marginal effect represents the change in the probability of diabetes occurring for a one-unit change in glucose level. It's worth noting that in such models, the regression coefficient itself represents the log odds ratio rather than the change in actual probability.
 
 In the following sections, I'll explore two examples of how to enhance the interpretability of model outputs using marginal effects and the [`marginaleffects`](https://marginaleffects.com/) package.
 
-*Note I*: While researching marginal effects, I found two particularly insightful blog posts - one by an unnamed author from the [University of Virginia](https://library.virginia.edu/data/articles/a-beginners-guide-to-marginal-effects) and another by [Andrew Heiss](https://www.andrewheiss.com/blog/2022/05/20/marginalia/). Both offer comprehensive descriptions of the concept. However, in this post, I've attempted to articulate the idea behind marginal effects in my own words, hoping to provide a perspective that might prove helpful to others, including my future self.
+*Note I*: While researching marginal effects, I found two particularly insightful blog posts - one by an unnamed author from the [University of Virginia](https://library.virginia.edu/data/articles/a-beginners-guide-to-marginal-effects) and another by [Andrew Heiss](https://www.andrewheiss.com/blog/2022/05/20/marginalia/). Both offer comprehensive descriptions of the concept. However, in this post, I've attempted to articulate the idea behind marginal effects in my own words, hoping to provide a perspective that might be helpful to others, including my future self.
 
-*Note II*: There are several other excellent R packages for calculating marginal effects, such as [`margins`](https://cran.r-project.org/web/packages/margins/index.html) and [`emmeans`](https://cran.r-project.org/web/packages/emmeans/index.html). However, for the sake of simplicity and consistency, I chose not to include them in this post.
+*Note II*: There are several other excellent `R` packages for calculating marginal effects, such as [`margins`](https://cran.r-project.org/web/packages/margins/index.html) and [`emmeans`](https://cran.r-project.org/web/packages/emmeans/index.html). However, for the sake of simplicity and consistency, I chose not to include them in this post.
 
 ::: tiny-code
 ```{r}
@@ -29,7 +29,8 @@ In the following sections, I'll explore two examples of how to enhance the inter
 
 options(width = 200) 
 
-# library
+# libraries --------------------------------------------------------------------
+
 library(tidyverse)
 library(magrittr)
 library(datasets)
@@ -51,7 +52,7 @@ f_case_when <- function(...){
 
 # ggplot theme -----------------------------------------------------------------
 
-my_theme <- function() {
+theme_set(
   theme_minimal(base_family = "Comic Sans MS") +
   theme(panel.grid.minor = element_blank(),
         plot.background = element_rect(fill = "#f8faf7", color = NA),
@@ -61,7 +62,7 @@ my_theme <- function() {
         strip.text = element_text(face = "bold"),
         strip.background = element_rect(fill = "grey80", color = NA),
         legend.title = element_text(face = "bold"))
-}
+)
 
 # data -------------------------------------------------------------------------
 
@@ -73,13 +74,14 @@ data(PimaIndiansDiabetes)
 
 ## Unraveling Curved Relationships: Marginal Effects Between Continuous Variables
 
-When dealing with continuous variables for both predictors and outcomes, marginal effects become a powerful tool for interpretation of non-linear models like quadratic relationships, where raw regression estimates prove challenging to interpret. Let's explore this concept using the `PimaIndiansDiabetes` dataset, where we'll examine the relationship between body mass and age. While this model is primarily for illustrative purposes and doesn't seek deeper interpretation, it serves as a nice example of marginal effects in action.
+When dealing with continuous variables for both predictors and outcomes, marginal effects become a powerful tool for interpretation of non-linear models like quadratic relationships, where raw regression estimates are challenging to interpret. Let's explore this concept using the `PimaIndiansDiabetes` dataset, where we'll examine the relationship between body mass and age. While this model is primarily for illustrative purposes and doesn't seek deeper interpretation, it serves as a nice example of marginal effects in action.
 
-<br>
+::: {.medium-space} 
+:::
 
 ### Linear vs. Quadratic: Which Fits Better?
 
-First, let's compare linear and quadratic models to see which better describes our data:
+First, let's compare a linear and a quadratic model to see which better describes the data:
 
 ::: tiny-code
 ```{r}
@@ -95,8 +97,7 @@ ggplot(PimaIndiansDiabetes, aes(x = age, y = mass) ) +
     stat_smooth(method = "lm", formula = y ~ x, linewidth = 1, color = '#1e1e1e') +
     scale_x_continuous(breaks = seq(20, 90, by=10)) +
     labs(title = 'Linear Model',
-         x = "Age", y = "Body Mass") + 
-    my_theme()
+         x = "Age", y = "Body Mass")
 
 # linear model
 linear_model <- glm(mass ~ age, data = PimaIndiansDiabetes)
@@ -118,8 +119,7 @@ ggplot(PimaIndiansDiabetes, aes(x = age, y = mass) ) +
     stat_smooth(method = "lm", formula = y ~ x + I(x^2), linewidth = 1.3, color = '#1e1e1e') +
     scale_x_continuous(breaks = seq(20, 90, by=10)) +
     labs(title = 'Quadratic Model',
-         x = "Age", y = "Body Mass") + 
-    my_theme()
+         x = "Age", y = "Body Mass")
 
 # quadratic model
 quadratic_model <- glm(mass ~ age +  I(age^2), data = PimaIndiansDiabetes)
@@ -127,13 +127,13 @@ summary(quadratic_model)
 ```
 :::
 
-The quadratic model shows a smaller residual deviance, indicating a better fit to our data. This suggests a more complex relationship between age and body mass: body mass tends to increase with age until around 45 years, after which it begins to decrease.
+The quadratic model shows a smaller residual deviance, indicating a better fit to the data. This suggests a more complex relationship between age and body mass: body mass tends to increase with age until around 45 years, after which it begins to decrease again.
 
 <br><br>
 
 ### Interpreting Quadratic Relationships: The Power of Marginal Effects
 
-Interpreting the coefficients of a quadratic model can be challenging - so we have two coefficients `age` and `I(age^2)`, one negative one positive - what the heck? This is where marginal effects, specifically *Marginal Effects at Representative Values (MER)*, come into play. We can calculate the slope (or tangent) at different ages to better understand the relationship, and these slopes are nothing else than *marginal effects*. Let's calculate the marginal effects at ages 30 and 60 using the `slopes()` function from the `marginaleffects` package:
+Interpreting the coefficients of a quadratic model can be challenging - so we have two coefficients `age` and `I(age^2)`, one negative one positive - but how to interpret them? This is where marginal effects, specifically *Marginal Effects at Representative Values (MER)*, come into play. We can calculate the slope (or tangent) at different ages to better understand the relationship, and these slopes are nothing else than *marginal effects*. Let's calculate the marginal effects at ages 30 and 60 using the `slopes()` function from the `marginaleffects` package:
 
 ::: small-code
 ```{r}
@@ -141,7 +141,10 @@ slopes(quadratic_model, newdata = datagrid(age = c(30, 60))) -> s; s
 ```
 :::
 
-Now, let's visualize these slopes on our plot:
+::: {.medium-space} 
+:::
+
+Now, let's visualize these slopes on the plot from above (inspired by [Andrew Heiss](https://www.andrewheiss.com/blog/2022/05/20/marginalia/)):
 
 ::: small-code
 ```{r}
@@ -179,12 +182,11 @@ ggplot(PimaIndiansDiabetes, aes(x = age, y = mass) ) +
     geom_point(data = d.annot, aes(x = x, y = y), fill = 'darkorange', shape = 21, size = 4) +
     scale_x_continuous(breaks = seq(20, 90, by=10)) +
     labs(title = 'Marginal Effects at Representative Values (MER)',
-         x = "Age", y = "Body Mass") + 
-    my_theme()
+         x = "Age", y = "Body Mass")
 ```
 :::
 
-This visualization helps us understand how the relationship between age and body mass changes over time. We can see that the slope is positive at age 30 but negative at age 60, indicating a shift in the relationship.
+This visualization helps to understand how the relationship between age and body mass changes over time. The slope is positive at age 30 but negative at age 60, indicating a shift in the relationship.
 
 <br><br>
 
@@ -206,8 +208,7 @@ plot_slopes(quadratic_model, variables = "age", condition = "age") +
   geom_richtext(data = d.annot, aes(x = x, y = b, label = label), color = 'darkorange', nudge_y = 0.15) +
   scale_x_continuous(breaks = seq(20, 90, by=10)) +
   labs(title = 'Marginal Effects Across All Ages',
-       y = 'Marginal Effect (dy/dx)', x = 'Age') +
-  my_theme()
+       y = 'Marginal Effect (dy/dx)', x = 'Age')
 ```
 :::
 
@@ -215,24 +216,24 @@ plot_slopes(quadratic_model, variables = "age", condition = "age") +
 
 ### Interpretation
 
-Our analysis reveals that:
+The analysis reveals that:
 
 -   At age 30, a one-year increase in age is associated with a 0.2 unit increase in body mass.
 -   At age 60, a one-year increase in age is associated with a 0.4 unit decrease in body mass.
 
-This shift from a positive to a negative relationship as age increases illustrates the non-linear nature of the association between age and body mass in our dataset.
+This shift from a positive to a negative relationship as age increases illustrates the non-linear nature of the association between age and body mass in the given dataset.
 
 <br><br>
 
 ### Beyond MER: Exploring MEM and AME
 
-We've just taken a deep dive into the concept of *Marginal Effects at Representative Values (MER)*. But there's more! Two other concepts can shed light on our data (depending on context and data, one or the other make more sense): MEM and AME. Let's break these three down in more detail:
+We've just looked at the concept of *Marginal Effects at Representative Values (MER)*. But there's more! Two other concepts can shed light on the data (depending on context and data, one or the other make more sense): MEM and AME. Let's break these three down in more detail:
 
 :::::: columns
 :::: {.column width="55%"}
 <br><br> **Marginal Effect at Representative Values (MER)**:
 
-This represents the dy/dx at very specific, representative values of x (age in the example above).
+This represents the dy/dx at very specific, representative values of x (as for the age of 30 and 60 above).
 
 ::: tiny-code
 ```{r}
@@ -288,15 +289,15 @@ avg_slopes(quadratic_model)
 
 ## Unravelling Logistic Regression and Marginal Effects
 
-Logistic regression is a powerful and often used tool, but its raw parameters can be challenging to interpret. Many practitioners struggle with the concept of log odds ratios and often mistakenly interpret odds as probabilities. This is where marginal effects come to the rescue, offering a more intuitive way to understand and communicate the results of logistic regression models.
-
-In logistic regression, the raw parameters represent log odds ratios, expressed as $log(\frac{p}{1-p})$. When we exponentiate these coefficients, we get odds ratios $\frac{p}{1-p}$. But what do these really mean in practical terms? The interpretation can be tricky, and it's easy to conflate odds with probabilities. While it would be convenient if they were the same, they're not – and this is where marginal effects shine.
+Logistic regression is a powerful and often used tool. The raw parameters represent log odds ratios, expressed as $log(\frac{p}{1-p})$. Exponentiating these coefficients results in odds ratios $\frac{p}{1-p}$, which is a common measure used in scientific studies. But what do these really mean in practical terms? The interpretation can be tricky, and it's easy to conflate odds with probabilities. While it would be convenient if they were the same, they're not – and this is where marginal effects shine.
 
 Let's explore this concept using the `PimaIndiansDiabetes` dataset again. We'll investigate how age and above-average body mass (binary coded) relate to the risk of diabetes. Again, this example is simplified for illustration, and is simply used to provide insights into marginal effects in case of a binary coded outcome variable.
 
+::: {.small-space} 
+:::
+
 First, let's prepare our data:
 
-::: tiny-code
 ```{r}
 # add binary predictor variable
 PimaIndiansDiabetes %<>% 
@@ -304,6 +305,8 @@ PimaIndiansDiabetes %<>%
          mass_fg = f_case_when(mass <= mean(mass) ~ 'below-avg',
                                mass > mean(mass) ~ 'above-avg'))
 ```
+
+::: {.small-space} 
 :::
 
 Lets build the model:
@@ -322,7 +325,6 @@ p1 <- ggplot(PimaIndiansDiabetes, aes(x = age, y = diab)) +
   stat_smooth(method="glm", color="black", se=TRUE, method.args = list(family=binomial), linewidth = 1) +
   labs(title = 'Logistic Regression - Age',
        y = 'Probability of Diabetes', x = 'Age') +
-  my_theme() +
   theme(axis.text = element_text(size = 9),
         axis.title = element_text(size = 11))
 
@@ -332,7 +334,6 @@ p2 <- ggplot(PimaIndiansDiabetes, aes(x = mass_fg, y = diab)) +
   stat_summary(fun = mean, geom = "point", size = 3.5, color = "black") +
   geom_smooth(method = "glm", method.args = list(family = "binomial"), se = FALSE) +
   labs(x = "Body mass", y = "Probability of Diabetes", title = "Logistic Regression - Body Mass Flag") +
-  my_theme() +
   theme(axis.text = element_text(size = 9),
         axis.title = element_text(size = 11))
 
@@ -350,6 +351,8 @@ Lets look at the odds ratios:
 ```{r}
 exp(logit_model$coefficients)
 ```
+
+<br>
 
 **Traditional interpretation**:
 
@@ -381,11 +384,16 @@ comparisons(logit_model, variable = 'mass_fg') -> rr.mass; rr.mass
 ::::
 ::::::::
 
+::: {.small-space} 
+:::
+
+The outputs of the `comparisons()` function shows for each individual the difference in predicted probability of current age, and for one year older (+1), and the difference in probability treating the subject to be above average massed, vs. below averaged massed.
+
 <br>
 
 ### Average Marginal Effects (AME)
 
-Furthermore, to get a population-level perspective, we can average these individual effects using `avg_comparisons()`
+Furthermore, to get a population-level perspective, we can average these individual effects from above using `avg_comparisons()`
 
 :::::::: columns
 :::: {.column width="48.75%"}
@@ -408,6 +416,9 @@ avg_comparisons(logit_model, variable = 'mass_fg')
 ::::
 ::::::::
 
+::: {.small-space} 
+:::
+
 So what do these risk differences, or population averaged risk differences, tell us?
 
 -   On average, for each year increase in age, the probability of diabetes increases by 0.9 percentage points.
@@ -419,16 +430,19 @@ These marginal effects provide a much more intuitive interpretation than the raw
 
 We can further refine our analysis by exploring *Marginal Effects at the Mean (MEA)* and *Marginal Effects at Representative Values (MER)*.
 
-<br><br>
+<br>
 
 ### Marginal Effects at the Mean (MEA)
 
-If we don't specify the `variables` argument, the function calculates marginal effects at the means of both predictors:
+If we don't specify the `variables` argument, the `comparisons()`-function calculates marginal effects at the means of both predictors:
 
 ::: tiny-code
 ```{r}
 comparisons(logit_model, newdata = 'mean')
 ```
+:::
+
+::: {.small-space} 
 :::
 
 This gives us the marginal effects at the average age of 33.2 years and the more common body mass category (above-avg). We can verify this result manually by changing age from 33.2 to 34.2 (+1)
@@ -441,6 +455,9 @@ p1-p0
 ```
 :::
 
+::: {.small-space} 
+:::
+
 and for body mass flag changing from *below-avg* to *above-avg*, keeping age constant at the mean of 33.2:
 
 ::: tiny-code
@@ -449,6 +466,9 @@ p0 <- predict(logit_model, newdata = data.frame(age = 33.2, mass_fg = 'below-avg
 p1 <- predict(logit_model, newdata = data.frame(age = 33.2, mass_fg = 'above-avg'), type = 'response')
 p1-p0
 ```
+:::
+
+::: {.small-space} 
 :::
 
 **Interpretation**:
@@ -491,8 +511,7 @@ plot_comparisons(logit_model, variable = 'mass_fg',
              fill = 'darkorange',  shape = 21, size = 4) +
   labs(title = 'Marginal Effects at Representative Values (MER)',
        y = 'Risk Difference \n p(above-avg) - p(below-avg)',
-       x = 'Age') +
-  my_theme()
+       x = 'Age')
 ```
 :::
 ::::
