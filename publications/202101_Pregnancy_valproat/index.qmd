@@ -8,8 +8,9 @@ image: featured-pdf.png
 publication: 
 categories:
   - "health services research"
-  - "pregnancy"
+  - "drugs pregnancy"
   - "drug safety" 
+  - "claims data"
 url_source: https://smw.ch/index.php/smw/article/view/2936
 url_preprint: 
 pdf_file: "paper.pdf"

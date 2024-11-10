@@ -8,8 +8,9 @@ image: featured-pdf.png
 publication: "BMC Health Services Research, **23**, _707_ (2023)."
 categories:
   - "health services research"
-  - "pregnancy" 
+  - "drugs pregnancy" 
   - "drug safety"
+  - "claims data"
 url_source: https://www.mdpi.com/1660-4601/19/3/1456
 url_preprint: 
 pdf_file: "paper.pdf"

@@ -9,6 +9,7 @@ description: "This observational study investigates drug safety in integrated ca
 categories:
   - "health services research"
   - "drug safety"
+  - "claims data"
 url_source: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0311099
 url_preprint:
 pdf_file: "paper.pdf"

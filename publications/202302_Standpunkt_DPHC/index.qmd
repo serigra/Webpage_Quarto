@@ -8,6 +8,7 @@ image: featured-pdf.png
 categories:
   - "health services research"
   - "drug safety"
+  - "claims data"
 publication:
 url_source: https://www.helsana.ch/de/helsana-gruppe/medien-publikationen/standpunkt.html
 url_preprint: 

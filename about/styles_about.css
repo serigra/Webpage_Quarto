@@ -18,7 +18,21 @@
   font-size: 1rem;
   font-weight: 500;
   letter-spacing: 0.1em;
+  margin-bottom: 2em;
 }
+
+.description {
+  color: #B2BEB5;
+  font-size: 1rem;
+  margin-top: 1.3em!important;
+}
+
+/* link (to R user group) within the description */
+.description a {
+    text-decoration: underline!important; /* Underlines the link */
+    color: #235347!important; /* Ensures the link color matches your description */
+}
+
 
 /* profile picture  */
 .about-image {
@@ -30,7 +44,7 @@
 /* text */
 .about-contents {
   padding: 0 0 0 2em !important;
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   color: #666260;
 }
 
@@ -73,6 +87,7 @@ a {
   color: #235347 
   column-gap: 0em !important;
   font-size: 1.4em !important;
+  margin-top: 0.5em;
 }
 
 /* social links: individual links */

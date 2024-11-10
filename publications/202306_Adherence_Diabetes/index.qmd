@@ -8,7 +8,9 @@ image: featured-pdf.png
 publication: "BMC Health Services Research, **23**, _707_ (2023)."
 categories:
   - "health services research"
-  - "diabetes"
+  - "diabetes care"
+  - "quality of care"
+  - "claims data"
 url_source: https://bmchealthservres.biomedcentral.com/articles/10.1186/s12913-023-09694-z#:~:text=care%20in%20Switzerland.-,Conclusion,care%20among%20patients%20with%20diabetes
 url_preprint: 
 pdf_file: "paper.pdf"

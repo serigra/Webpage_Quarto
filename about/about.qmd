@@ -1,6 +1,8 @@
 ---
 title: "Sereina M. Graber"
 subtitle: PhD, Data Scientist
+description: "Member of the organizing committee for the <br>
+[Zurich R User Group](https://zurich-r-user-group.github.io/)!"
 image: profile_picture.jpeg
 css: styles_about.css
 toc: false # no table of contents in about page
@@ -37,8 +39,9 @@ html:
 
 ## Experience
 
-**since 2019 \| Data Scientist \@ Health Sciences, Helsana insurance grp.**\
-Lead, design and implementation of data analyses for internal projects and scientific studies at the health science department, with a focus on understanding the effectiveness and the quality of treatment in the Swiss health care system. Find all the research group's publications [here](https://www.helsana.ch/de/helsana-gruppe/medien-publikationen/wissenschaftliche-publikationen.html), and my individual publications [here](/publications/index.qmd).
+**since 2019 \| Data Scientist & Researcher \@ Health Sciences, Helsana insurance grp.**\
+I am working as Data Scientist and Health Sciences Researcher at the Health Science Department of the Helsana Insurance Group, where we focus on understanding the effectiveness and the quality of treatment in the Swiss health care system. I am part of the Research Data Team, where we are responsible for the technical infrastructure, extract and process data, conceptualize and implement statistical analyses, and collaborate with internal and external stakeholders on scientific publications and internal analytical projects.\
+Find all the research group's publications [here](https://www.helsana.ch/de/helsana-gruppe/medien-publikationen/wissenschaftliche-publikationen.html), and my individual publications [here](/publications/index.qmd).
 
 **2017 - 2019 \| Data Scientist \@ Advanced Analytics, Sanitas insurance grp.**\
 Lead, design and implementation of advanced analytical projects. In-house consulting and teaching of statistical and analytical skills.
@@ -58,6 +61,6 @@ Anthropological Institute and Museum, University of Zurich.\
 Epidemiology, Biostatistics and Prevention Institute, University of Zurich.\
 [Thesis](files/Msc_Thesis_Biostats.pdf): Phylogenetic Comparative Methods for Discrete Responses in Evolutionary Biology.
 
-**2012 \| Master of Science in Anthropology**\
+**2012 \| Master of Science in Biology**\
 Anthropological Institute and Museum, University of Zurich.\
 [Thesis](files/Msc_Thesis_Biology.pdf): Cooperative Breeding and the Evolution of Brain Size in Birds.

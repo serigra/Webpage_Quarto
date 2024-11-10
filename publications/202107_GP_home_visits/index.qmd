@@ -9,6 +9,7 @@ publication:
 categories:
   - "health services research"
   - "GP home visits"
+  - "claims data"
 url_source: https://smw.ch/index.php/smw/article/view/3032
 url_preprint: 
 pdf_file: "paper.pdf"

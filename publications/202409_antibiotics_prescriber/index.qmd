@@ -9,6 +9,7 @@ css: "../styles_publications_individual.css"
 categories:
   - "health services research"
   - "antibiotics"
+  - "claims data"
 url_source: https://www.eurosurveillance.org/content/10.2807/1560-7917.ES.2024.29.37.2300734
 url_preprint:
 pdf_file: "paper.pdf"

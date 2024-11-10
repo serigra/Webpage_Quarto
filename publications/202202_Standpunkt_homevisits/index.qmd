@@ -9,6 +9,7 @@ publication: "Helsana Standpunkt"
 categories:
   - "health services research"
   - "GP home visits" 
+  - "claims data"
 url_source: https://standpunkt.helsana.ch/de/startseite
 url_preprint: 
 pdf_file: "PDF.pdf"

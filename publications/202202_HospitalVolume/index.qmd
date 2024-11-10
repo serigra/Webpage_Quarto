@@ -9,6 +9,7 @@ publication:
 categories:
   - "health services research"
   - "hospital volume" 
+  - "claims data"
 url_source: https://bmchealthservres.biomedcentral.com/articles/10.1186/s12913-022-07513-5
 url_preprint: 
 pdf_file: "paper.pdf"
