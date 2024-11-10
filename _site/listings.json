@@ -1,0 +1,54 @@
+[
+  {
+    "listing": "/blog/index.html",
+    "items": [
+      "/blog/08_Marginal_Effects/index.html",
+      "/blog/07_userR!_talks/index.html",
+      "/blog/07_userR!_workshops/index.html",
+      "/blog/01_Contrasts/index.html"
+    ]
+  },
+  {
+    "listing": "/publications/index.html",
+    "items": [
+      "/publications/202410_AB_packsize/index.html",
+      "/publications/202409_integrated_care_drug_safety/index.html",
+      "/publications/202409_antibiotics_prescriber/index.html",
+      "/publications/202408_pregnancy_drugs/index.html",
+      "/publications/202404_prostate_cancer/index.html",
+      "/publications/202309_Helsana_Versorgungsreport/index.html",
+      "/publications/202306_Adherence_Diabetes/index.html",
+      "/publications/202302_Standpunkt_DPHC/index.html",
+      "/publications/202301_ParentalProvisioning_BrainSize/index.html",
+      "/publications/202206_Economoics_Brain_Evolution/index.html",
+      "/publications/202205_QI_Weiterentwicklung_general/index.html",
+      "/publications/202202_HospitalVolume/index.html",
+      "/publications/202202_Standpunkt_homevisits/index.html",
+      "/publications/202201_Pregnancy_chronic/index.html",
+      "/publications/202111_Pregnancy_acute/index.html",
+      "/publications/202107_GP_home_visits/index.html",
+      "/publications/202101_Pregnancy_valproat/index.html",
+      "/publications/201810_Comparing_img_methods/index.html",
+      "/publications/201805_Reproductive_Seasonality/index.html",
+      "/publications/201712_Curiosity_orangutans/index.html",
+      "/publications/201702_Olfactory_performance/index.html",
+      "/publications/201701_Ecology_SocialLearning/index.html",
+      "/publications/201603_Foraging_niches/index.html",
+      "/publications/201512_Elevated_matrix/index.html",
+      "/publications/201510_Uptake_ferromagnetic/index.html",
+      "/publications/201507_Sevoflurane/index.html",
+      "/publications/201410_Shared_microbiome/index.html",
+      "/publications/201407_Intraoperative_fluid/index.html"
+    ]
+  },
+  {
+    "listing": "/talks/index.html",
+    "items": [
+      "/talks/202406_RMeetup_antibiotics/index.html",
+      "/talks/202405_SSGIM/index.html",
+      "/talks/201608_IPS/index.html",
+      "/talks/201602_AAPA/index.html",
+      "/talks/201202_AAPA_birds/index.html"
+    ]
+  }
+]

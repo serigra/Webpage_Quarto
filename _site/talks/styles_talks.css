@@ -1,0 +1,71 @@
+
+/* ============== Layout and Formatting Titles and Subtitles =================*/
+
+/*  center the listing */
+.quarto-listing {
+  max-width: 77%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+ 
+
+/* title of page "talks*/
+.title {
+  font-family: "Petrona";
+  font-size: 3rem;
+  color: #FA2FBD;
+  font-weight: 500;
+  line-height: 3em !important; /*that there is more space around title*/
+  text-align: center;
+}
+
+/* subtitle of page: "Talks about Evolutionary Biology, Clinical Trials And Health Services Research" */
+.subtitle {
+  font-family: 'Bebas Neue', sans-serif;
+  color: #666260;
+  text-transform: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  /* letter-spacing: 0.1em; */
+  text-align: center !important;
+  padding-left: 8rem;
+  padding-right: 8rem;
+  margin-bottom: 5em !important;
+}
+
+
+
+
+/* -- single talks in list --*/
+
+.listing-talk-title {
+  font-family: 'Petrona';
+  color: #235347 !important;  /*Ensure the link inherits the color of the surrounding text */
+  text-transform: none;
+  font-size: 20px;
+  font-weight: 700; 
+}
+
+
+.listing-talk-conf {
+  color: #757883;
+  font-size: 15px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+
+.listing-description {
+  margin-top: 0.5em;
+  font-size: 0.8em;
+  color: #666;
+  margin-bottom: 30px;
+  text-align: justify;
+}
+
+
+.listing-links {
+  font-size: 0.8em; /* Adjust this value as needed */
+}

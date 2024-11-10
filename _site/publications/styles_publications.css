@@ -1,0 +1,111 @@
+
+/* ============== Layout and Formatting Titles and Subtitles =================*/
+
+/*  center the listing */
+.quarto-listing {
+  max-width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+
+/* title of page "publications*/
+.title {
+  font-family: "Petrona";
+  font-size: 3rem;
+  color: #FA2FBD;
+  font-weight: 500;
+  line-height: 3em !important; /*that there is more space around title*/
+  text-align: center;
+}
+
+/* subtitle of page: "Publications In Evolutionary Biology, Clinical Trials And Health Services Research" */
+.subtitle {
+  font-family: 'Bebas Neue', sans-serif;
+  color: #666260;
+  text-transform: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  /* letter-spacing: 0.1em; */
+  text-align: center !important;
+  padding-left: 8rem;
+  padding-right: 8rem;
+  margin-bottom: 2em !important;
+}
+
+.category-filters {
+  margin-bottom: 3em !important;/* Adds space below the category buttons */
+  text-align: center;
+}
+
+.content-container.listing-pagination {
+  display: none;
+}
+
+
+
+/* =================== Format Single Publications in List ====================*/
+
+.listing-pub-title {
+  font-family: 'Petrona';
+  color: #235347 !important;  /*Ensure the link inherits the color of the surrounding text */
+  text-transform: none;
+  font-size: 20px;
+  font-weight: 700; 
+}
+
+.listing-pub-author {
+  color: #757883;
+  font-size: 15px;
+  margin-top: 5px;
+  margin-bottom: 8px;
+}
+
+.listing-pub-journal {
+  color: #757883;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.listing-description {
+  margin-top: 10px;
+  font-size: 1em;
+  color: #666;
+  margin-bottom: 0.5em;
+  text-align: justify;
+}
+
+.listing-pub-url {
+  font-size: 13px;
+  margin-bottom: 10px;
+  display: flex;  /* Ensure URL and category buttons align in flexbox */
+  align-items: center;
+}
+
+
+
+/* Ensure Flexbox Layout Doesn't Break After Filtering with Category Buttons*/
+.publication-item {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+/* Styling for filter and category buttons */
+.category-button {
+    padding: 4px 7px;
+    background-color: #f8faf7;
+    color: #235347 !important;
+    border: 0.3px solid #B2BEB5!important;  /* Add green border */
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 0.7em;
+    margin-bottom: 3px; /* braucht ein bisschen weniger Abstand als pdf link um aligned zu sein */
+}
+
+.category-button:hover {
+    background-color: #e8ece4;
+}
+

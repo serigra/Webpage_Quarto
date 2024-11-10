@@ -1,0 +1,102 @@
+
+/* ============= Titles and Subtitles of Individual Blog Posts ============== */
+
+.title {
+  font-family: "Petrona";
+  font-size: 3rem;
+  color: #FA2FBD;
+  font-weight: 500;
+  margin-bottom: 1.2em !important;
+  /*text-align: center;*/
+}
+
+
+h1 {
+color: #7F8A80;
+font-family: "Petrona";
+font-size: 1.9rem;
+font-weight: 500;
+margin-top: 1.2rem;
+margin-bottom: 0.9rem;
+}
+
+
+h2 {
+color: #235347; 
+font-family: "Petrona";
+font-size: 1.4rem;
+font-weight: 500;
+margin-top: 1.2rem;
+margin-bottom: 0.9rem;
+}
+
+
+h3 {
+color: #7F8A80; 
+font-family: "Petrona";
+font-size: 1.2rem;
+font-weight: 500;
+margin-top: 1.2rem;
+margin-bottom: 0.9rem;
+}
+
+
+
+/* ============== ToC of Sections (right side of blog post) ================= */
+
+/* Title of TOC "on this page" */
+#toc-title{
+  font-family: "Petrona";
+  /*display: none; --> to not show title*/
+}
+
+/* Color of TOC links */
+.sidebar nav[role="doc-toc"] ul > li > a {
+    font-family: "Petrona";
+    color: #98A399 !important;
+}
+
+/* Color of active TOC links and vertical line next to it*/
+.sidebar nav[role="doc-toc"] ul > li > a.active {
+    font-family: "Petrona";
+    color: #235347 !important;
+    border-left: 1.5px solid #235347 !important; 
+}
+
+/* Change the color of TOC links on hover */
+.sidebar nav[role="doc-toc"] ul > li > a:hover {
+    font-family: "Petrona";
+    color: #FA2FBD !important;
+}
+
+
+#toc .nav-link:hover {
+  color: #FA2FBD !important;
+}
+
+
+
+/* ======= Customize the size of title block banner (e.g. useR! blog posts) ====== */
+
+.quarto-title-block .quarto-title-banner {
+  background-size: cover;
+  background-position: center;
+  height: auto;
+  min-height: 230px; /* Adjust this value as needed */
+}
+
+
+
+/* Suppress references (as part of quarto appendices) at the end of blog post */
+
+#quarto-bibliography {
+  display: none; /* suppress the reference list at the end of a blog post*/
+}
+
+#quarto-appendix {
+  /* coz the quarto appendix (=bibliography) leaves a small box --> 
+  hide with same background color as rest of site*/
+  background-color: #FBFAF9!important; 
+  border-color: #FBFAF9!important;
+}
+

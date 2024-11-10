@@ -1,0 +1,185 @@
+
+/* ========= Format Body, Title and Subtitles of the Page ====================*/
+
+body {
+  /* background-color: #f8f8f6!important;  --> defined in _quarto.yml  */ 
+  max-width: 2000px;  /* Set your desired maximum width */
+  margin: 0 auto;    /* Center the content */
+  margin-left: 4em;
+  margin-right: 3em;
+  padding: 6px;     /* Optional: add some padding for better appearance */
+}
+
+/* title: "Grüezi. Hi there!" */
+.title {
+  font-family: "Petrona";
+  font-size: 4.7rem;
+  color: #235347;
+  font-weight: 500;
+  line-height: 1.1em !important;
+}
+
+/* subtitle: "STATISTICS, VISUALIZATIONS AND R PROGRAMMING " */
+.subtitle {
+  font-family: "Petrona";
+  color: #FA2FBD;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* so that heading, subtitle are right aligned */
+.entity-contents {
+  text-align: right !important;
+  padding: 0 3em 0 0em;
+}
+
+
+/* blurb */
+.about-contents {
+  padding: 0 0 0 2em !important;
+  font-size: 1.2rem;
+  color: #666260;
+}
+
+/* social links: block of links */
+.about-entity .about-links {
+  justify-content: flex-end !important;
+  column-gap: 0em !important;
+  font-size: 1.6em !important;
+}
+
+/* social links: individual links */
+.about-entity .about-link {
+  padding: 0.25em 0.25em !important;
+  border: none !important;  
+}
+
+/* normal links */
+a {
+  font-family: "Petrona" !important; /*'Bebas Neue', sans-serif;*/
+  color: #235347 !important;
+  font-size: 1em;
+  text-transform: none;
+}
+
+/* About Me (arrow)*/
+.about-links.subtitle {
+  font-family: "Petrona";
+  color: #235347;
+  font-size: 0.8em !important;
+  justify-content: flex-end !important;
+}
+
+/* image (twisted polygon) on HOME page*/
+.about-image {
+  margin-top: 2em; /* image shifted a little bit to bottom*/
+  margin-left: 1.2em;
+  padding: 0.5em 2em 0em 0;
+}
+
+
+
+
+
+/* ============================= Navigation Bar ============================= */
+
+/* background color of navbar */
+.navbar {
+  background: transparent;
+}
+
+
+/* navbar links */
+.navbar-nav .nav-link {
+    font-family: 'Bebas Neue', sans-serif;
+    color: #235347 !important;
+    text-transform: uppercase;
+    letter-spacing: .1em; 
+    border-bottom: 0px hidden;    
+    margin: 0px 10px 0px 10px; 
+    padding: 2px 2px 4px 2px !important;
+
+    &:hover {
+      border-bottom: 1px solid !important;
+      padding: 2px 2px 0px 2px !important;
+      color: #FA2FBD;
+    }
+}
+
+
+
+
+/* ============== Customize Size of (R) Code Input/ Output ================ */
+
+/* Code */
+pre.sourceCode {
+  background-color: #fafafa; 
+  border: 0.9px solid #ddd;
+  border-radius: 4px;
+  padding: 1em;
+}
+
+
+code.sourceCode {
+  font-family: 'Courier New', monospace;
+  font-size: 1em;
+}
+
+
+/* Ouput of Code */
+.cell-output {
+  background-color: #f2f2f0!important;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0.5em;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+
+.teenytiny-code{
+  font-size: 65%  
+}
+
+
+.tinyer-code{
+  font-size: 72%  
+}
+
+
+.tiny-code{
+  font-size: 85%  
+}
+
+
+.callout-note {
+  border-left-color: #235347 !important;
+}
+
+.callout-note .callout-header {
+  background-color: #B2BEB5 !important;
+}
+
+
+
+
+/* ============= Vertical Spaces for Between Text and/or Images ==============*/
+
+.tiny-space {
+  margin-bottom: 0.5em; 
+}
+
+
+.small-space {
+  margin-bottom: 1em; 
+}
+
+.medium-space {
+  margin-bottom: 2em;
+}
+
+.large-space {
+  margin-bottom: 3em;
+}

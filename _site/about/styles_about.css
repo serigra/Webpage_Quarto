@@ -1,0 +1,110 @@
+
+/* ============ Format Title, ubtitles of the ABOUT-subpage ==================*/
+
+/* title: Sereina M. Graber */
+.title {
+  font-family: "Petrona";
+  font-size: 2.5rem;
+  color: #235347;
+  font-weight: 500;
+  line-height: 1.1em !important;
+}
+
+/* subtitle: PhD  */
+.subtitle {
+  font-family: "Petrona";
+  color: #B2BEB5;
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  margin-bottom: 2em;
+}
+
+.description {
+  color: #B2BEB5;
+  font-size: 1rem;
+  margin-top: 1.3em!important;
+}
+
+/* link (to R user group) within the description */
+.description a {
+    text-decoration: underline!important; /* Underlines the link */
+    color: #235347!important; /* Ensures the link color matches your description */
+}
+
+
+/* profile picture  */
+.about-image {
+  margin-top: 0.1em; /* image shifted a little bit to bottom*/
+  padding: 0 0em 0em 0;
+}
+
+
+/* text */
+.about-contents {
+  padding: 0 0 0 2em !important;
+  font-size: 0.95rem;
+  color: #666260;
+}
+
+
+/* # "Background""  */
+h1 {
+color: #FA2FBD;
+font-family: "Petrona";
+font-size: 2.5rem;
+font-weight: 500;
+margin-top: 0px;
+margin-bottom: 1px;
+}
+
+
+/* ## "Experience, Education""  */
+h2 {
+color: #7F8A80;
+font-family: "Petrona";
+font-size: 1.5rem;
+font-weight: 500;
+margin-top: 0px;
+margin-bottom: 1px;
+}
+
+/* ======================== Format (Social) Links =============================*/
+
+/* links */
+a {
+  font-family: "Petrona" !important;
+  color: #FA2FBD;
+  font-size: 1.0em;
+  text-transform: none;
+}
+
+
+/* social links: block of links */
+.about-entity .about-links {
+  justify-content: flex-end !important;
+  color: #235347 
+  column-gap: 0em !important;
+  font-size: 1.4em !important;
+  margin-top: 0.5em;
+}
+
+/* social links: individual links */
+.about-entity .about-link {
+  padding: 0.25em 0.25em !important;
+  border: none !important;  
+}
+
+
+.cv-link {
+    font-size: 0.9em; /* Adjust font size as needed */
+    color: #B2BEB5 !important;/* Set the text color to pink */
+    text-decoration: none; /* Remove underline */
+    margin-left: 0.5em; /* Add some space to the left */
+}
+
+.cv-link:hover {
+    color: #235347!important; /* Change color on hover (optional) */
+    text-decoration: underline; /* Underline on hover (optional) */
+}
