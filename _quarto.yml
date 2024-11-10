@@ -1,6 +1,6 @@
 project:
   type: website
-  output-dir: _site # folder where all rendered files (for preview) are saved to
+  output-dir: docs # folder where all rendered files (for preview) are saved to
   render:
     - "*.qmd"
     - "!x_not_published/" # do not render / ignore this folder
