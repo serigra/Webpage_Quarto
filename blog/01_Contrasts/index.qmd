@@ -2,6 +2,8 @@
 title: "Contrasts and Multiple Testing in R"
 author: "Sereina M. Graber"
 date: "2023-01-06"
+toc: true
+toc-depth: 2
 css: "../styles_blog_individual.css"
 image: contrast_def_sketch.png
 callout-icon: false
@@ -10,7 +12,7 @@ bibliography: references.bib
 #suppress-bibliography: true
 citations-hover: true
 crossref:
-  labels: title 
+  labels: title
   chapters: true
 ---
 
@@ -39,7 +41,7 @@ library(multcomp)
 theme_set(
   theme_minimal(base_family = "Comic Sans MS") +
   theme(panel.grid.minor = element_blank(),
-        plot.background = element_rect(fill = "#f8faf7", color = NA),
+        plot.background = element_rect(fill = "#f8f8f6", color = NA),
         plot.title = element_text(face = "bold"),
         axis.text = element_text(size = 10),
         axis.title = element_text(face = "bold", size = 12),
@@ -68,7 +70,8 @@ When using regression models in R (`lm()`, `glm()`, etc.) that include factor va
 
 This blog post hopefully helps to understand and apply contrasts in `R`, using a practical example and explaining some theory along the way.
 
-::: {.medium-space} :::
+::: medium-space
+:::
 
 Here are the **references** that helped me dive into the topic:
 
@@ -78,7 +81,6 @@ Here are the **references** that helped me dive into the topic:
 -   Meier, Lukas. ANOVA and mixed models: a short introduction using R. Chapman and Hall/CRC, 2022. [Online Version](https://people.math.ethz.ch/~meier/teaching/anova/contrasts-and-multiple-testing.html).
 -   [StackOverflow: How to set contrasts for my variable in regression analysis with R](https://stackoverflow.com/questions/39802426/how-to-set-contrasts-for-my-variable-in-regression-analysis-with-r)
 -   [A (sort of) Complete Guide to Contrasts in R by Rose Maier](https://rstudio-pubs-static.s3.amazonaws.com/65059_586f394d8eb84f84b1baaf56ffb6b47f.html)
-
 
 <br><br>
 
@@ -115,12 +117,12 @@ summary(lm.mod.nonorth)
 
 I highly recommend Andy Field's books [@field2012discovering; @field2016adventure] for understanding contrasts. This sections' content builds on his explanations, however, his books offer much more comprehensive and detailed descriptions.
 
-::: {.medium-space} 
+::: medium-space
 :::
 
 By default, `lm()` compares each treatment level against the control group (the first level of the factor). The regression coefficients represent the differences in means between each treatment and the control group ($\overline{w}_{k}$ = mean weight of group *k*):
 
-::: {.medium-space} 
+::: medium-space
 :::
 
 :::::: columns
@@ -133,7 +135,6 @@ PlantGrowth %>%
   group_by(group) %>% 
   summarise(mean = mean(weight))
 ```
-
 :::
 
 ::: {.column width="2.5%"}
@@ -145,12 +146,10 @@ Differences in means:
 -   $\overline{w}_{trt1} - \overline{w}_{ctrl}$ = 4.66 - 5.03 = -0.371
 -   $\overline{w}_{trt2} - \overline{w}_{ctrl}$ = 5.53 - 5.03 = 0.494
 :::
-
 ::::::
 
-::: {.small-space} 
+::: small-space
 :::
-
 
 These default comparisons are known as **treatment contrasts**. The reference level can easily be changed in `R` using the function `relevel()`, e.g. for setting `trt1` as the reference level: `PlantGrowth$group <- relevel(PlantGrowth$group, ref = 'trt1')`. Changing the reference level might already help to assess certain comparisons of interest, but might not include all of them. Therefore, manually defined **planned contrasts** might be needed.
 
@@ -166,10 +165,8 @@ Before going into more details about orthogonal and non-orthogonal contrasts, le
 
 In order to understand how specific contrasts can be generated, it might be helpful to illustrate the setup based on the default setting from above.
 
-
-::: {.medium-space} 
+::: medium-space
 :::
-
 
 ::::: columns
 ::: {.column width="45%"}
@@ -202,7 +199,7 @@ def_contr %>%
 :::
 :::::
 
-::: {.small-space} 
+::: small-space
 :::
 
 These represent non-independent or non-orthogonal contrasts because the control group is used twice. Further details about orthogonal and non-orthogonal contrasts, see [this section](#sec-nonorthcontrasts).\
@@ -212,7 +209,7 @@ There are a couple of rules which need to be followed in order to set the contra
 -   2: those groups not included in a contrast should be assigned weights of zero
 -   3: for each contrast, the sum of the weights need to add up to zero (last row).
 
-::: {.medium-space}  
+::: medium-space
 :::
 
 The contrasts serve as dummy variables in the linear model:
@@ -234,7 +231,8 @@ Often, you'll want to make specific comparisons that don't align with the defaul
 -   The combined treatment groups vs. the control group
 -   The difference between the two treatment groups
 
-::: {.medium-space} :::
+::: medium-space
+:::
 
 ::::: columns
 ::: {.column width="50%"}
@@ -276,17 +274,18 @@ Why do they need to add up to 0, and one can not use e.g. +2, +2 and -2 --\> wha
 
 ## Implementing Contrasts
 
-::: {.small-space} 
+::: small-space
 :::
 
 I find [Rose Maier's article](https://rstudio-pubs-static.s3.amazonaws.com/65059_586f394d8eb84f84b1baaf56ffb6b47f.html) a great practical guide for implementing contrasts in R.
 
-::: {.small-space} 
+::: small-space
 :::
 
 `R` provides several predefined functions for setting contrasts automatically. For example, treatment contrasts can be implemented using `contr.treatment(n = 3, base = 'ctrl')`. Here, `n` specifies the number of factor levels, while `base` indicates the reference category. Other built-in options include Helmert contrasts, which can be set using `contr.helmert()`. In Helmert contrasts, each level is compared to the mean of the subsequent levels. For instance, with our data this would compare: $ctr$ vs. $mean(trt_{1} + trt_{2})$ and $trt_{1}$ vs. $trt_{2}$.
 
-::: {.medium-space} :::
+::: medium-space
+:::
 
 To see these custom contrasts in action, `R` offers three main approaches for implementing them (see also this [converstation on stackoverflow](https://stackoverflow.com/questions/39802426/how-to-set-contrasts-for-my-variable-in-regression-analysis-with-r)):
 
@@ -295,10 +294,11 @@ To see these custom contrasts in action, `R` offers three main approaches for im
 2.  **Data Frame-Level Contrasts**: Define contrasts directly in the data frame. For example, if the factor variable is releveled, the treatment contrast is adjusted accordingly in the data itself. Or one can set manually designed contrasts by using the following line of code: `contrasts(PlantGrowth$group) <- cbind(c(-2, 1, 1), c(0, -1, 1))`. These correspond to the planned contrasts from above.
 
 3.  **Model-Level Specification**: Specify contrasts in the model.
-    - using `contrasts` argument within `lm()`
-    - using `glht()` from the `multcomp` package
 
-::: {.medium-space} 
+    -   using `contrasts` argument within `lm()`
+    -   using `glht()` from the `multcomp` package
+
+::: medium-space
 :::
 
 The third method offers the most flexibility and is my preferred way. Let's explore the two main approaches within this method, using planned orthogonal contrast example from above.
@@ -319,7 +319,7 @@ trt2_vs_trt1 <- c(0, -1, 1)
 ```
 :::
 
-::: {.small-space} 
+::: small-space
 :::
 
 *Second*, take the inverse of the matrix (because the contrast argument expects the inverse):
@@ -331,7 +331,7 @@ colnames(inv.contrast.matrix) <- rownames(contrast.matrix.orth); inv.contrast.ma
 ```
 :::
 
-::: {.small-space} 
+::: small-space
 :::
 
 *Third*, run the linear model including the inverse matrix into the contrast argument:
@@ -364,7 +364,7 @@ trt2_vs_trt1          0    -1     1
 ```
 :::
 
-::: {.small-space} 
+::: small-space
 :::
 
 *Second*, apply the `glht()` function from `multcomp` on the default model (`lm.mod.nonorth`) with the contrast matrix as the linear function (`linfct`) argument:
@@ -375,7 +375,7 @@ glht.mod.orth <- multcomp::glht(lm.mod.nonorth, linfct = mcp(group = contrast.ma
 ```
 :::
 
-::: {.small-space} 
+::: small-space
 :::
 
 *Third*, get the summary statistics (for now using no adjustment for multiple testing):
@@ -390,7 +390,7 @@ summary(glht.mod.orth, test = adjusted('none'))
 
 While the second approach may seem a bit less intuitive, it provides good options for controlling for multiple comparisons - for further information see the section on [Handling Multiple Comparisons](#sec-adjustment). For this reason, it’s my preferred method, especially when dealing with non-orthogonal contrasts.
 
-::: {.small-space} 
+::: small-space
 :::
 
 If we were to use the same contrast setting as the default, the results would be identical to the default linear model `lm.mod.nonorth` without a contrast argument:
@@ -419,7 +419,7 @@ summary(lm.mod.nonorth)
 ```
 :::
 
-::: {.small-space} 
+::: small-space
 :::
 
 ### Approach II: `glht()` from the `multcomp` package
@@ -448,7 +448,7 @@ summary(glht.mod.nonorth, test = adjusted('none'))
 
 Understanding the difference between orthogonal and non-orthogonal contrasts is essential, and also here Andy Field’s book [@field2012discovering] is as a great resource.
 
-::: {.small-space} 
+::: small-space
 :::
 
 In brief:
@@ -462,7 +462,7 @@ To determine if contrasts are orthogonal, we need to check if the sum of the row
 So orthogonal contrasts make life easier, and this is why they are so popular. But often hypotheses comprise comparisons which are not independent of one another. And thus, non-orthogonal contrasts might of be of interest, which subsequently need adjusted test statistics.
 -->
 
-::: {.medium-space} 
+::: medium-space
 :::
 
 ### Orthogonal Contrasts
@@ -502,7 +502,7 @@ def_contr %>%
   row_spec(4, bold = T, color = "white", background = "darkgrey")
 ```
 
-::: {.small-space} 
+::: small-space
 :::
 
 This reuse of the control group creates overlapping variance components, which inflates our risk of false positives (elevated familywise error rate), and is known as the problem of multiplicity. To maintain valid statistical conclusions, we need to adjust for these multiple comparisons.
@@ -523,12 +523,12 @@ Left unaddressed, these issues can lead to Type I errors – finding "significan
 
 -   **Statistical Adjustments**: Apply multiple comparison procedures to adjust test statistics. This is recommended when orthogonal contrasts aren't suitable.
 
-::: {.small-space} 
+::: small-space
 :::
 
 For implementing these statistical adjustments, the `multcomp` package [@hothorn2008simultaneous] provides robust tools for both testing and constructing confidence intervals. Let's see how this works with our non-orthogonal (default) contrasts model (see "Add On: Replicating Default Contrasts"):
 
-::: {.medium-space} 
+::: medium-space
 :::
 
 :::::::: columns
@@ -562,8 +562,8 @@ After applying multiple comparison adjustments, the p-values increase noticeably
 
 <br>
 
-::::::::: columns
-::::: {.column width="48.75%"}
+::::::::::: columns
+:::::: {.column width="48.75%"}
 **Unadjusted Confidence Intervals**
 
 We can calculate the default confidence intervals "by hand"...
@@ -577,7 +577,7 @@ se <- sqrt(diag(vcov(lm.mod.nonorth)))
 ```
 :::
 
-::: {.tiny-space} 
+::: tiny-space
 :::
 
 ...or we use the default method of the `confint()` function:
@@ -587,12 +587,12 @@ se <- sqrt(diag(vcov(lm.mod.nonorth)))
 confint.default(lm.mod.nonorth)
 ```
 :::
-:::::
+::::::
 
 ::: {.column width="2.5%"}
 :::
 
-:::: {.column width="48.75%"}
+::::: {.column width="48.75%"}
 **Adjusted Conficence Intervals**
 
 <!--
@@ -607,12 +607,12 @@ confint(glht.mod.nonorth) # see ?confint.glht
 ```
 :::
 
-::: {.tiny-space} 
+::: tiny-space
 :::
 
 *Note*: when using `summary()` on a `glht`-object, the represented standard errors are not adjusted (only p-values are adjusted by default)!
-::::
-:::::::::
+:::::
+:::::::::::
 
 As with adjusting p-values for multiplicity, using adjusted confidence intervals also leads to more conservative inferences (i.e. broader confidence intervals). <br><br>
 

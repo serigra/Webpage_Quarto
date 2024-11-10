@@ -1,12 +1,13 @@
-/* width of the listing/ body*/
-body {
-  max-width: 1200px;  /* Set your desired maximum width */
-  margin: 0 auto;    /* Center the content */
-  margin-left: 10em;
-  padding: 20px;     /* Optional: add some padding for better appearance */
-  flex-grow: 1;  /* Allow body to take up remaining space */
-  display: flex;
-  flex-direction: column;
+
+/* ============== Layout and Formatting Titles and Subtitles =================*/
+
+/*  center the listing */
+.quarto-listing {
+  max-width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 
@@ -31,7 +32,7 @@ body {
   text-align: center !important;
   padding-left: 8rem;
   padding-right: 8rem;
-  margin-bottom: 3em !important;
+  margin-bottom: 2em !important;
 }
 
 .category-filters {
@@ -39,14 +40,13 @@ body {
   text-align: center;
 }
 
-
 .content-container.listing-pagination {
   display: none;
 }
 
 
 
-/* -- single publications in list --*/
+/* =================== Format Single Publications in List ====================*/
 
 .listing-pub-title {
   font-family: 'Petrona';
@@ -84,7 +84,9 @@ body {
   align-items: center;
 }
 
-/* Ensure Flexbox Layout Doesn't Break After Filtering */
+
+
+/* Ensure Flexbox Layout Doesn't Break After Filtering with Category Buttons*/
 .publication-item {
     display: flex;
     flex-direction: row;
@@ -99,7 +101,7 @@ body {
     border: 0.3px solid #B2BEB5!important;  /* Add green border */
     cursor: pointer;
     border-radius: 5px;
-    font-size: 0.6em;
+    font-size: 0.7em;
     margin-bottom: 3px; /* braucht ein bisschen weniger Abstand als pdf link um aligned zu sein */
 }
 

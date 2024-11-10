@@ -1,9 +1,8 @@
 ---
 title: "Grüezi. Hi there!" #title of "home" page
 pagetitle: "Sereina M. Graber - Home" # appears on top of browser window
-subtitle: "STATISTICS AND DATA SCIENCE USING R"
+subtitle: "STATISTICS, VISUALIZATIONS AND R PROGRAMMING"
 image: home_polygon_1.png # in root folder
-backgroundcolor: "#f8faf7"
 about:
   template: solana
   image-width: 28em
@@ -30,8 +29,7 @@ I am a data scientist and part of the health services research team of one of th
 [About →](about/about.qmd)
 :::
 
-<!-- Add the image and explanation link -->
 
-<p style="font-size: small; color: #757883; margin-top: 1px;text-align: right;">
+<p style="font-size: small; color: #757883; margin-top: 1px; text-align: right;">
 Check out the R code for the twisted polygon <a href="twisted_polygon.qmd">here</a>.
 </p>

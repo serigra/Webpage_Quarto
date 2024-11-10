@@ -1,3 +1,6 @@
+
+/* ============ Format Title, ubtitles of the ABOUT-subpage ==================*/
+
 /* title: Sereina M. Graber */
 .title {
   font-family: "Petrona";
@@ -32,7 +35,7 @@
 }
 
 
-/* # Background  */
+/* # "Background""  */
 h1 {
 color: #FA2FBD;
 font-family: "Petrona";
@@ -43,7 +46,7 @@ margin-bottom: 1px;
 }
 
 
-/* ## Experience, Education  */
+/* ## "Experience, Education""  */
 h2 {
 color: #7F8A80;
 font-family: "Petrona";
@@ -53,6 +56,8 @@ margin-top: 0px;
 margin-bottom: 1px;
 }
 
+/* ======================== Format (Social) Links =============================*/
+
 /* links */
 a {
   font-family: "Petrona" !important;
@@ -60,6 +65,7 @@ a {
   font-size: 1.0em;
   text-transform: none;
 }
+
 
 /* social links: block of links */
 .about-entity .about-links {

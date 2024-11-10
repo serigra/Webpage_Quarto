@@ -1,0 +1,9 @@
+# Options specified here will apply to all posts in this folder
+
+# Unless overridden in the front matter of individual posts
+
+
+comments:
+  utterances:
+    repo: serigra/Webpage_Quarto
+

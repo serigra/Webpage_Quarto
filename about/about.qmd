@@ -27,13 +27,13 @@ html:
 
 # Background
 
-
-<div style="margin-bottom: 0.9em;"></div>
+::: {style="margin-bottom: 0.9em;"}
+:::
 
 [{{< fa file-pdf >}} CV](files/CV.pdf){.cv-link}
 
-<div style="margin-bottom: 1.1em;"></div>
-
+::: {style="margin-bottom: 1.1em;"}
+:::
 
 ## Experience
 

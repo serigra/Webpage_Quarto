@@ -1,5 +1,9 @@
 project:
   type: website
+  output-dir: _site # folder where all rendered files (for preview) are saved to
+  render:
+    - "*.qmd"
+    - "!x_not_published/" # do not render / ignore this folder
 
 website:
   title: "Sereina"
@@ -8,7 +12,7 @@ website:
     location: navbar
     type: overlay
   page-footer: 
-        background: "#f8faf7"
+        background: "#f8f8f6"
         center: © 2024  &middot; Made with [![](https://www.r-project.org/Rlogo.png){fig-alt="R" width=25px}](https://www.r-project.org/)  and [![](https://quarto.org/quarto.png){fig-alt="Quarto" width=65px}](https://quarto.org/) 
   navbar:
     title: false # not using website title on left side of navbar...
@@ -27,23 +31,21 @@ website:
         aria-label: "Talks"
       - href: blog/index.qmd
         text: blog
-    tools:
       - icon: github
-        menu:
-          - text: Source Code
-            url:  https://github.com/serigra/Webpage_Quarto
+        href: https://github.com/serigra/Webpage_Quarto
     
 format:
   html:
     theme: cosmo
+    backgroundcolor: "#f8f8f6"
     css: styles.css
     toc: true
-    grid:
-      sidebar-width: 200px
+    grid: # to format layout of "HOME" Site, formating of other sites is defined in styles_publications.css, styles_talks.css, etc
+      sidebar-width: 180px
       body-width: 1100px
       margin-width: 200px
       gutter-width: 1.5rem
 
-editor: visual
+editor: source
 
   

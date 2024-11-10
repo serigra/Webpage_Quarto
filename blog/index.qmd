@@ -10,7 +10,7 @@ listing:
   sort-ui: false
   filter-ui: false
   fields: [title, author, categories, date, image]
-  image-align: left
+  image-align: right
   #image-height: 150px
   page-size: 5
 comments: false

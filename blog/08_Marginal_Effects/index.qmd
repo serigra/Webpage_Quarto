@@ -2,6 +2,8 @@
 title: "Unravelling Marginal Effects"
 author: "Sereina M. Graber"
 date: "2024-09-16"
+toc: true
+toc-depth: 2
 css: "../styles_blog_individual.css"
 image: cover-png.png
 code-summary: "R Code"
@@ -50,12 +52,13 @@ f_case_when <- function(...){
   }
 
 
+
 # ggplot theme -----------------------------------------------------------------
 
 theme_set(
   theme_minimal(base_family = "Comic Sans MS") +
   theme(panel.grid.minor = element_blank(),
-        plot.background = element_rect(fill = "#f8faf7", color = NA),
+        plot.background = element_rect(fill = "#f8f8f6", color = NA), 
         plot.title = element_text(face = "bold"),
         axis.text = element_text(size = 10),
         axis.title = element_text(face = "bold", size = 12),
@@ -76,7 +79,7 @@ data(PimaIndiansDiabetes)
 
 When dealing with continuous variables for both predictors and outcomes, marginal effects become a powerful tool for interpretation of non-linear models like quadratic relationships, where raw regression estimates are challenging to interpret. Let's explore this concept using the `PimaIndiansDiabetes` dataset, where we'll examine the relationship between body mass and age. While this model is primarily for illustrative purposes and doesn't seek deeper interpretation, it serves as a nice example of marginal effects in action.
 
-::: {.medium-space} 
+::: medium-space
 :::
 
 ### Linear vs. Quadratic: Which Fits Better?
@@ -141,7 +144,7 @@ slopes(quadratic_model, newdata = datagrid(age = c(30, 60))) -> s; s
 ```
 :::
 
-::: {.medium-space} 
+::: medium-space
 :::
 
 Now, let's visualize these slopes on the plot from above (inspired by [Andrew Heiss](https://www.andrewheiss.com/blog/2022/05/20/marginalia/)):
@@ -293,7 +296,7 @@ Logistic regression is a powerful and often used tool. The raw parameters repres
 
 Let's explore this concept using the `PimaIndiansDiabetes` dataset again. We'll investigate how age and above-average body mass (binary coded) relate to the risk of diabetes. Again, this example is simplified for illustration, and is simply used to provide insights into marginal effects in case of a binary coded outcome variable.
 
-::: {.small-space} 
+::: small-space
 :::
 
 First, let's prepare our data:
@@ -306,7 +309,7 @@ PimaIndiansDiabetes %<>%
                                mass > mean(mass) ~ 'above-avg'))
 ```
 
-::: {.small-space} 
+::: small-space
 :::
 
 Lets build the model:
@@ -384,7 +387,7 @@ comparisons(logit_model, variable = 'mass_fg') -> rr.mass; rr.mass
 ::::
 ::::::::
 
-::: {.small-space} 
+::: small-space
 :::
 
 The outputs of the `comparisons()` function shows for each individual the difference in predicted probability of current age, and for one year older (+1), and the difference in probability treating the subject to be above average massed, vs. below averaged massed.
@@ -416,7 +419,7 @@ avg_comparisons(logit_model, variable = 'mass_fg')
 ::::
 ::::::::
 
-::: {.small-space} 
+::: small-space
 :::
 
 So what do these risk differences, or population averaged risk differences, tell us?
@@ -442,7 +445,7 @@ comparisons(logit_model, newdata = 'mean')
 ```
 :::
 
-::: {.small-space} 
+::: small-space
 :::
 
 This gives us the marginal effects at the average age of 33.2 years and the more common body mass category (above-avg). We can verify this result manually by changing age from 33.2 to 34.2 (+1)
@@ -455,7 +458,7 @@ p1-p0
 ```
 :::
 
-::: {.small-space} 
+::: small-space
 :::
 
 and for body mass flag changing from *below-avg* to *above-avg*, keeping age constant at the mean of 33.2:
@@ -468,7 +471,7 @@ p1-p0
 ```
 :::
 
-::: {.small-space} 
+::: small-space
 :::
 
 **Interpretation**:

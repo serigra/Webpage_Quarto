@@ -10,7 +10,7 @@ title: "Twisted polygon"
 
 The function below is based on a random process, and thus, results in a different output each time.
 
-Libraries:
+`R` Library:
 
 ```{r}
 library(ggplot2)
@@ -54,8 +54,10 @@ random_polygons <- function(n_edges = 4, n_polygons = 10, range_values = c(-10,1
     scale_fill_gradientn(colors = colors) + # different color palettes: see ?scale_fill_distiller
     theme_void() + # no background/grid/axes
     theme(legend.position = "none", 
-          panel.background = element_rect(fill = "#f8faf7", color = NA),
-          plot.background = element_rect(fill = "#f8faf7", color = NA)
+          panel.background = element_rect(fill = "#f8f8f6", color = NA),
+          plot.background = element_rect(fill = "#f8f8f6", color = NA),
+          #panel.grid = element_blank(),   # Remove grid lines, which can look like a frame
+          panel.border = element_blank()
           )
   
   if (coord_polar == TRUE){
@@ -72,6 +74,9 @@ random_polygons <- function(n_edges = 4, n_polygons = 10, range_values = c(-10,1
 Apply function:
 
 ```{r}
+#| fig.asp: 1 # Makes the plot square, so that there are no white boxes on left and right
+#| fig-align: "center"
+
 custom_colors <- c('#FA2FBD', RColorBrewer::brewer.pal(5, name = 'Pastel1'), '#235347')
 
 random_polygons(n_edges = 5,

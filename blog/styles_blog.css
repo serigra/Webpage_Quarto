@@ -1,9 +1,14 @@
-/* width of the listing/ body*/
-body {
-  max-width: 1150px;  /* Set your desired maximum width */
-  margin: 0 auto;    /* Center the content */
-  margin-left: 10em;
-  padding: 20px;     /* Optional: add some padding for better appearance */
+
+/* ============== Layout and Formatting Titles and Subtitles =================*/
+
+
+/*  center the listing */
+.quarto-listing {
+  max-width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 
@@ -17,24 +22,25 @@ body {
   text-align: center;
 }
 
-/* subtitle of page: "Structured notes on different topics..." */
+
+/* subtitle of page: "This blog serves as my..." */
 .subtitle {
   font-family: 'Bebas Neue', sans-serif;
   color: #666260;
   text-transform: none;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 500;
   /* letter-spacing: 0.1em; */
   text-align: center !important;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding-left: 10rem;
+  padding-right: 10rem;
   margin-bottom: 5em !important;
 }
 
 
 
 
-/* -- single posts in list --*/
+/* ===================== Format Single Posts in List ========================*/
 
 /* --for title of listing, .listing-title does not work coz its a link --*/
 h3.no-anchor.listing-title {
@@ -69,7 +75,6 @@ div.listing img.listing-image {
   width: 150px !important; /* Set the desired width */
   height: auto !important; /* Maintain aspect ratio */
 }
-
 
 
 .section-ref:hover {

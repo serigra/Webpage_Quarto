@@ -1,6 +1,8 @@
-/* width of the whole body of the page*/
+
+/* ========= Format Body, Title and Subtitles of the Page ====================*/
+
 body {
-  background-color: #f8faf7; /* background color of whole website */
+  /* background-color: #f8f8f6!important;  --> defined in _quarto.yml  */ 
   max-width: 2000px;  /* Set your desired maximum width */
   margin: 0 auto;    /* Center the content */
   margin-left: 4em;
@@ -17,7 +19,7 @@ body {
   line-height: 1.1em !important;
 }
 
-/* subtitle: "Statistics and Data Science in R" */
+/* subtitle: "STATISTICS, VISUALIZATIONS AND R PROGRAMMING " */
 .subtitle {
   font-family: "Petrona";
   color: #FA2FBD;
@@ -27,7 +29,7 @@ body {
   letter-spacing: 0.1em;
 }
 
-/* so that heading, subtitle are right aligned*/
+/* so that heading, subtitle are right aligned */
 .entity-contents {
   text-align: right !important;
   padding: 0 3em 0 0em;
@@ -70,7 +72,7 @@ a {
   justify-content: flex-end !important;
 }
 
-/* image  on home page*/
+/* image (twisted polygon) on HOME page*/
 .about-image {
   margin-top: 2em; /* image shifted a little bit to bottom*/
   margin-left: 1.2em;
@@ -78,15 +80,18 @@ a {
 }
 
 
-/* Navbar */
 
-/* header */
+
+
+/* ============================= Navigation Bar ============================= */
+
+/* background color of navbar */
 .navbar {
   background: transparent;
 }
 
 
-/* links */
+/* navbar links */
 .navbar-nav .nav-link {
     font-family: 'Bebas Neue', sans-serif;
     color: #235347 !important;
@@ -101,4 +106,80 @@ a {
       padding: 2px 2px 0px 2px !important;
       color: #FA2FBD;
     }
+}
+
+
+
+
+/* ============== Customize Size of (R) Code Input/ Output ================ */
+
+/* Code */
+pre.sourceCode {
+  background-color: #fafafa; 
+  border: 0.9px solid #ddd;
+  border-radius: 4px;
+  padding: 1em;
+}
+
+
+code.sourceCode {
+  font-family: 'Courier New', monospace;
+  font-size: 1em;
+}
+
+
+/* Ouput of Code */
+.cell-output {
+  background-color: #f2f2f0!important;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0.5em;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+
+.teenytiny-code{
+  font-size: 65%  
+}
+
+
+.tinyer-code{
+  font-size: 72%  
+}
+
+
+.tiny-code{
+  font-size: 85%  
+}
+
+
+.callout-note {
+  border-left-color: #235347 !important;
+}
+
+.callout-note .callout-header {
+  background-color: #B2BEB5 !important;
+}
+
+
+
+
+/* ============= Vertical Spaces for Between Text and/or Images ==============*/
+
+.tiny-space {
+  margin-bottom: 0.5em; 
+}
+
+
+.small-space {
+  margin-bottom: 1em; 
+}
+
+.medium-space {
+  margin-bottom: 2em;
+}
+
+.large-space {
+  margin-bottom: 3em;
 }

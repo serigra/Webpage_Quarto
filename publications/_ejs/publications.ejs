@@ -1,6 +1,8 @@
 ```{=html}
 <%
-// The name of the author to bold - you can change this as needed
+
+
+// The name of the author to bold
 const authorToBold = 'Sereina M. Graber';
 function formatAuthors(authorString) {
   return authorString.split(', ').map(author => 
@@ -10,7 +12,7 @@ function formatAuthors(authorString) {
   ).join(', ');
 }
 
-// Collect all unique categories
+// Collect all unique categories of filter buttons
 const allCategories = new Set();
 items.forEach(item => {
   if (item.categories) {
