@@ -1,7 +1,7 @@
 
 # Welcome to the Repository of My Personal Webpage!
 
-Link: [https://serigra.github.io/Webpage_Quarto/]( https://serigra.github.io/Webpage_Quarto/)
+Link to the webpage: [https://serigra.github.io/Webpage_Quarto/]( https://serigra.github.io/Webpage_Quarto/)
 
 ## How Did I Customize the Styling of My Personal Quarto-based Webpage?
 

@@ -24,7 +24,7 @@ page-layout: full
 ---
 
 ::: {#hero-heading}
-I am a data scientist and part of the health services research team of one of the biggest health insurance companies in Switzerland. By training, I am a biostatistician and biologist. My passion lies in R programming and expressing quantitative information using numbers, models and visual displays. This website serves as a documentation of various topics around statistics, visualizations and data science, which are certainly of interest to my later self, but possibly also to others.
+I am a data scientist and part of the health services research team of one of the biggest health insurance companies in Switzerland. By training, I am a biostatistician and biologist. My passion lies in R programming and expressing quantitative information using numbers, models and visual displays. This website serves as my portfolio and as a documentation of various topics around statistics, visualizations and data science, which are certainly of interest to my later self, but possibly also to others.
 
 [About →](about/about.qmd)
 :::
