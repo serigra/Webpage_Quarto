@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.54">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Sereina M. Graber">
+<meta name="dcterms.date" content="2023-01-06">
+
+<title>Contrasts and Multiple Testing in R – Sereina</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../home_polygon_1.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../styles_blog_individual.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../home_polygon_1.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Sereina M. Graber</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about/about.html"> 
+<span class="menu-text">about</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../publications/index.html"> 
+<span class="menu-text">publications</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../talks/index.html"> 
+<span class="menu-text">talks</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog/index.html"> 
+<span class="menu-text">blog</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/serigra/Webpage_Quarto"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#illustrative-example-plant-growth-experiment" id="toc-illustrative-example-plant-growth-experiment" class="nav-link active" data-scroll-target="#illustrative-example-plant-growth-experiment">Illustrative Example: Plant Growth Experiment</a></li>
+  <li><a href="#understanding-contrasts" id="toc-understanding-contrasts" class="nav-link" data-scroll-target="#understanding-contrasts">Understanding Contrasts</a></li>
+  <li><a href="#implementing-contrasts" id="toc-implementing-contrasts" class="nav-link" data-scroll-target="#implementing-contrasts">Implementing Contrasts</a></li>
+  <li><a href="#sec-nonorthcontrasts" id="toc-sec-nonorthcontrasts" class="nav-link" data-scroll-target="#sec-nonorthcontrasts">Orthogonal vs.&nbsp;Non-Orthogonal Contrasts</a></li>
+  <li><a href="#sec-adjustment" id="toc-sec-adjustment" class="nav-link" data-scroll-target="#sec-adjustment">Handling Multiple Comparisons</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Contrasts and Multiple Testing in R</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Sereina M. Graber </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 6, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cell">
+<style type="text/css">
+.table {
+  width: auto !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+</div>
+<p><br><br></p>
+<p>When using regression models in R (<code>lm()</code>, <code>glm()</code>, etc.) that include factor variables as predictors, the default behavior is to compare each factor level to the reference category (typically the first level). These comparisons, known as contrasts, need attention for two reasons:</p>
+<ol type="1">
+<li><p>Default contrasts often don’t align with the key comparisons you’re actually interested in. You might have specific hypotheses in mind that require <strong>planned contrasts</strong> — custom comparisons between levels or groups that better address your research questions.</p></li>
+<li><p>For factor variable with more than two levels, default comparisons are often non-independent (non-orthogonal), meaning they overlap. This overlap makes it necessary to apply <strong>adjustments for multiple testing</strong> to avoid incorrect conclusions.</p></li>
+</ol>
+<p>This blog post hopefully helps to understand and apply contrasts in <code>R</code>, using a practical example and explaining some theory along the way.</p>
+<div class="medium-space">
+
+</div>
+<p>Here are the <strong>references</strong> that helped me dive into the topic:</p>
+<ul>
+<li>Field, A. An adventure in statistics: The reality enigma. Sage publications, 2016. <a href="https://www.statisticsadventure.com/">statisticsadventure.com</a>.</li>
+<li>Field A, Miles J, Field Z. Discovering statistics using R. Sage publications, 2012. <a href="https://www.discovr.rocks/">discovr.rocks</a>.</li>
+<li>Hothorn T, Bretz F, Westfall P. Simultaneous Inference in General Parametric Models. Biometrical Journal, 50(3), 346–363, 2008. <a href="https://epub.ub.uni-muenchen.de/2120/1/tr019.pdf">Link PDF</a>.</li>
+<li>Meier, Lukas. ANOVA and mixed models: a short introduction using R. Chapman and Hall/CRC, 2022. <a href="https://people.math.ethz.ch/~meier/teaching/anova/contrasts-and-multiple-testing.html">Online Version</a>.</li>
+<li><a href="https://stackoverflow.com/questions/39802426/how-to-set-contrasts-for-my-variable-in-regression-analysis-with-r">StackOverflow: How to set contrasts for my variable in regression analysis with R</a></li>
+<li><a href="https://rstudio-pubs-static.s3.amazonaws.com/65059_586f394d8eb84f84b1baaf56ffb6b47f.html">A (sort of) Complete Guide to Contrasts in R by Rose Maier</a></li>
+</ul>
+<p><br><br></p>
+<section id="illustrative-example-plant-growth-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="illustrative-example-plant-growth-experiment">Illustrative Example: Plant Growth Experiment</h2>
+<p>Let’s use a dataset from an experiment comparing plant yields (measured as weight) between two treatment groups and a control group. This data is available in <code>R</code>’s <code>datasets</code> package.<br>
+Let’s first look at the data, and run a simple linear regression model:</p>
+<div class="small-code">
+<details class="code-fold">
+<summary>R Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(datasets)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"PlantGrowth"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> PlantGrowth, <span class="fu">aes</span>(<span class="at">x =</span> group, <span class="at">y =</span> weight)) <span class="sc">+</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># regression model</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>lm.mod.nonorth <span class="ot">&lt;-</span> <span class="fu">lm</span>(weight <span class="sc">~</span> group, <span class="at">data =</span> PlantGrowth)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.mod.nonorth)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell quarto-layout-panel" data-layout-align="center" data-layout="[[80,20]]">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 80.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 20.0%;justify-content: center;">
+<pre><code>
+Call:
+lm(formula = weight ~ group, data = PlantGrowth)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.0710 -0.4180 -0.0060  0.2627  1.3690 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   5.0320     0.1971  25.527   &lt;2e-16 ***
+grouptrt1    -0.3710     0.2788  -1.331   0.1944    
+grouptrt2     0.4940     0.2788   1.772   0.0877 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.6234 on 27 degrees of freedom
+Multiple R-squared:  0.2641,    Adjusted R-squared:  0.2096 
+F-statistic: 4.846 on 2 and 27 DF,  p-value: 0.01591</code></pre>
+</div>
+</div>
+</div>
+</div>
+<p><br></p>
+</section>
+<section id="understanding-contrasts" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-contrasts">Understanding Contrasts</h2>
+<p>I highly recommend Andy Field’s books <span class="citation" data-cites="field2012discovering field2016adventure">(<a href="#ref-field2012discovering" role="doc-biblioref">Field, Miles, and Field 2012</a>; <a href="#ref-field2016adventure" role="doc-biblioref">Field 2016</a>)</span> for understanding contrasts. This sections’ content builds on his explanations, however, his books offer much more comprehensive and detailed descriptions.</p>
+<div class="medium-space">
+
+</div>
+<p>By default, <code>lm()</code> compares each treatment level against the control group (the first level of the factor). The regression coefficients represent the differences in means between each treatment and the control group (<span class="math inline">\(\overline{w}_{k}\)</span> = mean weight of group <em>k</em>):</p>
+<div class="medium-space">
+
+</div>
+<div class="columns">
+<div class="column" style="width:20%;">
+<p>Group means:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>R Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>PlantGrowth <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(weight))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  group  mean
+  &lt;fct&gt; &lt;dbl&gt;
+1 ctrl   5.03
+2 trt1   4.66
+3 trt2   5.53</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:2.5%;">
+
+</div><div class="column" style="width:77.5%;">
+<p>Differences in means:</p>
+<ul>
+<li><span class="math inline">\(\overline{w}_{trt1} - \overline{w}_{ctrl}\)</span> = 4.66 - 5.03 = -0.371</li>
+<li><span class="math inline">\(\overline{w}_{trt2} - \overline{w}_{ctrl}\)</span> = 5.53 - 5.03 = 0.494</li>
+</ul>
+</div>
+</div>
+<div class="small-space">
+
+</div>
+<p>These default comparisons are known as <strong>treatment contrasts</strong>. The reference level can easily be changed in <code>R</code> using the function <code>relevel()</code>, e.g.&nbsp;for setting <code>trt1</code> as the reference level: <code>PlantGrowth$group &lt;- relevel(PlantGrowth$group, ref = 'trt1')</code>. Changing the reference level might already help to assess certain comparisons of interest, but might not include all of them. Therefore, manually defined <strong>planned contrasts</strong> might be needed.</p>
+<!--
+Furthermore, it is important to note that the default treatment contrasts encompass comparisons which are non-independent (non-orthogonal) of one another, since the data of the reference level is used multiple times (of course only in case a factor variable has more than two levels). Non-independent multiple comparisons increase the family-/experimentwise error rate, in other words, if you were to use these p-values directly, you'd be increasing your risk of Type I errors (false positives). Therefore, we would need adjustments of the test statistics.
+
+Before going into more details about orthogonal and non-orthogonal contrasts, lets have a look at how contrasts can be set manually, and how they can be implemented into a model.
+-->
+<p><br></p>
+<section id="treatment-contrasts-default" class="level3">
+<h3 class="anchored" data-anchor-id="treatment-contrasts-default">Treatment Contrasts (default)</h3>
+<p>In order to understand how specific contrasts can be generated, it might be helpful to illustrate the setup based on the default setting from above.</p>
+<div class="medium-space">
+
+</div>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p>Schematically the comparisons can be illustrated as follows: <br><br></p>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="contrast_def_sketch.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+</div><div class="column" style="width:55%;">
+<p>This can be translated into a matrix using a dummy coding scheme, with weights (grey numbers in the scheme on the left) indicating the individual comparisons:</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-condensed table-hover caption-top table-sm table-striped small" data-quarto-postprocess="true">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: left; empty-cells: hide; border-bottom: hidden;"></th>
+<th data-quarto-table-cell-role="th" style="text-align: center; border-bottom: hidden; padding-bottom: 0; padding-left: 3px; padding-right: 3px;"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Contrast 1
+</div></th>
+<th data-quarto-table-cell-role="th" style="text-align: center; border-bottom: hidden; padding-bottom: 0; padding-left: 3px; padding-right: 3px;"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Contrast 2
+</div></th>
+</tr>
+<tr class="odd">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Group levels</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">trt1 vs. ctrl</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">trt2 vs. ctrl</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">ctrl</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">-1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">trt1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">trt2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-weight: bold; color: white !important; background-color: darkgrey !important;">sum</td>
+<td style="text-align: right; font-weight: bold; color: white !important; background-color: darkgrey !important;">0</td>
+<td style="text-align: right; font-weight: bold; color: white !important; background-color: darkgrey !important;">0</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</div>
+<div class="small-space">
+
+</div>
+<p>These represent non-independent or non-orthogonal contrasts because the control group is used twice. Further details about orthogonal and non-orthogonal contrasts, see <a href="#sec-nonorthcontrasts">this section</a>.<br>
+There are a couple of rules which need to be followed in order to set the contrasts matrix right:</p>
+<ul>
+<li>1: levels/groups with positive weights are compared to levels/groups with negative weights</li>
+<li>2: those groups not included in a contrast should be assigned weights of zero</li>
+<li>3: for each contrast, the sum of the weights need to add up to zero (last row).</li>
+</ul>
+<div class="medium-space">
+
+</div>
+<p>The contrasts serve as dummy variables in the linear model:</p>
+<p><span class="math inline">\(w_{i} = b_{0} + b_{1}Contrast1_{i} + b_{2}Contrast2_{i}\)</span></p>
+<p>where the mean of each group can be presented with the following formulas:</p>
+<ul>
+<li><span class="math inline">\(\overline{w}_{ctrl} = b_{0} + (-1*b_{1}) + (-1*b_{2})\)</span></li>
+<li><span class="math inline">\(\overline{w}_{trt1} = b_{0} + ( 1*b_{1}) + ( 0*b_{2})\)</span></li>
+<li><span class="math inline">\(\overline{w}_{trt2} = b_{0} + ( 0*b_{1}) + ( 1*b_{2})\)</span></li>
+</ul>
+<p><br></p>
+</section>
+<section id="planned-contrasts" class="level3">
+<h3 class="anchored" data-anchor-id="planned-contrasts">Planned Contrasts</h3>
+<p>Often, you’ll want to make specific comparisons that don’t align with the default contrasts. For example, you might want to compare:</p>
+<ul>
+<li>The combined treatment groups vs.&nbsp;the control group</li>
+<li>The difference between the two treatment groups</li>
+</ul>
+<div class="medium-space">
+
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="contrast_sketch.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:88.0%"></p>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<p>These can be represented in a new contrast matrix:</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-condensed table-hover caption-top table-sm table-striped small" data-quarto-postprocess="true">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: left; empty-cells: hide; border-bottom: hidden;"></th>
+<th data-quarto-table-cell-role="th" style="text-align: center; border-bottom: hidden; padding-bottom: 0; padding-left: 3px; padding-right: 3px;"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Contrast 1
+</div></th>
+<th data-quarto-table-cell-role="th" style="text-align: center; border-bottom: hidden; padding-bottom: 0; padding-left: 3px; padding-right: 3px;"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Contrast 2
+</div></th>
+</tr>
+<tr class="odd">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Group levels</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">trt1 + trt2 vs. ctrl</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">trt2 vs. trt1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">ctrl</td>
+<td style="text-align: right;">-2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">trt1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">-1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">trt2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-weight: bold; color: white !important; background-color: darkgrey !important;">sum</td>
+<td style="text-align: right; font-weight: bold; color: white !important; background-color: darkgrey !important;">0</td>
+<td style="text-align: right; font-weight: bold; color: white !important; background-color: darkgrey !important;">0</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</div>
+<p>These represent independent (orthogonal) contrasts, because each group is only used once. For the difference between orthogonal and non-orthogonal contrasts, again see <a href="#sec-nonorthcontrasts">this section</a>.</p>
+<!--
+Why do they need to add up to 0, and one can not use e.g. +2, +2 and -2 --\> what happens mathematically? --\> Check Andy Field - An adventure in statistics
+-->
+<p><br><br></p>
+</section>
+</section>
+<section id="implementing-contrasts" class="level2">
+<h2 class="anchored" data-anchor-id="implementing-contrasts">Implementing Contrasts</h2>
+<div class="small-space">
+
+</div>
+<p>I find <a href="https://rstudio-pubs-static.s3.amazonaws.com/65059_586f394d8eb84f84b1baaf56ffb6b47f.html">Rose Maier’s article</a> a great practical guide for implementing contrasts in R.</p>
+<div class="small-space">
+
+</div>
+<p><code>R</code> provides several predefined functions for setting contrasts automatically. For example, treatment contrasts can be implemented using <code>contr.treatment(n = 3, base = 'ctrl')</code>. Here, <code>n</code> specifies the number of factor levels, while <code>base</code> indicates the reference category. Other built-in options include Helmert contrasts, which can be set using <code>contr.helmert()</code>. In Helmert contrasts, each level is compared to the mean of the subsequent levels. For instance, with our data this would compare: <span class="math inline">\(ctr\)</span> vs.&nbsp;<span class="math inline">\(mean(trt_{1} + trt_{2})\)</span> and <span class="math inline">\(trt_{1}\)</span> vs.&nbsp;<span class="math inline">\(trt_{2}\)</span>.</p>
+<div class="medium-space">
+
+</div>
+<p>To see these custom contrasts in action, <code>R</code> offers three main approaches for implementing them (see also this <a href="https://stackoverflow.com/questions/39802426/how-to-set-contrasts-for-my-variable-in-regression-analysis-with-r">converstation on stackoverflow</a>):</p>
+<ol type="1">
+<li><p><strong>Global Contrast Settings</strong>: Set contrasts globally using <code>options("contrasts" = c('contr.helmert', 'contr.poly'))</code>. The <em>first</em> element stands for the contrasts in unordered, and the <em>second</em> for ordered factor variables. These become your default contrasts for all models.</p></li>
+<li><p><strong>Data Frame-Level Contrasts</strong>: Define contrasts directly in the data frame. For example, if the factor variable is releveled, the treatment contrast is adjusted accordingly in the data itself. Or one can set manually designed contrasts by using the following line of code: <code>contrasts(PlantGrowth$group) &lt;- cbind(c(-2, 1, 1), c(0, -1, 1))</code>. These correspond to the planned contrasts from above.</p></li>
+<li><p><strong>Model-Level Specification</strong>: Specify contrasts in the model.</p>
+<ul>
+<li>using <code>contrasts</code> argument within <code>lm()</code></li>
+<li>using <code>glht()</code> from the <code>multcomp</code> package</li>
+</ul></li>
+</ol>
+<div class="medium-space">
+
+</div>
+<p>The third method offers the most flexibility and is my preferred way. Let’s explore the two main approaches within this method, using planned orthogonal contrast example from above.</p>
+<p><br></p>
+<section id="approach-i-contrasts-argument-within-lm" class="level3">
+<h3 class="anchored" data-anchor-id="approach-i-contrasts-argument-within-lm">Approach I: <code>contrasts</code> argument within <code>lm()</code></h3>
+<p>Include the inverse of contrast matrix in the contrasts-argument of <code>lm()</code>/ <code>glm()</code>. It is important to always take the inverse of the contrast matrix, otherwise the estimates get messed up and are not interpretable in the usual way.</p>
+<p><em>First</em>, build the (orthogonal) contrasts matrix (make sure the weights are correctly ordered according to the order of the factor levels):</p>
+<div class="tiny-code">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>trt1plus2_vs_ctrl <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>) </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>trt2_vs_trt1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>) </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>(contrast.matrix.orth <span class="ot">&lt;-</span> <span class="fu">rbind</span>(trt1plus2_vs_ctrl, trt2_vs_trt1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  [,1] [,2] [,3]
+trt1plus2_vs_ctrl   -2    1    1
+trt2_vs_trt1         0   -1    1</code></pre>
+</div>
+</div>
+</div>
+<div class="small-space">
+
+</div>
+<p><em>Second</em>, take the inverse of the matrix (because the contrast argument expects the inverse):</p>
+<div class="tiny-code">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>inv.contrast.matrix <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">ginv</span>(contrast.matrix.orth)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(inv.contrast.matrix) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(contrast.matrix.orth); inv.contrast.matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     trt1plus2_vs_ctrl  trt2_vs_trt1
+[1,]        -0.3333333  7.514131e-17
+[2,]         0.1666667 -5.000000e-01
+[3,]         0.1666667  5.000000e-01</code></pre>
+</div>
+</div>
+</div>
+<div class="small-space">
+
+</div>
+<p><em>Third</em>, run the linear model including the inverse matrix into the contrast argument:</p>
+<div class="tiny-code">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>lm.mod.orth <span class="ot">&lt;-</span> <span class="fu">lm</span>(weight <span class="sc">~</span> group, </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> PlantGrowth, </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">contrasts =</span> <span class="fu">list</span>(<span class="at">group =</span> inv.contrast.matrix))</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.mod.orth)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = weight ~ group, data = PlantGrowth, contrasts = list(group = inv.contrast.matrix))
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.0710 -0.4180 -0.0060  0.2627  1.3690 
+
+Coefficients:
+                       Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)              5.0730     0.1138  44.573  &lt; 2e-16 ***
+grouptrt1plus2_vs_ctrl   0.1230     0.4829   0.255  0.80086    
+grouptrt2_vs_trt1        0.8650     0.2788   3.103  0.00446 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.6234 on 27 degrees of freedom
+Multiple R-squared:  0.2641,    Adjusted R-squared:  0.2096 
+F-statistic: 4.846 on 2 and 27 DF,  p-value: 0.01591</code></pre>
+</div>
+</div>
+</div>
+<p><br><br></p>
+</section>
+<section id="approach-ii-glht-from-the-multcomp-package" class="level3">
+<h3 class="anchored" data-anchor-id="approach-ii-glht-from-the-multcomp-package">Approach II: <code>glht()</code> from the <code>multcomp</code> package</h3>
+<p><em>First</em>, build the (orthogonal) contrasts matrix. Here I use a different way of constructing the contrasts matrix:</p>
+<div class="tiny-code">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>Input <span class="ot">=</span> <span class="st">"</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="st">Contrast            ctrl  trt1   trt2</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="st">trt1plus2_vs_ctrl    -2     1     1</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="st">trt2_vs_trt1          0    -1     1</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="st">"</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>(contrast.matrix.orth <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">read.table</span>(<span class="fu">textConnection</span>(Input),</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>                                              <span class="at">header =</span> T,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>                                              <span class="at">row.names =</span> <span class="dv">1</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  ctrl trt1 trt2
+trt1plus2_vs_ctrl   -2    1    1
+trt2_vs_trt1         0   -1    1</code></pre>
+</div>
+</div>
+</div>
+<div class="small-space">
+
+</div>
+<p><em>Second</em>, apply the <code>glht()</code> function from <code>multcomp</code> on the default model (<code>lm.mod.nonorth</code>) with the contrast matrix as the linear function (<code>linfct</code>) argument:</p>
+<div class="tiny-code">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>glht.mod.orth <span class="ot">&lt;-</span> multcomp<span class="sc">::</span><span class="fu">glht</span>(lm.mod.nonorth, <span class="at">linfct =</span> <span class="fu">mcp</span>(<span class="at">group =</span> contrast.matrix.orth))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="small-space">
+
+</div>
+<p><em>Third</em>, get the summary statistics (for now using no adjustment for multiple testing):</p>
+<div class="tiny-code">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glht.mod.orth, <span class="at">test =</span> <span class="fu">adjusted</span>(<span class="st">'none'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     Simultaneous Tests for General Linear Hypotheses
+
+Multiple Comparisons of Means: User-defined Contrasts
+
+
+Fit: lm(formula = weight ~ group, data = PlantGrowth)
+
+Linear Hypotheses:
+                       Estimate Std. Error t value Pr(&gt;|t|)   
+trt1plus2_vs_ctrl == 0   0.1230     0.4829   0.255  0.80086   
+trt2_vs_trt1 == 0        0.8650     0.2788   3.103  0.00446 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+(Adjusted p values reported -- none method)</code></pre>
+</div>
+</div>
+</div>
+<p><br></p>
+<p>While the second approach may seem a bit less intuitive, it provides good options for controlling for multiple comparisons - for further information see the section on <a href="#sec-adjustment">Handling Multiple Comparisons</a>. For this reason, it’s my preferred method, especially when dealing with non-orthogonal contrasts.</p>
+<div class="small-space">
+
+</div>
+<p>If we were to use the same contrast setting as the default, the results would be identical to the default linear model <code>lm.mod.nonorth</code> without a contrast argument:</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Add On: Replicating Default Contrasts
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>I recreated the default contrasts in <code>glm()</code>/<code>lm()</code> using the two approaches explained above, just to make sure I understand how they work:</p>
+<section id="approach-i-contrasts-argument-within-lm-1" class="level3">
+<h3 class="anchored" data-anchor-id="approach-i-contrasts-argument-within-lm-1">Approach I: <code>contrasts</code> argument within <code>lm()</code></h3>
+<div class="tiny-code">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># non-orthogonal contrasts matrix</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>trt1_vs_ctrl <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>) </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>trt2_vs_ctrl <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>) </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>contrast.matrix.nonorth <span class="ot">&lt;-</span> <span class="fu">rbind</span>(trt1_vs_ctrl, trt2_vs_ctrl)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># inverse of matrix</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>inv.contrast.matrix <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">ginv</span>(contrast.matrix.nonorth)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(inv.contrast.matrix) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(contrast.matrix.nonorth)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co"># run model with inverse contrasts matrix</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>lm.mod.nonorth <span class="ot">&lt;-</span> <span class="fu">lm</span>(weight <span class="sc">~</span> group, <span class="at">data =</span> PlantGrowth, <span class="at">contrasts =</span> <span class="fu">list</span>(<span class="at">group =</span> inv.contrast.matrix))</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.mod.nonorth)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = weight ~ group, data = PlantGrowth, contrasts = list(group = inv.contrast.matrix))
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.0710 -0.4180 -0.0060  0.2627  1.3690 
+
+Coefficients:
+                  Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)         5.0730     0.1138  44.573   &lt;2e-16 ***
+grouptrt1_vs_ctrl  -0.3710     0.2788  -1.331   0.1944    
+grouptrt2_vs_ctrl   0.4940     0.2788   1.772   0.0877 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.6234 on 27 degrees of freedom
+Multiple R-squared:  0.2641,    Adjusted R-squared:  0.2096 
+F-statistic: 4.846 on 2 and 27 DF,  p-value: 0.01591</code></pre>
+</div>
+</div>
+</div>
+<div class="small-space">
+
+</div>
+</section>
+<section id="approach-ii-glht-from-the-multcomp-package-1" class="level3">
+<h3 class="anchored" data-anchor-id="approach-ii-glht-from-the-multcomp-package-1">Approach II: <code>glht()</code> from the <code>multcomp</code> package</h3>
+<div class="tiny-code">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># non-orthogonal contrasts matrix</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>Input <span class="ot">=</span> <span class="st">"</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="st">Contrast          ctrl  trt1   trt2</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="st">trt2_vs_ctrl       -1     0     1</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="st">trt1_vs_ctrl       -1     1     0</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="st">"</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>contrast.matrix.nonorth <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">read.table</span>(<span class="fu">textConnection</span>(Input),</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>                                                <span class="at">header =</span> T,</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>                                                <span class="at">row.names =</span> <span class="dv">1</span>))</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>glht.mod.nonorth <span class="ot">&lt;-</span> multcomp<span class="sc">::</span><span class="fu">glht</span>(lm.mod.nonorth, <span class="at">linfct =</span> <span class="fu">mcp</span>(<span class="at">group =</span> contrast.matrix.nonorth))</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glht.mod.nonorth, <span class="at">test =</span> <span class="fu">adjusted</span>(<span class="st">'none'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     Simultaneous Tests for General Linear Hypotheses
+
+Multiple Comparisons of Means: User-defined Contrasts
+
+
+Fit: lm(formula = weight ~ group, data = PlantGrowth, contrasts = list(group = inv.contrast.matrix))
+
+Linear Hypotheses:
+                  Estimate Std. Error t value Pr(&gt;|t|)  
+trt2_vs_ctrl == 0   0.4940     0.2788   1.772   0.0877 .
+trt1_vs_ctrl == 0  -0.3710     0.2788  -1.331   0.1944  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+(Adjusted p values reported -- none method)</code></pre>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+<p><br><br></p>
+</section>
+</section>
+<section id="sec-nonorthcontrasts" class="level2">
+<h2 class="anchored" data-anchor-id="sec-nonorthcontrasts">Orthogonal vs.&nbsp;Non-Orthogonal Contrasts</h2>
+<p>Understanding the difference between orthogonal and non-orthogonal contrasts is essential, and also here Andy Field’s book <span class="citation" data-cites="field2012discovering">(<a href="#ref-field2012discovering" role="doc-biblioref">Field, Miles, and Field 2012</a>)</span> is as a great resource.</p>
+<div class="small-space">
+
+</div>
+<p>In brief:</p>
+<ul>
+<li><strong>Orthogonal contrasts</strong> are independent comparisons. This means each data, and thus, variance component is only used once. No adjustment for multiple testing is needed.</li>
+<li><strong>Non-orthogonal contrasts</strong> involve overlapping comparisons. They require adjustment for multiple testing to control the familywise/ experimentwise error rate (the probability of a Type I error increases when using the same data multiple times).</li>
+</ul>
+<p>To determine if contrasts are orthogonal, we need to check if the sum of the row-wise contrast-products of the weights adds up to 0.</p>
+<!--
+So orthogonal contrasts make life easier, and this is why they are so popular. But often hypotheses comprise comparisons which are not independent of one another. And thus, non-orthogonal contrasts might of be of interest, which subsequently need adjusted test statistics.
+-->
+<div class="medium-space">
+
+</div>
+<section id="orthogonal-contrasts" class="level3">
+<h3 class="anchored" data-anchor-id="orthogonal-contrasts">Orthogonal Contrasts</h3>
+<p>In orthogonal contrasts, the sum of the row-wise contrast products of the weights always equals zero, indicating that the contrasts are independent. Below is the contrast matrix from above, now with an additional column showing the contrast products. At first glance, it may seem like <code>trt1</code> and <code>trt2</code> are used multiple times, raising doubts about the independence of these contrasts. However, each is only used once. The first contrast combines <code>trt1</code> and <code>trt2</code>, representing a distinct variance component. The fact that the sum equals zero confirms that these contrasts are indeed independent (i.e., orthogonal).</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-condensed table-hover caption-top table-sm table-striped small" data-quarto-postprocess="true">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: left; empty-cells: hide; border-bottom: hidden;"></th>
+<th data-quarto-table-cell-role="th" style="text-align: center; border-bottom: hidden; padding-bottom: 0; padding-left: 3px; padding-right: 3px;"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Contrast 1
+</div></th>
+<th data-quarto-table-cell-role="th" style="text-align: center; border-bottom: hidden; padding-bottom: 0; padding-left: 3px; padding-right: 3px;"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Contrast 2
+</div></th>
+<th data-quarto-table-cell-role="th" style="text-align: right; empty-cells: hide; border-bottom: hidden;"></th>
+</tr>
+<tr class="odd">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Group levels</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">trt1 + trt2 vs. ctrl</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">trt2 vs. trt1</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Product of contrasts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">ctrl</td>
+<td style="text-align: right;">-2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">trt1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">-1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">trt2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-weight: bold; color: white !important; background-color: darkgrey !important;">sum</td>
+<td style="text-align: right; font-weight: bold; color: white !important; background-color: darkgrey !important;">0</td>
+<td style="text-align: right; font-weight: bold; color: white !important; background-color: darkgrey !important;">0</td>
+<td style="text-align: right; font-weight: bold; color: white !important; background-color: darkgrey !important;">0</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p><br></p>
+</section>
+<section id="non-orthogonal-contrasts-and-the-multiplicity-problem" class="level3">
+<h3 class="anchored" data-anchor-id="non-orthogonal-contrasts-and-the-multiplicity-problem">Non-orthogonal Contrasts and the Multiplicity Problem</h3>
+<p>In non-orthogonal contrasts, the sum of the row-wise contrast products of the weights in the contrast matrix does not equal zero, indicating that the contrasts are not independent. For example, in default treatment contrasts, the control group is used multiple times:</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-condensed table-hover caption-top table-sm table-striped small" data-quarto-postprocess="true">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: left; empty-cells: hide; border-bottom: hidden;"></th>
+<th data-quarto-table-cell-role="th" style="text-align: center; border-bottom: hidden; padding-bottom: 0; padding-left: 3px; padding-right: 3px;"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Contrast 1
+</div></th>
+<th data-quarto-table-cell-role="th" style="text-align: center; border-bottom: hidden; padding-bottom: 0; padding-left: 3px; padding-right: 3px;"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Contrast 2
+</div></th>
+<th data-quarto-table-cell-role="th" style="text-align: right; empty-cells: hide; border-bottom: hidden;"></th>
+</tr>
+<tr class="odd">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Group levels</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">trt1 vs. ctrl</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">trt2 vs. ctrl</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Product of contrasts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">ctrl</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">trt1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">trt2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-weight: bold; color: white !important; background-color: darkgrey !important;">sum</td>
+<td style="text-align: right; font-weight: bold; color: white !important; background-color: darkgrey !important;">0</td>
+<td style="text-align: right; font-weight: bold; color: white !important; background-color: darkgrey !important;">0</td>
+<td style="text-align: right; font-weight: bold; color: white !important; background-color: darkgrey !important;">1</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<div class="small-space">
+
+</div>
+<p>This reuse of the control group creates overlapping variance components, which inflates our risk of false positives (elevated familywise error rate), and is known as the problem of multiplicity. To maintain valid statistical conclusions, we need to adjust for these multiple comparisons.</p>
+<p><br><br></p>
+</section>
+</section>
+<section id="sec-adjustment" class="level2">
+<h2 class="anchored" data-anchor-id="sec-adjustment">Handling Multiple Comparisons</h2>
+<p>When using <code>R</code>’s standard regression functions (<code>lm()</code>, <code>glm()</code>, etc.), we face three important issues:</p>
+<ul>
+<li>They use non-orthogonal default contrasts (in case of factor variables with more than 2 levels)</li>
+<li>They don’t automatically adjust for multiple comparisons</li>
+<li>They provide no warning about the need for such adjustments</li>
+</ul>
+<p>Left unaddressed, these issues can lead to Type I errors – finding “significant” differences that don’t actually exist. There are basically two approaches to handle this:</p>
+<ul>
+<li><p><strong>Orthogonal Contrasts</strong>: Restructure the comparisons to be independent of each other. This may not be feasible if it doesn’t align with research questions.</p></li>
+<li><p><strong>Statistical Adjustments</strong>: Apply multiple comparison procedures to adjust test statistics. This is recommended when orthogonal contrasts aren’t suitable.</p></li>
+</ul>
+<div class="small-space">
+
+</div>
+<p>For implementing these statistical adjustments, the <code>multcomp</code> package <span class="citation" data-cites="hothorn2008simultaneous">(<a href="#ref-hothorn2008simultaneous" role="doc-biblioref">Hothorn, Bretz, and Westfall 2008</a>)</span> provides robust tools for both testing and constructing confidence intervals. Let’s see how this works with our non-orthogonal (default) contrasts model (see “Add On: Replicating Default Contrasts”):</p>
+<div class="medium-space">
+
+</div>
+<div class="columns">
+<div class="column" style="width:48.75%;">
+<p><strong>Unadjusted P-values</strong></p>
+<div class="tiny-code">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get non-adjusted p-values (equivalent to standard lm output)</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glht.mod.nonorth, <span class="at">test =</span> <span class="fu">adjusted</span>(<span class="st">'none'</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     Simultaneous Tests for General Linear Hypotheses
+
+Multiple Comparisons of Means: User-defined Contrasts
+
+
+Fit: lm(formula = weight ~ group, data = PlantGrowth, contrasts = list(group = inv.contrast.matrix))
+
+Linear Hypotheses:
+                  Estimate Std. Error t value Pr(&gt;|t|)  
+trt2_vs_ctrl == 0   0.4940     0.2788   1.772   0.0877 .
+trt1_vs_ctrl == 0  -0.3710     0.2788  -1.331   0.1944  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+(Adjusted p values reported -- none method)</code></pre>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:2.5%;">
+
+</div><div class="column" style="width:48.75%;">
+<p><strong>Adjusted P-values</strong></p>
+<div class="tiny-code">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get adjusted p-values using the single-step method (default)</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glht.mod.nonorth, <span class="at">test =</span> <span class="fu">adjusted</span>(<span class="st">'single-step'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     Simultaneous Tests for General Linear Hypotheses
+
+Multiple Comparisons of Means: User-defined Contrasts
+
+
+Fit: lm(formula = weight ~ group, data = PlantGrowth, contrasts = list(group = inv.contrast.matrix))
+
+Linear Hypotheses:
+                  Estimate Std. Error t value Pr(&gt;|t|)
+trt2_vs_ctrl == 0   0.4940     0.2788   1.772    0.153
+trt1_vs_ctrl == 0  -0.3710     0.2788  -1.331    0.323
+(Adjusted p values reported -- single-step method)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>After applying multiple comparison adjustments, the p-values increase noticeably, making the statistical inference more conservative. This reinforces the initial conclusion of insufficient evidence against the null hypothesis of no difference between treatments.</p>
+<p><br></p>
+<div class="columns">
+<div class="column" style="width:48.75%;">
+<p><strong>Unadjusted Confidence Intervals</strong></p>
+<p>We can calculate the default confidence intervals “by hand”…</p>
+<div class="tiny-code">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">diag</span>(<span class="fu">vcov</span>(lm.mod.nonorth)))</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>(<span class="fu">cbind</span>(<span class="at">estimate =</span> <span class="fu">coef</span>(lm.mod.nonorth),</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">lwr =</span> <span class="fu">coef</span>(lm.mod.nonorth) <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> se,</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">upr =</span> <span class="fu">coef</span>(lm.mod.nonorth) <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> se))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  estimate         lwr      upr
+(Intercept)          5.073  4.84992825 5.296072
+grouptrt1_vs_ctrl   -0.371 -0.91741195 0.175412
+grouptrt2_vs_ctrl    0.494 -0.05241195 1.040412</code></pre>
+</div>
+</div>
+</div>
+<div class="tiny-space">
+
+</div>
+<p>…or we use the default method of the <code>confint()</code> function:</p>
+<div class="tiny-code">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint.default</span>(lm.mod.nonorth)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                        2.5 %    97.5 %
+(Intercept)        4.84993235 5.2960676
+grouptrt1_vs_ctrl -0.91740191 0.1754019
+grouptrt2_vs_ctrl -0.05240191 1.0404019</code></pre>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:2.5%;">
+
+</div><div class="column" style="width:48.75%;">
+<p><strong>Adjusted Conficence Intervals</strong></p>
+<!--
+`confint()` in context with glht-methods from `multcomp`package (see`?confint.glht`): "Simultaneous confidence intervals for linear functions can be computed using method confint. \[...\] All simultaneous inference procedures implemented here control the family-wise error rate (FWER). \[...\] `summary()` computes (adjusted) p-values for general linear hypotheses, `confint()` computes (adjusted) confidence intervals.
+-->
+<p>Using the function <code>confint()</code> on a <code>glht</code>-object computes adjusted confidence intervals.</p>
+<div class="tiny-code">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(glht.mod.nonorth) <span class="co"># see ?confint.glht</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     Simultaneous Confidence Intervals
+
+Multiple Comparisons of Means: User-defined Contrasts
+
+
+Fit: lm(formula = weight ~ group, data = PlantGrowth, contrasts = list(group = inv.contrast.matrix))
+
+Quantile = 2.3335
+95% family-wise confidence level
+ 
+
+Linear Hypotheses:
+                  Estimate lwr     upr    
+trt2_vs_ctrl == 0  0.4940  -0.1565  1.1445
+trt1_vs_ctrl == 0 -0.3710  -1.0215  0.2795</code></pre>
+</div>
+</div>
+</div>
+<div class="tiny-space">
+
+</div>
+<p><em>Note</em>: when using <code>summary()</code> on a <code>glht</code>-object, the represented standard errors are not adjusted (only p-values are adjusted by default)!</p>
+</div>
+</div>
+<p>As with adjusting p-values for multiplicity, using adjusted confidence intervals also leads to more conservative inferences (i.e.&nbsp;broader confidence intervals). <br><br></p>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>When comparing more than two groups:</p>
+<ol type="1">
+<li>Consider using orthogonal contrasts if they align with your research questions. These don’t require adjustment for multiple testing.</li>
+<li>If your questions necessitate non-orthogonal comparisons, be sure to adjust your test statistics accordingly.</li>
+</ol>
+<p>By understanding and properly implementing contrasts, you can ensure that your statistical analyses accurately reflect your research questions and maintain appropriate control over Type I error rates.</p>
+<p><br><br></p>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-field2016adventure" class="csl-entry" role="listitem">
+Field, Andy. 2016. <span>“An Adventure in Statistics: The Reality Enigma.”</span>
+</div>
+<div id="ref-field2012discovering" class="csl-entry" role="listitem">
+Field, Andy, Jeremy Miles, and Zoë Field. 2012. <em>Discovering Statistics Using r</em>. Sage.
+</div>
+<div id="ref-hothorn2008simultaneous" class="csl-entry" role="listitem">
+Hothorn, Torsten, Frank Bretz, and Peter Westfall. 2008. <span>“Simultaneous Inference in General Parametric Models.”</span> <em>Biometrical Journal: Journal of Mathematical Methods in Biosciences</em> 50 (3): 346–63.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="serigra/Webpage_Quarto" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2024 · Made with <a href="https://www.r-project.org/"><img src="https://www.r-project.org/Rlogo.png" class="img-fluid" alt="R" width="25"></a> and <a href="https://quarto.org/"><img src="https://quarto.org/quarto.png" class="img-fluid" alt="Quarto" width="65"></a></p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

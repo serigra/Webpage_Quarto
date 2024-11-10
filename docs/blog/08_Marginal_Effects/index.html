@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.54">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Sereina M. Graber">
+<meta name="dcterms.date" content="2024-09-16">
+
+<title>Unravelling Marginal Effects – Sereina</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../home_polygon_1.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../styles_blog_individual.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../home_polygon_1.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Sereina M. Graber</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about/about.html"> 
+<span class="menu-text">about</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../publications/index.html"> 
+<span class="menu-text">publications</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../talks/index.html"> 
+<span class="menu-text">talks</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog/index.html"> 
+<span class="menu-text">blog</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/serigra/Webpage_Quarto"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#unraveling-curved-relationships-marginal-effects-between-continuous-variables" id="toc-unraveling-curved-relationships-marginal-effects-between-continuous-variables" class="nav-link active" data-scroll-target="#unraveling-curved-relationships-marginal-effects-between-continuous-variables">Unraveling Curved Relationships: Marginal Effects Between Continuous Variables</a></li>
+  <li><a href="#unravelling-logistic-regression-and-marginal-effects" id="toc-unravelling-logistic-regression-and-marginal-effects" class="nav-link" data-scroll-target="#unravelling-logistic-regression-and-marginal-effects">Unravelling Logistic Regression and Marginal Effects</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Unravelling Marginal Effects</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Sereina M. Graber </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 16, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><br><br></p>
+<p>Raw parameter estimates from complex models, particularly those involving non-linear terms or interactions, are often challenging to interpret and may lack real-world context. This difficulty is especially pronounced for non-statisticians, who are often the ones tasked with translating results into practical solutions. In this regard, marginal effects can be useful, as they provide a clearer and more interpretable view of the relationships within a statistical model.<br>
+The term “marginal effects” carries slightly different meanings across different fields and contexts. For an in-depth exploration of this terminology, I recommend to read <a href="https://www.andrewheiss.com/blog/2022/05/20/marginalia/">Andrew Heiss’s blog post</a>. For the following, I’ll adhere to the following general concept: Marginal effects illustrate how a one-unit change in the independent variable influences the dependent variable, while holding other factors or covariates constant. This concept manifests differently across model types:</p>
+<ul>
+<li><strong>Linear Regression Models</strong>: Here, coefficients themselves already represent (constant) marginal effects, due to the linear nature of the relationship. For instance, in a model predicting salary based on years of experience, a coefficient of 500 for experience indicates that each additional year increases salary by 500 units.</li>
+<li><strong>Non-linear Models</strong>: In models such as logit, probit, Poisson, or those involving quadratic/ polynomial terms, marginal effects are not constant. They must be calculated for specific values of the independent variable. For example, in a logistic regression model predicting diabetes based on glucose levels, the marginal effect represents the change in the probability of diabetes occurring for a one-unit change in glucose level. It’s worth noting that in such models, the regression coefficient itself represents the log odds ratio rather than the change in actual probability.</li>
+</ul>
+<p>In the following sections, I’ll explore two examples of how to enhance the interpretability of model outputs using marginal effects and the <a href="https://marginaleffects.com/"><code>marginaleffects</code></a> package.</p>
+<p><em>Note I</em>: While researching marginal effects, I found two particularly insightful blog posts - one by an unnamed author from the <a href="https://library.virginia.edu/data/articles/a-beginners-guide-to-marginal-effects">University of Virginia</a> and another by <a href="https://www.andrewheiss.com/blog/2022/05/20/marginalia/">Andrew Heiss</a>. Both offer comprehensive descriptions of the concept. However, in this post, I’ve attempted to articulate the idea behind marginal effects in my own words, hoping to provide a perspective that might be helpful to others, including my future self.</p>
+<p><em>Note II</em>: There are several other excellent <code>R</code> packages for calculating marginal effects, such as <a href="https://cran.r-project.org/web/packages/margins/index.html"><code>margins</code></a> and <a href="https://cran.r-project.org/web/packages/emmeans/index.html"><code>emmeans</code></a>. However, for the sake of simplicity and consistency, I chose not to include them in this post.</p>
+<div class="tiny-code">
+
+</div>
+<p><br><br></p>
+<section id="unraveling-curved-relationships-marginal-effects-between-continuous-variables" class="level2">
+<h2 class="anchored" data-anchor-id="unraveling-curved-relationships-marginal-effects-between-continuous-variables">Unraveling Curved Relationships: Marginal Effects Between Continuous Variables</h2>
+<p>When dealing with continuous variables for both predictors and outcomes, marginal effects become a powerful tool for interpretation of non-linear models like quadratic relationships, where raw regression estimates are challenging to interpret. Let’s explore this concept using the <code>PimaIndiansDiabetes</code> dataset, where we’ll examine the relationship between body mass and age. While this model is primarily for illustrative purposes and doesn’t seek deeper interpretation, it serves as a nice example of marginal effects in action.</p>
+<div class="medium-space">
+
+</div>
+<section id="linear-vs.-quadratic-which-fits-better" class="level3">
+<h3 class="anchored" data-anchor-id="linear-vs.-quadratic-which-fits-better">Linear vs.&nbsp;Quadratic: Which Fits Better?</h3>
+<p>First, let’s compare a linear and a quadratic model to see which better describes the data:</p>
+<div class="tiny-code">
+<details class="code-fold">
+<summary>R Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(PimaIndiansDiabetes, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> mass) ) <span class="sc">+</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>( <span class="at">color =</span> <span class="st">'black'</span>, <span class="at">fill =</span> <span class="st">'#7950f2'</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>,  <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">formula =</span> y <span class="sc">~</span> x, <span class="at">linewidth =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">'#1e1e1e'</span>) <span class="sc">+</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">90</span>, <span class="at">by=</span><span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Linear Model'</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Age"</span>, <span class="at">y =</span> <span class="st">"Body Mass"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># linear model</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>linear_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(mass <span class="sc">~</span> age, <span class="at">data =</span> PimaIndiansDiabetes)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(linear_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell quarto-layout-panel" data-layout="[[80,20]]">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 80.0%;justify-content: center;">
+<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="576"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 20.0%;justify-content: flex-start;">
+<pre><code>
+Call:
+glm(formula = mass ~ age, data = PimaIndiansDiabetes)
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 31.18493    0.85347  36.539   &lt;2e-16 ***
+age          0.02430    0.02421   1.004    0.316    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 62.15938)
+
+    Null deviance: 47677  on 767  degrees of freedom
+Residual deviance: 47614  on 766  degrees of freedom
+AIC: 5355.1
+
+Number of Fisher Scoring iterations: 2</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="tiny-code">
+<details class="code-fold">
+<summary>R Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(PimaIndiansDiabetes, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> mass) ) <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">fill =</span> <span class="st">'#7950f2'</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>,  <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">formula =</span> y <span class="sc">~</span> x <span class="sc">+</span> <span class="fu">I</span>(x<span class="sc">^</span><span class="dv">2</span>), <span class="at">linewidth =</span> <span class="fl">1.3</span>, <span class="at">color =</span> <span class="st">'#1e1e1e'</span>) <span class="sc">+</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">90</span>, <span class="at">by=</span><span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Quadratic Model'</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Age"</span>, <span class="at">y =</span> <span class="st">"Body Mass"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># quadratic model</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>quadratic_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(mass <span class="sc">~</span> age <span class="sc">+</span>  <span class="fu">I</span>(age<span class="sc">^</span><span class="dv">2</span>), <span class="at">data =</span> PimaIndiansDiabetes)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(quadratic_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell quarto-layout-panel" data-layout="[[80,20]]">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 80.0%;justify-content: center;">
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="576"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 20.0%;justify-content: flex-start;">
+<pre><code>
+Call:
+glm(formula = mass ~ age + I(age^2), data = PimaIndiansDiabetes)
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 16.311932   2.567317   6.354 3.61e-10 ***
+age          0.866956   0.139589   6.211 8.65e-10 ***
+I(age^2)    -0.010569   0.001725  -6.125 1.45e-09 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 59.33079)
+
+    Null deviance: 47677  on 767  degrees of freedom
+Residual deviance: 45388  on 765  degrees of freedom
+AIC: 5320.3
+
+Number of Fisher Scoring iterations: 2</code></pre>
+</div>
+</div>
+</div>
+</div>
+<p>The quadratic model shows a smaller residual deviance, indicating a better fit to the data. This suggests a more complex relationship between age and body mass: body mass tends to increase with age until around 45 years, after which it begins to decrease again.</p>
+<p><br><br></p>
+</section>
+<section id="interpreting-quadratic-relationships-the-power-of-marginal-effects" class="level3">
+<h3 class="anchored" data-anchor-id="interpreting-quadratic-relationships-the-power-of-marginal-effects">Interpreting Quadratic Relationships: The Power of Marginal Effects</h3>
+<p>Interpreting the coefficients of a quadratic model can be challenging - so we have two coefficients <code>age</code> and <code>I(age^2)</code>, one negative one positive - but how to interpret them? This is where marginal effects, specifically <em>Marginal Effects at Representative Values (MER)</em>, come into play. We can calculate the slope (or tangent) at different ages to better understand the relationship, and these slopes are nothing else than <em>marginal effects</em>. Let’s calculate the marginal effects at ages 30 and 60 using the <code>slopes()</code> function from the <code>marginaleffects</code> package:</p>
+<div class="small-code">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">slopes</span>(quadratic_model, <span class="at">newdata =</span> <span class="fu">datagrid</span>(<span class="at">age =</span> <span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">60</span>))) <span class="ot">-&gt;</span> s; s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ Term age Estimate Std. Error     z Pr(&gt;|z|)    S  2.5 % 97.5 %
+  age  30    0.233     0.0414  5.62   &lt;0.001 25.6  0.152  0.314
+  age  60   -0.401     0.0734 -5.47   &lt;0.001 24.4 -0.545 -0.257
+
+Columns: rowid, term, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, age, predicted_lo, predicted_hi, predicted, mass 
+Type:  response </code></pre>
+</div>
+</div>
+</div>
+<div class="medium-space">
+
+</div>
+<p>Now, let’s visualize these slopes on the plot from above (inspired by <a href="https://www.andrewheiss.com/blog/2022/05/20/marginalia/">Andrew Heiss</a>):</p>
+<div class="small-code">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>R Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># y = 16.311932 + 0.866956*x + -0.010569(x^2) </span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>b_30 <span class="ot">&lt;-</span> s<span class="sc">$</span>estimate[<span class="dv">1</span>]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>x_30 <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>y_30 <span class="ot">&lt;-</span> <span class="fl">16.311932</span> <span class="sc">+</span> <span class="fl">0.866956</span><span class="sc">*</span><span class="dv">30</span> <span class="sc">-</span><span class="fl">0.010569</span><span class="sc">*</span>(<span class="dv">30</span><span class="sc">^</span><span class="dv">2</span>) </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>intercept_30 <span class="ot">&lt;-</span> b_30 <span class="sc">*</span> (<span class="sc">-</span>x_30) <span class="sc">+</span> y_30</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>b_60 <span class="ot">&lt;-</span> s<span class="sc">$</span>estimate[<span class="dv">2</span>]</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>x_60 <span class="ot">&lt;-</span> <span class="dv">60</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>y_60 <span class="ot">&lt;-</span> <span class="fl">16.311932</span> <span class="sc">+</span> <span class="fl">0.866956</span><span class="sc">*</span><span class="dv">60</span> <span class="sc">-</span><span class="fl">0.010569</span><span class="sc">*</span>(<span class="dv">60</span><span class="sc">^</span><span class="dv">2</span>) </span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>intercept_60 <span class="ot">&lt;-</span> b_60 <span class="sc">*</span> (<span class="sc">-</span>x_60) <span class="sc">+</span> y_60</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>d.annot <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">c</span>(x_30, x_60), </span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>                      <span class="at">y =</span> <span class="fu">c</span>(y_30, y_60), </span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>                      <span class="at">b =</span> <span class="fu">c</span>(b_30, b_60),</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>                      <span class="at">i =</span> <span class="fu">c</span>(intercept_30, intercept_60)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>                      ) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">'dy/dx = '</span> , <span class="fu">round</span>(b, <span class="dv">2</span>)))</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(PimaIndiansDiabetes, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> mass) ) <span class="sc">+</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">fill =</span> <span class="st">'#7950f2'</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>,  <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">formula =</span> y <span class="sc">~</span> x <span class="sc">+</span> <span class="fu">I</span>(x<span class="sc">^</span><span class="dv">2</span>), <span class="at">linewidth =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">'#1e1e1e'</span>) <span class="sc">+</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_abline</span>(<span class="at">data =</span> d.annot, <span class="fu">aes</span>(<span class="at">slope =</span> b, <span class="at">intercept =</span> i),</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>                <span class="at">linewidth =</span> <span class="fl">1.1</span>, <span class="at">color =</span> <span class="st">'darkorange'</span>) <span class="sc">+</span>  </span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_richtext</span>(<span class="at">data =</span> d.annot, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">label =</span> label), <span class="at">color =</span> <span class="st">'darkorange'</span>, <span class="at">nudge_y =</span> <span class="dv">4</span>) <span class="sc">+</span> </span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">data =</span> d.annot, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y), <span class="at">fill =</span> <span class="st">'darkorange'</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">90</span>, <span class="at">by=</span><span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Marginal Effects at Representative Values (MER)'</span>,</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Age"</span>, <span class="at">y =</span> <span class="st">"Body Mass"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>This visualization helps to understand how the relationship between age and body mass changes over time. The slope is positive at age 30 but negative at age 60, indicating a shift in the relationship.</p>
+<p><br><br></p>
+</section>
+<section id="comprehensive-view-marginal-effects-across-all-ages" class="level3">
+<h3 class="anchored" data-anchor-id="comprehensive-view-marginal-effects-across-all-ages">Comprehensive View: Marginal Effects Across All Ages</h3>
+<p>To get a complete picture, we can calculate and plot the marginal effects (slopes) for all ages using the <code>plot_slopes()</code> function:</p>
+<div class="small-code">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>R Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_slopes</span>(quadratic_model, <span class="at">variables =</span> <span class="st">"age"</span>, <span class="at">condition =</span> <span class="st">"age"</span>) <span class="sc">+</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">'darkgrey'</span>, <span class="at">linetype =</span> <span class="st">'dotted'</span>, <span class="at">lwd =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> d.annot, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> b), <span class="at">fill =</span> <span class="st">'darkorange'</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_richtext</span>(<span class="at">data =</span> d.annot, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> b, <span class="at">label =</span> label), <span class="at">color =</span> <span class="st">'darkorange'</span>, <span class="at">nudge_y =</span> <span class="fl">0.15</span>) <span class="sc">+</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">90</span>, <span class="at">by=</span><span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Marginal Effects Across All Ages'</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">'Marginal Effect (dy/dx)'</span>, <span class="at">x =</span> <span class="st">'Age'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p><br><br></p>
+</section>
+<section id="interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation">Interpretation</h3>
+<p>The analysis reveals that:</p>
+<ul>
+<li>At age 30, a one-year increase in age is associated with a 0.2 unit increase in body mass.</li>
+<li>At age 60, a one-year increase in age is associated with a 0.4 unit decrease in body mass.</li>
+</ul>
+<p>This shift from a positive to a negative relationship as age increases illustrates the non-linear nature of the association between age and body mass in the given dataset.</p>
+<p><br><br></p>
+</section>
+<section id="beyond-mer-exploring-mem-and-ame" class="level3">
+<h3 class="anchored" data-anchor-id="beyond-mer-exploring-mem-and-ame">Beyond MER: Exploring MEM and AME</h3>
+<p>We’ve just looked at the concept of <em>Marginal Effects at Representative Values (MER)</em>. But there’s more! Two other concepts can shed light on the data (depending on context and data, one or the other make more sense): MEM and AME. Let’s break these three down in more detail:</p>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><br><br> <strong>Marginal Effect at Representative Values (MER)</strong>:</p>
+<p>This represents the dy/dx at very specific, representative values of x (as for the age of 30 and 60 above).</p>
+<div class="tiny-code">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">slopes</span>(quadratic_model, <span class="at">newdata =</span> <span class="fu">datagrid</span>(<span class="at">age =</span> <span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">60</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ Term age Estimate Std. Error     z Pr(&gt;|z|)    S  2.5 % 97.5 %
+  age  30    0.233     0.0414  5.62   &lt;0.001 25.6  0.152  0.314
+  age  60   -0.401     0.0734 -5.47   &lt;0.001 24.4 -0.545 -0.257
+
+Columns: rowid, term, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, age, predicted_lo, predicted_hi, predicted, mass 
+Type:  response </code></pre>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:45%;">
+<p><img src="images/MER_continuous.png" class="img-fluid" width="400"></p>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><br><br></p>
+<p><strong>Marginal Effect at the Mean (MEM)</strong>:</p>
+<p>This represents the dy/dx at the mean value of x (age in the example above).</p>
+<div class="tiny-code">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">slopes</span>(quadratic_model, <span class="at">newdata =</span> <span class="st">"mean"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ Term Estimate Std. Error    z Pr(&gt;|z|)    S  2.5 % 97.5 %
+  age    0.164     0.0329 4.99   &lt;0.001 20.7 0.0998  0.229
+
+Columns: rowid, term, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, predicted_lo, predicted_hi, predicted, age, mass 
+Type:  response </code></pre>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:45%;">
+<p><img src="images/MEM_continuous.png" class="img-fluid" width="400"></p>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><br><br> <strong>Average Marginal Effect (AME)</strong>:</p>
+<p>This is the mean of all observation-specific marginal effects. It’s calculated by determining dy/dx at each value of x and then taking the average. Based on the example above, this might not be very helpful though.</p>
+<div class="tiny-code">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">avg_slopes</span>(quadratic_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ Term    Contrast Estimate Std. Error z Pr(&gt;|z|)    S  2.5 % 97.5 %
+  age mean(dY/dX)    0.164     0.0329 5   &lt;0.001 20.7 0.0999  0.229
+
+Columns: term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, predicted_lo, predicted_hi, predicted 
+Type:  response </code></pre>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:45%;">
+<p><img src="images/AME_continuous.png" class="img-fluid" width="400"></p>
+</div>
+</div>
+<p><br><br></p>
+</section>
+</section>
+<section id="unravelling-logistic-regression-and-marginal-effects" class="level2">
+<h2 class="anchored" data-anchor-id="unravelling-logistic-regression-and-marginal-effects">Unravelling Logistic Regression and Marginal Effects</h2>
+<p>Logistic regression is a powerful and often used tool. The raw parameters represent log odds ratios, expressed as <span class="math inline">\(log(\frac{p}{1-p})\)</span>. Exponentiating these coefficients results in odds ratios <span class="math inline">\(\frac{p}{1-p}\)</span>, which is a common measure used in scientific studies. But what do these really mean in practical terms? The interpretation can be tricky, and it’s easy to conflate odds with probabilities. While it would be convenient if they were the same, they’re not – and this is where marginal effects shine.</p>
+<p>Let’s explore this concept using the <code>PimaIndiansDiabetes</code> dataset again. We’ll investigate how age and above-average body mass (binary coded) relate to the risk of diabetes. Again, this example is simplified for illustration, and is simply used to provide insights into marginal effects in case of a binary coded outcome variable.</p>
+<div class="small-space">
+
+</div>
+<p>First, let’s prepare our data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add binary predictor variable</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>PimaIndiansDiabetes <span class="sc">%&lt;&gt;%</span> </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diab =</span> <span class="fu">ifelse</span>(diabetes <span class="sc">==</span> <span class="st">'pos'</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">mass_fg =</span> <span class="fu">f_case_when</span>(mass <span class="sc">&lt;=</span> <span class="fu">mean</span>(mass) <span class="sc">~</span> <span class="st">'below-avg'</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>                               mass <span class="sc">&gt;</span> <span class="fu">mean</span>(mass) <span class="sc">~</span> <span class="st">'above-avg'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="small-space">
+
+</div>
+<p>Lets build the model:</p>
+<div class="teenytiny-code">
+<details class="code-fold">
+<summary>R Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot: age</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(PimaIndiansDiabetes, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> diab)) <span class="sc">+</span> </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">fill =</span> <span class="st">'#7950f2'</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>,  <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">"glm"</span>, <span class="at">color=</span><span class="st">"black"</span>, <span class="at">se=</span><span class="cn">TRUE</span>, <span class="at">method.args =</span> <span class="fu">list</span>(<span class="at">family=</span>binomial), <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Logistic Regression - Age'</span>,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">'Probability of Diabetes'</span>, <span class="at">x =</span> <span class="st">'Age'</span>) <span class="sc">+</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">9</span>),</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>))</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co"># plot: body mass binary coded</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(PimaIndiansDiabetes, <span class="fu">aes</span>(<span class="at">x =</span> mass_fg, <span class="at">y =</span> diab)) <span class="sc">+</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.3</span>, <span class="at">height =</span> <span class="fl">0.05</span>, <span class="at">fill =</span> <span class="st">'#7950f2'</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>,  <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">size =</span> <span class="fl">3.5</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"glm"</span>, <span class="at">method.args =</span> <span class="fu">list</span>(<span class="at">family =</span> <span class="st">"binomial"</span>), <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Body mass"</span>, <span class="at">y =</span> <span class="st">"Probability of Diabetes"</span>, <span class="at">title =</span> <span class="st">"Logistic Regression - Body Mass Flag"</span>) <span class="sc">+</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">9</span>),</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>))</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>p1<span class="sc">+</span>p2<span class="sc">+</span><span class="fu">plot_annotation</span>(<span class="at">theme =</span> <span class="fu">theme</span>(<span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span><span class="st">"#f8faf7"</span>, <span class="at">color=</span><span class="st">"#f8faf7"</span>)))</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="co"># logistic regression</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>logit_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(diabetes <span class="sc">~</span> age <span class="sc">+</span> mass_fg, <span class="at">data =</span> PimaIndiansDiabetes, <span class="at">family =</span> <span class="st">'binomial'</span>)</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(logit_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell quarto-layout-panel" data-layout="[[80,20]]">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 80.0%;justify-content: center;">
+<p><img src="index_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="768"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 20.0%;justify-content: flex-start;">
+<pre><code>
+Call:
+glm(formula = diabetes ~ age + mass_fg, family = "binomial", 
+    data = PimaIndiansDiabetes)
+
+Coefficients:
+                  Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)      -2.676442   0.272066  -9.837  &lt; 2e-16 ***
+age               0.042212   0.006757   6.247 4.18e-10 ***
+mass_fgabove-avg  1.105120   0.164923   6.701 2.07e-11 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 993.48  on 767  degrees of freedom
+Residual deviance: 903.32  on 765  degrees of freedom
+AIC: 909.32
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+</div>
+</div>
+</div>
+<p>Lets look at the odds ratios:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(logit_model<span class="sc">$</span>coefficients)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     (Intercept)              age mass_fgabove-avg 
+      0.06880757       1.04311523       3.01958756 </code></pre>
+</div>
+</div>
+<p><br></p>
+<p><strong>Traditional interpretation</strong>:</p>
+<ul>
+<li>For each year increase in age, the odds of having diabetes increase by 4%.</li>
+<li>Individuals with above-average body mass have odds of diabetes 3 times higher than those with below-average body mass.</li>
+</ul>
+<p>While these interpretations are technically correct, they’re not very intuitive. Many people, including myself, find odds ratios difficult to grasp and often conflate them with probabilities.</p>
+<p>Therefore lets look at marginal effects, which offer a more accessible way to interpret our results. They show how changes in our predictors affect the probability (not odds!) of the outcome. First thing we could do, is to get individual <em>risk differences</em>: predict the probability of diabetes for a given subject based on their current age, and the probability for one year older (+1), and calculate the difference between the two. Analogously for the binary variable, predict the probability of diabetes for each subject, once treating the subject to be above average massed, and once below averaged massed, and take the difference thereof. We could do this by hand, but the <code>comparisons()</code> function from the <code>marginaleffects</code> does this for us (which is the analogue function to <code>slopes()</code> for the continuous relationship from above).</p>
+<div class="columns">
+<div class="column" style="width:48.75%;">
+<div class="tinyer-code">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">comparisons</span>(logit_model, <span class="at">variable =</span> <span class="st">'age'</span>) <span class="ot">-&gt;</span> rr.age; rr.age</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ Term Contrast Estimate Std. Error     z Pr(&gt;|z|)    S   2.5 %  97.5 %
+  age       +1  0.00977   0.001293  7.55   &lt;0.001 44.4 0.00723 0.01230
+  age       +1  0.00691   0.001123  6.15   &lt;0.001 30.3 0.00471 0.00912
+  age       +1  0.00709   0.001172  6.04   &lt;0.001 29.3 0.00479 0.00938
+  age       +1  0.00525   0.000682  7.70   &lt;0.001 46.1 0.00392 0.00659
+  age       +1  0.01049   0.001679  6.25   &lt;0.001 31.2 0.00720 0.01378
+--- 758 rows omitted. See ?avg_comparisons and ?print.marginaleffects --- 
+  age       +1  0.00787   0.000620 12.69   &lt;0.001 120.2 0.00666 0.00909
+  age       +1  0.01012   0.001547  6.54   &lt;0.001  34.0 0.00709 0.01315
+  age       +1  0.00674   0.001075  6.27   &lt;0.001  31.4 0.00464 0.00885
+  age       +1  0.00945   0.001802  5.24   &lt;0.001  22.6 0.00591 0.01298
+  age       +1  0.00557   0.000760  7.33   &lt;0.001  42.0 0.00408 0.00706
+Columns: rowid, term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, predicted_lo, predicted_hi, predicted, diabetes, age, mass_fg 
+Type:  response </code></pre>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:2.5%;">
+
+</div><div class="column" style="width:48.75%;">
+<div class="tinyer-code">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">comparisons</span>(logit_model, <span class="at">variable =</span> <span class="st">'mass_fg'</span>) <span class="ot">-&gt;</span> rr.mass; rr.mass</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Term              Contrast Estimate Std. Error    z Pr(&gt;|z|)    S 2.5 % 97.5 %
+ mass_fg above-avg - below-avg    0.269     0.0382 7.05   &lt;0.001 39.0 0.195  0.344
+ mass_fg above-avg - below-avg    0.232     0.0328 7.07   &lt;0.001 39.2 0.167  0.296
+ mass_fg above-avg - below-avg    0.235     0.0332 7.08   &lt;0.001 39.3 0.170  0.300
+ mass_fg above-avg - below-avg    0.192     0.0288 6.67   &lt;0.001 35.1 0.136  0.249
+ mass_fg above-avg - below-avg    0.239     0.0337 7.09   &lt;0.001 39.4 0.173  0.305
+--- 758 rows omitted. See ?avg_comparisons and ?print.marginaleffects --- 
+ mass_fg above-avg - below-avg    0.252     0.0386 6.54   &lt;0.001 33.9 0.177  0.328
+ mass_fg above-avg - below-avg    0.217     0.0310 6.98   &lt;0.001 38.3 0.156  0.278
+ mass_fg above-avg - below-avg    0.228     0.0323 7.05   &lt;0.001 39.1 0.165  0.292
+ mass_fg above-avg - below-avg    0.268     0.0379 7.07   &lt;0.001 39.2 0.194  0.343
+ mass_fg above-avg - below-avg    0.201     0.0295 6.80   &lt;0.001 36.5 0.143  0.258
+Columns: rowid, term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, predicted_lo, predicted_hi, predicted, diabetes, age, mass_fg 
+Type:  response </code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="small-space">
+
+</div>
+<p>The outputs of the <code>comparisons()</code> function shows for each individual the difference in predicted probability of current age, and for one year older (+1), and the difference in probability treating the subject to be above average massed, vs.&nbsp;below averaged massed.</p>
+<p><br></p>
+<section id="average-marginal-effects-ame" class="level3">
+<h3 class="anchored" data-anchor-id="average-marginal-effects-ame">Average Marginal Effects (AME)</h3>
+<p>Furthermore, to get a population-level perspective, we can average these individual effects from above using <code>avg_comparisons()</code></p>
+<div class="columns">
+<div class="column" style="width:48.75%;">
+<div class="tinyer-code">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">avg_comparisons</span>(logit_model, <span class="at">variable =</span> <span class="st">'age'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ Term Contrast Estimate Std. Error    z Pr(&gt;|z|)    S   2.5 % 97.5 %
+  age mean(+1)  0.00854    0.00124 6.88   &lt;0.001 37.3 0.00611  0.011
+
+Columns: term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, predicted_lo, predicted_hi, predicted 
+Type:  response </code></pre>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:2.5%;">
+
+</div><div class="column" style="width:48.75%;">
+<div class="tinyer-code">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">avg_comparisons</span>(logit_model, <span class="at">variable =</span> <span class="st">'mass_fg'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Term                          Contrast Estimate Std. Error    z Pr(&gt;|z|)    S 2.5 % 97.5 %
+ mass_fg mean(above-avg) - mean(below-avg)    0.229     0.0324 7.05   &lt;0.001 39.0 0.165  0.292
+
+Columns: term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, predicted_lo, predicted_hi, predicted 
+Type:  response </code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="small-space">
+
+</div>
+<p>So what do these risk differences, or population averaged risk differences, tell us?</p>
+<ul>
+<li>On average, for each year increase in age, the probability of diabetes increases by 0.9 percentage points.</li>
+<li>For changing from below-averaged body mass to above-averaged body mass increases the probability of diabetes, again on average across all subjects, by 23% percentage points.</li>
+</ul>
+<p><em>Note</em>: If you prefer risk ratios instead of risk differences, you can easily add the argument <code>comparison = "ratio"</code> to the <code>comparisons()</code> function.</p>
+<p>These marginal effects provide a much more intuitive interpretation than the raw parameter estimates (log odds ratios). They show how changes in the independent variables (age and body mass group) influence the outcome probability of diabetes.</p>
+<p>We can further refine our analysis by exploring <em>Marginal Effects at the Mean (MEA)</em> and <em>Marginal Effects at Representative Values (MER)</em>.</p>
+<p><br></p>
+</section>
+<section id="marginal-effects-at-the-mean-mea" class="level3">
+<h3 class="anchored" data-anchor-id="marginal-effects-at-the-mean-mea">Marginal Effects at the Mean (MEA)</h3>
+<p>If we don’t specify the <code>variables</code> argument, the <code>comparisons()</code>-function calculates marginal effects at the means of both predictors:</p>
+<div class="tiny-code">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">comparisons</span>(logit_model, <span class="at">newdata =</span> <span class="st">'mean'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Term              Contrast Estimate Std. Error    z Pr(&gt;|z|)    S  2.5 % 97.5 %  age   mass_fg
+ age     +1                      0.0105    0.00168 6.24   &lt;0.001 31.1 0.0072 0.0138 33.2 above-avg
+ mass_fg above-avg - below-avg   0.2394    0.03376 7.09   &lt;0.001 39.4 0.1732 0.3055 33.2 above-avg
+
+Columns: rowid, term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, predicted_lo, predicted_hi, predicted, age, mass_fg, diabetes 
+Type:  response </code></pre>
+</div>
+</div>
+</div>
+<div class="small-space">
+
+</div>
+<p>This gives us the marginal effects at the average age of 33.2 years and the more common body mass category (above-avg). We can verify this result manually by changing age from 33.2 to 34.2 (+1)</p>
+<div class="tiny-code">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>p0 <span class="ot">&lt;-</span> <span class="fu">predict</span>(logit_model, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">age =</span> <span class="fl">33.2</span>,    <span class="at">mass_fg =</span> <span class="st">'above-avg'</span>), <span class="at">type =</span> <span class="st">'response'</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(logit_model, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">age =</span> <span class="fl">33.2</span> <span class="sc">+</span><span class="dv">1</span>, <span class="at">mass_fg =</span> <span class="st">'above-avg'</span>), <span class="at">type =</span> <span class="st">'response'</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>p1<span class="sc">-</span>p0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         1 
+0.01049434 </code></pre>
+</div>
+</div>
+</div>
+<div class="small-space">
+
+</div>
+<p>and for body mass flag changing from <em>below-avg</em> to <em>above-avg</em>, keeping age constant at the mean of 33.2:</p>
+<div class="tiny-code">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>p0 <span class="ot">&lt;-</span> <span class="fu">predict</span>(logit_model, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">age =</span> <span class="fl">33.2</span>, <span class="at">mass_fg =</span> <span class="st">'below-avg'</span>), <span class="at">type =</span> <span class="st">'response'</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(logit_model, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">age =</span> <span class="fl">33.2</span>, <span class="at">mass_fg =</span> <span class="st">'above-avg'</span>), <span class="at">type =</span> <span class="st">'response'</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>p1<span class="sc">-</span>p0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        1 
+0.2392282 </code></pre>
+</div>
+</div>
+</div>
+<div class="small-space">
+
+</div>
+<p><strong>Interpretation</strong>:</p>
+<ul>
+<li>For someone with above-average body mass, turning 34 compared to 33 increases the probability of diabetes by 1 percentage point.</li>
+<li>For someone aged 33, changing from below-average to above-average body mass increases the probability of diabetes by 24 percentage points.</li>
+</ul>
+<p><br><br></p>
+</section>
+<section id="marginal-effects-at-representative-values-mer" class="level3">
+<h3 class="anchored" data-anchor-id="marginal-effects-at-representative-values-mer">Marginal Effects at Representative Values (MER)</h3>
+<p>We can also examine how marginal effects change across different ages:</p>
+<div class="columns">
+<div class="column" style="width:58.75%;">
+<p><br></p>
+<div class="teenytiny-code">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">comparisons</span>(logit_model, <span class="at">variable =</span> <span class="st">'mass_fg'</span>, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">age =</span> <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">80</span>, <span class="at">by=</span><span class="dv">10</span>))) <span class="ot">-&gt;</span> c; c</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Term              Contrast Estimate Std. Error    z Pr(&gt;|z|)    S 2.5 % 97.5 % age
+ mass_fg above-avg - below-avg    0.188     0.0285 6.59   &lt;0.001 34.4 0.132  0.244  20
+ mass_fg above-avg - below-avg    0.228     0.0323 7.05   &lt;0.001 39.1 0.165  0.292  30
+ mass_fg above-avg - below-avg    0.258     0.0364 7.09   &lt;0.001 39.5 0.187  0.329  40
+ mass_fg above-avg - below-avg    0.269     0.0382 7.05   &lt;0.001 39.0 0.195  0.344  50
+ mass_fg above-avg - below-avg    0.259     0.0384 6.75   &lt;0.001 36.0 0.184  0.335  60
+ mass_fg above-avg - below-avg    0.230     0.0398 5.79   &lt;0.001 27.1 0.152  0.308  70
+ mass_fg above-avg - below-avg    0.191     0.0423 4.50   &lt;0.001 17.2 0.108  0.273  80
+
+Columns: rowid, term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, predicted_lo, predicted_hi, predicted, age, diabetes 
+Type:  response </code></pre>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:2.5%;">
+
+</div><div class="column" style="width:38.75%;">
+<div class="tinyer-code">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>R Code</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_comparisons</span>(logit_model, <span class="at">variable =</span> <span class="st">'mass_fg'</span>, </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">condition =</span> <span class="fu">list</span>(<span class="st">"age"</span> <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">80</span>, <span class="at">by=</span><span class="dv">10</span>))) <span class="sc">+</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">age =</span> c<span class="sc">$</span>age, <span class="at">est =</span> c<span class="sc">$</span>estimate), <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> est),</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> <span class="st">'darkorange'</span>,  <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Marginal Effects at Representative Values (MER)'</span>,</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">'Risk Difference </span><span class="sc">\n</span><span class="st"> p(above-avg) - p(below-avg)'</span>,</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">'Age'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>This analysis suggests that the risk difference peaks around age 50, however, notice that the confidence intervals are relatively broad.</p>
+<p>By incorporating marginal effects into our analysis of logistic regression models, we gain a much richer and more intuitive understanding of our data. This approach allows us to communicate complex statistical relationships in terms of probability changes, which are far more accessible to a general audience. Remember, while odds ratios have their place in statistical analysis, marginal effects offer a powerful tool for interpretation and communication in many real-world scenarios.</p>
+<p><br><br></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="serigra/Webpage_Quarto" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2024 · Made with <a href="https://www.r-project.org/"><img src="https://www.r-project.org/Rlogo.png" class="img-fluid" alt="R" width="25"></a> and <a href="https://quarto.org/"><img src="https://quarto.org/quarto.png" class="img-fluid" alt="Quarto" width="65"></a></p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
