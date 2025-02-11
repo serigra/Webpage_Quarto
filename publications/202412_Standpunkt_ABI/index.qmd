@@ -1,0 +1,38 @@
+---
+title: 'Antibiotika - Eine Bestandesaufnahme: Wer verschreibt wie viel?'
+author: "Sereina M. Graber, Sabrina M. Stollberg"
+date: '2024-12-02'
+publication: ""
+image: featured-pdf.png
+css: "../styles_publications_individual.css"
+description: "Der verantwortungsvolle Einsatz von Antibiotika ist entscheidend, da ihre übermäßige Verwendung die Entstehung resistenter Bakterien begünstigt. Die vorliegende Studie hat untersucht, wie viele Antibiotika in der ambulanten Versorgung von welchen medizinischen Fachgruppen in der Schweiz verschrieben werden. Die Ergebnisse liefern unerwartete Erkenntnisse."
+categories:
+  - "health services research"
+  - "claims data"
+  - "antibiotics"
+url_source: https://standpunkt.helsana.ch/de/antibiotikaverschreibungen-eine-bestandesaufnahme-wer-verschreibt-wie-viel
+url_preprint:
+pdf_file: 
+journ: "Helsana Standpunkt"
+issue: Nr. 4
+page: 
+year: 2024
+---
+
+## Abstract
+
+### **Background**
+
+Integrated care models (ICMs) might be an effective strategy to improve patients’ quality of care. The aim of this study was to compare different ICMs such as family-doctor models, and a standard care model (SCM) regarding patients’ drug safety in Swiss primary care.
+
+### **Methods**
+
+We performed an observational study using health insurance claims data from patients who were continuously enrolled in an ICM or in a SCM between 2020 and 2021. ICMs included family-doctor model (FDM), family-doctor model light (FDM-light) and the telemedicine model (TM). Drug safety was assessed by the prescription of potentially inappropriate proton pump-inhibitors (PIPPI), opioids (PIO), medications (PIM), and polypharmacy. Propensity-score-weighted multiple logistic regression models were used to examine the association between different types of ICMs and drug safety.
+
+### **Results**
+
+Patients in FDM had significantly lower odds of receiving PIPPI (OR, 0.86; CI 95%, 0.83–0.89), PIO (OR, 0.81; CI 95%, 0.76–0.85), PIM (OR, 0.94; CI 95%, 0.91–0.97), and polypharmacy (OR, 0.94; CI 95%, 0.91–0.97) compared to patients in SCM. Potentially inappropriate prescribing was also lower in patients in TM and partly in FDM-light than in SCM. Persons enrolled in FDM were less likely to receive PIM (OR, 0.93; CI 95%, 0.89–0.97) and polypharmacy (OR, 0.94; CI 95%, 0.90–0.99) than those in FDM-light, whereas the odds of receiving PIPPI and polypharmacy were higher in FDM than in TM.
+
+### **Conclusion**
+
+ICMs were significantly associated with higher drug safety compared to SCM for most outcomes. Findings suggest that patients may benefit most from ICMs with a high degree of coordination or gatekeeping. ICM may represent an effective approach to improve patients’ drug safety and, thus, to reduce the risk of adverse events.
