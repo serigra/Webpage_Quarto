@@ -1,19 +1,8 @@
 
 /* ========= Format Body, Title and Subtitles of the Page ====================*/
 
-@font-face {
-  font-family: 'Petrona';
-  src: url('fonts/Petrona-VariableFont_wght.ttf') format('truetype-variations');
-  font-weight: 100 900;
-  font-style: normal;
-}
+@import url('https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,100..900;1,100..900&display=swap$');
 
-@font-face {
-  font-family: 'Petrona';
-  src: url('fonts/Petrona-Italic-VariableFont_wght.ttf') format('truetype-variations');
-  font-weight: 100 900;
-  font-style: italic;
-}
 
 body {
   max-width: 2000px;
