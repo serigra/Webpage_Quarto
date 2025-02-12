@@ -40,7 +40,36 @@ margin-top: 1.2rem;
 margin-bottom: 0.9rem;
 }
 
+/* ===================== Responsive Adjustments ======================== */
 
+/* Media query for smaller screens (mobile devices) */
+@media screen and (max-width: 768px) {
+
+  /* Adjust title for smaller screens */
+  .title {
+    font-size: 2.0rem; /* Reduce title size */
+    margin-bottom: 1em !important; /* Adjust spacing */
+    text-align: left !important; /* Center-align the title */
+  }
+
+  /* Left-align h1, h2, and h3 on smaller screens */
+  h1, h2, h3 {
+    text-align: left !important; /* Ensure headings are left-aligned */
+    margin-left: 0; /* Remove any unintended margins */
+    margin-right: 0; /* Remove any unintended margins */
+  }
+
+  /* Adjust body text for smaller screens */
+  body {
+    text-align: left !important; /* Justify or block-align the body text */
+    padding-left: 1rem; /* Add some padding for better readability */
+    padding-right: 1rem; /* Add some padding for better readability */
+    line-height: 1.6; /* Improve line spacing for readability on mobile */
+    margin: 0 auto; /* Center the content container horizontally if needed */
+  }
+
+
+}
 
 /* ============== ToC of Sections (right side of blog post) ================= */
 

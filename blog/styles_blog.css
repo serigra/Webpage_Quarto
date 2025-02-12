@@ -1,8 +1,6 @@
-
 /* ============== Layout and Formatting Titles and Subtitles =================*/
 
-
-/*  center the listing */
+/* Center the listing */
 .quarto-listing {
   max-width: 75%;
   margin-left: auto;
@@ -11,40 +9,34 @@
   padding-right: 15px;
 }
 
-
-/* title of page "Notes · Thoughts · Blog"*/
+/* Title of page "Notes · Thoughts · Blog" */
 .title {
   font-family: "Petrona";
   font-size: 3rem;
   color: #FA2FBD;
   font-weight: 500;
-  line-height: 3em !important; /*that there is more space around title*/
+  line-height: 3em !important; /* Adds more space around title */
   text-align: center;
 }
 
-
-/* subtitle of page: "This blog serves as my..." */
+/* Subtitle of page: "This blog serves as my..." */
 .subtitle {
   font-family: 'Bebas Neue', sans-serif;
   color: #666260;
   text-transform: none;
   font-size: 0.8rem;
   font-weight: 500;
-  /* letter-spacing: 0.1em; */
   text-align: center !important;
   padding-left: 10rem;
   padding-right: 10rem;
   margin-bottom: 5em !important;
 }
 
-
-
-
 /* ===================== Format Single Posts in List ========================*/
 
-/* --for title of listing, .listing-title does not work coz its a link --*/
+/* Title of listing (h3.no-anchor.listing-title) */
 h3.no-anchor.listing-title {
-  font-family: "Petrona"; /*'Bebas Neue', sans-serif;*/
+  font-family: "Petrona"; /* 'Bebas Neue', sans-serif; */
   color: #235347 !important; 
   font-size: 20px;
   text-transform: none;
@@ -55,11 +47,13 @@ h3.no-anchor.listing-title:hover {
   text-decoration: underline; 
 }
 
+/* Listing date */
 .listing-date {
   color: #7F8A80;
   text-decoration: none !important; 
 }
 
+/* Listing author */
 .listing-author {
   color: #98A399;
   text-transform: none;
@@ -67,17 +61,36 @@ h3.no-anchor.listing-title:hover {
   font-size: 15px;
   margin-top: 8px;
   margin-bottom: 8px;
-  /*line-height: 1.5;*/
 }
 
-
+/* Blog post images */
 div.listing img.listing-image {
   width: 150px !important; /* Set the desired width */
   height: auto !important; /* Maintain aspect ratio */
 }
 
-
+/* Hover effect for references */
 .section-ref:hover {
   position: relative;
   cursor: pointer;
+}
+
+/* ===================== Responsive Adjustments ======================== */
+
+@media screen and (max-width: 768px) {
+  
+  .quarto-listing {
+    max-width: 90%;
+  }
+
+ .title {
+    font-size: 1.8rem;
+    line-height: 1.5em !important;
+  }
+
+
+  .subtitle {
+    padding-left: 1.1rem;
+    padding-right: 1.1rem;
+  }
 }

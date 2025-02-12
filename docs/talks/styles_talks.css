@@ -1,4 +1,3 @@
-
 /* ============== Layout and Formatting Titles and Subtitles =================*/
 
 /*  center the listing */
@@ -9,7 +8,6 @@
   padding-left: 15px;
   padding-right: 15px;
 }
- 
 
 /* title of page "talks*/
 .title {
@@ -28,15 +26,11 @@
   text-transform: none;
   font-size: 0.9rem;
   font-weight: 500;
-  /* letter-spacing: 0.1em; */
   text-align: center !important;
   padding-left: 8rem;
   padding-right: 8rem;
   margin-bottom: 5em !important;
 }
-
-
-
 
 /* -- single talks in list --*/
 
@@ -48,14 +42,12 @@
   font-weight: 700; 
 }
 
-
 .listing-talk-conf {
   color: #757883;
   font-size: 15px;
   margin-top: 8px;
   margin-bottom: 8px;
 }
-
 
 .listing-description {
   margin-top: 0.5em;
@@ -65,7 +57,59 @@
   text-align: justify;
 }
 
-
 .listing-links {
   font-size: 0.8em; /* Adjust this value as needed */
+}
+
+
+/* ==================== Media query for smaller screens ===================== */
+
+@media screen and (max-width: 768px) {
+  .quarto-listing {
+    max-width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .title {
+    font-size: 2rem;
+    line-height: 1.5em !important;
+  }
+
+  .subtitle {
+    font-size: 0.8rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-bottom: 2.5em !important;
+  }
+
+  .listing-talk-title {
+    font-size: 18px;
+  }
+
+  .listing-talk-conf {
+    font-size: 14px;
+  }
+
+  .listing-description {
+    font-size: 0.75em;
+    margin-bottom: 20px;
+  }
+
+  .listing-links {
+    font-size: 0.75em;
+  }
+}
+
+/* ================= Media query for medium-sized screens ==================== */
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .quarto-listing {
+    max-width: 90%;
+  }
+
+  .subtitle {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
 }
