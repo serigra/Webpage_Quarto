@@ -2,15 +2,12 @@
 /* ========= Format Body, Title and Subtitles of the Page ====================*/
 
 body {
-  /* background-color: #f8f8f6!important;  --> defined in _quarto.yml  */ 
-  max-width: 2000px;  /* Set your desired maximum width */
-  margin: 0 auto;    /* Center the content */
-  margin-left: 4em;
-  margin-right: 3em;
-  padding: 6px;     /* Optional: add some padding for better appearance */
+  max-width: 2000px;
+  margin: 0 auto;
+  padding: 6px;
+  width: 90%;
 }
 
-/* title: "Grüezi. Hi there!" */
 .title {
   font-family: "Petrona";
   font-size: 4.7rem;
@@ -19,7 +16,6 @@ body {
   line-height: 1.1em !important;
 }
 
-/* subtitle: "STATISTICS, VISUALIZATIONS AND R PROGRAMMING " */
 .subtitle {
   font-family: "Petrona";
   color: #FA2FBD;
@@ -29,42 +25,44 @@ body {
   letter-spacing: 0.1em;
 }
 
-/* so that heading, subtitle are right aligned */
 .entity-contents {
   text-align: right !important;
-  padding: 0 3em 0 0em;
+  padding: 0 3em 0 0;
 }
 
-
-/* blurb */
 .about-contents {
   padding: 0 0 0 2em !important;
   font-size: 1.2rem;
   color: #666260;
 }
 
-/* social links: block of links */
+/* Base styles for social links container */
 .about-entity .about-links {
+  display: flex !important;
   justify-content: flex-end !important;
-  column-gap: 0em !important;
+  align-items: center !important;
+  column-gap: 0 !important;
   font-size: 1.6em !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  width: 100% !important;
 }
 
-/* social links: individual links */
+/* Individual social link styles */
 .about-entity .about-link {
-  padding: 0.25em 0.25em !important;
-  border: none !important;  
+  padding: 0.25em !important;
+  border: none !important;
+  display: inline-block !important;
+  white-space: nowrap !important;
 }
 
-/* normal links */
 a {
-  font-family: "Petrona" !important; /*'Bebas Neue', sans-serif;*/
+  font-family: "Petrona" !important;
   color: #235347 !important;
   font-size: 1em;
   text-transform: none;
 }
 
-/* About Me (arrow)*/
 .about-links.subtitle {
   font-family: "Petrona";
   color: #235347;
@@ -72,14 +70,89 @@ a {
   justify-content: flex-end !important;
 }
 
-/* image (twisted polygon) on HOME page*/
 .about-image {
-  margin-top: 2em; /* image shifted a little bit to bottom*/
-  margin-left: 1.2em;
-  padding: 0.5em 2em 0em 0;
+  margin: 2em 0 0 1.2em;
+  padding: 0.5em 2em 0 0;
 }
 
 
+
+
+/* ---------------------  Responsive Styles Tablet -------------------- */
+
+@media screen and (max-width: 768px) {
+  body {
+    width: 95%;
+    text-align: center !important;
+  }
+  
+  .title {
+    font-size: 2.7rem;
+    text-align: center;
+  }
+  
+  .subtitle {
+    font-size: .9rem;
+    text-align: center;
+  }
+  
+  .about-image {
+    margin: 1em auto;
+    padding: 0;
+    max-width: 70%;
+    display: block;
+  }
+  
+  .entity-contents {
+    text-align: left !important;
+    padding: 0 !important;
+  }
+  
+  /* Mobile-specific social links styles */
+  .about-entity .about-links {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 1em !important;
+    width: 100% !important;
+    padding: 10px 0 30px !important;
+    margin: 0 auto !important;
+  }
+  
+  .about-entity .about-link {
+    display: inline-block !important;
+    font-size: 1.2em !important;
+    padding: 0.25em !important;
+    margin: 0 !important;
+  }
+}
+
+
+
+/* --------------------  Responsive Styles Mobile ------------------- */
+
+@media screen and (max-width: 480px) {
+  body {
+    width: 105%;
+  }
+  
+  .about-image {
+    margin-top: 0.5em;
+    max-width: 65%;
+  }
+  
+  /* Small mobile adjustments for social links */
+  .about-entity .about-links {
+    padding: 5px 0 30px !important; /* Increased bottom padding for smaller screens */
+  }
+  
+  .about-entity .about-link {
+    font-size: 1.5rem !important;
+    padding: 0.15em !important;
+  }
+}
 
 
 

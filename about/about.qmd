@@ -1,7 +1,7 @@
 ---
 title: "Sereina M. Graber"
 subtitle: PhD, Data Scientist
-description: "Member of the organizing committee for the <br>
+description: "Member of the organizing committee <br>
 [Zurich R User Group](https://zurich-r-user-group.github.io/)!"
 image: profile_picture.jpeg
 css: styles_about.css

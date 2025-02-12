@@ -1,7 +1,4 @@
-
 /* ============== Layout and Formatting Titles and Subtitles =================*/
-
-/*  center the listing */
 .quarto-listing {
   max-width: 75%;
   margin-left: auto;
@@ -10,33 +7,29 @@
   padding-right: 15px;
 }
 
-
-/* title of page "publications*/
 .title {
   font-family: "Petrona";
   font-size: 3rem;
   color: #FA2FBD;
   font-weight: 500;
-  line-height: 3em !important; /*that there is more space around title*/
+  line-height: 1.2;
   text-align: center;
+  margin-bottom: 0.9em;
 }
 
-/* subtitle of page: "Publications In Evolutionary Biology, Clinical Trials And Health Services Research" */
 .subtitle {
   font-family: 'Bebas Neue', sans-serif;
   color: #666260;
   text-transform: none;
   font-size: 0.9rem;
   font-weight: 500;
-  /* letter-spacing: 0.1em; */
   text-align: center !important;
-  padding-left: 8rem;
-  padding-right: 8rem;
+  margin-top: 2em !important;
   margin-bottom: 2em !important;
 }
 
 .category-filters {
-  margin-bottom: 3em !important;/* Adds space below the category buttons */
+  margin-bottom: 3em !important;
   text-align: center;
 }
 
@@ -44,29 +37,19 @@
   display: none;
 }
 
-
-
 /* =================== Format Single Publications in List ====================*/
-
 .listing-pub-title {
   font-family: 'Petrona';
-  color: #235347 !important;  /*Ensure the link inherits the color of the surrounding text */
+  color: #235347 !important;
   text-transform: none;
   font-size: 20px;
   font-weight: 700; 
 }
 
-.listing-pub-author {
+.listing-pub-author, .listing-pub-journal {
   color: #757883;
   font-size: 15px;
-  margin-top: 5px;
   margin-bottom: 8px;
-}
-
-.listing-pub-journal {
-  color: #757883;
-  font-size: 15px;
-  margin-bottom: 5px;
 }
 
 .listing-description {
@@ -80,32 +63,65 @@
 .listing-pub-url {
   font-size: 13px;
   margin-bottom: 10px;
-  display: flex;  /* Ensure URL and category buttons align in flexbox */
+  display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 
-
-
-/* Ensure Flexbox Layout Doesn't Break After Filtering with Category Buttons*/
 .publication-item {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-/* Styling for filter and category buttons */
 .category-button {
-    padding: 4px 7px;
-    background-color: #f8faf7;
-    color: #235347 !important;
-    border: 0.3px solid #B2BEB5!important;  /* Add green border */
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 0.7em;
-    margin-bottom: 3px; /* braucht ein bisschen weniger Abstand als pdf link um aligned zu sein */
+  padding: 4px 7px;
+  background-color: #f8faf7;
+  color: #235347 !important;
+  border: 0.3px solid #B2BEB5!important;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 0.7em;
+  margin-bottom: 3px;
+  margin-right: 5px;
 }
 
 .category-button:hover {
-    background-color: #e8ece4;
+  background-color: #e8ece4;
 }
 
+/* Media query for mobile devices */
+@media screen and (max-width: 768px) {
+  .quarto-listing {
+    max-width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 0.8rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .listing-pub-title {
+    font-size: 18px;
+  }
+
+  .listing-pub-author, .listing-pub-journal {
+    font-size: 14px;
+  }
+
+  .listing-description {
+    font-size: 0.9em;
+  }
+
+  .category-button {
+    font-size: 0.6em;
+    padding: 3px 5px;
+  }
+}
