@@ -7,8 +7,8 @@
 body {
   max-width: 2000px;
   margin: 0 auto;
-  padding: 6px;
-  width: 90%;
+  padding: 0;
+  width: 95%;
 }
 
 .title {
@@ -137,8 +137,14 @@ a {
 /* --------------------  Responsive Styles Mobile ------------------- */
 
 @media screen and (max-width: 480px) {
+  
   body {
-    width: 105%;
+    width: 98%; 
+    padding: 0 1%; /* Add small padding on both sides */
+  }
+  
+  .about-contents {
+    padding: 0 0.5em !important; /* Reduce left padding */
   }
   
   .about-image {
