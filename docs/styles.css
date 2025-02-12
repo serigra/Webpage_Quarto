@@ -1,6 +1,14 @@
 
 /* ========= Format Body, Title and Subtitles of the Page ====================*/
 
+@font-face {
+  font-family: 'Petrona';
+  src: url('fonts/Petrona-Italic-VariableFont_wght.ttf') format('ttf'),
+       url('fonts/Petrona-VariableFont_wght.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   max-width: 2000px;
   margin: 0 auto;
