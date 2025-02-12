@@ -84,13 +84,13 @@ div.listing img.listing-image {
   }
 
  .title {
-    font-size: 2rem;
+    font-size: 1.8rem;
     line-height: 1.5em !important;
   }
 
 
   .subtitle {
-    padding-left: 3rem;
-    padding-right: 3rem;
+    padding-left: 1.1rem;
+    padding-right: 1.1rem;
   }
 }
