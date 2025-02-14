@@ -12,6 +12,7 @@ I found myself very quickly diving into CSS, HTML, and JavaScript code.
 Since I didn`t know anything about these languages, I figured out most of the things
 by trial & error and by consulting LLMs (ChatGPT, Claude or Perplexity).
 In hindsight, I would probably recommend to my younger self to do a short introduction course, especially on CSS and HTML.
+I like the following overview given by Sam Csik: https://samanthacsik.github.io/talks_workshops/2023-08-03-just-enough-css/
 
 Since I still don't know much about these languages, I tried to document 
 as much as possible to avoid getting lost again. 
@@ -77,6 +78,18 @@ the `index.qmd` file in the root directory.
   The files are referenced in the `blog/index.qmd` and in each of the blogs posts `index.qmd` files by 
   `css: "../styles_blog_individual.css"`.
 
+### Responsive Design with CSS Media Queries
+
+To ensure compatibility with smaller screens, all .css files include additional specifications using media queries. 
+For example:
+
+``` 
+@media screen and (max-width: 768px) {
+  /* Styles for screens 768px wide or smaller */
+}
+``` 
+These media queries allow your webpage to adapt its design and layout dynamically based on the size of the user’s screen, providing an optimized experience on devices of all sizes.
+See also notes on Chrome DevTools Device Mode further down.
 
 ### Customized Listing Layout (Publications, Talks)
 
@@ -162,6 +175,17 @@ to suppress the References section at the end of my blog posts (see further down
 first need to identify the exact name of that element. These identifiers, known as [*CSS selectors*](https://www.w3schools.com/css/css_selectors.asp),
 can be found by inspecting the underlying HTML code (right click -> Inspect).
 
+### Chrome DevTools Device Mode
+
+A helpful tool for web development, especially when testing your website on smaller screens, is the [Chrome DevTools device mode](https://developer.chrome.com/docs/devtools/device-mode).
+
+To access it:
+	1.	Click the three dots in the top-right corner of Chrome.
+	2.	Navigate to More Tools → Developer Tools.
+	3.	Click the icon that looks like two overlapping screens (this toggles the device toolbar).
+
+This mode lets you adjust the screen size and see how your webpage design responds to different dimensions. 
+It’s a quick and convenient way to ensure your site is mobile-friendly and responsive.
 
 ### Vertical Spacing
 
