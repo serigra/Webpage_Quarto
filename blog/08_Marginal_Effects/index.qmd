@@ -69,7 +69,9 @@ theme_set(
 
 # data -------------------------------------------------------------------------
 
-data(PimaIndiansDiabetes)
+# PimaIndiansDiabetes2 instead of PimaIndiansDiabetes
+# -> all zero values of glucose, pressure, triceps, insulin and mass have been set to NA
+data(PimaIndiansDiabetes2)
 ```
 :::
 
@@ -77,7 +79,15 @@ data(PimaIndiansDiabetes)
 
 ## Unraveling Curved Relationships: Marginal Effects Between Continuous Variables
 
-When dealing with continuous variables for both predictors and outcomes, marginal effects become a powerful tool for interpretation of non-linear models like quadratic relationships, where raw regression estimates are challenging to interpret. Let's explore this concept using the `PimaIndiansDiabetes` dataset, where we'll examine the relationship between body mass and age. While this model is primarily for illustrative purposes and doesn't seek deeper interpretation, it serves as a nice example of marginal effects in action.
+When dealing with continuous variables for both predictors and outcomes, marginal effects become a powerful tool for interpretation of non-linear models like quadratic relationships, where raw regression estimates are challenging to interpret. Let's explore this concept using a synthetic data set on plant growth and fertilizer. The data follows a natural inverted U-shaped curve that's commonly observed in agriculture: plants respond positively to fertilizer up to an optimal point (around 3 g/m²), after which excess nutrients become toxic and inhibit growth, demonstrating a classic quadratic relationship. 
+
+Data set
+```{r}
+set.seed(123)
+x <- seq(0, 10, length.out = 100)           # Fertilizer amount
+y <- -2*x^2 + 10*x + 5 + rnorm(100, sd = 10)  # Plant growth
+plant_data <- data.frame(fertilizer = x, growth = y)
+```
 
 ::: medium-space
 :::
@@ -90,20 +100,19 @@ First, let's compare a linear and a quadratic model to see which better describe
 ```{r}
 #| code-fold: true
 #| warning: false
-#| fig-width: 6
+#| fig-width: 5.75
 #| fig-height: 4.5
 #| layout: [[80, 20]]
 
 # plot
-ggplot(PimaIndiansDiabetes, aes(x = age, y = mass) ) +
-    geom_point( color = 'black', fill = '#7950f2', alpha = 0.6,  shape = 21, size = 3) +
+ggplot(plant_data, aes(x = fertilizer, y = growth) ) +
+    geom_point(color = 'black', fill = '#7950f2', alpha = 0.6,  shape = 21, size = 3) +
     stat_smooth(method = "lm", formula = y ~ x, linewidth = 1, color = '#1e1e1e') +
-    scale_x_continuous(breaks = seq(20, 90, by=10)) +
     labs(title = 'Linear Model',
-         x = "Age", y = "Body Mass")
+         x = expression(paste("Fertilizer [g/", m^2, ']')), y = "Growth [cm]")
 
 # linear model
-linear_model <- glm(mass ~ age, data = PimaIndiansDiabetes)
+linear_model <- lm(growth ~ fertilizer, data = plant_data)
 summary(linear_model)
 ```
 :::
@@ -117,30 +126,29 @@ summary(linear_model)
 #| layout: [[80, 20]]
 
 # plot
-ggplot(PimaIndiansDiabetes, aes(x = age, y = mass) ) +
+ggplot(plant_data, aes(x = fertilizer, y = growth) ) +
     geom_point(fill = '#7950f2', alpha = 0.5,  shape = 21, size = 3) +
     stat_smooth(method = "lm", formula = y ~ x + I(x^2), linewidth = 1.3, color = '#1e1e1e') +
-    scale_x_continuous(breaks = seq(20, 90, by=10)) +
     labs(title = 'Quadratic Model',
-         x = "Age", y = "Body Mass")
+         x = expression(paste("Fertilizer [g/", m^2, ']')), y = "Growth [cm]")
 
 # quadratic model
-quadratic_model <- glm(mass ~ age +  I(age^2), data = PimaIndiansDiabetes)
+quadratic_model <- lm(growth ~ fertilizer +  I(fertilizer^2), data = plant_data)
 summary(quadratic_model)
 ```
 :::
 
-The quadratic model shows a smaller residual deviance, indicating a better fit to the data. This suggests a more complex relationship between age and body mass: body mass tends to increase with age until around 45 years, after which it begins to decrease again.
+The quadratic model shows a much smaller residual deviance, indicating a better fit to the data, which is not very surprising. This suggests a more complex relationship between fertilizer and plant growth: growth tends to increase with the amount of fertilizer until around 3 g/m², after which it begins to decrease again.
 
 <br><br>
 
 ### Interpreting Quadratic Relationships: The Power of Marginal Effects
 
-Interpreting the coefficients of a quadratic model can be challenging - so we have two coefficients `age` and `I(age^2)`, one negative one positive - but how to interpret them? This is where marginal effects, specifically *Marginal Effects at Representative Values (MER)*, come into play. We can calculate the slope (or tangent) at different ages to better understand the relationship, and these slopes are nothing else than *marginal effects*. Let's calculate the marginal effects at ages 30 and 60 using the `slopes()` function from the `marginaleffects` package:
+Interpreting the coefficients of a quadratic model can be challenging - so we have two coefficients `fertilizer` and `I(fertilizer^2)`, one negative one positive - but how to interpret them? This is where marginal effects, specifically *Marginal Effects at Representative Values (MER)*, come into play. We can calculate the slope (or tangent) at different amounts of fertilizer to better understand the relationship, and these slopes are nothing else than *marginal effects*. Let's calculate the marginal effects at 2 g/m² and 6 g/m² using the `slopes()` function from the `marginaleffects` package:
 
 ::: small-code
 ```{r}
-slopes(quadratic_model, newdata = datagrid(age = c(30, 60))) -> s; s
+slopes(quadratic_model, newdata = datagrid(fertilizer = c(1.5, 6))) -> s; s
 ```
 :::
 
@@ -158,44 +166,45 @@ Now, let's visualize these slopes on the plot from above (inspired by [Andrew He
 #| fig-height: 4.5
 
 
-# y = 16.311932 + 0.866956*x + -0.010569(x^2) 
-b_30 <- s$estimate[1]
-x_30 <- 30
-y_30 <- 16.311932 + 0.866956*30 -0.010569*(30^2) 
-intercept_30 <- b_30 * (-x_30) + y_30
+# y = 6.6991 + 9.0133*x + -1.8765(x^2) 
+b_15 <- s$estimate[1]
+x_15 <- 1.5
+y_15 <- 6.6991 + 9.0133*1.5 -1.8765*(1.5^2) 
+intercept_15 <- b_15 * (-x_15) + y_15
 
-b_60 <- s$estimate[2]
-x_60 <- 60
-y_60 <- 16.311932 + 0.866956*60 -0.010569*(60^2) 
-intercept_60 <- b_60 * (-x_60) + y_60
+b_6 <- s$estimate[2]
+x_6 <- 6
+y_6 <- 6.6991 + 9.0133*6 -1.8765*(6^2) 
+intercept_6 <- b_6 * (-x_6) + y_6
 
-d.annot <- data.frame(x = c(x_30, x_60), 
-                      y = c(y_30, y_60), 
-                      b = c(b_30, b_60),
-                      i = c(intercept_30, intercept_60)
+d.annot <- data.frame(x = c(x_15, x_6), 
+                      y = c(y_15, y_6), 
+                      b = c(b_15, b_6),
+                      i = c(intercept_15, intercept_6)
                       ) %>% 
   mutate(label = paste0('dy/dx = ' , round(b, 2)))
 
-ggplot(PimaIndiansDiabetes, aes(x = age, y = mass) ) +
+ggplot(plant_data, aes(x = fertilizer, y = growth) ) +
     geom_point(fill = '#7950f2', alpha = 0.3,  shape = 21, size = 3) +
     stat_smooth(method = "lm", formula = y ~ x + I(x^2), linewidth = 1, color = '#1e1e1e') +
     geom_abline(data = d.annot, aes(slope = b, intercept = i),
                 linewidth = 1.1, color = 'darkorange') +  
-    geom_richtext(data = d.annot, aes(x = x, y = y, label = label), color = 'darkorange', nudge_y = 4) + 
+    geom_richtext(data = d.annot, aes(x = x, y = y, label = label), color = 'darkorange', nudge_y = 7) + 
     geom_point(data = d.annot, aes(x = x, y = y), fill = 'darkorange', shape = 21, size = 4) +
-    scale_x_continuous(breaks = seq(20, 90, by=10)) +
+    #scale_x_continuous(breaks = seq(0, 90, by=10)) +
+    #scale_y_continuous(limits = c(0,70)) + 
     labs(title = 'Marginal Effects at Representative Values (MER)',
-         x = "Age", y = "Body Mass")
+         x = expression(paste("Fertilizer [g/", m^2, ']')), y = "Grwoth [cm]")
 ```
 :::
 
-This visualization helps to understand how the relationship between age and body mass changes over time. The slope is positive at age 30 but negative at age 60, indicating a shift in the relationship.
+This visualization helps to understand how the relationship between the amount of fertilizer and growth changes. The slope is positive at the amount of 1.5 g/m² but negative at 6 g/m², indicating a clear shift in the relationship.
 
 <br><br>
 
 ### Comprehensive View: Marginal Effects Across All Ages
 
-To get a complete picture, we can calculate and plot the marginal effects (slopes) for all ages using the `plot_slopes()` function:
+To get a complete picture, we can calculate and plot the marginal effects (slopes) for all amounts of fertilizer using the `plot_slopes()` function:
 
 ::: small-code
 ```{r}
@@ -205,13 +214,12 @@ To get a complete picture, we can calculate and plot the marginal effects (slope
 #| fig-width: 6
 #| fig-height: 4
 
-plot_slopes(quadratic_model, variables = "age", condition = "age") + 
+plot_slopes(quadratic_model, variables = "fertilizer", condition = "fertilizer") + 
   geom_hline(yintercept = 0, color = 'darkgrey', linetype = 'dotted', lwd = 1) +
+  geom_richtext(data = d.annot, aes(x = x, y = b, label = label), color = 'darkorange', nudge_y = 3.5) +
   geom_point(data = d.annot, aes(x = x, y = b), fill = 'darkorange', shape = 21, size = 4) +
-  geom_richtext(data = d.annot, aes(x = x, y = b, label = label), color = 'darkorange', nudge_y = 0.15) +
-  scale_x_continuous(breaks = seq(20, 90, by=10)) +
-  labs(title = 'Marginal Effects Across All Ages',
-       y = 'Marginal Effect (dy/dx)', x = 'Age')
+  labs(title = 'Marginal Effects Across All Amounts of Fertilizer',
+       y = 'Marginal Effect (dy/dx)', x = expression(paste("Fertilizer [g/", m^2, ']')))
 ```
 :::
 
@@ -221,10 +229,11 @@ plot_slopes(quadratic_model, variables = "age", condition = "age") +
 
 The analysis reveals that:
 
--   At age 30, a one-year increase in age is associated with a 0.2 unit increase in body mass.
--   At age 60, a one-year increase in age is associated with a 0.4 unit decrease in body mass.
+-   **At 1.5 g/m² of fertilizer**: A one-unit increase in fertilizer (from 1.5 to 2.5 g/m²) is associated with an estimated 3.38 cm increase in plant growth.
 
-This shift from a positive to a negative relationship as age increases illustrates the non-linear nature of the association between age and body mass in the given dataset.
+-   **At 6 g/m² of fertilizer**: A one-unit increase in fertilizer (from 6 to 7 g/m²) is associated with an estimated 13.5 cm decrease in plant growth.
+
+This shift from a positive to a negative relationship when increasing the amount of fertilizer illustrates that at lower levels (before the optimum), additional fertilizer promotes growth, and at higher levels (after the optimum), additional fertilizer reduces growth due to toxicity.
 
 <br><br>
 
@@ -236,7 +245,7 @@ We've just looked at the concept of *Marginal Effects at Representative Values (
 :::: {.column width="55%"}
 <br><br> **Marginal Effect at Representative Values (MER)**:
 
-This represents the dy/dx at very specific, representative values of x (as for the age of 30 and 60 above).
+This represents the dy/dx at very specific, representative values of x (as for the amount of fertilizer of 2 g/m2 and 6 g/m2 above).
 
 ::: tiny-code
 ```{r}
@@ -256,7 +265,7 @@ slopes(quadratic_model, newdata = datagrid(age = c(30, 60)))
 
 **Marginal Effect at the Mean (MEM)**:
 
-This represents the dy/dx at the mean value of x (age in the example above).
+This represents the dy/dx at the mean value of x (amount of fertilizer in the example above).
 
 ::: tiny-code
 ```{r}
@@ -294,7 +303,7 @@ avg_slopes(quadratic_model)
 
 Logistic regression is a powerful and often used tool. The raw parameters represent log odds ratios, expressed as $log(\frac{p}{1-p})$. Exponentiating these coefficients results in odds ratios $\frac{p}{1-p}$, which is a common measure used in scientific studies. But what do these really mean in practical terms? The interpretation can be tricky, and it's easy to conflate odds with probabilities. While it would be convenient if they were the same, they're not – and this is where marginal effects shine.
 
-Let's explore this concept using the `PimaIndiansDiabetes` dataset again. We'll investigate how age and above-average body mass (binary coded) relate to the risk of diabetes. Again, this example is simplified for illustration, and is simply used to provide insights into marginal effects in case of a binary coded outcome variable.
+Let's explore this concept using the `PimaIndiansDiabetes2` dataset again. We'll investigate how age and above-average body mass (binary coded) relate to the risk of diabetes. Again, this example is simplified for illustration, and is simply used to provide insights into marginal effects in case of a binary coded outcome variable.
 
 ::: small-space
 :::
@@ -303,7 +312,8 @@ First, let's prepare our data:
 
 ```{r}
 # add binary predictor variable
-PimaIndiansDiabetes %<>% 
+PimaIndiansDiabetes2 %<>% 
+  filter(!is.na(mass)) %>% 
   mutate(diab = ifelse(diabetes == 'pos', 1, 0),
          mass_fg = f_case_when(mass <= mean(mass) ~ 'below-avg',
                                mass > mean(mass) ~ 'above-avg'))
@@ -323,7 +333,7 @@ Lets build the model:
 #| layout: [[80,20]]
 
 # plot: age
-p1 <- ggplot(PimaIndiansDiabetes, aes(x = age, y = diab)) + 
+p1 <- ggplot(PimaIndiansDiabetes2, aes(x = age, y = diab)) + 
   geom_point(fill = '#7950f2', alpha = 0.3,  shape = 21, size = 2) +
   stat_smooth(method="glm", color="black", se=TRUE, method.args = list(family=binomial), linewidth = 1) +
   labs(title = 'Logistic Regression - Age',
@@ -332,7 +342,7 @@ p1 <- ggplot(PimaIndiansDiabetes, aes(x = age, y = diab)) +
         axis.title = element_text(size = 11))
 
 # plot: body mass binary coded
-p2 <- ggplot(PimaIndiansDiabetes, aes(x = mass_fg, y = diab)) +
+p2 <- ggplot(PimaIndiansDiabetes2, aes(x = mass_fg, y = diab)) +
   geom_jitter(width = 0.3, height = 0.05, fill = '#7950f2', alpha = 0.3,  shape = 21, size = 2) +
   stat_summary(fun = mean, geom = "point", size = 3.5, color = "black") +
   geom_smooth(method = "glm", method.args = list(family = "binomial"), se = FALSE) +
@@ -344,7 +354,7 @@ p1+p2+plot_annotation(theme = theme(plot.background = element_rect(fill ="#f8faf
 
 
 # logistic regression
-logit_model <- glm(diabetes ~ age + mass_fg, data = PimaIndiansDiabetes, family = 'binomial')
+logit_model <- glm(diabetes ~ age + mass_fg, data = PimaIndiansDiabetes2, family = 'binomial')
 summary(logit_model)
 ```
 :::

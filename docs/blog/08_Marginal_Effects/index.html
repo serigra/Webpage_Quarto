@@ -253,7 +253,14 @@ The term “marginal effects” carries slightly different meanings across diffe
 <p><br><br></p>
 <section id="unraveling-curved-relationships-marginal-effects-between-continuous-variables" class="level2">
 <h2 class="anchored" data-anchor-id="unraveling-curved-relationships-marginal-effects-between-continuous-variables">Unraveling Curved Relationships: Marginal Effects Between Continuous Variables</h2>
-<p>When dealing with continuous variables for both predictors and outcomes, marginal effects become a powerful tool for interpretation of non-linear models like quadratic relationships, where raw regression estimates are challenging to interpret. Let’s explore this concept using the <code>PimaIndiansDiabetes</code> dataset, where we’ll examine the relationship between body mass and age. While this model is primarily for illustrative purposes and doesn’t seek deeper interpretation, it serves as a nice example of marginal effects in action.</p>
+<p>When dealing with continuous variables for both predictors and outcomes, marginal effects become a powerful tool for interpretation of non-linear models like quadratic relationships, where raw regression estimates are challenging to interpret. Let’s explore this concept using a synthetic data set on plant growth and fertilizer. The data follows a natural inverted U-shaped curve that’s commonly observed in agriculture: plants respond positively to fertilizer up to an optimal point (around 3 g/m²), after which excess nutrients become toxic and inhibit growth, demonstrating a classic quadratic relationship.</p>
+<p>Data set</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="at">length.out =</span> <span class="dv">100</span>)           <span class="co"># Fertilizer amount</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">10</span><span class="sc">*</span>x <span class="sc">+</span> <span class="dv">5</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">10</span>)  <span class="co"># Plant growth</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>plant_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">fertilizer =</span> x, <span class="at">growth =</span> y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div class="medium-space">
 
 </div>
@@ -263,41 +270,40 @@ The term “marginal effects” carries slightly different meanings across diffe
 <div class="tiny-code">
 <details class="code-fold">
 <summary>R Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(PimaIndiansDiabetes, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> mass) ) <span class="sc">+</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>( <span class="at">color =</span> <span class="st">'black'</span>, <span class="at">fill =</span> <span class="st">'#7950f2'</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>,  <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">formula =</span> y <span class="sc">~</span> x, <span class="at">linewidth =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">'#1e1e1e'</span>) <span class="sc">+</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">90</span>, <span class="at">by=</span><span class="dv">10</span>)) <span class="sc">+</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Linear Model'</span>,</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Age"</span>, <span class="at">y =</span> <span class="st">"Body Mass"</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># linear model</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>linear_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(mass <span class="sc">~</span> age, <span class="at">data =</span> PimaIndiansDiabetes)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(linear_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plant_data, <span class="fu">aes</span>(<span class="at">x =</span> fertilizer, <span class="at">y =</span> growth) ) <span class="sc">+</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">'black'</span>, <span class="at">fill =</span> <span class="st">'#7950f2'</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>,  <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">formula =</span> y <span class="sc">~</span> x, <span class="at">linewidth =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">'#1e1e1e'</span>) <span class="sc">+</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Linear Model'</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Fertilizer [g/"</span>, m<span class="sc">^</span><span class="dv">2</span>, <span class="st">']'</span>)), <span class="at">y =</span> <span class="st">"Growth [cm]"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># linear model</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>linear_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(growth <span class="sc">~</span> fertilizer, <span class="at">data =</span> plant_data)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(linear_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell quarto-layout-panel" data-layout="[[80,20]]">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 80.0%;justify-content: center;">
-<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="576"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="552"></p>
 </div>
 <div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 20.0%;justify-content: flex-start;">
 <pre><code>
 Call:
-glm(formula = mass ~ age, data = PimaIndiansDiabetes)
+lm(formula = growth ~ fertilizer, data = plant_data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-45.408 -10.298  -1.008  13.436  37.090 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) 31.18493    0.85347  36.539   &lt;2e-16 ***
-age          0.02430    0.02421   1.004    0.316    
+(Intercept)  37.6577     3.3830   11.13   &lt;2e-16 ***
+fertilizer   -9.7514     0.5845  -16.68   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-(Dispersion parameter for gaussian family taken to be 62.15938)
-
-    Null deviance: 47677  on 767  degrees of freedom
-Residual deviance: 47614  on 766  degrees of freedom
-AIC: 5355.1
-
-Number of Fisher Scoring iterations: 2</code></pre>
+Residual standard error: 17.04 on 98 degrees of freedom
+Multiple R-squared:  0.7396,    Adjusted R-squared:  0.7369 
+F-statistic: 278.4 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </div>
@@ -305,63 +311,62 @@ Number of Fisher Scoring iterations: 2</code></pre>
 <div class="tiny-code">
 <details class="code-fold">
 <summary>R Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(PimaIndiansDiabetes, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> mass) ) <span class="sc">+</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">fill =</span> <span class="st">'#7950f2'</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>,  <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">formula =</span> y <span class="sc">~</span> x <span class="sc">+</span> <span class="fu">I</span>(x<span class="sc">^</span><span class="dv">2</span>), <span class="at">linewidth =</span> <span class="fl">1.3</span>, <span class="at">color =</span> <span class="st">'#1e1e1e'</span>) <span class="sc">+</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">90</span>, <span class="at">by=</span><span class="dv">10</span>)) <span class="sc">+</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Quadratic Model'</span>,</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Age"</span>, <span class="at">y =</span> <span class="st">"Body Mass"</span>)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># quadratic model</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>quadratic_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(mass <span class="sc">~</span> age <span class="sc">+</span>  <span class="fu">I</span>(age<span class="sc">^</span><span class="dv">2</span>), <span class="at">data =</span> PimaIndiansDiabetes)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(quadratic_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plant_data, <span class="fu">aes</span>(<span class="at">x =</span> fertilizer, <span class="at">y =</span> growth) ) <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">fill =</span> <span class="st">'#7950f2'</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>,  <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">formula =</span> y <span class="sc">~</span> x <span class="sc">+</span> <span class="fu">I</span>(x<span class="sc">^</span><span class="dv">2</span>), <span class="at">linewidth =</span> <span class="fl">1.3</span>, <span class="at">color =</span> <span class="st">'#1e1e1e'</span>) <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Quadratic Model'</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Fertilizer [g/"</span>, m<span class="sc">^</span><span class="dv">2</span>, <span class="st">']'</span>)), <span class="at">y =</span> <span class="st">"Growth [cm]"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># quadratic model</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>quadratic_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(growth <span class="sc">~</span> fertilizer <span class="sc">+</span>  <span class="fu">I</span>(fertilizer<span class="sc">^</span><span class="dv">2</span>), <span class="at">data =</span> plant_data)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(quadratic_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell quarto-layout-panel" data-layout="[[80,20]]">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 80.0%;justify-content: center;">
-<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="576"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="576"></p>
 </div>
 <div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 20.0%;justify-content: flex-start;">
 <pre><code>
 Call:
-glm(formula = mass ~ age + I(age^2), data = PimaIndiansDiabetes)
+lm(formula = growth ~ fertilizer + I(fertilizer^2), data = plant_data)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-24.0680  -5.9884  -0.2665   6.7743  21.9457 
 
 Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) 16.311932   2.567317   6.354 3.61e-10 ***
-age          0.866956   0.139589   6.211 8.65e-10 ***
-I(age^2)    -0.010569   0.001725  -6.125 1.45e-09 ***
+                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)       6.6991     2.6889   2.491   0.0144 *  
+fertilizer        9.0133     1.2427   7.253    1e-10 ***
+I(fertilizer^2)  -1.8765     0.1203 -15.604   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-(Dispersion parameter for gaussian family taken to be 59.33079)
-
-    Null deviance: 47677  on 767  degrees of freedom
-Residual deviance: 45388  on 765  degrees of freedom
-AIC: 5320.3
-
-Number of Fisher Scoring iterations: 2</code></pre>
+Residual standard error: 9.143 on 97 degrees of freedom
+Multiple R-squared:  0.9258,    Adjusted R-squared:  0.9243 
+F-statistic: 605.3 on 2 and 97 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </div>
 </div>
-<p>The quadratic model shows a smaller residual deviance, indicating a better fit to the data. This suggests a more complex relationship between age and body mass: body mass tends to increase with age until around 45 years, after which it begins to decrease again.</p>
+<p>The quadratic model shows a much smaller residual deviance, indicating a better fit to the data, which is not very surprising. This suggests a more complex relationship between fertilizer and plant growth: growth tends to increase with the amount of fertilizer until around 3 g/m², after which it begins to decrease again.</p>
 <p><br><br></p>
 </section>
 <section id="interpreting-quadratic-relationships-the-power-of-marginal-effects" class="level3">
 <h3 class="anchored" data-anchor-id="interpreting-quadratic-relationships-the-power-of-marginal-effects">Interpreting Quadratic Relationships: The Power of Marginal Effects</h3>
-<p>Interpreting the coefficients of a quadratic model can be challenging - so we have two coefficients <code>age</code> and <code>I(age^2)</code>, one negative one positive - but how to interpret them? This is where marginal effects, specifically <em>Marginal Effects at Representative Values (MER)</em>, come into play. We can calculate the slope (or tangent) at different ages to better understand the relationship, and these slopes are nothing else than <em>marginal effects</em>. Let’s calculate the marginal effects at ages 30 and 60 using the <code>slopes()</code> function from the <code>marginaleffects</code> package:</p>
+<p>Interpreting the coefficients of a quadratic model can be challenging - so we have two coefficients <code>fertilizer</code> and <code>I(fertilizer^2)</code>, one negative one positive - but how to interpret them? This is where marginal effects, specifically <em>Marginal Effects at Representative Values (MER)</em>, come into play. We can calculate the slope (or tangent) at different amounts of fertilizer to better understand the relationship, and these slopes are nothing else than <em>marginal effects</em>. Let’s calculate the marginal effects at 2 g/m² and 6 g/m² using the <code>slopes()</code> function from the <code>marginaleffects</code> package:</p>
 <div class="small-code">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">slopes</span>(quadratic_model, <span class="at">newdata =</span> <span class="fu">datagrid</span>(<span class="at">age =</span> <span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">60</span>))) <span class="ot">-&gt;</span> s; s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">slopes</span>(quadratic_model, <span class="at">newdata =</span> <span class="fu">datagrid</span>(<span class="at">fertilizer =</span> <span class="fu">c</span>(<span class="fl">1.5</span>, <span class="dv">6</span>))) <span class="ot">-&gt;</span> s; s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
- Term age Estimate Std. Error     z Pr(&gt;|z|)    S  2.5 % 97.5 %
-  age  30    0.233     0.0414  5.62   &lt;0.001 25.6  0.152  0.314
-  age  60   -0.401     0.0734 -5.47   &lt;0.001 24.4 -0.545 -0.257
+       Term fertilizer Estimate Std. Error      z Pr(&gt;|z|)     S  2.5 % 97.5 %
+ fertilizer        1.5     3.38      0.898   3.77   &lt;0.001  12.6   1.62   5.14
+ fertilizer        6.0   -13.50      0.395 -34.17   &lt;0.001 847.9 -14.28 -12.73
 
-Columns: rowid, term, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, age, predicted_lo, predicted_hi, predicted, mass 
-Type:  response </code></pre>
+Type:  response 
+Columns: rowid, term, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, fertilizer, predicted_lo, predicted_hi, predicted, growth </code></pre>
 </div>
 </div>
 </div>
@@ -373,66 +378,66 @@ Type:  response </code></pre>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>R Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># y = 16.311932 + 0.866956*x + -0.010569(x^2) </span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>b_30 <span class="ot">&lt;-</span> s<span class="sc">$</span>estimate[<span class="dv">1</span>]</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>x_30 <span class="ot">&lt;-</span> <span class="dv">30</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>y_30 <span class="ot">&lt;-</span> <span class="fl">16.311932</span> <span class="sc">+</span> <span class="fl">0.866956</span><span class="sc">*</span><span class="dv">30</span> <span class="sc">-</span><span class="fl">0.010569</span><span class="sc">*</span>(<span class="dv">30</span><span class="sc">^</span><span class="dv">2</span>) </span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>intercept_30 <span class="ot">&lt;-</span> b_30 <span class="sc">*</span> (<span class="sc">-</span>x_30) <span class="sc">+</span> y_30</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>b_60 <span class="ot">&lt;-</span> s<span class="sc">$</span>estimate[<span class="dv">2</span>]</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>x_60 <span class="ot">&lt;-</span> <span class="dv">60</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>y_60 <span class="ot">&lt;-</span> <span class="fl">16.311932</span> <span class="sc">+</span> <span class="fl">0.866956</span><span class="sc">*</span><span class="dv">60</span> <span class="sc">-</span><span class="fl">0.010569</span><span class="sc">*</span>(<span class="dv">60</span><span class="sc">^</span><span class="dv">2</span>) </span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>intercept_60 <span class="ot">&lt;-</span> b_60 <span class="sc">*</span> (<span class="sc">-</span>x_60) <span class="sc">+</span> y_60</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>d.annot <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">c</span>(x_30, x_60), </span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>                      <span class="at">y =</span> <span class="fu">c</span>(y_30, y_60), </span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>                      <span class="at">b =</span> <span class="fu">c</span>(b_30, b_60),</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>                      <span class="at">i =</span> <span class="fu">c</span>(intercept_30, intercept_60)</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>                      ) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">'dy/dx = '</span> , <span class="fu">round</span>(b, <span class="dv">2</span>)))</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(PimaIndiansDiabetes, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> mass) ) <span class="sc">+</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">fill =</span> <span class="st">'#7950f2'</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>,  <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">formula =</span> y <span class="sc">~</span> x <span class="sc">+</span> <span class="fu">I</span>(x<span class="sc">^</span><span class="dv">2</span>), <span class="at">linewidth =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">'#1e1e1e'</span>) <span class="sc">+</span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_abline</span>(<span class="at">data =</span> d.annot, <span class="fu">aes</span>(<span class="at">slope =</span> b, <span class="at">intercept =</span> i),</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>                <span class="at">linewidth =</span> <span class="fl">1.1</span>, <span class="at">color =</span> <span class="st">'darkorange'</span>) <span class="sc">+</span>  </span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_richtext</span>(<span class="at">data =</span> d.annot, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">label =</span> label), <span class="at">color =</span> <span class="st">'darkorange'</span>, <span class="at">nudge_y =</span> <span class="dv">4</span>) <span class="sc">+</span> </span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">data =</span> d.annot, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y), <span class="at">fill =</span> <span class="st">'darkorange'</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">90</span>, <span class="at">by=</span><span class="dv">10</span>)) <span class="sc">+</span></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Marginal Effects at Representative Values (MER)'</span>,</span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Age"</span>, <span class="at">y =</span> <span class="st">"Body Mass"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<p>This visualization helps to understand how the relationship between age and body mass changes over time. The slope is positive at age 30 but negative at age 60, indicating a shift in the relationship.</p>
-<p><br><br></p>
-</section>
-<section id="comprehensive-view-marginal-effects-across-all-ages" class="level3">
-<h3 class="anchored" data-anchor-id="comprehensive-view-marginal-effects-across-all-ages">Comprehensive View: Marginal Effects Across All Ages</h3>
-<p>To get a complete picture, we can calculate and plot the marginal effects (slopes) for all ages using the <code>plot_slopes()</code> function:</p>
-<div class="small-code">
-<div class="cell" data-layout-align="center">
-<details class="code-fold">
-<summary>R Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_slopes</span>(quadratic_model, <span class="at">variables =</span> <span class="st">"age"</span>, <span class="at">condition =</span> <span class="st">"age"</span>) <span class="sc">+</span> </span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">'darkgrey'</span>, <span class="at">linetype =</span> <span class="st">'dotted'</span>, <span class="at">lwd =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> d.annot, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> b), <span class="at">fill =</span> <span class="st">'darkorange'</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_richtext</span>(<span class="at">data =</span> d.annot, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> b, <span class="at">label =</span> label), <span class="at">color =</span> <span class="st">'darkorange'</span>, <span class="at">nudge_y =</span> <span class="fl">0.15</span>) <span class="sc">+</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">90</span>, <span class="at">by=</span><span class="dv">10</span>)) <span class="sc">+</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Marginal Effects Across All Ages'</span>,</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">'Marginal Effect (dy/dx)'</span>, <span class="at">x =</span> <span class="st">'Age'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># y = 6.6991 + 9.0133*x + -1.8765(x^2) </span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>b_15 <span class="ot">&lt;-</span> s<span class="sc">$</span>estimate[<span class="dv">1</span>]</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>x_15 <span class="ot">&lt;-</span> <span class="fl">1.5</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>y_15 <span class="ot">&lt;-</span> <span class="fl">6.6991</span> <span class="sc">+</span> <span class="fl">9.0133</span><span class="sc">*</span><span class="fl">1.5</span> <span class="sc">-</span><span class="fl">1.8765</span><span class="sc">*</span>(<span class="fl">1.5</span><span class="sc">^</span><span class="dv">2</span>) </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>intercept_15 <span class="ot">&lt;-</span> b_15 <span class="sc">*</span> (<span class="sc">-</span>x_15) <span class="sc">+</span> y_15</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>b_6 <span class="ot">&lt;-</span> s<span class="sc">$</span>estimate[<span class="dv">2</span>]</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>x_6 <span class="ot">&lt;-</span> <span class="dv">6</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>y_6 <span class="ot">&lt;-</span> <span class="fl">6.6991</span> <span class="sc">+</span> <span class="fl">9.0133</span><span class="sc">*</span><span class="dv">6</span> <span class="sc">-</span><span class="fl">1.8765</span><span class="sc">*</span>(<span class="dv">6</span><span class="sc">^</span><span class="dv">2</span>) </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>intercept_6 <span class="ot">&lt;-</span> b_6 <span class="sc">*</span> (<span class="sc">-</span>x_6) <span class="sc">+</span> y_6</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>d.annot <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">c</span>(x_15, x_6), </span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>                      <span class="at">y =</span> <span class="fu">c</span>(y_15, y_6), </span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>                      <span class="at">b =</span> <span class="fu">c</span>(b_15, b_6),</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>                      <span class="at">i =</span> <span class="fu">c</span>(intercept_15, intercept_6)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>                      ) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">'dy/dx = '</span> , <span class="fu">round</span>(b, <span class="dv">2</span>)))</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plant_data, <span class="fu">aes</span>(<span class="at">x =</span> fertilizer, <span class="at">y =</span> growth) ) <span class="sc">+</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">fill =</span> <span class="st">'#7950f2'</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>,  <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">formula =</span> y <span class="sc">~</span> x <span class="sc">+</span> <span class="fu">I</span>(x<span class="sc">^</span><span class="dv">2</span>), <span class="at">linewidth =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">'#1e1e1e'</span>) <span class="sc">+</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_abline</span>(<span class="at">data =</span> d.annot, <span class="fu">aes</span>(<span class="at">slope =</span> b, <span class="at">intercept =</span> i),</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>                <span class="at">linewidth =</span> <span class="fl">1.1</span>, <span class="at">color =</span> <span class="st">'darkorange'</span>) <span class="sc">+</span>  </span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_richtext</span>(<span class="at">data =</span> d.annot, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">label =</span> label), <span class="at">color =</span> <span class="st">'darkorange'</span>, <span class="at">nudge_y =</span> <span class="dv">7</span>) <span class="sc">+</span> </span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">data =</span> d.annot, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y), <span class="at">fill =</span> <span class="st">'darkorange'</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">#scale_x_continuous(breaks = seq(0, 90, by=10)) +</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    <span class="co">#scale_y_continuous(limits = c(0,70)) + </span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Marginal Effects at Representative Values (MER)'</span>,</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Fertilizer [g/"</span>, m<span class="sc">^</span><span class="dv">2</span>, <span class="st">']'</span>)), <span class="at">y =</span> <span class="st">"Grwoth [cm]"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>This visualization helps to understand how the relationship between the amount of fertilizer and growth changes. The slope is positive at the amount of 1.5 g/m² but negative at 6 g/m², indicating a clear shift in the relationship.</p>
+<p><br><br></p>
+</section>
+<section id="comprehensive-view-marginal-effects-across-all-ages" class="level3">
+<h3 class="anchored" data-anchor-id="comprehensive-view-marginal-effects-across-all-ages">Comprehensive View: Marginal Effects Across All Ages</h3>
+<p>To get a complete picture, we can calculate and plot the marginal effects (slopes) for all amounts of fertilizer using the <code>plot_slopes()</code> function:</p>
+<div class="small-code">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>R Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_slopes</span>(quadratic_model, <span class="at">variables =</span> <span class="st">"fertilizer"</span>, <span class="at">condition =</span> <span class="st">"fertilizer"</span>) <span class="sc">+</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">'darkgrey'</span>, <span class="at">linetype =</span> <span class="st">'dotted'</span>, <span class="at">lwd =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_richtext</span>(<span class="at">data =</span> d.annot, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> b, <span class="at">label =</span> label), <span class="at">color =</span> <span class="st">'darkorange'</span>, <span class="at">nudge_y =</span> <span class="fl">3.5</span>) <span class="sc">+</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> d.annot, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> b), <span class="at">fill =</span> <span class="st">'darkorange'</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Marginal Effects Across All Amounts of Fertilizer'</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">'Marginal Effect (dy/dx)'</span>, <span class="at">x =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Fertilizer [g/"</span>, m<span class="sc">^</span><span class="dv">2</span>, <span class="st">']'</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
 </figure>
 </div>
 </div>
@@ -444,10 +449,10 @@ Type:  response </code></pre>
 <h3 class="anchored" data-anchor-id="interpretation">Interpretation</h3>
 <p>The analysis reveals that:</p>
 <ul>
-<li>At age 30, a one-year increase in age is associated with a 0.2 unit increase in body mass.</li>
-<li>At age 60, a one-year increase in age is associated with a 0.4 unit decrease in body mass.</li>
+<li><p><strong>At 1.5 g/m² of fertilizer</strong>: A one-unit increase in fertilizer (from 1.5 to 2.5 g/m²) is associated with an estimated 3.38 cm increase in plant growth.</p></li>
+<li><p><strong>At 6 g/m² of fertilizer</strong>: A one-unit increase in fertilizer (from 6 to 7 g/m²) is associated with an estimated 13.5 cm decrease in plant growth.</p></li>
 </ul>
-<p>This shift from a positive to a negative relationship as age increases illustrates the non-linear nature of the association between age and body mass in the given dataset.</p>
+<p>This shift from a positive to a negative relationship when increasing the amount of fertilizer illustrates that at lower levels (before the optimum), additional fertilizer promotes growth, and at higher levels (after the optimum), additional fertilizer reduces growth due to toxicity.</p>
 <p><br><br></p>
 </section>
 <section id="beyond-mer-exploring-mem-and-ame" class="level3">
@@ -456,18 +461,22 @@ Type:  response </code></pre>
 <div class="columns">
 <div class="column" style="width:55%;">
 <p><br><br> <strong>Marginal Effect at Representative Values (MER)</strong>:</p>
-<p>This represents the dy/dx at very specific, representative values of x (as for the age of 30 and 60 above).</p>
+<p>This represents the dy/dx at very specific, representative values of x (as for the amount of fertilizer of 2 g/m2 and 6 g/m2 above).</p>
 <div class="tiny-code">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">slopes</span>(quadratic_model, <span class="at">newdata =</span> <span class="fu">datagrid</span>(<span class="at">age =</span> <span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">60</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">slopes</span>(quadratic_model, <span class="at">newdata =</span> <span class="fu">datagrid</span>(<span class="at">age =</span> <span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">60</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Some of the variable names are missing from the model data: age</code></pre>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
- Term age Estimate Std. Error     z Pr(&gt;|z|)    S  2.5 % 97.5 %
-  age  30    0.233     0.0414  5.62   &lt;0.001 25.6  0.152  0.314
-  age  60   -0.401     0.0734 -5.47   &lt;0.001 24.4 -0.545 -0.257
+ age Estimate Std. Error     z Pr(&gt;|z|)     S 2.5 % 97.5 %
+  30    -9.75      0.314 -31.1   &lt;0.001 702.9 -10.4  -9.14
+  60    -9.75      0.314 -31.1   &lt;0.001 702.9 -10.4  -9.14
 
-Columns: rowid, term, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, age, predicted_lo, predicted_hi, predicted, mass 
-Type:  response </code></pre>
+Term: fertilizer
+Type:  response 
+Columns: rowid, term, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, age, predicted_lo, predicted_hi, predicted, fertilizer, growth </code></pre>
 </div>
 </div>
 </div>
@@ -479,17 +488,18 @@ Type:  response </code></pre>
 <div class="column" style="width:55%;">
 <p><br><br></p>
 <p><strong>Marginal Effect at the Mean (MEM)</strong>:</p>
-<p>This represents the dy/dx at the mean value of x (age in the example above).</p>
+<p>This represents the dy/dx at the mean value of x (amount of fertilizer in the example above).</p>
 <div class="tiny-code">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">slopes</span>(quadratic_model, <span class="at">newdata =</span> <span class="st">"mean"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">slopes</span>(quadratic_model, <span class="at">newdata =</span> <span class="st">"mean"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
- Term Estimate Std. Error    z Pr(&gt;|z|)    S  2.5 % 97.5 %
-  age    0.164     0.0329 4.99   &lt;0.001 20.7 0.0998  0.229
+ Estimate Std. Error     z Pr(&gt;|z|)     S 2.5 % 97.5 %
+    -9.75      0.314 -31.1   &lt;0.001 702.9 -10.4  -9.14
 
-Columns: rowid, term, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, predicted_lo, predicted_hi, predicted, age, mass 
-Type:  response </code></pre>
+Term: fertilizer
+Type:  response 
+Columns: rowid, term, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, predicted_lo, predicted_hi, predicted, fertilizer, growth </code></pre>
 </div>
 </div>
 </div>
@@ -503,14 +513,16 @@ Type:  response </code></pre>
 <p>This is the mean of all observation-specific marginal effects. It’s calculated by determining dy/dx at each value of x and then taking the average. Based on the example above, this might not be very helpful though.</p>
 <div class="tiny-code">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">avg_slopes</span>(quadratic_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">avg_slopes</span>(quadratic_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
- Term    Contrast Estimate Std. Error z Pr(&gt;|z|)    S  2.5 % 97.5 %
-  age mean(dY/dX)    0.164     0.0329 5   &lt;0.001 20.7 0.0999  0.229
+ Estimate Std. Error     z Pr(&gt;|z|)     S 2.5 % 97.5 %
+    -9.75      0.314 -31.1   &lt;0.001 702.9 -10.4  -9.14
 
-Columns: term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, predicted_lo, predicted_hi, predicted 
-Type:  response </code></pre>
+Term: fertilizer
+Type:  response 
+Comparison: mean(dY/dX)
+Columns: term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, predicted_lo, predicted_hi, predicted </code></pre>
 </div>
 </div>
 </div>
@@ -524,17 +536,18 @@ Type:  response </code></pre>
 <section id="unravelling-logistic-regression-and-marginal-effects" class="level2">
 <h2 class="anchored" data-anchor-id="unravelling-logistic-regression-and-marginal-effects">Unravelling Logistic Regression and Marginal Effects</h2>
 <p>Logistic regression is a powerful and often used tool. The raw parameters represent log odds ratios, expressed as <span class="math inline">\(log(\frac{p}{1-p})\)</span>. Exponentiating these coefficients results in odds ratios <span class="math inline">\(\frac{p}{1-p}\)</span>, which is a common measure used in scientific studies. But what do these really mean in practical terms? The interpretation can be tricky, and it’s easy to conflate odds with probabilities. While it would be convenient if they were the same, they’re not – and this is where marginal effects shine.</p>
-<p>Let’s explore this concept using the <code>PimaIndiansDiabetes</code> dataset again. We’ll investigate how age and above-average body mass (binary coded) relate to the risk of diabetes. Again, this example is simplified for illustration, and is simply used to provide insights into marginal effects in case of a binary coded outcome variable.</p>
+<p>Let’s explore this concept using the <code>PimaIndiansDiabetes2</code> dataset again. We’ll investigate how age and above-average body mass (binary coded) relate to the risk of diabetes. Again, this example is simplified for illustration, and is simply used to provide insights into marginal effects in case of a binary coded outcome variable.</p>
 <div class="small-space">
 
 </div>
 <p>First, let’s prepare our data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add binary predictor variable</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>PimaIndiansDiabetes <span class="sc">%&lt;&gt;%</span> </span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diab =</span> <span class="fu">ifelse</span>(diabetes <span class="sc">==</span> <span class="st">'pos'</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">mass_fg =</span> <span class="fu">f_case_when</span>(mass <span class="sc">&lt;=</span> <span class="fu">mean</span>(mass) <span class="sc">~</span> <span class="st">'below-avg'</span>,</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>                               mass <span class="sc">&gt;</span> <span class="fu">mean</span>(mass) <span class="sc">~</span> <span class="st">'above-avg'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add binary predictor variable</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>PimaIndiansDiabetes2 <span class="sc">%&lt;&gt;%</span> </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(mass)) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diab =</span> <span class="fu">ifelse</span>(diabetes <span class="sc">==</span> <span class="st">'pos'</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">mass_fg =</span> <span class="fu">f_case_when</span>(mass <span class="sc">&lt;=</span> <span class="fu">mean</span>(mass) <span class="sc">~</span> <span class="st">'below-avg'</span>,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>                               mass <span class="sc">&gt;</span> <span class="fu">mean</span>(mass) <span class="sc">~</span> <span class="st">'above-avg'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="small-space">
 
@@ -543,53 +556,53 @@ Type:  response </code></pre>
 <div class="teenytiny-code">
 <details class="code-fold">
 <summary>R Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot: age</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(PimaIndiansDiabetes, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> diab)) <span class="sc">+</span> </span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">fill =</span> <span class="st">'#7950f2'</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>,  <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">"glm"</span>, <span class="at">color=</span><span class="st">"black"</span>, <span class="at">se=</span><span class="cn">TRUE</span>, <span class="at">method.args =</span> <span class="fu">list</span>(<span class="at">family=</span>binomial), <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Logistic Regression - Age'</span>,</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">'Probability of Diabetes'</span>, <span class="at">x =</span> <span class="st">'Age'</span>) <span class="sc">+</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">9</span>),</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>))</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co"># plot: body mass binary coded</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(PimaIndiansDiabetes, <span class="fu">aes</span>(<span class="at">x =</span> mass_fg, <span class="at">y =</span> diab)) <span class="sc">+</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.3</span>, <span class="at">height =</span> <span class="fl">0.05</span>, <span class="at">fill =</span> <span class="st">'#7950f2'</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>,  <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">size =</span> <span class="fl">3.5</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"glm"</span>, <span class="at">method.args =</span> <span class="fu">list</span>(<span class="at">family =</span> <span class="st">"binomial"</span>), <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Body mass"</span>, <span class="at">y =</span> <span class="st">"Probability of Diabetes"</span>, <span class="at">title =</span> <span class="st">"Logistic Regression - Body Mass Flag"</span>) <span class="sc">+</span></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">9</span>),</span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>))</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>p1<span class="sc">+</span>p2<span class="sc">+</span><span class="fu">plot_annotation</span>(<span class="at">theme =</span> <span class="fu">theme</span>(<span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span><span class="st">"#f8faf7"</span>, <span class="at">color=</span><span class="st">"#f8faf7"</span>)))</span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="co"># logistic regression</span></span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>logit_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(diabetes <span class="sc">~</span> age <span class="sc">+</span> mass_fg, <span class="at">data =</span> PimaIndiansDiabetes, <span class="at">family =</span> <span class="st">'binomial'</span>)</span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(logit_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot: age</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(PimaIndiansDiabetes2, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> diab)) <span class="sc">+</span> </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">fill =</span> <span class="st">'#7950f2'</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>,  <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">"glm"</span>, <span class="at">color=</span><span class="st">"black"</span>, <span class="at">se=</span><span class="cn">TRUE</span>, <span class="at">method.args =</span> <span class="fu">list</span>(<span class="at">family=</span>binomial), <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Logistic Regression - Age'</span>,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">'Probability of Diabetes'</span>, <span class="at">x =</span> <span class="st">'Age'</span>) <span class="sc">+</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">9</span>),</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>))</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co"># plot: body mass binary coded</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(PimaIndiansDiabetes2, <span class="fu">aes</span>(<span class="at">x =</span> mass_fg, <span class="at">y =</span> diab)) <span class="sc">+</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.3</span>, <span class="at">height =</span> <span class="fl">0.05</span>, <span class="at">fill =</span> <span class="st">'#7950f2'</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>,  <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">size =</span> <span class="fl">3.5</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"glm"</span>, <span class="at">method.args =</span> <span class="fu">list</span>(<span class="at">family =</span> <span class="st">"binomial"</span>), <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Body mass"</span>, <span class="at">y =</span> <span class="st">"Probability of Diabetes"</span>, <span class="at">title =</span> <span class="st">"Logistic Regression - Body Mass Flag"</span>) <span class="sc">+</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">9</span>),</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>))</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>p1<span class="sc">+</span>p2<span class="sc">+</span><span class="fu">plot_annotation</span>(<span class="at">theme =</span> <span class="fu">theme</span>(<span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span><span class="st">"#f8faf7"</span>, <span class="at">color=</span><span class="st">"#f8faf7"</span>)))</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="co"># logistic regression</span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>logit_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(diabetes <span class="sc">~</span> age <span class="sc">+</span> mass_fg, <span class="at">data =</span> PimaIndiansDiabetes2, <span class="at">family =</span> <span class="st">'binomial'</span>)</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(logit_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell quarto-layout-panel" data-layout="[[80,20]]">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 80.0%;justify-content: center;">
-<p><img src="index_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="768"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="768"></p>
 </div>
 <div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 20.0%;justify-content: flex-start;">
 <pre><code>
 Call:
 glm(formula = diabetes ~ age + mass_fg, family = "binomial", 
-    data = PimaIndiansDiabetes)
+    data = PimaIndiansDiabetes2)
 
 Coefficients:
                   Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)      -2.676442   0.272066  -9.837  &lt; 2e-16 ***
-age               0.042212   0.006757   6.247 4.18e-10 ***
-mass_fgabove-avg  1.105120   0.164923   6.701 2.07e-11 ***
+(Intercept)      -2.568264   0.269092  -9.544  &lt; 2e-16 ***
+age               0.041748   0.006804   6.136 8.46e-10 ***
+mass_fgabove-avg  1.021895   0.162706   6.281 3.37e-10 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 993.48  on 767  degrees of freedom
-Residual deviance: 903.32  on 765  degrees of freedom
-AIC: 909.32
+    Null deviance: 981.53  on 756  degrees of freedom
+Residual deviance: 899.13  on 754  degrees of freedom
+AIC: 905.13
 
 Number of Fisher Scoring iterations: 4</code></pre>
 </div>
@@ -598,10 +611,10 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 <p>Lets look at the odds ratios:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(logit_model<span class="sc">$</span>coefficients)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(logit_model<span class="sc">$</span>coefficients)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     (Intercept)              age mass_fgabove-avg 
-      0.06880757       1.04311523       3.01958756 </code></pre>
+      0.07666854       1.04263177       2.77845620 </code></pre>
 </div>
 </div>
 <p><br></p>
@@ -616,23 +629,25 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <div class="column" style="width:48.75%;">
 <div class="tinyer-code">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">comparisons</span>(logit_model, <span class="at">variable =</span> <span class="st">'age'</span>) <span class="ot">-&gt;</span> rr.age; rr.age</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">comparisons</span>(logit_model, <span class="at">variable =</span> <span class="st">'age'</span>) <span class="ot">-&gt;</span> rr.age; rr.age</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
- Term Contrast Estimate Std. Error     z Pr(&gt;|z|)    S   2.5 %  97.5 %
-  age       +1  0.00977   0.001293  7.55   &lt;0.001 44.4 0.00723 0.01230
-  age       +1  0.00691   0.001123  6.15   &lt;0.001 30.3 0.00471 0.00912
-  age       +1  0.00709   0.001172  6.04   &lt;0.001 29.3 0.00479 0.00938
-  age       +1  0.00525   0.000682  7.70   &lt;0.001 46.1 0.00392 0.00659
-  age       +1  0.01049   0.001679  6.25   &lt;0.001 31.2 0.00720 0.01378
---- 758 rows omitted. See ?avg_comparisons and ?print.marginaleffects --- 
-  age       +1  0.00787   0.000620 12.69   &lt;0.001 120.2 0.00666 0.00909
-  age       +1  0.01012   0.001547  6.54   &lt;0.001  34.0 0.00709 0.01315
-  age       +1  0.00674   0.001075  6.27   &lt;0.001  31.4 0.00464 0.00885
-  age       +1  0.00945   0.001802  5.24   &lt;0.001  22.6 0.00591 0.01298
-  age       +1  0.00557   0.000760  7.33   &lt;0.001  42.0 0.00408 0.00706
-Columns: rowid, term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, predicted_lo, predicted_hi, predicted, diabetes, age, mass_fg 
-Type:  response </code></pre>
+ Estimate Std. Error     z Pr(&gt;|z|)    S   2.5 %  97.5 %
+  0.00965   0.001306  7.39   &lt;0.001 42.7 0.00709 0.01221
+  0.00721   0.001180  6.12   &lt;0.001 29.9 0.00490 0.00953
+  0.00738   0.001229  6.01   &lt;0.001 29.0 0.00497 0.00979
+  0.00556   0.000720  7.72   &lt;0.001 46.3 0.00415 0.00698
+  0.01038   0.001691  6.14   &lt;0.001 30.1 0.00706 0.01369
+--- 747 rows omitted. See ?avg_comparisons and ?print.marginaleffects --- 
+  0.00780   0.000640 12.20   &lt;0.001 111.3 0.00655 0.00906
+  0.01003   0.001564  6.42   &lt;0.001  32.7 0.00697 0.01310
+  0.00705   0.001130  6.23   &lt;0.001  31.0 0.00483 0.00926
+  0.00959   0.001821  5.27   &lt;0.001  22.8 0.00602 0.01316
+  0.00588   0.000803  7.32   &lt;0.001  41.9 0.00431 0.00746
+Term: age
+Type:  response 
+Comparison: +1
+Columns: rowid, term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, predicted_lo, predicted_hi, predicted, diabetes, age, mass_fg </code></pre>
 </div>
 </div>
 </div>
@@ -641,23 +656,25 @@ Type:  response </code></pre>
 </div><div class="column" style="width:48.75%;">
 <div class="tinyer-code">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">comparisons</span>(logit_model, <span class="at">variable =</span> <span class="st">'mass_fg'</span>) <span class="ot">-&gt;</span> rr.mass; rr.mass</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">comparisons</span>(logit_model, <span class="at">variable =</span> <span class="st">'mass_fg'</span>) <span class="ot">-&gt;</span> rr.mass; rr.mass</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-    Term              Contrast Estimate Std. Error    z Pr(&gt;|z|)    S 2.5 % 97.5 %
- mass_fg above-avg - below-avg    0.269     0.0382 7.05   &lt;0.001 39.0 0.195  0.344
- mass_fg above-avg - below-avg    0.232     0.0328 7.07   &lt;0.001 39.2 0.167  0.296
- mass_fg above-avg - below-avg    0.235     0.0332 7.08   &lt;0.001 39.3 0.170  0.300
- mass_fg above-avg - below-avg    0.192     0.0288 6.67   &lt;0.001 35.1 0.136  0.249
- mass_fg above-avg - below-avg    0.239     0.0337 7.09   &lt;0.001 39.4 0.173  0.305
---- 758 rows omitted. See ?avg_comparisons and ?print.marginaleffects --- 
- mass_fg above-avg - below-avg    0.252     0.0386 6.54   &lt;0.001 33.9 0.177  0.328
- mass_fg above-avg - below-avg    0.217     0.0310 6.98   &lt;0.001 38.3 0.156  0.278
- mass_fg above-avg - below-avg    0.228     0.0323 7.05   &lt;0.001 39.1 0.165  0.292
- mass_fg above-avg - below-avg    0.268     0.0379 7.07   &lt;0.001 39.2 0.194  0.343
- mass_fg above-avg - below-avg    0.201     0.0295 6.80   &lt;0.001 36.5 0.143  0.258
-Columns: rowid, term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, predicted_lo, predicted_hi, predicted, diabetes, age, mass_fg 
-Type:  response </code></pre>
+ Estimate Std. Error    z Pr(&gt;|z|)    S 2.5 % 97.5 %
+    0.250     0.0381 6.55   &lt;0.001 34.1 0.175  0.325
+    0.219     0.0336 6.51   &lt;0.001 33.6 0.153  0.285
+    0.222     0.0340 6.52   &lt;0.001 33.7 0.155  0.289
+    0.183     0.0297 6.16   &lt;0.001 30.4 0.125  0.241
+    0.225     0.0344 6.53   &lt;0.001 33.8 0.157  0.292
+--- 747 rows omitted. See ?avg_comparisons and ?print.marginaleffects --- 
+    0.232     0.0379 6.12   &lt;0.001 30.0 0.158  0.306
+    0.205     0.0320 6.42   &lt;0.001 32.8 0.143  0.268
+    0.216     0.0332 6.49   &lt;0.001 33.4 0.150  0.281
+    0.250     0.0380 6.56   &lt;0.001 34.1 0.175  0.324
+    0.191     0.0304 6.27   &lt;0.001 31.4 0.131  0.250
+Term: mass_fg
+Type:  response 
+Comparison: above-avg - below-avg
+Columns: rowid, term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, predicted_lo, predicted_hi, predicted, diabetes, age, mass_fg </code></pre>
 </div>
 </div>
 </div>
@@ -675,14 +692,16 @@ Type:  response </code></pre>
 <div class="column" style="width:48.75%;">
 <div class="tinyer-code">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">avg_comparisons</span>(logit_model, <span class="at">variable =</span> <span class="st">'age'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">avg_comparisons</span>(logit_model, <span class="at">variable =</span> <span class="st">'age'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
- Term Contrast Estimate Std. Error    z Pr(&gt;|z|)    S   2.5 % 97.5 %
-  age mean(+1)  0.00854    0.00124 6.88   &lt;0.001 37.3 0.00611  0.011
+ Estimate Std. Error    z Pr(&gt;|z|)    S   2.5 % 97.5 %
+  0.00854    0.00127 6.74   &lt;0.001 35.9 0.00606  0.011
 
-Columns: term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, predicted_lo, predicted_hi, predicted 
-Type:  response </code></pre>
+Term: age
+Type:  response 
+Comparison: mean(+1)
+Columns: term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, predicted_lo, predicted_hi, predicted </code></pre>
 </div>
 </div>
 </div>
@@ -691,14 +710,16 @@ Type:  response </code></pre>
 </div><div class="column" style="width:48.75%;">
 <div class="tinyer-code">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">avg_comparisons</span>(logit_model, <span class="at">variable =</span> <span class="st">'mass_fg'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">avg_comparisons</span>(logit_model, <span class="at">variable =</span> <span class="st">'mass_fg'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-    Term                          Contrast Estimate Std. Error    z Pr(&gt;|z|)    S 2.5 % 97.5 %
- mass_fg mean(above-avg) - mean(below-avg)    0.229     0.0324 7.05   &lt;0.001 39.0 0.165  0.292
+ Estimate Std. Error   z Pr(&gt;|z|)    S 2.5 % 97.5 %
+    0.215     0.0331 6.5   &lt;0.001 33.5  0.15   0.28
 
-Columns: term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, predicted_lo, predicted_hi, predicted 
-Type:  response </code></pre>
+Term: mass_fg
+Type:  response 
+Comparison: mean(above-avg) - mean(below-avg)
+Columns: term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, predicted_lo, predicted_hi, predicted </code></pre>
 </div>
 </div>
 </div>
@@ -722,15 +743,15 @@ Type:  response </code></pre>
 <p>If we don’t specify the <code>variables</code> argument, the <code>comparisons()</code>-function calculates marginal effects at the means of both predictors:</p>
 <div class="tiny-code">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">comparisons</span>(logit_model, <span class="at">newdata =</span> <span class="st">'mean'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">comparisons</span>(logit_model, <span class="at">newdata =</span> <span class="st">'mean'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-    Term              Contrast Estimate Std. Error    z Pr(&gt;|z|)    S  2.5 % 97.5 %  age   mass_fg
- age     +1                      0.0105    0.00168 6.24   &lt;0.001 31.1 0.0072 0.0138 33.2 above-avg
- mass_fg above-avg - below-avg   0.2394    0.03376 7.09   &lt;0.001 39.4 0.1732 0.3055 33.2 above-avg
+    Term              Contrast Estimate Std. Error    z Pr(&gt;|z|)    S   2.5 % 97.5 %  age   mass_fg
+ age     +1                     0.00759    0.00129 5.88   &lt;0.001 27.8 0.00506 0.0101 33.3 below-avg
+ mass_fg above-avg - below-avg  0.22558    0.03455 6.53   &lt;0.001 33.8 0.15787 0.2933 33.3 below-avg
 
-Columns: rowid, term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, predicted_lo, predicted_hi, predicted, age, mass_fg, diabetes 
-Type:  response </code></pre>
+Type:  response 
+Columns: rowid, term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, predicted_lo, predicted_hi, predicted, age, mass_fg, diabetes </code></pre>
 </div>
 </div>
 </div>
@@ -740,12 +761,12 @@ Type:  response </code></pre>
 <p>This gives us the marginal effects at the average age of 33.2 years and the more common body mass category (above-avg). We can verify this result manually by changing age from 33.2 to 34.2 (+1)</p>
 <div class="tiny-code">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>p0 <span class="ot">&lt;-</span> <span class="fu">predict</span>(logit_model, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">age =</span> <span class="fl">33.2</span>,    <span class="at">mass_fg =</span> <span class="st">'above-avg'</span>), <span class="at">type =</span> <span class="st">'response'</span>)</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(logit_model, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">age =</span> <span class="fl">33.2</span> <span class="sc">+</span><span class="dv">1</span>, <span class="at">mass_fg =</span> <span class="st">'above-avg'</span>), <span class="at">type =</span> <span class="st">'response'</span>)</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>p1<span class="sc">-</span>p0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>p0 <span class="ot">&lt;-</span> <span class="fu">predict</span>(logit_model, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">age =</span> <span class="fl">33.2</span>,    <span class="at">mass_fg =</span> <span class="st">'above-avg'</span>), <span class="at">type =</span> <span class="st">'response'</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(logit_model, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">age =</span> <span class="fl">33.2</span> <span class="sc">+</span><span class="dv">1</span>, <span class="at">mass_fg =</span> <span class="st">'above-avg'</span>), <span class="at">type =</span> <span class="st">'response'</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>p1<span class="sc">-</span>p0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         1 
-0.01049434 </code></pre>
+0.01038606 </code></pre>
 </div>
 </div>
 </div>
@@ -755,12 +776,12 @@ Type:  response </code></pre>
 <p>and for body mass flag changing from <em>below-avg</em> to <em>above-avg</em>, keeping age constant at the mean of 33.2:</p>
 <div class="tiny-code">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>p0 <span class="ot">&lt;-</span> <span class="fu">predict</span>(logit_model, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">age =</span> <span class="fl">33.2</span>, <span class="at">mass_fg =</span> <span class="st">'below-avg'</span>), <span class="at">type =</span> <span class="st">'response'</span>)</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(logit_model, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">age =</span> <span class="fl">33.2</span>, <span class="at">mass_fg =</span> <span class="st">'above-avg'</span>), <span class="at">type =</span> <span class="st">'response'</span>)</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>p1<span class="sc">-</span>p0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>p0 <span class="ot">&lt;-</span> <span class="fu">predict</span>(logit_model, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">age =</span> <span class="fl">33.2</span>, <span class="at">mass_fg =</span> <span class="st">'below-avg'</span>), <span class="at">type =</span> <span class="st">'response'</span>)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(logit_model, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">age =</span> <span class="fl">33.2</span>, <span class="at">mass_fg =</span> <span class="st">'above-avg'</span>), <span class="at">type =</span> <span class="st">'response'</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>p1<span class="sc">-</span>p0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        1 
-0.2392282 </code></pre>
+0.2253507 </code></pre>
 </div>
 </div>
 </div>
@@ -782,20 +803,22 @@ Type:  response </code></pre>
 <p><br></p>
 <div class="teenytiny-code">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">comparisons</span>(logit_model, <span class="at">variable =</span> <span class="st">'mass_fg'</span>, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">age =</span> <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">80</span>, <span class="at">by=</span><span class="dv">10</span>))) <span class="ot">-&gt;</span> c; c</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">comparisons</span>(logit_model, <span class="at">variable =</span> <span class="st">'mass_fg'</span>, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">age =</span> <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">80</span>, <span class="at">by=</span><span class="dv">10</span>))) <span class="ot">-&gt;</span> c; c</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-    Term              Contrast Estimate Std. Error    z Pr(&gt;|z|)    S 2.5 % 97.5 % age
- mass_fg above-avg - below-avg    0.188     0.0285 6.59   &lt;0.001 34.4 0.132  0.244  20
- mass_fg above-avg - below-avg    0.228     0.0323 7.05   &lt;0.001 39.1 0.165  0.292  30
- mass_fg above-avg - below-avg    0.258     0.0364 7.09   &lt;0.001 39.5 0.187  0.329  40
- mass_fg above-avg - below-avg    0.269     0.0382 7.05   &lt;0.001 39.0 0.195  0.344  50
- mass_fg above-avg - below-avg    0.259     0.0384 6.75   &lt;0.001 36.0 0.184  0.335  60
- mass_fg above-avg - below-avg    0.230     0.0398 5.79   &lt;0.001 27.1 0.152  0.308  70
- mass_fg above-avg - below-avg    0.191     0.0423 4.50   &lt;0.001 17.2 0.108  0.273  80
+ Estimate Std. Error    z Pr(&gt;|z|)    S  2.5 % 97.5 % age
+    0.179     0.0294 6.10   &lt;0.001 29.8 0.1216  0.237  20
+    0.216     0.0332 6.49   &lt;0.001 33.4 0.1504  0.281  30
+    0.241     0.0368 6.56   &lt;0.001 34.1 0.1693  0.314  40
+    0.250     0.0381 6.55   &lt;0.001 34.1 0.1752  0.325  50
+    0.239     0.0378 6.31   &lt;0.001 31.7 0.1645  0.313  60
+    0.211     0.0386 5.46   &lt;0.001 24.4 0.1351  0.286  70
+    0.173     0.0403 4.31   &lt;0.001 15.9 0.0945  0.252  80
 
-Columns: rowid, term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, predicted_lo, predicted_hi, predicted, age, diabetes 
-Type:  response </code></pre>
+Term: mass_fg
+Type:  response 
+Comparison: above-avg - below-avg
+Columns: rowid, term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, predicted_lo, predicted_hi, predicted, age, diabetes </code></pre>
 </div>
 </div>
 </div>
@@ -806,18 +829,18 @@ Type:  response </code></pre>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>R Code</summary>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_comparisons</span>(logit_model, <span class="at">variable =</span> <span class="st">'mass_fg'</span>, </span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">condition =</span> <span class="fu">list</span>(<span class="st">"age"</span> <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">80</span>, <span class="at">by=</span><span class="dv">10</span>))) <span class="sc">+</span></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">age =</span> c<span class="sc">$</span>age, <span class="at">est =</span> c<span class="sc">$</span>estimate), <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> est),</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> <span class="st">'darkorange'</span>,  <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Marginal Effects at Representative Values (MER)'</span>,</span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">'Risk Difference </span><span class="sc">\n</span><span class="st"> p(above-avg) - p(below-avg)'</span>,</span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">'Age'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_comparisons</span>(logit_model, <span class="at">variable =</span> <span class="st">'mass_fg'</span>, </span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">condition =</span> <span class="fu">list</span>(<span class="st">"age"</span> <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">80</span>, <span class="at">by=</span><span class="dv">10</span>))) <span class="sc">+</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">age =</span> c<span class="sc">$</span>age, <span class="at">est =</span> c<span class="sc">$</span>estimate), <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> est),</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> <span class="st">'darkorange'</span>,  <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Marginal Effects at Representative Values (MER)'</span>,</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">'Risk Difference </span><span class="sc">\n</span><span class="st"> p(above-avg) - p(below-avg)'</span>,</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">'Age'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
 </figure>
 </div>
 </div>
@@ -1263,7 +1286,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       &nbsp;
     </div>   
     <div class="nav-footer-center">
-<p>© 2024 · Made with <a href="https://www.r-project.org/"><img src="https://www.r-project.org/Rlogo.png" class="img-fluid" alt="R" width="25"></a> and <a href="https://quarto.org/"><img src="https://quarto.org/quarto.png" class="img-fluid" alt="Quarto" width="65"></a></p>
+<p>© 2025 · Made with <a href="https://www.r-project.org/"><img src="https://www.r-project.org/Rlogo.png" class="img-fluid" alt="R" width="25"></a> and <a href="https://quarto.org/"><img src="https://quarto.org/quarto.png" class="img-fluid" alt="Quarto" width="65"></a></p>
 </div>
     <div class="nav-footer-right">
       &nbsp;
