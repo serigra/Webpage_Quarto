@@ -1,0 +1,20 @@
+---
+title: 'Antibiotika-Verschreibungen: Packungsgrösse spielt eine entscheidende Rolle'
+author: "Sabrina M. Stollberg, Sereina M. Graber"
+date: '2025-27-02'
+publication: ""
+image: featured-pdf.png
+css: "../styles_publications_individual.css"
+description: "Im Jahr 2022 wurden in der Schweiz aufgrund zu grosser Antibiotika-Packungen potentiell rund 2,7 Millionen Tabletten mehr verschrieben als nötig – ein Problem, besonders angesichts von Lieferengpässen und der wachsenden Gefahr von Antibiotikaresistenzen."
+categories:
+  - "health services research"
+  - "claims data"
+  - "antibiotics"
+url_source: https://standpunkt.helsana.ch/de/antibiotika-verschreibungen-packungsgroesse
+url_preprint:
+pdf_file: 
+journ: "Helsana Standpunkt"
+issue: Nr. 1
+page: 
+year: 2025
+---
