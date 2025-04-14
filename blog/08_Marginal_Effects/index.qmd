@@ -402,7 +402,12 @@ Furthermore, to get a population-level perspective, we can average these individ
 :::: {.column width="48.75%"}
 ::: tinyer-code
 ```{r}
+<<<<<<< Updated upstream
 avg_comparisons(logit_model, variable = 'age')
+=======
+avg_comparisons(logit_model, variable = 'glucose') -> a
+print.me(a)
+>>>>>>> Stashed changes
 ```
 :::
 ::::
@@ -413,7 +418,12 @@ avg_comparisons(logit_model, variable = 'age')
 :::: {.column width="48.75%"}
 ::: tinyer-code
 ```{r}
+<<<<<<< Updated upstream
 avg_comparisons(logit_model, variable = 'mass_fg')
+=======
+avg_comparisons(logit_model, variable = 'bmi_fg') -> b
+print.me(b)
+>>>>>>> Stashed changes
 ```
 :::
 ::::
