@@ -84,7 +84,7 @@ When dealing with continuous variables for both predictors and outcomes, margina
 Data set
 ```{r}
 set.seed(123)
-x <- seq(0, 10, length.out = 100)           # Fertilizer amount
+x <- seq(0, 10, length.out = 100)             # Fertilizer amount
 y <- -2*x^2 + 10*x + 5 + rnorm(100, sd = 10)  # Plant growth
 plant_data <- data.frame(fertilizer = x, growth = y)
 ```
@@ -94,13 +94,15 @@ plant_data <- data.frame(fertilizer = x, growth = y)
 
 ### Linear vs. Quadratic: Which Fits Better?
 
-First, let's compare a linear and a quadratic model to see which better describes the data:
+First, let's compare a linear and a quadratic model to see which better describes the data.
+
+
 
 ::: tiny-code
 ```{r}
 #| code-fold: true
 #| warning: false
-#| fig-width: 5.75
+#| fig-width: 6
 #| fig-height: 4.5
 #| layout: [[80, 20]]
 
@@ -128,17 +130,34 @@ summary(linear_model)
 # plot
 ggplot(plant_data, aes(x = fertilizer, y = growth) ) +
     geom_point(fill = '#7950f2', alpha = 0.5,  shape = 21, size = 3) +
-    stat_smooth(method = "lm", formula = y ~ x + I(x^2), linewidth = 1.3, color = '#1e1e1e') +
+    stat_smooth(method = "lm", formula = y ~ poly(x, 2), linewidth = 1.3, color = '#1e1e1e') +
     labs(title = 'Quadratic Model',
          x = expression(paste("Fertilizer [g/", m^2, ']')), y = "Growth [cm]")
 
 # quadratic model
-quadratic_model <- lm(growth ~ fertilizer +  I(fertilizer^2), data = plant_data)
+quadratic_model <- lm(growth ~ poly(fertilizer, 2), data = plant_data)
 summary(quadratic_model)
 ```
 :::
 
-The quadratic model shows a much smaller residual deviance, indicating a better fit to the data, which is not very surprising. This suggests a more complex relationship between fertilizer and plant growth: growth tends to increase with the amount of fertilizer until around 3 g/m², after which it begins to decrease again.
+The quadratic model, not surprisingly, shows a much smaller residual standard error, indicating a better fit to the data. This improved fit suggests a more complex relationship between fertilizer and plant growth. Rather than a simple, monotonic decline, the data indicate that growth initially increases with fertilizer use, reaching a peak around 3 g/m², after which it starts to decline.
+
+::: medium-space
+:::
+
+:::::: {.callout-note collapse="true"}
+## Quadratic term: raw vs. orthogonal polynomials
+
+When fitting a quadratic model in R, there are two common ways to include polynomial terms: using  `x + I(x^2)` or `poly(x, 2)`. Both approaches capture quadratic relationships, but they differ significantly in how the terms are constructed.
+
+* `x + I(x^2)` (equivalent to `poly(x, 2, raw = TRUE)`) includes the raw polynomial terms directly—i.e., the variable $x$ and its square $x^2$. These terms are generally easier to interpret — at least in theory — since the coefficients correspond directly to the linear and quadratic parts of the model. (Though in practice, I still find their meaning tricky to pin down — the reason why marginal effects are so useful.). However, raw polynomial terms tend to be highly correlated, which can introduce multicollinearity and affect the reliability of coefficient estimates.
+
+* `poly(x, 2)` by default creates orthogonal polynomials—transformed versions of the original terms that are statistically uncorrelated. This helps mitigate multicollinearity, but comes at the cost of interpretability: the coefficients no longer directly correspond to powers of the predictor.
+
+A more nuanced discussion of the trade-offs and appropriate use cases for each approach can be found on [CrossValidated](https://stats.stackexchange.com/questions/258307/raw-or-orthogonal-polynomial-regression).
+
+However, in the current context of marginal effects, the choice between them is less important, since both methods yield identical marginal effects.
+::::::
 
 <br><br>
 
