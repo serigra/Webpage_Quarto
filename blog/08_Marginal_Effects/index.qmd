@@ -441,16 +441,8 @@ Furthermore, to get a population-level perspective, we can average these individ
 :::: {.column width="48.75%"}
 ::: tiny-code
 ```{r}
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-avg_comparisons(logit_model, variable = 'age')
-=======
 avg_comparisons(logit_model, variable = 'glucose') -> a
 print.me(a)
->>>>>>> Stashed changes
-=======
-avg_comparisons(logit_model, variable = 'glucose') -> a; print.me(a)
->>>>>>> 1095e7c7dd8099100ab72bf56d581d15350900a7
 ```
 :::
 ::::
@@ -461,16 +453,8 @@ avg_comparisons(logit_model, variable = 'glucose') -> a; print.me(a)
 :::: {.column width="48.75%"}
 ::: tiny-code
 ```{r}
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-avg_comparisons(logit_model, variable = 'mass_fg')
-=======
 avg_comparisons(logit_model, variable = 'bmi_fg') -> b
 print.me(b)
->>>>>>> Stashed changes
-=======
-avg_comparisons(logit_model, variable = 'bmi_fg') -> b; print.me(b)
->>>>>>> 1095e7c7dd8099100ab72bf56d581d15350900a7
 ```
 :::
 ::::
