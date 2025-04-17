@@ -383,15 +383,13 @@ Quadratic term: raw vs.&nbsp;orthogonal polynomials
 <p>Interpreting the coefficients in quadratic or higher-order polynomial models — whether based on raw or orthogonal terms — can be tricky and often unintuitive. This is where marginal effects, specifically <em>Marginal Effects at Representative Values (MER)</em>, come into play. We can calculate the slope (or tangent) at different amounts of fertilizer to better understand the relationship, and these slopes are nothing else than <em>marginal effects</em>. Let’s calculate the marginal effects at 2 g/m² and 6 g/m² using the <code>slopes()</code> function from the <code>marginaleffects</code> package:</p>
 <div class="small-code">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">slopes</span>(quadratic_model, <span class="at">newdata =</span> <span class="fu">datagrid</span>(<span class="at">fertilizer =</span> <span class="fu">c</span>(<span class="fl">1.5</span>, <span class="dv">6</span>))) <span class="ot">-&gt;</span> s; s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">slopes</span>(quadratic_model, <span class="at">newdata =</span> <span class="fu">datagrid</span>(<span class="at">fertilizer =</span> <span class="fu">c</span>(<span class="fl">1.5</span>, <span class="dv">6</span>))) <span class="ot">-&gt;</span> s;</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(s, <span class="at">ncols =</span> <span class="dv">0</span>, <span class="at">type =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
        Term fertilizer Estimate Std. Error      z Pr(&gt;|z|)     S   2.5 % 97.5 %
  fertilizer        1.5     2.77       1.80   1.54    0.123   3.0  -0.753   6.29
- fertilizer        6.0   -13.01       0.79 -16.46   &lt;0.001 199.8 -14.558 -11.46
-
-Type:  response 
-Columns: rowid, term, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, fertilizer, predicted_lo, predicted_hi, predicted, growth </code></pre>
+ fertilizer        6.0   -13.01       0.79 -16.46   &lt;0.001 199.8 -14.558 -11.46</code></pre>
 </div>
 </div>
 </div>

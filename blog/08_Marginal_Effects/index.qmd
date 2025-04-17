@@ -174,7 +174,8 @@ Interpreting the coefficients in quadratic or higher-order polynomial models —
 
 ::: small-code
 ```{r}
-slopes(quadratic_model, newdata = datagrid(fertilizer = c(1.5, 6))) -> s; s
+slopes(quadratic_model, newdata = datagrid(fertilizer = c(1.5, 6))) -> s;
+print(s, ncols = 0, type = FALSE)
 ```
 :::
 
