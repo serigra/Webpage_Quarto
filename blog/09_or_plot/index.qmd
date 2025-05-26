@@ -4,22 +4,46 @@ author: "Sereina M. Graber"
 date: "2025-04-16"
 toc: true
 toc-depth: 2
-css: "../styles_blog_individual.css"
+
 image: cover-png.png
 code-summary: "R Code"
+
+format:
+  closeread-html:
+    code-fold: true
+    cr-section:
+      layout: sidebar-left
+knitr:
+  opts_chunk: 
+    dev.args:
+      bg: transparent
 ---
 
-<br><br>
+\
 
+\
+
+In this post, I will show you how to plot model estimates (odds ratios and confidence intervals) in an elegant way using the `ggplot2` package in R. The example is based on a hypothetical dataset that includes sociodemographic and health variables. The goal is to visualize the odds ratios (OR) and their confidence intervals (CI) for each variable, while also highlighting significant p-values.
+
+
+
+First we load some packages and generate the hypothetical data set that we will use for the plot.
 
 ```{r}
+#| output: false
+
 library(tidyverse)
 library(ggtext)
 library(patchwork)
+
+theme_set(
+  theme(plot.background = element_rect(fill = "#f8f8f6", color = NA))
+)
 ```
 
 
 ```{r}
+#| echo: true
 
 # hypothetical data set including sociodemographic and health variables
 data <- data.frame(
@@ -76,30 +100,182 @@ data <- data.frame(
   )
 
 
-#head(data)
+head(data)
 ```
 
+Now lets start build up the plot step by step.
 
-## 1) Plot Odds Ratios and Confidence Intervals
+\
+
+\
+
+
+::::{.cr-section}
+
+
+:::{focus-on="cr-plot-layout-I"}
+
+To start, first we arrange the grid with the main plot and the coefficients on the right side using the patchwork package. 
+
 ```{r}
+#| echo: true
+#| code-fold: false
+#| eval: false
+
+
+mainPlot <- ggplot()
+rightPlot <- ggplot()
+
+mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
+```
+:::
+ 
+
+
+:::{#cr-plot-layout-I}
+```{r}
+mainPlot <- ggplot() +
+  annotate("text", x = 0.5, y = 0.5, label = "MainPlot", size = 6, color = 'lightgrey') +
+  theme(
+    axis.title = element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    panel.grid = element_blank()
+  )
+
+rightPlot <- ggplot() +
+  annotate("text", x = 0.5, y = 0.5, label = "RightPlot", size = 6, color = 'lightgrey') +
+  theme(
+    axis.title = element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    panel.grid = element_blank()
+  )
+
+mainPlot + rightPlot + plot_layout(widths = c(2.05,0.85))
+```
+:::
+
+
+Lets focus on building up the main plot first. [@cr-plot-layout-II]
+
+:::{#cr-plot-layout-II}
+```{r}
+mainPlot <- ggplot() +
+  annotate("text", x = 0.5, y = 0.5, label = "MainPlot", size = 6) +
+  theme(
+    axis.title = element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    panel.grid = element_blank()
+  )
+
+mainPlot + rightPlot + plot_layout(widths = c(2.05,0.85))
+```
+:::
+
+
+:::{focus-on="cr-main-plot-1"}
+Lets start with plotting the odds ratios and confidence intervals.
+
+```{r}
+#| echo: true
+#| code-fold: false
+#| eval: false
+
 ggplot(data, aes(y = variable, x = OR)) +
   geom_point(size=2, show.legend = F) +
-  geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), height = 0.0, size = 0.70) +
-  geom_vline(aes(xintercept = 1), color = 'grey80', lty = 2, size = 0.8) 
+  geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), 
+                 height = 0.0, linewidth = 0.70) +
+  geom_vline(aes(xintercept = 1), 
+             color = 'grey80', lty = 2, linewidth = 0.8)
 ```
 
-You wanna have the variable ordered so that sociodemographic variables appear first,
-and then below that health variables are plotted. To do so, you need to translate the 
+But, you wanna have the variable ordered so that sociodemographic variables appear first,
+and then below that health variables are plotted. 
+:::
+
+
+:::{#cr-main-plot-1}
+```{r}
+#| warning: false
+
+mainPlot <- 
+  
+  ggplot(data, aes(y = variable, x = OR)) +
+    geom_point(size=2, show.legend = F) +
+    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), height = 0.0, linewidth = 0.70) +
+    geom_vline(aes(xintercept = 1), color = 'grey80', lty = 2, size = 0.8)
+
+mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
+```
+:::
+
+
+
+:::{focus-on="cr-main-plot-2"}
+To reorder the variables, I translated the 
 "variable" variable into an ordered factor and to show the variables ordered from
 top to bottom, instead of the other way around, I used fct_rev() function from 
 the forcats package.
 
+\
 
-<br><br>
+```{r}
+#| echo: true
+#| eval: false
+
+data <- data |> 
+  mutate(variable = factor(variable, 
+                           levels = c("age", "sex_w_vs_m",
+                                      "region_urban_vs_rural", 
+                                      "region_suburban_vs_rural", 
+                                      "education", 
+                                      "income", 
+                                      "employment_yes_vs_no",
+                                      "physical_activity", 
+                                      "smoking_yes_vs_no", 
+                                      "alcohol", 
+                                      "hypertension_yes_vs_no", 
+                                      "diabetes", 
+                                      "BMI", 
+                                      "cholesterol",
+                                      "number_outpatient_consultations",
+                                      "number_hospital_visits", 
+                                      "total_healthcare_costs"),
+                           labels = c("Age", "Sex (w vs. m)",
+                                      "Region (urban vs. rural)",
+                                      "Region (suburban vs.rural",
+                                      "Education Level",
+                                      "Yearly Income (CHF)",
+                                      "Employed (vs. unemployed)",
+                                      "Physical Activity Level",
+                                      "Smoking (vs. non-smoking)",
+                                      "Alcohol Consume",
+                                      "Hypertension (yes vs. no)",
+                                      "Diabetes (yes vs. no)",
+                                      "BMI (≥ 25 vs < 25)",
+                                      "Cholesterol Level",
+                                      "No. outpatient consultations",
+                                      "No. hospital visits",
+                                      "Total Healthcare Costs (CHF)")
+  )
+  )
 
 
-## 2) Order the variables and change labels
+mainPlot <- 
+  
+  ggplot(data, aes(y = fct_rev(variable), x = OR)) +
+    geom_point(size=2, show.legend = F) +
+    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), height = 0.0, size = 0.70) +
+    geom_vline(aes(xintercept = 1), color = 'grey80', lty = 2, size = 0.8)
+```
 
+And to give even more structure to the plot, we can add subtitles for the variable categories, e.g. "Sociodemographic" and "Health Status"...
+
+:::
+
+:::{#cr-main-plot-2}
 ```{r}
 data <- data |> 
   mutate(variable = factor(variable, 
@@ -139,33 +315,39 @@ data <- data |>
   )
 
 
-mainPlot <- ggplot(data, aes(y = fct_rev(variable), x = OR)) +
-  geom_point(size=2, show.legend = F) +
-  geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), height = 0.0, size = 0.70) +
-  geom_vline(aes(xintercept = 1), color = 'grey80', lty = 2, size = 0.8) +
-  ylab('')
-mainPlot
+mainPlot <- 
+  
+  ggplot(data, aes(y = fct_rev(variable), x = OR)) +
+    geom_point(size=2, show.legend = F) +
+    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), height = 0.0, size = 0.70) +
+    geom_vline(aes(xintercept = 1), color = 'grey80', lty = 2, size = 0.8)
+
+mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 ```
+:::
 
 
-<br><br>
 
 
-## 3 Add subtitles for the variable categories
+:::{focus-on="cr-main-plot-3"}
+Add bold subtitles for the variable categories
 
+\
 
 ```{r}
-# original levels
+#| echo: true
+#| eval: false
+
 orig_levels <- levels(data$variable)
-# add two new levels
-new_levels <- R.utils::insert(orig_levels, ats = c(1, 8), values = c("Sociodemographic", "Health Status"))
+new_levels <- R.utils::insert(orig_levels, ats = c(1, 8), 
+                              values = c("**Sociodemographic**", "**Health Status**"))
 
 # add row between and fill with subtitle
 data <- data |> 
 group_by(type) |> 
   group_modify(~ add_row(.x, .before = 0)) |> 
   ungroup() |> 
-  mutate(variable = ifelse(is.na(variable), type, as.character(variable))) |>  
+  mutate(variable = ifelse(is.na(variable), paste0("**",type, "**"), as.character(variable))) |>  
   mutate(variable = factor(variable, 
                            levels = new_levels,
                            labels = new_levels
@@ -178,158 +360,459 @@ mainPlot <-
     geom_point(size=2, show.legend = F) +
     geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), height = 0.0, size = 0.70) +
     geom_vline(aes(xintercept = 1), color = 'grey80', lty = 2, size = 0.8) +
-    ylab('')
+    theme(axis.text.y = ggtext::element_markdown())
 
-mainPlot
+```
+:::
 
+:::{#cr-main-plot-3}
+```{r}
+#| warning: false
 
-# make the subitles bold
+orig_levels <- levels(data$variable)
+new_levels <- R.utils::insert(orig_levels, ats = c(1, 8), 
+                              values = c("**Sociodemographic**", "**Health Status**"))
+
+# add row between and fill with subtitle
+data <- data |> 
+group_by(type) |> 
+  group_modify(~ add_row(.x, .before = 0)) |> 
+  ungroup() |> 
+  mutate(variable = ifelse(is.na(variable), paste0("**",type, "**"), as.character(variable))) |>  
+  mutate(variable = factor(variable, 
+                           levels = new_levels,
+                           labels = new_levels
+                           )
+  )
+
 mainPlot <- 
   
-  data |> 
-  mutate(variable = fct_recode(variable,
-                               "**Sociodemographic**" = "Sociodemographic",
-                               "**Health Status**" = "Health Status")) %>%
-  ggplot(., aes(y = fct_rev(variable), x = OR)) +
+  ggplot(data, aes(y = fct_rev(variable), x = OR)) +
     geom_point(size=2, show.legend = F) +
     geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), height = 0.0, size = 0.70) +
     geom_vline(aes(xintercept = 1), color = 'grey80', lty = 2, size = 0.8) +
-    ylab('') +
     theme(axis.text.y = ggtext::element_markdown())
 
-mainPlot
+mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 ```
+:::
 
-<br><br>
 
-## 4) Format main plot
+
+:::{focus-on="cr-main-plot-4"}
+
+Style main plot
 ```{r}
+#| echo: true
+#| eval: false
+#| code-fold: false
+
 mainPlot <- 
   
   mainPlot + 
-  scale_alpha_discrete(range = c(0.35, 0.9)) +
-  labs(x = 'OR (CI)') +
+  labs(x = 'OR (CI)', y = '') +
   theme_classic() +
   theme(legend.position = 'none',
         axis.line.y = element_blank(),
         axis.ticks.y = element_blank(),
         axis.text.y = ggtext::element_markdown(),
-        #axis.title.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        panel.grid.major.y = element_line(color = '#F5F5F5'))
+```
+:::
+
+
+:::{#cr-main-plot-4}
+```{r}
+#| warning: false
+
+theme_normal <- 
+  theme_classic() +
+  theme(panel.background = element_rect(fill = "#f8f8f6", color = NA),
+        plot.background = element_rect(fill = "#f8f8f6", color = NA),
+        legend.position = 'none',
+        axis.line.x = element_line(),
+        axis.ticks.x = element_line(),
+        axis.text.x = element_text(),
+        axis.title.x = element_text(),
+        axis.line.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        axis.text.y = ggtext::element_markdown(),
         panel.grid.minor.y = element_blank(),
         panel.grid.major.y = element_line(color = '#F5F5F5'))
 
-mainPlot
+mainPlot <- 
+  
+  mainPlot + 
+  labs(x = 'OR (CI)', y = '') +
+  theme_normal
+  
+mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 ```
+:::
 
 
 
-<br><br>
+:::{focus-on="cr-main-plot-5"}
 
-## 5) Add coefficients (OR and CI) on the right side of the plot
-
-Make space for the coefficients, CI and p-values on the right side of the plot:
+Style points and error-bars based on the p-value significance level, using the `p_value_sign` variable.
 ```{r}
- # arrange plot using patchwork::
-rightPlot <- ggplot()
+#| echo: true
+#| eval: false
+#| code-fold: false
 
-plot <- mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
-plot
+mainPlot <- 
+  
+  ggplot(data, aes(y = fct_rev(variable), x = OR, color = p_value_sign)) +
+    geom_point(size=2, show.legend = F) +
+    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), height = 0.0, size = 0.70) +
+    geom_vline(aes(xintercept = 1), color = 'grey80', lty = 2, size = 0.8) +
+    scale_color_manual(values = c("#aaaaaa", "black")) +
+    labs(x = 'OR (CI)', y = '') +
+    theme_classic() +
+    theme(legend.position = 'none',
+          axis.line.y = element_blank(),
+          axis.ticks.y = element_blank(),
+          axis.text.y = ggtext::element_markdown(),
+          panel.grid.minor.y = element_blank(),
+          panel.grid.major.y = element_line(color = '#F5F5F5'))
 ```
+:::
+
+:::{#cr-main-plot-5}
+```{r}
+#| warning: false
+
+mainPlot <- 
+  
+  ggplot(data, aes(y = fct_rev(variable), x = OR, color = p_value_sign)) +
+    geom_point(size=2, show.legend = F) +
+    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), height = 0.0, size = 0.70) +
+    geom_vline(aes(xintercept = 1), color = 'grey80', lty = 2, size = 0.8) +
+    scale_color_manual(values = c("#aaaaaa", "black")) +
+    labs(x = 'OR (CI)', y = '') +
+    theme_normal
+  
+mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
+```
+:::
+
+Now lets focus on the right side of the plot... [@cr-right-plot-1]
 
 
-<br><br>
+:::{#cr-right-plot-1}
+```{r}
+#| warning: false
 
+rightPlot <- ggplot() +
+  annotate("text", x = 0.5, y = 0.5, label = "RightPlot", size = 6) +
+  theme(
+    axis.title = element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    panel.grid = element_blank()
+  )
+
+
+theme_grey80 <- 
+  theme(panel.background = element_rect(fill = "#f8f8f6", color = NA),
+        plot.background = element_rect(fill = "#f8f8f6", color = NA),
+        legend.position = 'none',
+        axis.line.x = element_line(color = 'grey80'),
+        axis.ticks.x = element_line(color = "grey80"),
+        axis.text.x = element_text(color = "grey80"),
+        axis.title.x = element_text(color = "grey80"),
+        axis.line.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        axis.text.y = ggtext::element_markdown(color = 'grey80'),
+        panel.grid.minor.y = element_blank(),
+        panel.grid.major.y = element_line(color = '#F5F5F5'))
+
+
+ mainPlot <- ggplot(data, aes(y = fct_rev(variable), x = OR)) +
+    geom_point(size=2, show.legend = F, color = 'grey80') +
+    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), height = 0.0, size = 0.70, color = 'grey80') +
+    geom_vline(aes(xintercept = 1), color = 'grey80', lty = 2, size = 0.8) +
+    labs(x = 'OR (CI)', y = '') +
+    theme_classic() +
+    theme_grey80
+    
+
+mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
+```
+:::
+
+
+:::{focus-on="cr-right-plot-2"}
 Plot the coefficients (OR and CI) and p-values:
+
 ```{r}
-margin.y <- dim(data)[1]+1
+#| echo: true
+#| eval: false
+#| code-fold: false
 
-
-# step 1 -----------------------------------------------------------------------
 rightPlot <-  
   
   ggplot(data, aes(y = fct_rev(variable))) +
-    geom_text(aes(x = 0, label = OR_CI, color = p_value_sign), size = 3, hjust = 0) +
-    geom_text(aes(x = 0.5, label = p_value_cat, color = p_value_sign), size = 3, hjust = 1)
-
-rightPlot
+    geom_text(aes(x = 0, label = OR_CI), size = 3, hjust = 0) +
+    geom_text(aes(x = 0.5, label = p_value_cat), size = 3, hjust = 1)
 ```
+:::
 
 
+:::{#cr-right-plot-2}
 ```{r}
-# step 2 -----------------------------------------------------------------------
+#| warning: false
+
 rightPlot <-  
   
   ggplot(data, aes(y = fct_rev(variable))) +
-    geom_text(aes(x = 0, label = OR_CI, color = p_value_sign), size = 3, hjust = 0) +
-    geom_text(aes(x = 0.5, label = p_value_cat, color = p_value_sign), size = 3, hjust = 1) +
-    # add titles on top for OR (CI) and p-value
-    annotate('text', x = 0.04, y = dim(data)[1]+1, label = "OR (CI)", hjust = 0, fontface = "bold") +
-    annotate('text', x = 0.5, y = dim(data)[1]+1, label = "p-value", hjust = 1, fontface = "bold") 
+    geom_text(aes(x = 0, label = OR_CI), size = 3, hjust = 0) +
+    geom_text(aes(x = 0.5, label = p_value_cat), size = 3, hjust = 1)
 
-rightPlot
+mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 ```
+:::
 
 
+:::{focus-on="cr-right-plot-3"}
+
+get rid of axis, labels and legend
 ```{r}
-# step 3 -----------------------------------------------------------------------
+#| echo: true
+#| eval: false
+#| code-fold: false
 
 rightPlot <-  
   
   ggplot(data, aes(y = fct_rev(variable))) +
-    geom_text(aes(x = 0, label = OR_CI, color = p_value_sign), size = 3, hjust = 0) +
-    geom_text(aes(x = 0.5, label = p_value_cat, color = p_value_sign), size = 3, hjust = 1) +
-    # add titles on top for OR (CI) and p-value
-    annotate('text', x = 0.04, y = dim(data)[1]+1, label = "OR (CI)", hjust = 0, fontface = "bold") +
-    annotate('text', x = 0.5, y = dim(data)[1]+1, label = "p-value", hjust = 1, fontface = "bold") +
-    # set colors for significant and insignificant p-values
-    scale_color_manual(values = c("#aaaaaa", "black")) +
-    coord_cartesian(ylim = c(1, margin.y) # space on top, that titles "OR (C)I" and "p-value" are not cut off
-                    , xlim = c(0, 0.51)   # space on the right side of the p-value
-                    )
-
-rightPlot
-```
-
-
-
-```{r}
-# step 4 -----------------------------------------------------------------------
-
-rightPlot <-  
-  
-  ggplot(data, aes(y = fct_rev(variable))) +
-    geom_text(aes(x = 0, label = OR_CI, color = p_value_sign), size = 3, hjust = 0) +
-    geom_text(aes(x = 0.5, label = p_value_cat, color = p_value_sign), size = 3, hjust = 1) +
-    # add titles on top for OR (CI) and p-value
-    annotate('text', x = 0.04, y = dim(data)[1]+1, label = "OR (CI)", hjust = 0, fontface = "bold") +
-    annotate('text', x = 0.5, y = dim(data)[1]+1, label = "p-value", hjust = 1, fontface = "bold") +
-    # set colors for significant and insignificant p-values
-    scale_color_manual(values = c("#aaaaaa", "black")) +
-    coord_cartesian(ylim = c(1, margin.y) # space on top, that titles "OR (C)I" and "p-value" are not cut off
-                    , xlim = c(0, 0.51)   # space on the right side of the p-value
-                    ) +
-    # get rid of axes, grid lines, etc.
+    geom_text(aes(x = 0, label = OR_CI), size = 3, hjust = 0) +
+    geom_text(aes(x = 0.5, label = p_value_cat), size = 3, hjust = 1) +
     theme_void() +
-    # get rid of legend
+    theme(legend.position = 'none')
+```
+:::
+
+
+:::{#cr-right-plot-3}
+```{r}
+#| warning: false
+
+rightPlot <-  
+  
+  ggplot(data, aes(y = fct_rev(variable))) +
+    geom_text(aes(x = 0, label = OR_CI), size = 3, hjust = 0) +
+    geom_text(aes(x = 0.5, label = p_value_cat), size = 3, hjust = 1) +
+    theme_void() +
     theme(legend.position = 'none')
 
-rightPlot
+mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 ```
+:::
 
-<br><br>
 
-## 6) Arrange main Plot and coefficients on the right side:
+
+:::{focus-on="cr-right-plot-4"}
+
+format the coefficients and p-values based on signifcance level (< 0.05 or > 0.05), using `ggtext::geom_richtext()` to make the p-values bold
 ```{r}
+#| echo: true
+#| eval: false
+#| code-fold: false
 
-# add same spaces on top as in rightPlot, so that y axes are aligned
-mainPlot <- 
-  mainPlot + 
-  coord_cartesian(ylim = c(1, margin.y)) # space on top, that titles "OR (C)I" and "p-value" are not cut off
-
-# arrange plot using patchwork::
-plot <-  mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
-plot
+rightPlot <-  
+  
+  ggplot(data, aes(y = fct_rev(variable))) +
+    geom_text(aes(x = 0, label = OR_CI, color = p_value_sign), size = 3, hjust = 0) +
+    geom_richtext(aes(x = 0.5, 
+                      label = ifelse(is.na(p_value_cat), NA, 
+                                     paste0('**', p_value_cat, '**')), 
+                      label.colour = NA, 
+                      color = p_value_sign), size = 3, hjust = 1) +
+    scale_color_manual(values = c("#aaaaaa", "black")) +
+    theme_void() +
+    theme(legend.position = 'none')
 ```
+:::
+
+
+:::{#cr-right-plot-4}
+```{r}
+#| warning: false
+
+rightPlot <-  
+  
+  ggplot(data, aes(y = fct_rev(variable))) +
+    geom_text(aes(x = 0, label = OR_CI, color = p_value_sign), size = 3, hjust = 0) +
+    ggtext::geom_richtext(aes(x = 0.5, 
+                              label = ifelse(is.na(p_value_cat), NA, 
+                                             paste0('**', p_value_cat, '**')), 
+                              label.colour = NA, 
+                              color = p_value_sign), size = 3, hjust = 1) +
+    scale_color_manual(values = c("#aaaaaa", "black")) +
+    theme_void() +
+    theme(legend.position = 'none')
+
+mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
+```
+:::
+
+
+
+:::{focus-on="cr-right-plot-5"}
+
+Add title for OR (CI) and p-value
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-fold: false
+
+rightPlot <-  
+  
+  ggplot(data, aes(y = fct_rev(variable))) +
+    geom_text(aes(x = 0, label = OR_CI, color = p_value_sign), size = 3, hjust = 0) +
+    geom_richtext(aes(x = 0.5, 
+                      label = ifelse(is.na(p_value_cat), NA,
+                                     paste0('**', p_value_cat, '**')), 
+                      label.colour = NA, 
+                      color = p_value_sign), size = 3, hjust = 1) +
+    # add titles on top for OR (CI) and p-value
+    annotate('text', x = 0.04, y = dim(data)[1]+1, 
+             label = "OR (CI)", hjust = 0, fontface = "bold") +
+    annotate('text', x = 0.5, y = dim(data)[1]+1, 
+             label = "p-value", hjust = 1, fontface = "bold") +
+    scale_color_manual(values = c("#aaaaaa", "black")) +
+    coord_cartesian(ylim = c(1, dim(data)[1]+1) , xlim = c(0, 0.51)) +
+    theme_void() +
+    theme(legend.position = 'none')
+```
+:::
+
+
+:::{#cr-right-plot-5}
+```{r}
+#| warning: false
+
+rightPlot <-  
+  
+  ggplot(data, aes(y = fct_rev(variable))) +
+    geom_text(aes(x = 0, label = OR_CI, color = p_value_sign), size = 3, hjust = 0) +
+    ggtext::geom_richtext(aes(x = 0.5, 
+                              label = ifelse(is.na(p_value_cat), NA, 
+                                             paste0('**', p_value_cat, '**')),
+                              label.colour = NA, 
+                              color = p_value_sign), size = 3, hjust = 1) +
+    # add titles on top for OR (CI) and p-value
+    annotate('text', x = 0.04, y = dim(data)[1]+1, 
+             label = "OR (CI)", hjust = 0, fontface = "bold") +
+    annotate('text', x = 0.5, y = dim(data)[1]+1, 
+             label = "p-value", hjust = 1, fontface = "bold") +
+    scale_color_manual(values = c("#aaaaaa", "black")) +
+    coord_cartesian(ylim = c(1, dim(data)[1]+1), xlim = c(0, 0.51)) +
+    theme_void() +
+    theme(legend.position = 'none')
+
+mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
+```
+:::
+
+
+:::{focus-on="cr-right-plot-6"}
+
+Align y axes of main plot and right plot, so that that they are on the exact same height, using the same `coord_cartesian()` setting in the main plot as in the right plot
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-fold: false
+
+mainPlot <-  
+  
+ mainPlot +
+    coord_cartesian(ylim = c(1, dim(data)[1]+1))
+    
+```
+:::
+
+
+:::{#cr-right-plot-6}
+```{r}
+#| warning: false
+
+mainPlot <-  
+  
+  ggplot(data, aes(y = fct_rev(variable), x = OR, color = p_value_sign)) +
+    geom_point(size=2, show.legend = F) +
+    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), height = 0.0, size = 0.70) +
+    geom_vline(aes(xintercept = 1), color = 'grey80', lty = 2, size = 0.8) +
+    coord_cartesian(ylim = c(1, dim(data)[1]+1)) + 
+    scale_color_manual(values = c("#aaaaaa", "black")) +
+    labs(x = 'OR (CI)', y = '') +
+    theme_normal
+  
+mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
+```
+:::
+
+
+::::
+
+\
+\
+
+So that's it! You now have a nice plot of model estimates with odds ratios and confidence intervals, as well as p-values, all nicely formatted and aligned.
+
+Here the complete and consolidated code:
+
+```{r}
+#| warning: false
+#| echo: true
+#| fig-align: center
+
+mainPlot <-  # -----------------------------------------------------------------
+  
+  ggplot(data, aes(y = fct_rev(variable), x = OR, color = p_value_sign)) +
+    geom_point(size=2, show.legend = F) +
+    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), height = 0.0, size = 0.70) +
+    geom_vline(aes(xintercept = 1), color = 'grey80', lty = 2, size = 0.8) +
+    coord_cartesian(ylim = c(1, dim(data)[1]+1)) + 
+    scale_color_manual(values = c("#aaaaaa", "black")) +
+    labs(x = 'OR (CI)', y = '') +
+    theme_classic() +
+    theme(legend.position = 'none',
+          axis.line.y = element_blank(),
+          axis.ticks.y = element_blank(),
+          axis.text.y = ggtext::element_markdown(),
+          panel.grid.minor.y = element_blank(),
+          panel.grid.major.y = element_line(color = '#F5F5F5'))
+
+
+rightPlot <- # ----------------------------------------------------------------- 
+  
+  ggplot(data, aes(y = fct_rev(variable))) +
+    geom_text(aes(x = 0, label = OR_CI, color = p_value_sign), size = 3, hjust = 0) +
+    geom_richtext(aes(x = 0.5, 
+                      label = ifelse(is.na(p_value_cat), NA, 
+                                     paste0('**', p_value_cat, '**')), 
+                      label.colour = NA, color = p_value_sign), size = 3, hjust = 1) +
+    annotate('text', x = 0.04, y = dim(data)[1]+1, 
+             label = "OR (CI)", hjust = 0, fontface = "bold") +
+    annotate('text', x = 0.5, y = dim(data)[1]+1, 
+             label = "p-value", hjust = 1, fontface = "bold") +
+    scale_color_manual(values = c("#aaaaaa", "black")) +
+    coord_cartesian(ylim = c(1, dim(data)[1]+1), xlim = c(0, 0.51)) +
+    theme_void() +
+    theme(legend.position = 'none')
+
+
+
+mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
+```
+
+
+
+
 
 
 
