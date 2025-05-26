@@ -1,0 +1,339 @@
+---
+title: "Plot Model Estimates"
+author: "Sereina M. Graber"
+date: "2025-04-16"
+toc: true
+toc-depth: 2
+css: "../styles_blog_individual.css"
+image: cover-png.png
+code-summary: "R Code"
+---
+
+<br><br>
+
+
+```{r}
+library(tidyverse)
+library(ggtext)
+library(patchwork)
+```
+
+
+```{r}
+
+# hypothetical data set including sociodemographic and health variables
+data <- data.frame(
+  type = c(
+    rep("Sociodemographic", 7),
+    rep("Health Status", 10)),
+  variable = c(
+   "age", 
+    "sex_w_vs_m", 
+    "region_urban_vs_rural", 
+    "region_suburban_vs_rural", 
+    "education", 
+    "income", 
+    "employment_yes_vs_no",
+    "smoking_yes_vs_no", 
+    "alcohol", 
+    "hypertension_yes_vs_no", 
+    "diabetes", 
+    "BMI", 
+    "physical_activity", 
+    "cholesterol",
+    "total_healthcare_costs", 
+    "number_hospital_visits", 
+    "number_outpatient_consultations"
+  ),
+  OR = c(
+    1.25, 0.9, 1.19, 1.12, 0.81, 0.81, 0.62, 1.1,
+    1.70, 1.92, 1.35, 1.32, 0.88, 1.02, 1.33,
+    1.45, 1.30
+  ),
+  CI_lower = c(
+    1.05, 0.72, 0.97, 0.95, 0.65, 0.56, 0.52, 0.92,
+    1.50, 1.86, 1.16, 1.23, 0.80, 0.74, 1.11,
+    1.33, 1.12
+  ),
+  CI_upper = c(
+    1.33, 1.13, 1.29, 1.20, 0.92, 1.03, 0.75, 1.23,
+    1.89, 2.02, 1.45, 1.44, 0.95, 1.13, 1.42,
+    1.52, 1.54
+  ),
+  p_value = c(
+    0.011, 0.18, 0.062, 0.062, 0.009, 0.073, 0.002, 0.19,
+    0.001, 0.0001, 0.004, 0.013, 0.021, 0.81, 0.0003,
+    0.00001, 0.0007
+  )) |> 
+  mutate(
+  # make variables ready for plotting
+  OR_CI = paste0(round(OR, 2), ' (', round(CI_lower, 2), '-', round(CI_upper, 2),')'),
+  p_value_sign = ifelse(p_value < 0.05, TRUE, FALSE),
+  p_value_cat = case_when(p_value < 0.001 ~ '< 0.001',
+                          p_value < 0.05 ~ '< 0.05',
+                          TRUE ~ as.character(round(p_value, 2))
+                          )
+  )
+
+
+#head(data)
+```
+
+
+## 1) Plot Odds Ratios and Confidence Intervals
+```{r}
+ggplot(data, aes(y = variable, x = OR)) +
+  geom_point(size=2, show.legend = F) +
+  geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), height = 0.0, size = 0.70) +
+  geom_vline(aes(xintercept = 1), color = 'grey80', lty = 2, size = 0.8) 
+```
+
+You wanna have the variable ordered so that sociodemographic variables appear first,
+and then below that health variables are plotted. To do so, you need to translate the 
+"variable" variable into an ordered factor and to show the variables ordered from
+top to bottom, instead of the other way around, I used fct_rev() function from 
+the forcats package.
+
+
+<br><br>
+
+
+## 2) Order the variables and change labels
+
+```{r}
+data <- data |> 
+  mutate(variable = factor(variable, 
+                           levels = c("age", "sex_w_vs_m",
+                                      "region_urban_vs_rural", 
+                                      "region_suburban_vs_rural", 
+                                      "education", 
+                                      "income", 
+                                      "employment_yes_vs_no",
+                                      "physical_activity", 
+                                      "smoking_yes_vs_no", 
+                                      "alcohol", 
+                                      "hypertension_yes_vs_no", 
+                                      "diabetes", 
+                                      "BMI", 
+                                      "cholesterol",
+                                      "number_outpatient_consultations",
+                                      "number_hospital_visits", 
+                                      "total_healthcare_costs"),
+                           labels = c("Age", "Sex (w vs. m)",
+                                      "Region (urban vs. rural)",
+                                      "Region (suburban vs.rural",
+                                      "Education Level",
+                                      "Yearly Income (CHF)",
+                                      "Employed (vs. unemployed)",
+                                      "Physical Activity Level",
+                                      "Smoking (vs. non-smoking)",
+                                      "Alcohol Consume",
+                                      "Hypertension (yes vs. no)",
+                                      "Diabetes (yes vs. no)",
+                                      "BMI (≥ 25 vs < 25)",
+                                      "Cholesterol Level",
+                                      "No. outpatient consultations",
+                                      "No. hospital visits",
+                                      "Total Healthcare Costs (CHF)")
+  )
+  )
+
+
+mainPlot <- ggplot(data, aes(y = fct_rev(variable), x = OR)) +
+  geom_point(size=2, show.legend = F) +
+  geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), height = 0.0, size = 0.70) +
+  geom_vline(aes(xintercept = 1), color = 'grey80', lty = 2, size = 0.8) +
+  ylab('')
+mainPlot
+```
+
+
+<br><br>
+
+
+## 3 Add subtitles for the variable categories
+
+
+```{r}
+# original levels
+orig_levels <- levels(data$variable)
+# add two new levels
+new_levels <- R.utils::insert(orig_levels, ats = c(1, 8), values = c("Sociodemographic", "Health Status"))
+
+# add row between and fill with subtitle
+data <- data |> 
+group_by(type) |> 
+  group_modify(~ add_row(.x, .before = 0)) |> 
+  ungroup() |> 
+  mutate(variable = ifelse(is.na(variable), type, as.character(variable))) |>  
+  mutate(variable = factor(variable, 
+                           levels = new_levels,
+                           labels = new_levels
+                           )
+  )
+
+mainPlot <- 
+  
+  ggplot(data, aes(y = fct_rev(variable), x = OR)) +
+    geom_point(size=2, show.legend = F) +
+    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), height = 0.0, size = 0.70) +
+    geom_vline(aes(xintercept = 1), color = 'grey80', lty = 2, size = 0.8) +
+    ylab('')
+
+mainPlot
+
+
+# make the subitles bold
+mainPlot <- 
+  
+  data |> 
+  mutate(variable = fct_recode(variable,
+                               "**Sociodemographic**" = "Sociodemographic",
+                               "**Health Status**" = "Health Status")) %>%
+  ggplot(., aes(y = fct_rev(variable), x = OR)) +
+    geom_point(size=2, show.legend = F) +
+    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), height = 0.0, size = 0.70) +
+    geom_vline(aes(xintercept = 1), color = 'grey80', lty = 2, size = 0.8) +
+    ylab('') +
+    theme(axis.text.y = ggtext::element_markdown())
+
+mainPlot
+```
+
+<br><br>
+
+## 4) Format main plot
+```{r}
+mainPlot <- 
+  
+  mainPlot + 
+  scale_alpha_discrete(range = c(0.35, 0.9)) +
+  labs(x = 'OR (CI)') +
+  theme_classic() +
+  theme(legend.position = 'none',
+        axis.line.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        axis.text.y = ggtext::element_markdown(),
+        #axis.title.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        panel.grid.major.y = element_line(color = '#F5F5F5'))
+
+mainPlot
+```
+
+
+
+<br><br>
+
+## 5) Add coefficients (OR and CI) on the right side of the plot
+
+Make space for the coefficients, CI and p-values on the right side of the plot:
+```{r}
+ # arrange plot using patchwork::
+rightPlot <- ggplot()
+
+plot <- mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
+plot
+```
+
+
+<br><br>
+
+Plot the coefficients (OR and CI) and p-values:
+```{r}
+margin.y <- dim(data)[1]+1
+
+
+# step 1 -----------------------------------------------------------------------
+rightPlot <-  
+  
+  ggplot(data, aes(y = fct_rev(variable))) +
+    geom_text(aes(x = 0, label = OR_CI, color = p_value_sign), size = 3, hjust = 0) +
+    geom_text(aes(x = 0.5, label = p_value_cat, color = p_value_sign), size = 3, hjust = 1)
+
+rightPlot
+```
+
+
+```{r}
+# step 2 -----------------------------------------------------------------------
+rightPlot <-  
+  
+  ggplot(data, aes(y = fct_rev(variable))) +
+    geom_text(aes(x = 0, label = OR_CI, color = p_value_sign), size = 3, hjust = 0) +
+    geom_text(aes(x = 0.5, label = p_value_cat, color = p_value_sign), size = 3, hjust = 1) +
+    # add titles on top for OR (CI) and p-value
+    annotate('text', x = 0.04, y = dim(data)[1]+1, label = "OR (CI)", hjust = 0, fontface = "bold") +
+    annotate('text', x = 0.5, y = dim(data)[1]+1, label = "p-value", hjust = 1, fontface = "bold") 
+
+rightPlot
+```
+
+
+```{r}
+# step 3 -----------------------------------------------------------------------
+
+rightPlot <-  
+  
+  ggplot(data, aes(y = fct_rev(variable))) +
+    geom_text(aes(x = 0, label = OR_CI, color = p_value_sign), size = 3, hjust = 0) +
+    geom_text(aes(x = 0.5, label = p_value_cat, color = p_value_sign), size = 3, hjust = 1) +
+    # add titles on top for OR (CI) and p-value
+    annotate('text', x = 0.04, y = dim(data)[1]+1, label = "OR (CI)", hjust = 0, fontface = "bold") +
+    annotate('text', x = 0.5, y = dim(data)[1]+1, label = "p-value", hjust = 1, fontface = "bold") +
+    # set colors for significant and insignificant p-values
+    scale_color_manual(values = c("#aaaaaa", "black")) +
+    coord_cartesian(ylim = c(1, margin.y) # space on top, that titles "OR (C)I" and "p-value" are not cut off
+                    , xlim = c(0, 0.51)   # space on the right side of the p-value
+                    )
+
+rightPlot
+```
+
+
+
+```{r}
+# step 4 -----------------------------------------------------------------------
+
+rightPlot <-  
+  
+  ggplot(data, aes(y = fct_rev(variable))) +
+    geom_text(aes(x = 0, label = OR_CI, color = p_value_sign), size = 3, hjust = 0) +
+    geom_text(aes(x = 0.5, label = p_value_cat, color = p_value_sign), size = 3, hjust = 1) +
+    # add titles on top for OR (CI) and p-value
+    annotate('text', x = 0.04, y = dim(data)[1]+1, label = "OR (CI)", hjust = 0, fontface = "bold") +
+    annotate('text', x = 0.5, y = dim(data)[1]+1, label = "p-value", hjust = 1, fontface = "bold") +
+    # set colors for significant and insignificant p-values
+    scale_color_manual(values = c("#aaaaaa", "black")) +
+    coord_cartesian(ylim = c(1, margin.y) # space on top, that titles "OR (C)I" and "p-value" are not cut off
+                    , xlim = c(0, 0.51)   # space on the right side of the p-value
+                    ) +
+    # get rid of axes, grid lines, etc.
+    theme_void() +
+    # get rid of legend
+    theme(legend.position = 'none')
+
+rightPlot
+```
+
+<br><br>
+
+## 6) Arrange main Plot and coefficients on the right side:
+```{r}
+
+# add same spaces on top as in rightPlot, so that y axes are aligned
+mainPlot <- 
+  mainPlot + 
+  coord_cartesian(ylim = c(1, margin.y)) # space on top, that titles "OR (C)I" and "p-value" are not cut off
+
+# arrange plot using patchwork::
+plot <-  mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
+plot
+```
+
+
+
+
+
+
+
