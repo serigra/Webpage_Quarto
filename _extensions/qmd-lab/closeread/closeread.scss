@@ -15,8 +15,7 @@
 .cr-section {
   display: grid;
   grid-template-rows: 1fr;
-  //background-color: var(--cr-section-background-color);
-  background-color: #B2BEB5;
+  background-color: var(--cr-section-background-color);
 
   // used to mimic quarto's layout class but exempt the section from some of the
   // behaviours that come with quarto responding to that class
@@ -30,10 +29,8 @@
   .narrative-col {
     grid-row: 1;
 
-    //font-family: var(--cr-narrative-font-family);
-    font-family: Roboto, sans-serif;
-    //font-size: var(--cr-narrative-font-size);
-    font-size: 1.2rem;
+    font-family: var(--cr-narrative-font-family);
+    font-size: var(--cr-narrative-font-size);
 
     .trigger {
       padding-block: 45svh;
@@ -346,4 +343,3 @@ body.cr-removeheaderspace {
   --cr-narrative-sidebar-width: 1fr;
   --cr-section-background-color: lightgrey;
 }
-

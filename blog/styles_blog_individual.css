@@ -1,6 +1,60 @@
 
 /* ============= Titles and Subtitles of Individual Blog Posts ============== */
 
+@import url('https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,100..900;1,100..900&display=swap$');
+
+
+/* =============== General Styles for (closeread) Blog Posts ================ */
+/* necessary to set here again, 'coz for the closeread blog posts  the styles 
+   are overwritten by cosmo default styles)*/
+
+body {
+  background-color: #f8f8f6 !important;
+}
+
+/* background color of navbar */
+.navbar {
+  background: transparent;!important
+}
+
+/* navbar links */
+.navbar-nav .nav-link {
+    font-family: 'Petrona', sans-serif;
+    color: #235347 !important;
+    text-transform: uppercase;
+    letter-spacing: .1em; 
+    border-bottom: 0px hidden;    
+    margin: 0px 10px 0px 10px; 
+    padding: 2px 2px 4px 2px !important;
+
+    &:hover {
+      border-bottom: 1px solid !important;
+      padding: 2px 2px 0px 2px !important;
+      color: #FA2FBD;
+    }
+}
+
+
+.navbar-title {
+  font-family: 'Petrona', sans-serif;
+  color: #235347 !important;
+}
+
+
+/* ================ Styles for Closeread (scrollytelling) ================== */
+.cr-section {
+  .narrative-col {
+    min-width: 700px;
+  }
+}
+
+.cr-section .sticky-col {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/* ================ Title Styles (relevant for all blog posts) ============== */
+
 .title {
   font-family: "Petrona";
   font-size: 3rem;
@@ -39,6 +93,8 @@ font-weight: 500;
 margin-top: 1.2rem;
 margin-bottom: 0.9rem;
 }
+
+
 
 /* ===================== Responsive Adjustments ======================== */
 

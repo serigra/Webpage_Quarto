@@ -2,21 +2,23 @@
 title: "Plot Model Estimates"
 author: "Sereina M. Graber"
 date: "2025-04-16"
-toc: true
-toc-depth: 2
-
 image: cover-png.png
-code-summary: "R Code"
-
+toc: false
 format:
   closeread-html:
-    code-fold: true
+    theme: cosmo
+    css: "../styles_blog_individual.css"
     cr-section:
       layout: sidebar-left
+    cr-style:
+      section-background-color: "#D1D7D3"
+      narrative-font-size: 1em
+    code-fold: true
 knitr:
   opts_chunk: 
     dev.args:
       bg: transparent
+code-summary: "R Code"
 ---
 
 \
@@ -261,15 +263,23 @@ data <- data |>
                                       "Total Healthcare Costs (CHF)")
   )
   )
+```
 
+```{r}
+#| echo: true
+#| eval: false
+#| code-fold: false
 
 mainPlot <- 
   
   ggplot(data, aes(y = fct_rev(variable), x = OR)) +
     geom_point(size=2, show.legend = F) +
-    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), height = 0.0, size = 0.70) +
-    geom_vline(aes(xintercept = 1), color = 'grey80', lty = 2, size = 0.8)
+    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`),
+                   height = 0.0, size = 0.70) +
+    geom_vline(aes(xintercept = 1), 
+               color = 'grey80', lty = 2, size = 0.8)
 ```
+
 
 And to give even more structure to the plot, we can add subtitles for the variable categories, e.g. "Sociodemographic" and "Health Status"...
 
@@ -319,8 +329,10 @@ mainPlot <-
   
   ggplot(data, aes(y = fct_rev(variable), x = OR)) +
     geom_point(size=2, show.legend = F) +
-    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), height = 0.0, size = 0.70) +
-    geom_vline(aes(xintercept = 1), color = 'grey80', lty = 2, size = 0.8)
+    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), 
+                   height = 0.0, size = 0.70) +
+    geom_vline(aes(xintercept = 1), 
+               color = 'grey80', lty = 2, size = 0.8)
 
 mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 ```
@@ -347,22 +359,32 @@ data <- data |>
 group_by(type) |> 
   group_modify(~ add_row(.x, .before = 0)) |> 
   ungroup() |> 
-  mutate(variable = ifelse(is.na(variable), paste0("**",type, "**"), as.character(variable))) |>  
+  mutate(variable = ifelse(is.na(variable), 
+                           paste0("**",type, "**"), as.character(variable))) |>  
   mutate(variable = factor(variable, 
                            levels = new_levels,
                            labels = new_levels
                            )
   )
+```
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-fold: false
 
 mainPlot <- 
   
   ggplot(data, aes(y = fct_rev(variable), x = OR)) +
     geom_point(size=2, show.legend = F) +
-    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), height = 0.0, size = 0.70) +
-    geom_vline(aes(xintercept = 1), color = 'grey80', lty = 2, size = 0.8) +
+    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), 
+                   height = 0.0, size = 0.70) +
+    geom_vline(aes(xintercept = 1), 
+               color = 'grey80', lty = 2, size = 0.8) +
     theme(axis.text.y = ggtext::element_markdown())
-
 ```
+
+
 :::
 
 :::{#cr-main-plot-3}
@@ -378,7 +400,8 @@ data <- data |>
 group_by(type) |> 
   group_modify(~ add_row(.x, .before = 0)) |> 
   ungroup() |> 
-  mutate(variable = ifelse(is.na(variable), paste0("**",type, "**"), as.character(variable))) |>  
+  mutate(variable = ifelse(is.na(variable), 
+                           paste0("**",type, "**"), as.character(variable))) |>  
   mutate(variable = factor(variable, 
                            levels = new_levels,
                            labels = new_levels
@@ -389,9 +412,11 @@ mainPlot <-
   
   ggplot(data, aes(y = fct_rev(variable), x = OR)) +
     geom_point(size=2, show.legend = F) +
-    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), height = 0.0, size = 0.70) +
-    geom_vline(aes(xintercept = 1), color = 'grey80', lty = 2, size = 0.8) +
-    theme(axis.text.y = ggtext::element_markdown())
+    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), 
+                   height = 0.0, size = 0.70) +
+    geom_vline(aes(xintercept = 1), 
+               color = 'grey80', lty = 2, size = 0.8) +
+    theme(axis.text.y = ggtext::element_markdown(hjust = 1)) # to have y-labs right aligned
 
 mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 ```
@@ -465,8 +490,10 @@ mainPlot <-
   
   ggplot(data, aes(y = fct_rev(variable), x = OR, color = p_value_sign)) +
     geom_point(size=2, show.legend = F) +
-    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), height = 0.0, size = 0.70) +
-    geom_vline(aes(xintercept = 1), color = 'grey80', lty = 2, size = 0.8) +
+    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), 
+                   height = 0.0, size = 0.70) +
+    geom_vline(aes(xintercept = 1), 
+               color = 'grey80', lty = 2, size = 0.8) +
     scale_color_manual(values = c("#aaaaaa", "black")) +
     labs(x = 'OR (CI)', y = '') +
     theme_classic() +
@@ -487,8 +514,10 @@ mainPlot <-
   
   ggplot(data, aes(y = fct_rev(variable), x = OR, color = p_value_sign)) +
     geom_point(size=2, show.legend = F) +
-    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), height = 0.0, size = 0.70) +
-    geom_vline(aes(xintercept = 1), color = 'grey80', lty = 2, size = 0.8) +
+    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), 
+                   height = 0.0, size = 0.70) +
+    geom_vline(aes(xintercept = 1), 
+               color = 'grey80', lty = 2, size = 0.8) +
     scale_color_manual(values = c("#aaaaaa", "black")) +
     labs(x = 'OR (CI)', y = '') +
     theme_normal
@@ -529,15 +558,18 @@ theme_grey80 <-
         panel.grid.major.y = element_line(color = '#F5F5F5'))
 
 
- mainPlot <- ggplot(data, aes(y = fct_rev(variable), x = OR)) +
+ mainPlot <- 
+   
+   ggplot(data, aes(y = fct_rev(variable), x = OR)) +
     geom_point(size=2, show.legend = F, color = 'grey80') +
-    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), height = 0.0, size = 0.70, color = 'grey80') +
-    geom_vline(aes(xintercept = 1), color = 'grey80', lty = 2, size = 0.8) +
+    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), 
+                   height = 0.0, size = 0.70, color = 'grey80') +
+    geom_vline(aes(xintercept = 1), 
+               color = 'grey80', lty = 2, size = 0.8) +
     labs(x = 'OR (CI)', y = '') +
     theme_classic() +
     theme_grey80
     
-
 mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 ```
 :::
@@ -623,7 +655,8 @@ format the coefficients and p-values based on signifcance level (< 0.05 or > 0.0
 rightPlot <-  
   
   ggplot(data, aes(y = fct_rev(variable))) +
-    geom_text(aes(x = 0, label = OR_CI, color = p_value_sign), size = 3, hjust = 0) +
+    geom_text(aes(x = 0, label = OR_CI, color = p_value_sign), 
+              size = 3, hjust = 0) +
     geom_richtext(aes(x = 0.5, 
                       label = ifelse(is.na(p_value_cat), NA, 
                                      paste0('**', p_value_cat, '**')), 
@@ -643,12 +676,13 @@ rightPlot <-
 rightPlot <-  
   
   ggplot(data, aes(y = fct_rev(variable))) +
-    geom_text(aes(x = 0, label = OR_CI, color = p_value_sign), size = 3, hjust = 0) +
+    geom_text(aes(x = 0, label = OR_CI, color = p_value_sign), 
+              size = 3, hjust = 0) +
     ggtext::geom_richtext(aes(x = 0.5, 
                               label = ifelse(is.na(p_value_cat), NA, 
                                              paste0('**', p_value_cat, '**')), 
                               label.colour = NA, 
-                              color = p_value_sign), size = 3, hjust = 1) +
+                              color = p_value_sign), fill = NA, size = 3, hjust = 1) +
     scale_color_manual(values = c("#aaaaaa", "black")) +
     theme_void() +
     theme(legend.position = 'none')
@@ -671,7 +705,8 @@ Add title for OR (CI) and p-value
 rightPlot <-  
   
   ggplot(data, aes(y = fct_rev(variable))) +
-    geom_text(aes(x = 0, label = OR_CI, color = p_value_sign), size = 3, hjust = 0) +
+    geom_text(aes(x = 0, label = OR_CI, color = p_value_sign), 
+              size = 3, hjust = 0) +
     geom_richtext(aes(x = 0.5, 
                       label = ifelse(is.na(p_value_cat), NA,
                                      paste0('**', p_value_cat, '**')), 
@@ -697,12 +732,13 @@ rightPlot <-
 rightPlot <-  
   
   ggplot(data, aes(y = fct_rev(variable))) +
-    geom_text(aes(x = 0, label = OR_CI, color = p_value_sign), size = 3, hjust = 0) +
+    geom_text(aes(x = 0, label = OR_CI, color = p_value_sign), 
+              size = 3, hjust = 0) +
     ggtext::geom_richtext(aes(x = 0.5, 
                               label = ifelse(is.na(p_value_cat), NA, 
                                              paste0('**', p_value_cat, '**')),
                               label.colour = NA, 
-                              color = p_value_sign), size = 3, hjust = 1) +
+                              color = p_value_sign), fill = NA, size = 3, hjust = 1) +
     # add titles on top for OR (CI) and p-value
     annotate('text', x = 0.04, y = dim(data)[1]+1, 
              label = "OR (CI)", hjust = 0, fontface = "bold") +
@@ -744,8 +780,10 @@ mainPlot <-
   
   ggplot(data, aes(y = fct_rev(variable), x = OR, color = p_value_sign)) +
     geom_point(size=2, show.legend = F) +
-    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), height = 0.0, size = 0.70) +
-    geom_vline(aes(xintercept = 1), color = 'grey80', lty = 2, size = 0.8) +
+    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), 
+                   height = 0.0, size = 0.70) +
+    geom_vline(aes(xintercept = 1), 
+               color = 'grey80', lty = 2, size = 0.8) +
     coord_cartesian(ylim = c(1, dim(data)[1]+1)) + 
     scale_color_manual(values = c("#aaaaaa", "black")) +
     labs(x = 'OR (CI)', y = '') +
@@ -774,8 +812,10 @@ mainPlot <-  # -----------------------------------------------------------------
   
   ggplot(data, aes(y = fct_rev(variable), x = OR, color = p_value_sign)) +
     geom_point(size=2, show.legend = F) +
-    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), height = 0.0, size = 0.70) +
-    geom_vline(aes(xintercept = 1), color = 'grey80', lty = 2, size = 0.8) +
+    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), 
+                   height = 0.0, size = 0.70) +
+    geom_vline(aes(xintercept = 1), 
+               color = 'grey80', lty = 2, size = 0.8) +
     coord_cartesian(ylim = c(1, dim(data)[1]+1)) + 
     scale_color_manual(values = c("#aaaaaa", "black")) +
     labs(x = 'OR (CI)', y = '') +
@@ -785,17 +825,21 @@ mainPlot <-  # -----------------------------------------------------------------
           axis.ticks.y = element_blank(),
           axis.text.y = ggtext::element_markdown(),
           panel.grid.minor.y = element_blank(),
-          panel.grid.major.y = element_line(color = '#F5F5F5'))
+          panel.grid.major.y = element_line(color = '#F5F5F5'),
+          panel.background = element_rect(fill = "#f8f8f6", color = NA),
+          plot.background = element_rect(fill = "#f8f8f6", color = NA))
 
 
 rightPlot <- # ----------------------------------------------------------------- 
   
   ggplot(data, aes(y = fct_rev(variable))) +
-    geom_text(aes(x = 0, label = OR_CI, color = p_value_sign), size = 3, hjust = 0) +
+    geom_text(aes(x = 0, label = OR_CI, color = p_value_sign), 
+              size = 3, hjust = 0) +
     geom_richtext(aes(x = 0.5, 
                       label = ifelse(is.na(p_value_cat), NA, 
                                      paste0('**', p_value_cat, '**')), 
-                      label.colour = NA, color = p_value_sign), size = 3, hjust = 1) +
+                      label.colour = NA, color = p_value_sign), 
+                  fill = NA, size = 3, hjust = 1) +
     annotate('text', x = 0.04, y = dim(data)[1]+1, 
              label = "OR (CI)", hjust = 0, fontface = "bold") +
     annotate('text', x = 0.5, y = dim(data)[1]+1, 
@@ -804,8 +848,6 @@ rightPlot <- # -----------------------------------------------------------------
     coord_cartesian(ylim = c(1, dim(data)[1]+1), xlim = c(0, 0.51)) +
     theme_void() +
     theme(legend.position = 'none')
-
-
 
 mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 ```

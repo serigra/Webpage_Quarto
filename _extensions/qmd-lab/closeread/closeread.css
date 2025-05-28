@@ -6,120 +6,20 @@
   padding-block-start: 10svh !important;
 }
 */
-
-@import url('https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,100..900;1,100..900&display=swap$');
-
-.title {
-  font-family: "Petrona";
-  font-size: 3rem;
-  color: #FA2FBD;
-  font-weight: 500;
-  margin-bottom: 1.2em !important;
-  /*text-align: center;*/
-}
-
-
-h1 {
-color: #7F8A80;
-font-family: "Petrona";
-font-size: 1.9rem;
-font-weight: 500;
-margin-top: 1.2rem;
-margin-bottom: 0.9rem;
-}
-
-
-h2 {
-color: #235347; 
-font-family: "Petrona";
-font-size: 1.4rem;
-font-weight: 500;
-margin-top: 1.2rem;
-margin-bottom: 0.9rem;
-}
-
-
-h3 {
-color: #7F8A80; 
-font-family: "Petrona";
-font-size: 1.2rem;
-font-weight: 500;
-margin-top: 1.2rem;
-margin-bottom: 0.9rem;
-}
-
-
-body {
-  font-family: "Segoe UI Symbol"!important;
-  max-width: 2000px;
-  /*margin: 0 auto;*/
-  padding: 0;
-  width: 100%;
-  color: #666260;
-  background-color: #f8f8f6!important;
-}
-
-
-
-a {
-  font-family: "Petrona" !important;
-  color: #235347 !important;
-  font-size: 1em;
-  text-transform: none;
-}
-
-
-/* ============================= Navigation Bar ============================= */
-
-.navbar {
-  background: transparent;
-}
-
-.navbar-title {
-  font-family: 'Petrona';
-  font-size: 1.25rem;
-  color: #235347;
-  text-align: center;
-}
-
-/* navbar links */
-.navbar-nav .nav-link {
-    font-family: 'Petrona';
-    color: #235347 !important;
-    text-transform: uppercase;
-    letter-spacing: .1em; 
-    border-bottom: 0px hidden;    
-    margin: 0px 10px 0px 10px; 
-    padding: 2px 2px 4px 2px !important;
-
-    &:hover {
-      border-bottom: 1px solid !important;
-      padding: 2px 2px 0px 2px !important;
-      color: #FA2FBD; !important
-    }
-}
-
-
-/* =========================== Closeread Styling ============================ */
-
 .cr-section {
   display: grid;
   grid-template-rows: 1fr;
-  /*background-color: var(--cr-section-background-color);*/
-  background-color: #D1D7D3;
+  background-color: var(--cr-section-background-color);
 }
 .cr-section.cr-column-screen {
   grid-column: screen-start/screen-end !important;
   z-index: 998;
   opacity: 0.999;
-  background-color: #D1D7D3;
 }
 .cr-section .narrative-col {
   grid-row: 1;
-  /*font-family: var(--cr-narrative-font-family);*/
-  font-family: Source Sans Pro !important;
-  /*font-size: var(--cr-narrative-font-size);*/
-  font-size: 1.05rem;
+  font-family: var(--cr-narrative-font-family);
+  font-size: var(--cr-narrative-font-size);
 }
 .cr-section .narrative-col .trigger {
   padding-block: 45svh;
@@ -360,7 +260,7 @@ body.cr-removeheaderspace #quarto-content main#quarto-document-content .quarto-t
   --cr-narrative-outer-margin: 5%;
   --cr-narrative-font-family: var(--bs-body-font-family);
   --cr-narrative-font-size: 1.15rem;
-  --cr-poem-font-family:  "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+  --cr-poem-font-family: Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
   --cr-narrative-sidebar-width: 1fr;
   --cr-section-background-color: lightgrey;
 }
