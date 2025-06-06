@@ -5,16 +5,33 @@
 
 
 /* =============== General Styles for (closeread) Blog Posts ================ */
-/* necessary to set here again, 'coz for the closeread blog posts  the styles 
+/* necessary to set here again, 'coz for the closeread blog posts the styles 
    are overwritten by cosmo default styles)*/
 
 body {
   background-color: #f8f8f6 !important;
 }
 
+
+/* links */
+a {
+  font-family: "Petrona" !important;
+  color: #235347 !important;
+  font-size: 1em;
+  text-transform: none;
+  background-color: transparent !important;
+}
+
+
+/* remove background styling from inline code, e.g. `function()` */
+code {
+    background-color: transparent !important;
+    background: none !important;
+}
+
 /* background color of navbar */
 .navbar {
-  background: transparent;!important
+  background: transparent !important;
 }
 
 /* navbar links */
@@ -41,18 +58,29 @@ body {
 }
 
 
+
+
+
 /* ================ Styles for Closeread (scrollytelling) ================== */
 .cr-section {
   .narrative-col {
-    min-width: 700px;
+    min-width: 760px;
+    padding-left: 35px;
+    padding-right: 0px;
+    margin-right: -10px;
   }
 }
 
 .cr-section .sticky-col {
   padding-left: 5px;
-  padding-right: 5px;
+  padding-right: 10px;
 }
 
+.cr-section {
+  gap: 20px; /* Reduce overall gap between columns */
+}  
+  
+  
 /* ================ Title Styles (relevant for all blog posts) ============== */
 
 .title {
@@ -93,7 +121,6 @@ font-weight: 500;
 margin-top: 1.2rem;
 margin-bottom: 0.9rem;
 }
-
 
 
 /* ===================== Responsive Adjustments ======================== */

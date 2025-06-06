@@ -13,23 +13,29 @@ format:
     cr-style:
       section-background-color: "#D1D7D3"
       narrative-font-size: 1em
+      narrative-text-color-sidebar: "#666260"
+    html-table-processing: none # that tables are not striped!
     code-fold: true
+filters:
+  - line-highlight # to highlight code lines, exentions from https://github.com/shafayetShafee/line-highlight
 knitr:
   opts_chunk: 
     dev.args:
       bg: transparent
-code-summary: "R Code"
+code-summary: "R code: data manipulation"
 ---
 
 \
 
 \
 
-In this post, I will show you how to plot model estimates (odds ratios and confidence intervals) in an elegant way using the `ggplot2` package in R. The example is based on a hypothetical dataset that includes sociodemographic and health variables. The goal is to visualize the odds ratios (OR) and their confidence intervals (CI) for each variable, while also highlighting significant p-values.
+For presenting model estimates (e.g. odds ratios and confidence intervals with corresponding p-values) in a report or publication I find some sort of figures way more helpful than tables. 
+The following post shows of how transforming a model ouput into a nicely designed plot, step by step.
+The example is based on a hypothetical model output that includes the effect size (odds ratios) of sociodemographic and health variables on some sort of outcome. 
 
 
+\
 
-First we load some packages and generate the hypothetical data set that we will use for the plot.
 
 ```{r}
 #| output: false
@@ -37,6 +43,9 @@ First we load some packages and generate the hypothetical data set that we will 
 library(tidyverse)
 library(ggtext)
 library(patchwork)
+library(gt)
+library(png)
+library(grid)
 
 theme_set(
   theme(plot.background = element_rect(fill = "#f8f8f6", color = NA))
@@ -45,69 +54,48 @@ theme_set(
 
 
 ```{r}
-#| echo: true
+source("model_data.R")
+source("model_table.R")
+source("model_plot.R")
+source("empty_plot.R")
+source("theme_type.R")
 
-# hypothetical data set including sociodemographic and health variables
-data <- data.frame(
-  type = c(
-    rep("Sociodemographic", 7),
-    rep("Health Status", 10)),
-  variable = c(
-   "age", 
-    "sex_w_vs_m", 
-    "region_urban_vs_rural", 
-    "region_suburban_vs_rural", 
-    "education", 
-    "income", 
-    "employment_yes_vs_no",
-    "smoking_yes_vs_no", 
-    "alcohol", 
-    "hypertension_yes_vs_no", 
-    "diabetes", 
-    "BMI", 
-    "physical_activity", 
-    "cholesterol",
-    "total_healthcare_costs", 
-    "number_hospital_visits", 
-    "number_outpatient_consultations"
-  ),
-  OR = c(
-    1.25, 0.9, 1.19, 1.12, 0.81, 0.81, 0.62, 1.1,
-    1.70, 1.92, 1.35, 1.32, 0.88, 1.02, 1.33,
-    1.45, 1.30
-  ),
-  CI_lower = c(
-    1.05, 0.72, 0.97, 0.95, 0.65, 0.56, 0.52, 0.92,
-    1.50, 1.86, 1.16, 1.23, 0.80, 0.74, 1.11,
-    1.33, 1.12
-  ),
-  CI_upper = c(
-    1.33, 1.13, 1.29, 1.20, 0.92, 1.03, 0.75, 1.23,
-    1.89, 2.02, 1.45, 1.44, 0.95, 1.13, 1.42,
-    1.52, 1.54
-  ),
-  p_value = c(
-    0.011, 0.18, 0.062, 0.062, 0.009, 0.073, 0.002, 0.19,
-    0.001, 0.0001, 0.004, 0.013, 0.021, 0.81, 0.0003,
-    0.00001, 0.0007
-  )) |> 
-  mutate(
-  # make variables ready for plotting
-  OR_CI = paste0(round(OR, 2), ' (', round(CI_lower, 2), '-', round(CI_upper, 2),')'),
-  p_value_sign = ifelse(p_value < 0.05, TRUE, FALSE),
-  p_value_cat = case_when(p_value < 0.001 ~ '< 0.001',
-                          p_value < 0.05 ~ '< 0.05',
-                          TRUE ~ as.character(round(p_value, 2))
-                          )
-  )
-
-
-head(data)
+d <- model_data()
 ```
 
-Now lets start build up the plot step by step.
+
+
+::: {layout="[40,10,50]" layout-valign="center"}
+```{r}
+model_table(data = d$data.original)
+```
+
+```{r}
+par(mar = c(0, 0, 0, 0), bg = "transparent")
+plot.new()
+arrow <- readPNG('arrow.png')
+grid.raster(arrow, x=.5, y=.5, width=.95)
+```
+
+```{r}
+#| fig-width: 8
+#| fig-height: 8
+#| warning: false
+
+model_plot(data = d$data.final)
+```
+:::
 
 \
+
+
+*Note I*: The *scrollytelling* framework of the following post is made using the [`closeread`](https://closeread.dev/) Quarto extension. The code highlighting is done using the [`line-highlight`](https://github.com/shafayetShafee/line-highlight) Quarto extension, which allows you to highlight specific lines of code in the code chunks. For table formatting I used the [`{gt}`](https://gt.rstudio.com/index.html) package and for plotting [`{ggplot2}`](https://ggplot2.tidyverse.org/). 
+
+*Note II*: The consolidated code for generating the data of the hypothetical model output as well as the code for the plot itself, you find at the very end of this post. For simplicity, the  data manipulation steps are not shown step by step, but can be found consolidated at the end.
+
+\
+
+Now lets start build up the plot step by step.
 
 \
 
@@ -117,13 +105,12 @@ Now lets start build up the plot step by step.
 
 :::{focus-on="cr-plot-layout-I"}
 
-To start, first we arrange the grid with the main plot and the coefficients on the right side using the patchwork package. 
+To start, first we arrange the grid with the main plot and the coefficients on the right side using the [`{patchwork}`](https://patchwork.data-imaginist.com/) package. (For simplicity, code for the assembled plot output is not shown in the following chunks.).
 
 ```{r}
 #| echo: true
 #| code-fold: false
 #| eval: false
-
 
 mainPlot <- ggplot()
 rightPlot <- ggplot()
@@ -136,23 +123,8 @@ mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 
 :::{#cr-plot-layout-I}
 ```{r}
-mainPlot <- ggplot() +
-  annotate("text", x = 0.5, y = 0.5, label = "MainPlot", size = 6, color = 'lightgrey') +
-  theme(
-    axis.title = element_blank(),
-    axis.text = element_blank(),
-    axis.ticks = element_blank(),
-    panel.grid = element_blank()
-  )
-
-rightPlot <- ggplot() +
-  annotate("text", x = 0.5, y = 0.5, label = "RightPlot", size = 6, color = 'lightgrey') +
-  theme(
-    axis.title = element_blank(),
-    axis.text = element_blank(),
-    axis.ticks = element_blank(),
-    panel.grid = element_blank()
-  )
+mainPlot <- empty_plot("MainPlot", color = 'lightgrey')
+rightPlot <- empty_plot("RightPlot", color = 'lightgrey')
 
 mainPlot + rightPlot + plot_layout(widths = c(2.05,0.85))
 ```
@@ -163,38 +135,29 @@ Lets focus on building up the main plot first. [@cr-plot-layout-II]
 
 :::{#cr-plot-layout-II}
 ```{r}
-mainPlot <- ggplot() +
-  annotate("text", x = 0.5, y = 0.5, label = "MainPlot", size = 6) +
-  theme(
-    axis.title = element_blank(),
-    axis.text = element_blank(),
-    axis.ticks = element_blank(),
-    panel.grid = element_blank()
-  )
-
+mainPlot <- empty_plot("MainPlot")
 mainPlot + rightPlot + plot_layout(widths = c(2.05,0.85))
 ```
 :::
 
 
 :::{focus-on="cr-main-plot-1"}
-Lets start with plotting the odds ratios and confidence intervals.
+Lets start with simply plotting the odds ratios and confidence intervals.
 
 ```{r}
 #| echo: true
 #| code-fold: false
 #| eval: false
 
-ggplot(data, aes(y = variable, x = OR)) +
-  geom_point(size=2, show.legend = F) +
-  geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), 
-                 height = 0.0, linewidth = 0.70) +
-  geom_vline(aes(xintercept = 1), 
-             color = 'grey80', lty = 2, linewidth = 0.8)
+mainPlot <- 
+  
+  ggplot(data, aes(y = variable, x = OR)) +
+    geom_point(size=2, show.legend = F) +
+    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), 
+                   height = 0.0, linewidth = 0.70)
 ```
 
-But, you wanna have the variable ordered so that sociodemographic variables appear first,
-and then below that health variables are plotted. 
+But, it would be nice to have the variables not ordered alphabetically, but rather so that sociodemographic variables appear first, and then below that health variables are plotted. 
 :::
 
 
@@ -204,10 +167,9 @@ and then below that health variables are plotted.
 
 mainPlot <- 
   
-  ggplot(data, aes(y = variable, x = OR)) +
+  ggplot(d$data.original, aes(y = variable, x = OR)) +
     geom_point(size=2, show.legend = F) +
-    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), height = 0.0, linewidth = 0.70) +
-    geom_vline(aes(xintercept = 1), color = 'grey80', lty = 2, size = 0.8)
+    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), height = 0.0, linewidth = 0.70)
 
 mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 ```
@@ -216,123 +178,37 @@ mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 
 
 :::{focus-on="cr-main-plot-2"}
-To reorder the variables, I translated the 
-"variable" variable into an ordered factor and to show the variables ordered from
-top to bottom, instead of the other way around, I used fct_rev() function from 
-the forcats package.
-
-\
-
-```{r}
-#| echo: true
-#| eval: false
-
-data <- data |> 
-  mutate(variable = factor(variable, 
-                           levels = c("age", "sex_w_vs_m",
-                                      "region_urban_vs_rural", 
-                                      "region_suburban_vs_rural", 
-                                      "education", 
-                                      "income", 
-                                      "employment_yes_vs_no",
-                                      "physical_activity", 
-                                      "smoking_yes_vs_no", 
-                                      "alcohol", 
-                                      "hypertension_yes_vs_no", 
-                                      "diabetes", 
-                                      "BMI", 
-                                      "cholesterol",
-                                      "number_outpatient_consultations",
-                                      "number_hospital_visits", 
-                                      "total_healthcare_costs"),
-                           labels = c("Age", "Sex (w vs. m)",
-                                      "Region (urban vs. rural)",
-                                      "Region (suburban vs.rural",
-                                      "Education Level",
-                                      "Yearly Income (CHF)",
-                                      "Employed (vs. unemployed)",
-                                      "Physical Activity Level",
-                                      "Smoking (vs. non-smoking)",
-                                      "Alcohol Consume",
-                                      "Hypertension (yes vs. no)",
-                                      "Diabetes (yes vs. no)",
-                                      "BMI (≥ 25 vs < 25)",
-                                      "Cholesterol Level",
-                                      "No. outpatient consultations",
-                                      "No. hospital visits",
-                                      "Total Healthcare Costs (CHF)")
-  )
-  )
-```
+To reorder the variables, I transformed the 
+variables into an ordered factor (see data preparation) and used `fct_rev()` function from 
+[`{forcats}`](https://forcats.tidyverse.org/) to reverse its order on the plot.
 
 ```{r}
 #| echo: true
 #| eval: false
 #| code-fold: false
+#| source-line-numbers: "3"
 
 mainPlot <- 
   
   ggplot(data, aes(y = fct_rev(variable), x = OR)) +
     geom_point(size=2, show.legend = F) +
     geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`),
-                   height = 0.0, size = 0.70) +
-    geom_vline(aes(xintercept = 1), 
-               color = 'grey80', lty = 2, size = 0.8)
+                   height = 0.0, size = 0.70) 
 ```
 
-
-And to give even more structure to the plot, we can add subtitles for the variable categories, e.g. "Sociodemographic" and "Health Status"...
-
+And to give even more structure to the plot, we can add subtitles for the variable categories, e.g. "Sociodemographic" and "Health Status" (see also data preparation)...
 :::
 
 :::{#cr-main-plot-2}
 ```{r}
-data <- data |> 
-  mutate(variable = factor(variable, 
-                           levels = c("age", "sex_w_vs_m",
-                                      "region_urban_vs_rural", 
-                                      "region_suburban_vs_rural", 
-                                      "education", 
-                                      "income", 
-                                      "employment_yes_vs_no",
-                                      "physical_activity", 
-                                      "smoking_yes_vs_no", 
-                                      "alcohol", 
-                                      "hypertension_yes_vs_no", 
-                                      "diabetes", 
-                                      "BMI", 
-                                      "cholesterol",
-                                      "number_outpatient_consultations",
-                                      "number_hospital_visits", 
-                                      "total_healthcare_costs"),
-                           labels = c("Age", "Sex (w vs. m)",
-                                      "Region (urban vs. rural)",
-                                      "Region (suburban vs.rural",
-                                      "Education Level",
-                                      "Yearly Income (CHF)",
-                                      "Employed (vs. unemployed)",
-                                      "Physical Activity Level",
-                                      "Smoking (vs. non-smoking)",
-                                      "Alcohol Consume",
-                                      "Hypertension (yes vs. no)",
-                                      "Diabetes (yes vs. no)",
-                                      "BMI (≥ 25 vs < 25)",
-                                      "Cholesterol Level",
-                                      "No. outpatient consultations",
-                                      "No. hospital visits",
-                                      "Total Healthcare Costs (CHF)")
-  )
-  )
-
+#| warning: false
 
 mainPlot <- 
   
-  ggplot(data, aes(y = fct_rev(variable), x = OR)) +
+  ggplot(d$data.ordered, aes(y = fct_rev(variable), x = OR)) +
     geom_point(size=2, show.legend = F) +
     geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), 
-                   height = 0.0, size = 0.70) +
-    geom_vline(aes(xintercept = 1), 
-               color = 'grey80', lty = 2, size = 0.8)
+                   height = 0.0, size = 0.70)
 
 mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 ```
@@ -342,36 +218,13 @@ mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 
 
 :::{focus-on="cr-main-plot-3"}
-Add bold subtitles for the variable categories
-
-\
-
-```{r}
-#| echo: true
-#| eval: false
-
-orig_levels <- levels(data$variable)
-new_levels <- R.utils::insert(orig_levels, ats = c(1, 8), 
-                              values = c("**Sociodemographic**", "**Health Status**"))
-
-# add row between and fill with subtitle
-data <- data |> 
-group_by(type) |> 
-  group_modify(~ add_row(.x, .before = 0)) |> 
-  ungroup() |> 
-  mutate(variable = ifelse(is.na(variable), 
-                           paste0("**",type, "**"), as.character(variable))) |>  
-  mutate(variable = factor(variable, 
-                           levels = new_levels,
-                           labels = new_levels
-                           )
-  )
-```
+Add bold subtitles for the variable categories, using `element_markdown()` from [`{ggtext}`](https://wilkelab.org/ggtext/) to format the text in the y-axis labels.
 
 ```{r}
 #| echo: true
 #| eval: false
 #| code-fold: false
+#| source-line-numbers: "7"
 
 mainPlot <- 
   
@@ -379,43 +232,20 @@ mainPlot <-
     geom_point(size=2, show.legend = F) +
     geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), 
                    height = 0.0, size = 0.70) +
-    geom_vline(aes(xintercept = 1), 
-               color = 'grey80', lty = 2, size = 0.8) +
     theme(axis.text.y = ggtext::element_markdown())
 ```
-
-
 :::
 
 :::{#cr-main-plot-3}
 ```{r}
 #| warning: false
 
-orig_levels <- levels(data$variable)
-new_levels <- R.utils::insert(orig_levels, ats = c(1, 8), 
-                              values = c("**Sociodemographic**", "**Health Status**"))
-
-# add row between and fill with subtitle
-data <- data |> 
-group_by(type) |> 
-  group_modify(~ add_row(.x, .before = 0)) |> 
-  ungroup() |> 
-  mutate(variable = ifelse(is.na(variable), 
-                           paste0("**",type, "**"), as.character(variable))) |>  
-  mutate(variable = factor(variable, 
-                           levels = new_levels,
-                           labels = new_levels
-                           )
-  )
-
 mainPlot <- 
   
-  ggplot(data, aes(y = fct_rev(variable), x = OR)) +
+  ggplot(d$data.final, aes(y = fct_rev(variable), x = OR)) +
     geom_point(size=2, show.legend = F) +
     geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), 
                    height = 0.0, size = 0.70) +
-    geom_vline(aes(xintercept = 1), 
-               color = 'grey80', lty = 2, size = 0.8) +
     theme(axis.text.y = ggtext::element_markdown(hjust = 1)) # to have y-labs right aligned
 
 mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
@@ -427,22 +257,27 @@ mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 :::{focus-on="cr-main-plot-4"}
 
 Style main plot
+
 ```{r}
 #| echo: true
 #| eval: false
 #| code-fold: false
+#| source-line-numbers: "7-8,10-14"
 
 mainPlot <- 
   
-  mainPlot + 
-  labs(x = 'OR (CI)', y = '') +
-  theme_classic() +
-  theme(legend.position = 'none',
-        axis.line.y = element_blank(),
-        axis.ticks.y = element_blank(),
-        axis.text.y = ggtext::element_markdown(),
-        panel.grid.minor.y = element_blank(),
-        panel.grid.major.y = element_line(color = '#F5F5F5'))
+  ggplot(data, aes(y = fct_rev(variable), x = OR)) +
+    geom_point(size=2, show.legend = F) +
+    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), 
+                   height = 0.0, size = 0.70) +
+    labs(x = 'OR (CI)', y = '') +
+    theme_classic() +
+    theme(axis.text.y = ggtext::element_markdown(),
+          axis.line.y = element_blank(),
+          axis.ticks.y = element_blank(),
+          panel.grid.minor.y = element_blank(),
+          panel.grid.major.y = element_line(color = '#F5F5F5'),
+          legend.position = 'none')
 ```
 :::
 
@@ -451,26 +286,61 @@ mainPlot <-
 ```{r}
 #| warning: false
 
-theme_normal <- 
-  theme_classic() +
-  theme(panel.background = element_rect(fill = "#f8f8f6", color = NA),
-        plot.background = element_rect(fill = "#f8f8f6", color = NA),
-        legend.position = 'none',
-        axis.line.x = element_line(),
-        axis.ticks.x = element_line(),
-        axis.text.x = element_text(),
-        axis.title.x = element_text(),
-        axis.line.y = element_blank(),
-        axis.ticks.y = element_blank(),
-        axis.text.y = ggtext::element_markdown(),
-        panel.grid.minor.y = element_blank(),
-        panel.grid.major.y = element_line(color = '#F5F5F5'))
-
 mainPlot <- 
   
   mainPlot + 
   labs(x = 'OR (CI)', y = '') +
-  theme_normal
+  theme_type(theme_type = 'normal')
+  
+mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
+```
+:::
+
+
+
+:::{focus-on="cr-main-plot-50"}
+
+... and add a vertical reference line at OR = 1 to support visual interpretation.
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-fold: false
+#| source-line-numbers: "7-8"
+
+mainPlot <- 
+  
+  ggplot(data, aes(y = fct_rev(variable), x = OR)) +
+    geom_point(size=2, show.legend = F) +
+    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), 
+                   height = 0.0, size = 0.70) +
+    geom_vline(aes(xintercept = 1), 
+               color = 'grey80', lty = 2, size = 0.8) +
+    labs(x = 'OR (CI)', y = '') +
+    theme_classic() +
+    theme(axis.text.y = ggtext::element_markdown(),
+          axis.line.y = element_blank(),
+          axis.ticks.y = element_blank(),
+          panel.grid.minor.y = element_blank(),
+          panel.grid.major.y = element_line(color = '#F5F5F5'),
+          legend.position = 'none')
+```
+:::
+
+:::{#cr-main-plot-50}
+```{r}
+#| warning: false
+
+mainPlot <- 
+  
+  ggplot(d$data.final, aes(y = fct_rev(variable), x = OR)) +
+    geom_point(size=2, show.legend = F) +
+    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), 
+                   height = 0.0, size = 0.70) +
+    geom_vline(aes(xintercept = 1), 
+               color = 'grey80', lty = 2, size = 0.8) +
+    labs(x = 'OR (CI)', y = '') +
+    theme_type(theme_type = 'normal')
   
 mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 ```
@@ -480,15 +350,17 @@ mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 
 :::{focus-on="cr-main-plot-5"}
 
-Style points and error-bars based on the p-value significance level, using the `p_value_sign` variable.
+...and color points and error-bars based on the p-value significance level, using the `p_value_sign` variable
 ```{r}
 #| echo: true
 #| eval: false
 #| code-fold: false
+#| source-line-numbers: "4,10"
 
 mainPlot <- 
   
-  ggplot(data, aes(y = fct_rev(variable), x = OR, color = p_value_sign)) +
+  ggplot(data, aes(y = fct_rev(variable), x = OR, 
+                   color = p_value_sign)) +
     geom_point(size=2, show.legend = F) +
     geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), 
                    height = 0.0, size = 0.70) +
@@ -497,12 +369,12 @@ mainPlot <-
     scale_color_manual(values = c("#aaaaaa", "black")) +
     labs(x = 'OR (CI)', y = '') +
     theme_classic() +
-    theme(legend.position = 'none',
+    theme(axis.text.y = ggtext::element_markdown(),
           axis.line.y = element_blank(),
           axis.ticks.y = element_blank(),
-          axis.text.y = ggtext::element_markdown(),
           panel.grid.minor.y = element_blank(),
-          panel.grid.major.y = element_line(color = '#F5F5F5'))
+          panel.grid.major.y = element_line(color = '#F5F5F5'),
+          legend.position = 'none')
 ```
 :::
 
@@ -512,7 +384,7 @@ mainPlot <-
 
 mainPlot <- 
   
-  ggplot(data, aes(y = fct_rev(variable), x = OR, color = p_value_sign)) +
+  ggplot(d$data.final, aes(y = fct_rev(variable), x = OR, color = p_value_sign)) +
     geom_point(size=2, show.legend = F) +
     geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), 
                    height = 0.0, size = 0.70) +
@@ -520,11 +392,13 @@ mainPlot <-
                color = 'grey80', lty = 2, size = 0.8) +
     scale_color_manual(values = c("#aaaaaa", "black")) +
     labs(x = 'OR (CI)', y = '') +
-    theme_normal
+    theme_type(theme_type = 'normal')
   
 mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 ```
 :::
+
+
 
 Now lets focus on the right side of the plot... [@cr-right-plot-1]
 
@@ -533,34 +407,11 @@ Now lets focus on the right side of the plot... [@cr-right-plot-1]
 ```{r}
 #| warning: false
 
-rightPlot <- ggplot() +
-  annotate("text", x = 0.5, y = 0.5, label = "RightPlot", size = 6) +
-  theme(
-    axis.title = element_blank(),
-    axis.text = element_blank(),
-    axis.ticks = element_blank(),
-    panel.grid = element_blank()
-  )
+rightPlot <- empty_plot("RightPlot")
 
-
-theme_grey80 <- 
-  theme(panel.background = element_rect(fill = "#f8f8f6", color = NA),
-        plot.background = element_rect(fill = "#f8f8f6", color = NA),
-        legend.position = 'none',
-        axis.line.x = element_line(color = 'grey80'),
-        axis.ticks.x = element_line(color = "grey80"),
-        axis.text.x = element_text(color = "grey80"),
-        axis.title.x = element_text(color = "grey80"),
-        axis.line.y = element_blank(),
-        axis.ticks.y = element_blank(),
-        axis.text.y = ggtext::element_markdown(color = 'grey80'),
-        panel.grid.minor.y = element_blank(),
-        panel.grid.major.y = element_line(color = '#F5F5F5'))
-
-
- mainPlot <- 
+mainPlot <- 
    
-   ggplot(data, aes(y = fct_rev(variable), x = OR)) +
+   ggplot(d$data.final, aes(y = fct_rev(variable), x = OR)) +
     geom_point(size=2, show.legend = F, color = 'grey80') +
     geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), 
                    height = 0.0, size = 0.70, color = 'grey80') +
@@ -568,7 +419,7 @@ theme_grey80 <-
                color = 'grey80', lty = 2, size = 0.8) +
     labs(x = 'OR (CI)', y = '') +
     theme_classic() +
-    theme_grey80
+    theme_type(theme_type = 'grau') 
     
 mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 ```
@@ -576,7 +427,7 @@ mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 
 
 :::{focus-on="cr-right-plot-2"}
-Plot the coefficients (OR and CI) and p-values:
+Plot the coefficients (OR and CI) and p-values as text:
 
 ```{r}
 #| echo: true
@@ -598,7 +449,7 @@ rightPlot <-
 
 rightPlot <-  
   
-  ggplot(data, aes(y = fct_rev(variable))) +
+  ggplot(d$data.final, aes(y = fct_rev(variable))) +
     geom_text(aes(x = 0, label = OR_CI), size = 3, hjust = 0) +
     geom_text(aes(x = 0.5, label = p_value_cat), size = 3, hjust = 1)
 
@@ -614,6 +465,7 @@ get rid of axis, labels and legend
 #| echo: true
 #| eval: false
 #| code-fold: false
+#| source-line-numbers: "6,7"
 
 rightPlot <-  
   
@@ -632,7 +484,7 @@ rightPlot <-
 
 rightPlot <-  
   
-  ggplot(data, aes(y = fct_rev(variable))) +
+  ggplot(d$data.final, aes(y = fct_rev(variable))) +
     geom_text(aes(x = 0, label = OR_CI), size = 3, hjust = 0) +
     geom_text(aes(x = 0.5, label = p_value_cat), size = 3, hjust = 1) +
     theme_void() +
@@ -646,16 +498,18 @@ mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 
 :::{focus-on="cr-right-plot-4"}
 
-format the coefficients and p-values based on signifcance level (< 0.05 or > 0.05), using `ggtext::geom_richtext()` to make the p-values bold
+format the coefficients and p-values based on signifcance level (< 0.05 or > 0.05), using `geom_richtext()` from [`{ggtext}`](https://wilkelab.org/ggtext/) to make the p-values bold
 ```{r}
 #| echo: true
 #| eval: false
 #| code-fold: false
+#| source-line-numbers: "5,7-12"
 
 rightPlot <-  
   
   ggplot(data, aes(y = fct_rev(variable))) +
-    geom_text(aes(x = 0, label = OR_CI, color = p_value_sign), 
+    geom_text(aes(x = 0, label = OR_CI, 
+                  color = p_value_sign), 
               size = 3, hjust = 0) +
     geom_richtext(aes(x = 0.5, 
                       label = ifelse(is.na(p_value_cat), NA, 
@@ -675,8 +529,9 @@ rightPlot <-
 
 rightPlot <-  
   
-  ggplot(data, aes(y = fct_rev(variable))) +
-    geom_text(aes(x = 0, label = OR_CI, color = p_value_sign), 
+  ggplot(d$data.final, aes(y = fct_rev(variable))) +
+    geom_text(aes(x = 0, label = OR_CI, 
+                  color = p_value_sign), 
               size = 3, hjust = 0) +
     ggtext::geom_richtext(aes(x = 0.5, 
                               label = ifelse(is.na(p_value_cat), NA, 
@@ -695,29 +550,30 @@ mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 
 :::{focus-on="cr-right-plot-5"}
 
-Add title for OR (CI) and p-value
+add title for OR (CI) and p-value
 
 ```{r}
 #| echo: true
 #| eval: false
 #| code-fold: false
+#| source-line-numbers: "13-17"
 
 rightPlot <-  
   
   ggplot(data, aes(y = fct_rev(variable))) +
-    geom_text(aes(x = 0, label = OR_CI, color = p_value_sign), 
+    geom_text(aes(x = 0, label = OR_CI, 
+                  color = p_value_sign), 
               size = 3, hjust = 0) +
     geom_richtext(aes(x = 0.5, 
                       label = ifelse(is.na(p_value_cat), NA,
                                      paste0('**', p_value_cat, '**')), 
                       label.colour = NA, 
                       color = p_value_sign), size = 3, hjust = 1) +
-    # add titles on top for OR (CI) and p-value
+    scale_color_manual(values = c("#aaaaaa", "black")) +
     annotate('text', x = 0.04, y = dim(data)[1]+1, 
              label = "OR (CI)", hjust = 0, fontface = "bold") +
     annotate('text', x = 0.5, y = dim(data)[1]+1, 
              label = "p-value", hjust = 1, fontface = "bold") +
-    scale_color_manual(values = c("#aaaaaa", "black")) +
     coord_cartesian(ylim = c(1, dim(data)[1]+1) , xlim = c(0, 0.51)) +
     theme_void() +
     theme(legend.position = 'none')
@@ -731,8 +587,9 @@ rightPlot <-
 
 rightPlot <-  
   
-  ggplot(data, aes(y = fct_rev(variable))) +
-    geom_text(aes(x = 0, label = OR_CI, color = p_value_sign), 
+  ggplot(d$data.final, aes(y = fct_rev(variable))) +
+    geom_text(aes(x = 0, label = OR_CI, 
+                  color = p_value_sign), 
               size = 3, hjust = 0) +
     ggtext::geom_richtext(aes(x = 0.5, 
                               label = ifelse(is.na(p_value_cat), NA, 
@@ -740,12 +597,12 @@ rightPlot <-
                               label.colour = NA, 
                               color = p_value_sign), fill = NA, size = 3, hjust = 1) +
     # add titles on top for OR (CI) and p-value
-    annotate('text', x = 0.04, y = dim(data)[1]+1, 
+    annotate('text', x = 0.04, y = dim(d$data.final)[1]+1, 
              label = "OR (CI)", hjust = 0, fontface = "bold") +
-    annotate('text', x = 0.5, y = dim(data)[1]+1, 
+    annotate('text', x = 0.5, y = dim(d$data.final)[1]+1, 
              label = "p-value", hjust = 1, fontface = "bold") +
     scale_color_manual(values = c("#aaaaaa", "black")) +
-    coord_cartesian(ylim = c(1, dim(data)[1]+1), xlim = c(0, 0.51)) +
+    coord_cartesian(ylim = c(1, dim(d$data.final)[1]+1), xlim = c(0, 0.51)) +
     theme_void() +
     theme(legend.position = 'none')
 
@@ -778,16 +635,16 @@ mainPlot <-
 
 mainPlot <-  
   
-  ggplot(data, aes(y = fct_rev(variable), x = OR, color = p_value_sign)) +
+  ggplot(d$data.final, aes(y = fct_rev(variable), x = OR, color = p_value_sign)) +
     geom_point(size=2, show.legend = F) +
     geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), 
                    height = 0.0, size = 0.70) +
     geom_vline(aes(xintercept = 1), 
                color = 'grey80', lty = 2, size = 0.8) +
-    coord_cartesian(ylim = c(1, dim(data)[1]+1)) + 
+    coord_cartesian(ylim = c(1, dim(d$data.final)[1]+1)) + 
     scale_color_manual(values = c("#aaaaaa", "black")) +
     labs(x = 'OR (CI)', y = '') +
-    theme_normal
+    theme_type(theme_type = 'normal') 
   
 mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 ```
@@ -804,56 +661,34 @@ So that's it! You now have a nice plot of model estimates with odds ratios and c
 Here the complete and consolidated code:
 
 ```{r}
-#| warning: false
 #| echo: true
-#| fig-align: center
+#| eval: false
+#| code-summary: "R code: data"
+#| code: !expr readLines("model_data.R")
 
-mainPlot <-  # -----------------------------------------------------------------
-  
-  ggplot(data, aes(y = fct_rev(variable), x = OR, color = p_value_sign)) +
-    geom_point(size=2, show.legend = F) +
-    geom_errorbarh(aes(xmin=`CI_lower`, xmax=`CI_upper`), 
-                   height = 0.0, size = 0.70) +
-    geom_vline(aes(xintercept = 1), 
-               color = 'grey80', lty = 2, size = 0.8) +
-    coord_cartesian(ylim = c(1, dim(data)[1]+1)) + 
-    scale_color_manual(values = c("#aaaaaa", "black")) +
-    labs(x = 'OR (CI)', y = '') +
-    theme_classic() +
-    theme(legend.position = 'none',
-          axis.line.y = element_blank(),
-          axis.ticks.y = element_blank(),
-          axis.text.y = ggtext::element_markdown(),
-          panel.grid.minor.y = element_blank(),
-          panel.grid.major.y = element_line(color = '#F5F5F5'),
-          panel.background = element_rect(fill = "#f8f8f6", color = NA),
-          plot.background = element_rect(fill = "#f8f8f6", color = NA))
-
-
-rightPlot <- # ----------------------------------------------------------------- 
-  
-  ggplot(data, aes(y = fct_rev(variable))) +
-    geom_text(aes(x = 0, label = OR_CI, color = p_value_sign), 
-              size = 3, hjust = 0) +
-    geom_richtext(aes(x = 0.5, 
-                      label = ifelse(is.na(p_value_cat), NA, 
-                                     paste0('**', p_value_cat, '**')), 
-                      label.colour = NA, color = p_value_sign), 
-                  fill = NA, size = 3, hjust = 1) +
-    annotate('text', x = 0.04, y = dim(data)[1]+1, 
-             label = "OR (CI)", hjust = 0, fontface = "bold") +
-    annotate('text', x = 0.5, y = dim(data)[1]+1, 
-             label = "p-value", hjust = 1, fontface = "bold") +
-    scale_color_manual(values = c("#aaaaaa", "black")) +
-    coord_cartesian(ylim = c(1, dim(data)[1]+1), xlim = c(0, 0.51)) +
-    theme_void() +
-    theme(legend.position = 'none')
-
-mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
+# not show
 ```
 
 
+```{r}
+#| echo: true
+#| eval: false
+#| code-summary: "R code: plot"
+#| code: !expr readLines("model_plot.R")
 
+#not show
+```
+
+
+```{r}
+#| warning: false
+#| echo: false
+#| fig-align: center
+#| fig-width: 8
+#| fig-height: 6.7
+
+model_plot(data = d$data.final)
+```
 
 
 
