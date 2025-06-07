@@ -1,7 +1,7 @@
 ---
-title: "Plot Model Estimates"
+title: "From Boring Tables to Beautiful Plots"
 author: "Sereina M. Graber"
-date: "2025-04-16"
+date: "2025-06-07"
 image: cover-png.png
 toc: false
 format:
@@ -29,9 +29,9 @@ code-summary: "R code: data manipulation"
 
 \
 
-For presenting model estimates (e.g. odds ratios and confidence intervals with corresponding p-values) in a report or publication I find some sort of figures way more helpful than tables. 
-The following post shows of how transforming a model ouput into a nicely designed plot, step by step.
-The example is based on a hypothetical model output that includes the effect size (odds ratios) of sociodemographic and health variables on some sort of outcome. 
+For presenting model estimates (e.g., odds ratios and confidence intervals with corresponding p-values) in reports or publications, I find figures are far more helpful than tables.
+
+The following post shows how to transform a model output into a nicely designed plot, step by step. The example is based on a hypothetical model output that includes odds ratios of sociodemographic and health variables on some binary outcome.
 
 
 \
@@ -90,13 +90,13 @@ model_plot(data = d$data.final)
 \
 
 
-*Note I*: The *scrollytelling* framework of the following post is made using the [`closeread`](https://closeread.dev/) Quarto extension. The code highlighting is done using the [`line-highlight`](https://github.com/shafayetShafee/line-highlight) Quarto extension, which allows you to highlight specific lines of code in the code chunks. For table formatting I used the [`{gt}`](https://gt.rstudio.com/index.html) package and for plotting [`{ggplot2}`](https://ggplot2.tidyverse.org/). 
+*Note I*: The *scrollytelling* framework is made using the [`closeread`](https://closeread.dev/) Quarto extension. The code highlighting is done using the [`line-highlight`](https://github.com/shafayetShafee/line-highlight) Quarto extension, which allows to highlight specific lines of code. For table formatting [`{gt}`](https://gt.rstudio.com/index.html) is used and for plotting [`{ggplot2}`](https://ggplot2.tidyverse.org/). 
 
-*Note II*: The consolidated code for generating the data of the hypothetical model output as well as the code for the plot itself, you find at the very end of this post. For simplicity, the  data manipulation steps are not shown step by step, but can be found consolidated at the end.
+*Note II*: You'll find the complete code for both generating the hypothetical model data and creating the visualization at the end of this post. The data preparation steps are not broken down individually, but are only found consolidated in the final code section.
 
 \
 
-Now lets start build up the plot step by step.
+Now let`s start building up the plot step by step.
 
 \
 
@@ -106,7 +106,9 @@ Now lets start build up the plot step by step.
 
 :::{focus-on="cr-plot-layout-I"}
 
-To start, first we arrange the grid with the main plot and the coefficients on the right side using the [`{patchwork}`](https://patchwork.data-imaginist.com/) package. (For simplicity, code for the assembled plot output is not shown in the following chunks.).
+## Setting Up the Layout
+
+First, let's arrange the grid with the main plot and the coefficients on the right side using [`{patchwork}`](https://patchwork.data-imaginist.com/). (For simplicity, code for the assembled plot output is not shown in the following chunks.).
 
 ```{r}
 #| echo: true
@@ -132,7 +134,13 @@ mainPlot + rightPlot + plot_layout(widths = c(2.05,0.85))
 :::
 
 
-Lets focus on building up the main plot first. [@cr-plot-layout-II]
+:::{focus-on="cr-plot-layout-II"}
+
+## Building the Main Plot
+
+Let's focus on building up the main plot first.
+
+:::
 
 :::{#cr-plot-layout-II}
 ```{r}
@@ -143,7 +151,7 @@ mainPlot + rightPlot + plot_layout(widths = c(2.05,0.85))
 
 
 :::{focus-on="cr-main-plot-1"}
-Lets start with simply plotting the odds ratios and confidence intervals.
+Let's start by simply plotting the odds ratios and confidence intervals.
 
 ```{r}
 #| echo: true
@@ -158,7 +166,7 @@ mainPlot <-
                    height = 0.0, linewidth = 0.70)
 ```
 
-But, it would be nice to have the variables not ordered alphabetically, but rather so that sociodemographic variables appear first, and then below that health variables are plotted. 
+Rather than displaying variables in alphabetical order, it would be more intuitive to group them logically — e.g. with sociodemographic variables appearing at the top, followed by health variables below.
 :::
 
 
@@ -179,9 +187,8 @@ mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 
 
 :::{focus-on="cr-main-plot-2"}
-To reorder the variables, I transformed the 
-variables into an ordered factor (see data preparation) and used `fct_rev()` function from 
-[`{forcats}`](https://forcats.tidyverse.org/) to reverse its order on the plot.
+To reorder the variables, I converted them into an ordered factor with new labels (see data preparation code) and used `fct_rev()` from 
+[`{forcats}`](https://forcats.tidyverse.org/) to reverse their order on the plot.
 
 ```{r}
 #| echo: true
@@ -218,9 +225,9 @@ mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 
 
 :::{focus-on="cr-main-plot-3"}
-And to give more structure to the plot, I added subtitles for the types of variables, i.e. *Sociodemographic* and *Health Status* (see data preparation)...
+To enhance the plot's structure, we can add subtitles that categorize the variable types — *Sociodemographic* and *Health Status* (see data preparation).
 
-Make subtitles bold using `element_markdown()` from [`{ggtext}`](https://wilkelab.org/ggtext/) to format the text in the y-axis labels.
+The subtitles can be formatted in bold by wrapping the text with `**...**` and using `element_markdown()` from [`{ggtext}`](https://wilkelab.org/ggtext/).
 
 ```{r}
 #| echo: true
@@ -258,7 +265,7 @@ mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 
 :::{focus-on="cr-main-plot-4"}
 
-Style main plot
+Next, let's make our main plot look a bit more polished...
 
 ```{r}
 #| echo: true
@@ -352,7 +359,7 @@ mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 
 :::{focus-on="cr-main-plot-5"}
 
-...and color points and error-bars based on the p-value significance level, using the `p_value_sign` variable
+Finally, points and error-bars can be colored based on the p-value significance level, using the `p_value_sign` variable (see data preparation).
 ```{r}
 #| echo: true
 #| eval: false
@@ -401,9 +408,11 @@ mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 :::
 
 
+:::{focus-on="cr-right-plot-1"}
+## Creating the Right Panel
 
-Now lets focus on the right side of the plot... [@cr-right-plot-1]
-
+Now let's focus on the right side of the plot...
+:::
 
 :::{#cr-right-plot-1}
 ```{r}
@@ -429,7 +438,7 @@ mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 
 
 :::{focus-on="cr-right-plot-2"}
-Plot the coefficients (OR and CI) and p-values as text:
+First, let's plot the coefficients (OR and CI) and p-values as text. Looks horrible 😵.
 
 ```{r}
 #| echo: true
@@ -462,7 +471,7 @@ mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 
 :::{focus-on="cr-right-plot-3"}
 
-get rid of axis, labels and legend
+Remove axes, labels and grid lines. Much better 🤓.
 ```{r}
 #| echo: true
 #| eval: false
@@ -500,7 +509,7 @@ mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 
 :::{focus-on="cr-right-plot-4"}
 
-format the coefficients and p-values based on signifcance level (< 0.05 or > 0.05), using `geom_richtext()` from [`{ggtext}`](https://wilkelab.org/ggtext/) to make the p-values bold
+Next, let's also color-code the coefficients and p-values based on significance level. To make significant p-values stand out, I've used `geom_richtext()` from [`{ggtext}`](https://wilkelab.org/ggtext/) to display them in bold.
 ```{r}
 #| echo: true
 #| eval: false
@@ -552,7 +561,7 @@ mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 
 :::{focus-on="cr-right-plot-5"}
 
-add title for OR (CI) and p-value
+Let's add titles for the *OR (CI)* and *p-value* columns. `coord_cartesian()` helps to adjust the y-axis limits so that the titles are positioned nicely within the plot.
 
 ```{r}
 #| echo: true
@@ -615,7 +624,9 @@ mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 
 :::{focus-on="cr-right-plot-6"}
 
-Align y axes of main plot and right plot, so that that they are on the exact same height, using the same `coord_cartesian()` setting in the main plot as in the right plot
+## Final Plot
+
+Let's make sure the y-axes of both plots are aligned so they're at exactly the same height, using the same `coord_cartesian()` setting in both the main plot and right plot.
 
 ```{r}
 #| echo: true
@@ -653,14 +664,51 @@ mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 :::
 
 
+
+:::{focus-on="cr-right-plot-7"}
+
+To finalize, let's add some annotation using [`{patchwork}`](https://patchwork.data-imaginist.com/).
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-fold: false
+#| source-line-numbers: "2-8"
+
+mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2)) +
+  plot_annotation(
+    title = 'Model Estimates of Sociodemographic and Health Variables',
+    caption = 'Note: This model output is entirely hypothetical and was created solely for illustrative purposes. 
+    It does not represent real data or imply any real-world conclusions.'
+  )
+    
+```
+:::
+
+
+:::{#cr-right-plot-7}
+```{r}
+#| warning: false
+
+mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2)) +
+  plot_annotation(
+    title = 'Model Estimates of Sociodemographic and Health Variables',
+    caption = 'Note: This model output is entirely hypothetical and was created solely for illustrative purposes. 
+    It does not represent real data or imply any real-world conclusions.'
+  )
+```
+:::
+
+
+
 ::::
 
 \
 \
 
-So that's it! You now have a nice plot of model estimates with odds ratios and confidence intervals, as well as p-values, all nicely formatted and aligned.
+That's it! Now we have an informative plot of model estimates with odds ratios, confidence intervals, and p-values - all nicely formatted and aligned.
 
-Here the complete and consolidated code:
+Here you find the complete code:
 
 ```{r}
 #| echo: true
