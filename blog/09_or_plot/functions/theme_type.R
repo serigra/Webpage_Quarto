@@ -1,3 +1,4 @@
+#library(ggplot2)
 
 theme_type <- function(theme_type = 'normal'){
 

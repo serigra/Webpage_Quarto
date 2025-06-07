@@ -1,5 +1,5 @@
-
-
+# library(R.utils)
+# library(tidyverse)
 
 model_data <- function() {
 
@@ -109,8 +109,8 @@ data.ordered <- data.original |>
 # ----------------------------- add subtitles ----------------------------------
 
 orig_levels <- levels(data.ordered$variable)
-new_levels <- R.utils::insert(orig_levels, ats = c(1, 8), 
-                              values = c("**Sociodemographic**", "**Health Status**"))
+new_levels <- insert(orig_levels, ats = c(1, 8), 
+                     values = c("**Sociodemographic**", "**Health Status**"))
 
 
 data <- data.ordered |> 
@@ -137,5 +137,5 @@ data <- data.ordered |>
 }
 
 
-# run
+# Example usage
 # data <- model_data()$data.final

@@ -1,4 +1,4 @@
-
+#library(ggplot2)
 
 empty_plot <- function(type = "MainPlot", color = 'black'){
   

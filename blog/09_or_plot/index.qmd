@@ -46,6 +46,7 @@ library(patchwork)
 library(gt)
 library(png)
 library(grid)
+library(R.utils)
 
 theme_set(
   theme(plot.background = element_rect(fill = "#f8f8f6", color = NA))
@@ -54,11 +55,11 @@ theme_set(
 
 
 ```{r}
-source("model_data.R")
-source("model_table.R")
-source("model_plot.R")
-source("empty_plot.R")
-source("theme_type.R")
+source("functions/model_data.R")
+source("functions/model_table.R")
+source("functions/model_plot.R")
+source("functions/empty_plot.R")
+source("functions/theme_type.R")
 
 d <- model_data()
 ```
@@ -73,7 +74,7 @@ model_table(data = d$data.original)
 ```{r}
 par(mar = c(0, 0, 0, 0), bg = "transparent")
 plot.new()
-arrow <- readPNG('arrow.png')
+arrow <- readPNG('images/arrow.png')
 grid.raster(arrow, x=.5, y=.5, width=.95)
 ```
 
@@ -196,7 +197,6 @@ mainPlot <-
                    height = 0.0, size = 0.70) 
 ```
 
-And to give even more structure to the plot, we can add subtitles for the variable categories, e.g. "Sociodemographic" and "Health Status" (see also data preparation)...
 :::
 
 :::{#cr-main-plot-2}
@@ -218,7 +218,9 @@ mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2))
 
 
 :::{focus-on="cr-main-plot-3"}
-Add bold subtitles for the variable categories, using `element_markdown()` from [`{ggtext}`](https://wilkelab.org/ggtext/) to format the text in the y-axis labels.
+And to give more structure to the plot, I added subtitles for the types of variables, i.e. *Sociodemographic* and *Health Status* (see data preparation)...
+
+Make subtitles bold using `element_markdown()` from [`{ggtext}`](https://wilkelab.org/ggtext/) to format the text in the y-axis labels.
 
 ```{r}
 #| echo: true
@@ -533,11 +535,11 @@ rightPlot <-
     geom_text(aes(x = 0, label = OR_CI, 
                   color = p_value_sign), 
               size = 3, hjust = 0) +
-    ggtext::geom_richtext(aes(x = 0.5, 
-                              label = ifelse(is.na(p_value_cat), NA, 
-                                             paste0('**', p_value_cat, '**')), 
-                              label.colour = NA, 
-                              color = p_value_sign), fill = NA, size = 3, hjust = 1) +
+    geom_richtext(aes(x = 0.5, 
+                      label = ifelse(is.na(p_value_cat), NA, 
+                                     paste0('**', p_value_cat, '**')), 
+                      label.colour = NA, 
+                      color = p_value_sign), fill = NA, size = 3, hjust = 1) +
     scale_color_manual(values = c("#aaaaaa", "black")) +
     theme_void() +
     theme(legend.position = 'none')
@@ -591,9 +593,9 @@ rightPlot <-
     geom_text(aes(x = 0, label = OR_CI, 
                   color = p_value_sign), 
               size = 3, hjust = 0) +
-    ggtext::geom_richtext(aes(x = 0.5, 
-                              label = ifelse(is.na(p_value_cat), NA, 
-                                             paste0('**', p_value_cat, '**')),
+    geom_richtext(aes(x = 0.5, 
+                      label = ifelse(is.na(p_value_cat), NA, 
+                                     paste0('**', p_value_cat, '**')),
                               label.colour = NA, 
                               color = p_value_sign), fill = NA, size = 3, hjust = 1) +
     # add titles on top for OR (CI) and p-value
@@ -664,9 +666,8 @@ Here the complete and consolidated code:
 #| echo: true
 #| eval: false
 #| code-summary: "R code: data"
-#| code: !expr readLines("model_data.R")
+#| code: !expr readLines("functions/model_data.R")
 
-# not show
 ```
 
 
@@ -674,9 +675,8 @@ Here the complete and consolidated code:
 #| echo: true
 #| eval: false
 #| code-summary: "R code: plot"
-#| code: !expr readLines("model_plot.R")
+#| code: !expr readLines("functions/model_plot.R")
 
-#not show
 ```
 
 

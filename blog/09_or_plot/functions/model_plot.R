@@ -1,3 +1,8 @@
+# library(ggplot2)
+# library(patchwork)
+# library(ggtext)
+# library(tidyverse)
+
 
 model_plot <- function(data){
   
@@ -47,16 +52,16 @@ ggplot(data, aes(y = fct_rev(variable))) +
 # ----------------------- combined plots & annotations -------------------------
 
 mainPlot + rightPlot + plot_layout(widths = c(1.8,1.2)) +
-  patchwork::plot_annotation(
+  plot_annotation(
     title = 'Model Estimates of Sociodemographic and Health Variables',
     subtitle = '',
     caption = 'Note: This model output is entirely hypothetical and was created solely for illustrative purposes. 
     It does not represent real data or imply any real-world conclusions.',
     theme = theme(plot.title = element_text(size = 17, face = "bold", hjust = 0),
-                 plot.subtitle = element_text(size = 16, hjust = 0),
-                 plot.caption = element_text(size = 10, hjust = 1, color = '#aaaaaa')) 
+                  plot.subtitle = element_text(size = 16, hjust = 0),
+                  plot.caption = element_text(size = 10, hjust = 1, color = '#aaaaaa')) 
   )
 }
 
-# run
+# Example usage:
 # model_plot(data = data)
