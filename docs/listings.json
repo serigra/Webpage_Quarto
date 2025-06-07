@@ -2,10 +2,21 @@
   {
     "listing": "/blog/index.html",
     "items": [
+      "/blog/09_or_plot/index.html",
       "/blog/08_Marginal_Effects/index.html",
       "/blog/07_userR!_talks/index.html",
       "/blog/07_userR!_workshops/index.html",
       "/blog/01_Contrasts/index.html"
+    ]
+  },
+  {
+    "listing": "/talks/index.html",
+    "items": [
+      "/talks/202406_RMeetup_antibiotics/index.html",
+      "/talks/202405_SSGIM/index.html",
+      "/talks/201608_IPS/index.html",
+      "/talks/201602_AAPA/index.html",
+      "/talks/201202_AAPA_birds/index.html"
     ]
   },
   {
@@ -42,16 +53,6 @@
       "/publications/201507_Sevoflurane/index.html",
       "/publications/201410_Shared_microbiome/index.html",
       "/publications/201407_Intraoperative_fluid/index.html"
-    ]
-  },
-  {
-    "listing": "/talks/index.html",
-    "items": [
-      "/talks/202406_RMeetup_antibiotics/index.html",
-      "/talks/202405_SSGIM/index.html",
-      "/talks/201608_IPS/index.html",
-      "/talks/201602_AAPA/index.html",
-      "/talks/201202_AAPA_birds/index.html"
     ]
   }
 ]
