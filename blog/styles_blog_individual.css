@@ -123,6 +123,71 @@ margin-bottom: 0.9rem;
 }
 
 
+/* ===================== Hex Sticker Gallery ======================== */
+
+.hex-stickers {
+  margin: 2rem auto;
+  max-width: 900px;
+  text-align: center;
+}
+
+.hex-row-1 {
+display: flex;
+justify-content: center;
+align-items: center;
+margin-bottom: -35px;
+}
+
+.hex-row-2 {
+margin-left: 5px;
+}
+
+
+/* for stickers in gallery */
+.hex-sticker {
+width: 120px;
+height: auto;
+margin: 0 5px;
+transition: transform 0.2s ease-in-out, filter 0.2s ease-in-out;
+}
+
+/* for standalone centered stickers */
+.hex-sticker-centered {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.hex-sticker:hover {
+transform: scale(1.1);
+filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.hex-stickers a {
+  text-decoration: none;
+}
+
+.hex-sticker-xsmall { width: 50px !important; }
+.hex-sticker-small { width: 80px !important; }
+.hex-sticker-medium { width: 120px !important; }
+.hex-sticker-large { width: 160px !important; }
+.hex-sticker-xlarge { width: 200px !important; }
+
+
+/* Responsive design */
+@media (max-width: 768px) {
+.hex-sticker {
+width: 80px;
+}
+.hex-row-2 {
+margin-left: 45px;
+}
+}
+
+
+
+
 /* ===================== Responsive Adjustments ======================== */
 
 /* Media query for smaller screens (mobile devices) */

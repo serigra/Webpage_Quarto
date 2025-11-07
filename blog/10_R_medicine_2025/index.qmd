@@ -1,5 +1,5 @@
 ---
-title: "R/Medicine 2025 · Personal Highlights"
+title: "R/ Medicine 2025 · Personal Highlights"
 author: "Sereina M. Graber"
 date: "2025-07-01"
 css: "../styles_blog_individual.css"
@@ -16,31 +16,228 @@ image: cover_R_medicine.png
 :::
 
 ::: {.column width="65%"}
-I attended the [R/Medicine](https://rconsortium.github.io/RMedicine_website/) virtual conference for the first time this year ([2025](https://rconsortium.github.io/RMedicine_2025/)). The conference is focused on the use of R in healthcare and medical research, running since 2018, and it features a combination of hands-on workshops and presentations. Initiated by the [R Consortium](https://r-consortium.org/) and sponsored by Posit and Genentech, R/Medicine stands out for its accessibility — conference fees remain very affordable even for non-students. \
+I attended the [R/ Medicine](https://rconsortium.github.io/RMedicine_website/) virtual conference for the first time this year ([2025](https://rconsortium.github.io/RMedicine_2025/)). The conference is focused on the use of `R` in healthcare and medical research, running since 2018, and it features a combination of hands-on workshops and presentations. Initiated by the [R Consortium](https://r-consortium.org/) and sponsored by Posit and Genentech, R/ Medicine stands out for its accessibility — conference fees remain very affordable even for non-students. \
 The following section highlights my favorite sessions, condensed to their key takeaways, and mainly serves as a repository for links to presentations and workshop materials.
 :::
 
 ::::::
 
 \
+\
+
+## Supercharging Statistical Analysis with ARDs and the {cards} R Package · [Becca Krouse and Davide Garolini, GSK/Roche]{style="color:#7F8A80;"}
+
+:::::: columns
+
+::: {.column width="30%"}
+::: {.hex-stickers}
+
+<a href="https://www.danieldsjoberg.com/gtsummary/">
+    <img src="https://raw.githubusercontent.com/ddsjoberg/gtsummary/main/man/figures/logo.png" class="hex-sticker">
+  </a>
+  <a href="https://insightsengineering.github.io/cards/latest-tag/">
+    <img src="https://raw.githubusercontent.com/insightsengineering/cards/main/man/figures/logo.png" class="hex-sticker">
+  </a>
+    <a href="https://insightsengineering.github.io/cardx/latest-tag/">
+    <img src="https://raw.githubusercontent.com/insightsengineering/cardx/main/man/figures/logo.png" class="hex-sticker">
+  </a>
+  
+:::
+:::
+
+::: {.column width="70%"}
+
+::: small-space
+:::
+
+As a big fan of [{gtsummary}](https://www.danieldsjoberg.com/gtsummary/), I was very curious to hear about the [{cards}](https://insightsengineering.github.io/cards//main/index.html) and [{cardx}](https://insightsengineering.github.io/cardx/latest-tag/) packages.\
+For context, **ARD** (**A**nalysis **R**esults **D**ata) refers to the "flat" dataset that contains the results of analyses - like summary statistics, model estimates, and p-values - for e.g. demographics or adverse events. **C**DISC **ARS** (**A**nalysis **R**esults **S**tandard) defines how these results and their metadata should be structured, linked, and documented, enabling automation, reproducibility, and fully auditable traceability supporting regulatory submissions (CDISC is the organisation making the standards).\
+The [{cards}](https://insightsengineering.github.io/cards//main/index.html) package builds on the functionality of [{gtsummary}](https://www.danieldsjoberg.com/gtsummary/) to make creating ARDs simple and efficient, while its companion,  [{cardx}](https://insightsengineering.github.io/cardx/latest-tag/), extends these capabilities, allowing you to export ARDs from a wide range of statistical methods and packages including `{geepack}`, `{lme4}` and `{survival}`.
+
+Find the material and slides [here](https://melkiades.github.io/ARD_rmedicine25/) and some further material from the R/ Pharma workshop in 2024: \
+[A Practical Workshop for Creating and Utilizing ARDs for Clinical Reporting](https://www.danieldsjoberg.com/ARD-RinPharma-workshop-2024/).
+
+:::
+
+::::::
 
 \
+
+## Ellmer - Demistifying LLMs · [Joe Cheng, CTO Posit]{style="color:#7F8A80;"}
+
+::: medium-space
+:::
+
+Joe Cheng provided a concise overview of how **LLMs** work, explaining the core concepts that are essential for anyone looking to use them effectively. Joe showcased three `R` packages ([{ellmer}](https://ellmer.tidyverse.org/), [{shinychat}](https://posit-dev.github.io/shinychat/r/index.html), [{querychat}](https://posit-dev.github.io/querychat/r/index.html)) designed to interface with large language models (LLMs), making it easy for developers to build interactive, AI-driven applications. In addition to the packages, he also introduced the concept of **Tool Calling** — a feature that enables LLMs to invoke external functions or tools to extend their capabilities, i.e. supply the LLM with up-to-date, real-time data.\
+He compared the strengths of different LLM providers, noting that OpenAI’s models excel at general-purpose tasks and conversation, while Anthropic’s models tend to perform better in code generation. Finally, he shared practical tips for **prompt engineering**, showing how thoughtful prompt design can significantly improve model performance and output quality.\
+Find the slides [here](https://jcheng5.github.io/rmedicine-2025/#/title-slide) and workshop material [here](https://github.com/jcheng5/rmedicine-2025).
+
+
+:::::: columns
+
+::: {.column width="32%"}
+<a href="https://ellmer.tidyverse.org/">
+<img src="images/ellmer.png" class="hex-sticker hex-sticker-centered hex-sticker-xlarge">
+</a>
+
+::: {style="text-align: center; font-size: 0.9em;"}
+provides unified R interface to a variety of LLMs & providers (OpenAI, Anthropic, etc), supporting streaming output, extraction of structured data and tool calling. 
+Check out [*Getting started with ellmer*](https://ellmer.tidyverse.org/articles/ellmer.html) for core concepts and examples.
+:::
+:::
+
+::: {.column width="1%"}
+:::
+
+::: {.column width="32%"}
+<a href="https://posit-dev.github.io/shinychat/r/index.html">
+<img src="images/shinychat.svg" class="hex-sticker hex-sticker-centered hex-sticker-xlarge">
+</a>
+
+::: {style="text-align: center; font-size: 0.9em;"}
+makes it simple to integrate AI-driven conversations into Shiny apps. It offers ready-to-use chat components (chat interface, streaming chat) and live streaming responses that connect with {ellmer} on the backend.
+:::
+:::
+
+::: {.column width="1%"}
+:::
+
+::: {.column width="32%"}
+<a href="https://posit-dev.github.io/querychat/r/index.html">
+<img src="images/querychat.png" class="hex-sticker hex-sticker-centered hex-sticker-xlarge">
+</a>
+
+::: {style="text-align: center; font-size: 0.9em;"}
+is also a Shiny-component package, specialized for data-frame querying — it lets users chat in natural language and retrieve results (filters, sorts, summaries) from a data frame by having the LLM generate SQL queries under the hood.
+:::
+:::
+
+
+::::::
+
+\
+\
+
+## Retrospective clinical data harmonisation reporting · [Jeremy Selva, National Heart Center Singapore]{style="color:#7F8A80;"}
+
+::: medium-space
+:::
+
+:::::: columns
+
+::: {.column width="30%"}
+![](images/data_harmonization.png){fig-align="center" width="310"}
+:::
+
+::: {.column width="70%"}
+Jeremy Selva shared a comprehensive workflow for retrospective clinical data harmonization using R, demonstrating how to ensure data quality, consistency, and reproducibility across diverse datasets. He demonstrated practical strategies for standardising clinical data from diverse sources to improve the reliability of analyses, and showed how to create an **automated technical report** that transparently documents the **data processing workflow** — fostering clarity and traceability both for oneself and for collaborators in research projects.\
+Find the slides [here]( https://jauntyjjs.github.io/RMedicine2025_harmonisation/#/title-slide) and his data-harmonization-project-template [here](https://jauntyjjs.github.io/harmonisation/).
+:::
+
+::::::
+
+A few useful tools I discovered along the way:
+
+* [Cleaning Medical Data with R](https://www.pipinghotdata.com/workshops/2023-06-06-cleaning-medical-data-with-r/) workshop by Shannon Pileggi (R/ Medicine 2023).
+
+:::::: columns
+
+::: {.column width="87%"}
+
+* [`{vroom}`](https://vroom.r-lib.org/) package for fast data reading including the function `problems()` which retrieves a data frame with one row for each potential problem in your data.
+:::
+
+::: {.column width="13%"}
+<a href="https://vroom.r-lib.org/">
+<img src="images/vroom.png" class="hex-sticker hex-sticker-centered hex-sticker-xsmall">
+</a>
+:::
+
+::::::
+
+
+:::::: columns
+
+::: {.column width="87%"}
+* [`{pointblank}`](https://rstudio.github.io/pointblank/index.html) package for data validation (-reporting) - in data frames or on database tables. It allows you to create validation steps and generate reports on data quality.
+:::
+
+::: {.column width="13%"}
+<a href="https://rstudio.github.io/pointblank/index.html">
+<img src="images/pointblank.png" class="hex-sticker hex-sticker-centered hex-sticker-xsmall">
+</a>
+:::
+
+::::::
+
+
+\
+\
+
+
+## Visualise, Optimise, Parametrise · [Cara Thompson, Data Viz Consultant]{style="color:#7F8A80;"}
+
+:::::: columns
+
+::: {.column width="30%"}
+\
+
+![](images/Cara_presentation.png){fig-align="center" width="260"}
+:::
+
+
+::: {.column width="70%"}
+\
+\
+Writing dataviz code that your future self will thank you for!\
+I often find myself spending a lot of time fine-tuning visualizations to make them visually appealing - reusing similar code again and again, not only for publications but also for quick, ad-hoc analyses. These are what Cara Thompson calls those "can you just?" moments. In her workshop, Cara clearly illustrated why and how to **parametrize plots** — so our future selves can spend less time tweaking and more time thinking.\
+Find the slides for the workshop [here](https://cararthompson.github.io/visualise-optimise-parameterise/slides/visualise-optimise-parameterise.html#/title-slide). 
+:::
+
+::::::
+
+
+:::::: columns
+
+::: {.column width="77%"}
+\
+A couple of really cool tools and tricks I learned for making plots smarter and faster:\
+
+* Choose and blend colors using her [{monochromeR}](https://github.com/cararthompson/monochromeR) package and the corresponding [Shiny app](https://cararthompson.shinyapps.io/monochromeR/). For even more details on `{monochromeR}`, see her [website](https://www.cararthompson.com/shinyapps/2022-01-11-monochromer/monochromer#i-also-turned-it-onto-a-shinyapp-so-you-can-use-the-no-code-solution-which-also-has-a-bit-of-extra-flexibility-just-here).\
+* In `{ggplot2}` use the `base_size` argument in combination with `rel()` to set relative sizes of text elements. *Example*: `theme_minimal(base_size = 16)` and `element_text(size = rel(0.8))` for axis text.\
+* Put `{ggplot2}` theme-definitions/ plots into **functions**! and use `get()` for getting e.g. grouping variable in a function. *Example*: `function(group_var = "species")` and inside the function `df |> group_by(group = get(group_var))`.\
+:::
+
+::: {.column width="23%"}
+\
+<a href="https://github.com/cararthompson/monochromeR">
+<img src="images/monochromeR.png" class="hex-sticker hex-sticker-centered hex-sticker-xlarge">
+</a>
+:::
+
+::::::
+
+
+\
+
+\
+
 
 ## R Package Development with GitHub Pages and {pkgdown} · [Melissa Van Bussel, Statistics Canada]{style="color:#7F8A80;"}
 
 :::::: columns
 
+::: {.column width="32%"}
+![](images/logo.png){fig-align="center" width="220"}
+:::
+
 ::: {.column width="68%"}
 \
-Besides the creation of a basic package, the workshop covered setting up a customized package website with [{`pkgdown`}](https://pkgdown.r-lib.org/) and GitHub Pages. Along the way, Melissa shared many useful tips and tricks using the [{`usethis`}](https://usethis.r-lib.org/) package.
+Besides the creation of a basic package, the workshop covered setting up a **customized package website** with [{`pkgdown`}](https://pkgdown.r-lib.org/) and GitHub Pages. Along the way, Melissa shared many useful tips and tricks using the [{`usethis`}](https://usethis.r-lib.org/) package.
 
 Find the slides of the workshop [here](https://melissavanbussel.github.io/rmedicine/slides.html#/title-slide) and the GitHub repository [here](https://github.com/melissavanbussel/rmedicine/tree/main?tab=readme-ov-file).
 
 My result of the pkgdown site: [serigra.github.io/rmedicine/](https://serigra.github.io/rmedicine/) (GitHub [repo](https://github.com/serigra/rmedicine)).
-:::
-
-::: {.column width="32%"}
-![](images/logo.png){fig-align="center" width="200"}
 :::
 
 ::::::
@@ -75,155 +272,3 @@ My result of the pkgdown site: [serigra.github.io/rmedicine/](https://serigra.gi
   - `_pkgdown.yml` vs. `pkgdown.yaml`: first controls how pkgdown site looks like, second is for GitHub actions.
   
 ::::::
-
-
-\
-\
-
-## Visualise, Optimise, Parametrise · [Cara Thompson, Data Viz Consultant]{style="color:#7F8A80;"}
-
-:::::: columns
-
-::: {.column width="30%"}
-\
-
-![](images/Cara_presentation.png){fig-align="center" width="260"}
-:::
-
-
-::: {.column width="70%"}
-\
-\
-Writing dataviz code that your future self will thank you for!\
-I often find myself spending a lot of time fine-tuning visualizations to make them visually appealing - reusing similar code again and again, not only for publications but also for quick, ad-hoc analyses. These are what Cara Thompson calls those "can you just?" moments. In her workshop, Cara clearly illustrated why and how to parameterise plots — so our future selves can spend less time tweaking and more time thinking.\
-Find the slides for the workshop [here](https://cararthompson.github.io/visualise-optimise-parameterise/slides/visualise-optimise-parameterise.html#/title-slide). 
-:::
-
-::::::
-
-
-:::::: columns
-
-::: {.column width="77%"}
-\
-A couple of really cool tools and tricks I learned for making plots smarter and faster:\
-
-* Choose and blend colors using her [{monochromeR}](https://github.com/cararthompson/monochromeR) package and the corresponding [Shiny app](https://cararthompson.shinyapps.io/monochromeR/). For even more details on monochromeR, see her [website](https://www.cararthompson.com/shinyapps/2022-01-11-monochromer/monochromer#i-also-turned-it-onto-a-shinyapp-so-you-can-use-the-no-code-solution-which-also-has-a-bit-of-extra-flexibility-just-here).\
-* In {ggplot2} use the `base_size` argument in combination with `rel()` to set relative sizes of text elements. *Example*: `theme_minimal(base_size = 16)` and `element_text(size = rel(0.8))` for axis text.\
-* Put {ggplot2} theme-definitions/ plots into **functions**! and use `get()` for getting e.g. grouping variable in a function. *Example*: `function(group_var = "species")` and inside the function `df |> group_by(group = get(group_var))`.\
-:::
-
-::: {.column width="23%"}
-![](images/monochromeR.png){fig-align="center" width="180"}
-:::
-
-::::::
-
-
-\
-
-## Ellmer - Demistifying LLMs · [Joe Cheng, CTO Posit]{style="color:#7F8A80;"}
-
-\
-
-Joe Cheng showcased the following three `R` packages designed to interface with large language models (LLMs), making it easy for developers to build interactive, AI-driven applications.\
-In addition to the packages, he provided a concise yet insightful overview of how LLMs work, explaining the core concepts that are essential for anyone looking to use them effectively. Joe also introduced the concept of **Tool Calling** — a feature that enables LLMs to invoke external functions or tools to extend their capabilities (for example, retrieving real-time weather data).\
-He compared the strengths of different LLM providers, noting that OpenAI’s models excel at general-purpose tasks and conversation, while Anthropic’s models tend to perform better in code generation. Finally, he shared practical tips for prompt engineering, showing how thoughtful prompt design can significantly improve model performance and output quality.\
-Find the slides [here](https://jcheng5.github.io/rmedicine-2025/#/title-slide) and workshop material [here](https://github.com/jcheng5/rmedicine-2025).
-
-
-:::::: columns
-
-::: {.column width="33.33%"}
-
-![](images/ellmer.png){fig-align="center" width="200"}
-
-::: {style="text-align: center;"}
-[{ellmer}](https://ellmer.tidyverse.org/).\
-Check out the [*Getting started with ellmer*](https://ellmer.tidyverse.org/articles/ellmer.html) section in the package documentation, which gives a nice overview on the core concepts and example use cases.
-:::
-:::
-
-::: {.column width="33.33%"}
-
-![](images/shinychat.svg){fig-align="center" width="200"}
-
-::: {style="text-align: center;"}
-[{shinychat}](https://posit-dev.github.io/shinychat/r/index.html)
-:::
-:::
-
-::: {.column width="33.33%"}
-
-![](images/querychat.png){fig-align="center" width="200"}
-
-::: {style="text-align: center;"}
-[{querychat}](https://posit-dev.github.io/querychat/r/index.html)
-:::
-:::
-
-
-::::::
-
-
-
-
-\
-
-## Retrospective clinical data harmonisation reporting · [Jeremy Selva, National Heart Center Singapore]{style="color:#7F8A80;"}
-
-\
-
-:::::: columns
-
-::: {.column width="30%"}
-![](images/data_harmonization.png){fig-align="center" width="310"}
-:::
-
-::: {.column width="70%"}
-Jeremy Selva shared a comprehensive workflow for retrospective clinical data harmonization using R, demonstrating how to ensure data quality, consistency, and reproducibility across diverse datasets. He demonstrated practical strategies for standardising clinical data from diverse sources to improve the reliability of analyses, and showed how to create an automated technical report that transparently documents the data processing workflow — fostering clarity and traceability both for oneself and for collaborators in research projects.\
-Find the slides [here]( https://jauntyjjs.github.io/RMedicine2025_harmonisation/#/title-slide) and his data-harmonization-project-template [here](https://jauntyjjs.github.io/harmonisation/).
-:::
-
-::::::
-
-A few useful tools I discovered along the way:
-
-* [Cleaning Medical Data with R](https://www.pipinghotdata.com/workshops/2023-06-06-cleaning-medical-data-with-r/) workshop by Shannon Pileggi (R/ Medicine 2023).
-
-:::::: columns
-
-::: {.column width="87%"}
-
-* [`{vroom}`](https://vroom.r-lib.org/) package for fast data reading including the function `problems()` which retrieves a data frame with one row for each potential problem in your data.
-:::
-
-::: {.column width="13%"}
-![](images/vroom.png){fig-align="center" width="50"}
-:::
-
-::::::
-
-
-:::::: columns
-
-::: {.column width="87%"}
-* [`{pointblank}`](https://rstudio.github.io/pointblank/index.html) package for data validation - in data frames or on database tables. It allows you to create validation steps and generate reports on data quality.
-:::
-
-::: {.column width="13%"}
-![](images/pointblank.png){fig-align="center" width="50"}
-:::
-
-
-
-::::::
-
-
-\
-
-
-## Supercharging Statistical Analysis with ARDs and the {cards} R Package · [Becca Krouse and Davide Garolini, GSK/Roche]{style="color:#7F8A80;"}
-
-Find the material and slides [here](https://melkiades.github.io/ARD_rmedicine25/).
-
