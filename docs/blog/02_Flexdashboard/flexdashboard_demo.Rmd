@@ -1,0 +1,106 @@
+---
+title: "Demo flexdashboard + htmlwidgets + crosstalk"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(plotly)
+library(DT)
+library(crosstalk)
+
+shared_mtcars <- SharedData$new(mtcars)
+```
+
+
+Inputs {.sidebar}
+--------------------------------------------------------------------------------
+
+
+```{r}
+crosstalk::filter_checkbox("cyl", "Cylinders", shared_mtcars, ~cyl, inline = TRUE)
+crosstalk::filter_slider("hp", "Horsepower", shared_mtcars, ~hp, width = "100%")
+crosstalk::filter_select("auto", "Automatic", shared_mtcars, ~ifelse(am == 0, "Yes", "No"))
+```
+
+
+
+
+Row {.tabset}
+--------------------------------------------------------------------------------
+
+### Table `{DT}`
+
+```{r}
+datatable(shared_mtcars)
+```
+
+### Data
+
+\
+
+`mtcars`: The data was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973–74 models).
+
+* `mpg` - Miles/(US) gallon
+* `cyl` - Number of cylinders
+* `disp` - Displacement (cu.in.)
+* `hp` - Gross horsepower
+* `drat` - Rear axle ratio
+* `wt` - Weight (1000 lbs)
+* `qsec` - 1/4 mile time
+* `vs` - Engine (0 = V-shaped, 1 = straight)
+* `am` - Transmission (0 = automatic, 1 = manual)
+* `gear` - Number of forward gears
+* `carb` - Number of carburetors
+
+
+
+Row
+--------------------------------------------------------------------------------
+
+
+### Chart A `{plotly}`
+
+```{r}
+#d3scatter(shared_mtcars, ~wt, ~mpg, ~factor(cyl), width="100%", height=250)
+
+plot_ly(shared_mtcars, 
+        x = ~wt, 
+        y = ~mpg, 
+        color = ~factor(cyl),
+        type = 'scatter',
+        mode = 'markers',
+        width = NULL,
+        height = 250) %>%
+  layout(
+    xaxis = list(title = "wt"),
+    yaxis = list(title = "mpg"),
+    legend = list(title = list(text = "cyl"))
+  )
+```
+
+### Chart B `{plotly}`
+
+```{r}
+#d3scatter(shared_mtcars, ~hp, ~qsec, ~factor(cyl), width="100%", height=250)
+
+plot_ly(shared_mtcars, 
+        x = ~hp, 
+        y = ~qsec, 
+        color = ~factor(cyl),
+        type = 'scatter',
+        mode = 'markers',
+        width = NULL,
+        height = 250) %>%
+  layout(
+    xaxis = list(title = "wt"),
+    yaxis = list(title = "mpg"),
+    legend = list(title = list(text = "cyl"))
+  )
+```
+
+
+
