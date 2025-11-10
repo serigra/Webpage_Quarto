@@ -2,6 +2,7 @@
 title: "Contrasts and Multiple Testing in R"
 author: "Sereina M. Graber"
 date: "2023-01-06"
+description: "This blog post helps to understand and apply contrasts in `R`, using a practical example and explaining some theory along the way."
 toc: true
 toc-depth: 2
 css: "../styles_blog_individual.css"

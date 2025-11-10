@@ -2,11 +2,11 @@
 
 /* Center the listing */
 .quarto-listing {
-  max-width: 75%;
+  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 /* Title of page "Notes · Thoughts · Blog" */
@@ -32,48 +32,89 @@
   margin-bottom: 5em !important;
 }
 
-/* ===================== Format Single Posts in List ========================*/
+/* =============== Style Grid Items (boxes for each blog post) ===============*/
 
-/* Title of listing (h3.no-anchor.listing-title) */
-h3.no-anchor.listing-title {
-  font-family: "Petrona"; /* 'Bebas Neue', sans-serif; */
-  color: #235347 !important; 
-  font-size: 20px;
+
+/* Style for individual grid items */
+.quarto-grid-item {
+  background-color: #fafafa; /* Light gray background - adjust as needed */
+  border: 1px solid #dee2e6; /* Border color and width */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation */
+  overflow: hidden; /* Prevents content overflow during scaling */
+}
+
+/* Hover effect - makes box bigger and enhances shadow */
+.quarto-grid-item:hover {
+  transform: scale(1.05); /* Makes box 5% bigger */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15); /* Deeper shadow on hover */
+}
+
+/* Optional: Style the card link to remove default styling */
+.quarto-grid-item .card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Optional: Ensure smooth transition for the entire card */
+.quarto-grid-item .card {
+  transition: inherit;
+}
+
+
+/* ===================== Format Single Posts in the grid ========================*/
+
+/* Title styling in grid box */
+.quarto-grid-item .card-title,
+.quarto-grid-item .card-title a {
+  font-family: "Petrona", serif !important;
+  color: #235347 !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  text-transform: none !important;
+  text-decoration: none !important;
+}
+
+/* Description text in grid box */
+.quarto-grid-item .card-text,
+.quarto-grid-item .listing-description {
+  font-family: 'Bebas Neue', sans-serif !important;
+  font-size: 0.8em !important;
+  color: #666 !important;
+  text-align: justify;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* Author styling in grid box */
+.quarto-grid-item .listing-author,
+.quarto-grid-item .card-author {
+  color: #98A399 !important;
+  font-size: 15px !important;
   text-transform: none;
-  text-decoration: none !important; 
-}
-
-h3.no-anchor.listing-title:hover {
-  text-decoration: underline; 
-}
-
-/* Listing date */
-.listing-date {
-  color: #7F8A80;
-  text-decoration: none !important; 
-}
-
-/* Listing author */
-.listing-author {
-  color: #98A399;
-  text-transform: none;
-  text-decoration: none !important; 
-  font-size: 15px;
+  text-decoration: none !important;
   margin-top: 8px;
   margin-bottom: 8px;
 }
 
-/* Blog post images */
-div.listing img.listing-image {
-  width: 150px !important; /* Set the desired width */
-  height: auto !important; /* Maintain aspect ratio */
+/* Date styling in grid box */
+.quarto-grid-item .listing-date,
+.quarto-grid-item .card-date {
+  color: #98A399 !important;
+  font-size: 14px !important;
+  text-transform: none;
+  text-decoration: none !important;
 }
 
-/* Hover effect for references */
-.section-ref:hover {
-  position: relative;
-  cursor: pointer;
+/* Card footer (contains author and date) */
+.quarto-grid-item .card-footer {
+  background-color: transparent;
+  border-top: none;
+  padding-top: 10px;
 }
+
+
 
 /* ===================== Responsive Adjustments ======================== */
 

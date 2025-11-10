@@ -2,6 +2,7 @@
 title: "R/ Pharma 2025 · Personal Highlights"
 author: "Sereina M. Graber"
 date: "2025-11-07"
+description: "Key takeaways and useful resources & links from my favorite sessions at the 2025 R/ Pharma virtual conference."
 css: "../styles_blog_individual.css"
 image: cover_R_pharma.png
 ---

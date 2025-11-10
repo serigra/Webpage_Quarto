@@ -2,6 +2,7 @@
 title: "Unravelling Marginal Effects"
 author: "Sereina M. Graber"
 date: "2024-09-16"
+description: "Marginal effects offer a more interpretable view of relationships within statistical models. Here I explore them using the `R` package `{marginaleffects}`."
 toc: true
 toc-depth: 2
 css: "../styles_blog_individual.css"

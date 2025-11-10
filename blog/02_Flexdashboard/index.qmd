@@ -1,11 +1,12 @@
 ---
-title: "Beyond Shiny: Interactive Dashboards with {flexdashboard}, {htmlwidgets}, and {crosstalk}"
+title: "Beyond Shiny: Interactive, Standalone Dashboards "
 author: "Sereina M. Graber"
 date: "2021-03-25"
+description: "How to use `{flexdashboard}`, `{htmlwidgets}` + `{crosstalk}` to build interactive and self-contained dashboards."
 toc: true
 toc-depth: 2
 css: "../styles_blog_individual.css"
-image: images/flexdashboard.png
+image: images/dashboard.png
 callout-icon: false
 code-summary: "R Code"
 #suppress-bibliography: true
@@ -134,6 +135,6 @@ The sidebar filters (checkboxes, a slider, and a dropdown) let you choose cylind
 
 Using `{flexdashboard}` together with `{htmlwidgets}` and `{crosstalk}` is a very simple way to build interactive, standalone applications. It offers a nice solution for presenting results in a compact, clear, and interactive way, and the fact that it works without a server means it can be shared easily via email and no admin/ infrastructure hassle.
 
-The probably biggest limitation, is however, that these dashboards are essentially static — all metrics need to be pre-calculated, filtering is basic, and the choice of the htmlwidgets is somewhat restricted. Furthermore large datasets can make it these types of dashboards very slow.
+The probably biggest limitations, however, are that these dashboards are essentially static — all metrics need to be pre-calculated, filtering options are basic, and the choice of the htmlwidgets is somewhat restricted. Furthermore, large datasets can make these types of dashboards very slow.
 
 All in all, this approach is perfect for small to medium-sized analytical projects where clarity, interactivity, and easy sharing are important. 

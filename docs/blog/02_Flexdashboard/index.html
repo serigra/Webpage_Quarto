@@ -8,8 +8,9 @@
 
 <meta name="author" content="Sereina M. Graber">
 <meta name="dcterms.date" content="2021-03-25">
+<meta name="description" content="How to use {flexdashboard}, {htmlwidgets} + {crosstalk} to build interactive and self-contained dashboards.">
 
-<title>Beyond Shiny: Interactive Dashboards with {flexdashboard}, {htmlwidgets}, and {crosstalk} – Sereina</title>
+<title>Beyond Shiny: Interactive, Standalone Dashboards – Sereina</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -180,9 +181,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Beyond Shiny: Interactive Dashboards with {flexdashboard}, {htmlwidgets}, and {crosstalk}</h1>
+<h1 class="title">Beyond Shiny: Interactive, Standalone Dashboards</h1>
 </div>
 
+<div>
+  <div class="description">
+    How to use <code>{flexdashboard}</code>, <code>{htmlwidgets}</code> + <code>{crosstalk}</code> to build interactive and self-contained dashboards.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -395,7 +401,7 @@ The sidebar filters (checkboxes, a slider, and a dropdown) let you choose cylind
 <section id="pros-cons-for-interactive-standalone-apps" class="level2">
 <h2 class="anchored" data-anchor-id="pros-cons-for-interactive-standalone-apps">Pros &amp; Cons for Interactive Standalone Apps</h2>
 <p>Using <code>{flexdashboard}</code> together with <code>{htmlwidgets}</code> and <code>{crosstalk}</code> is a very simple way to build interactive, standalone applications. It offers a nice solution for presenting results in a compact, clear, and interactive way, and the fact that it works without a server means it can be shared easily via email and no admin/ infrastructure hassle.</p>
-<p>The probably biggest limitation, is however, that these dashboards are essentially static — all metrics need to be pre-calculated, filtering is basic, and the choice of the htmlwidgets is somewhat restricted. Furthermore large datasets can make it these types of dashboards very slow.</p>
+<p>The probably biggest limitations, however, are that these dashboards are essentially static — all metrics need to be pre-calculated, filtering options are basic, and the choice of the htmlwidgets is somewhat restricted. Furthermore, large datasets can make these types of dashboards very slow.</p>
 <p>All in all, this approach is perfect for small to medium-sized analytical projects where clarity, interactivity, and easy sharing are important.</p>
 
 

@@ -32,7 +32,7 @@ html:
 ::: {style="margin-bottom: 0.9em;"}
 :::
 
-[{{< fa file-pdf >}} CV](files/CV.pdf){.cv-link}
+[{{< fa file-pdf >}} CV](files/CV_S_Graber.pdf){.cv-link}
 
 ::: {style="margin-bottom: 1.1em;"}
 :::
@@ -55,12 +55,12 @@ Design, implementation of and consulting on statistics and data analyses for cli
 
 **2017 \| PhD in Evolutionary Biology**\
 Anthropological Institute and Museum, University of Zurich.\
-[Thesis](files/Dissertation.pdf): Comparative Analysis on Social & Ecological Factors Driving Brain Size Evolution.
+[Thesis](files/Dissertation_S_Graber.pdf): Comparative Analysis on Social & Ecological Factors Driving Brain Size Evolution.
 
 **2015 \| Master of Science in Biostatistics**\
 Epidemiology, Biostatistics and Prevention Institute, University of Zurich.\
-[Thesis](files/Msc_Thesis_Biostats.pdf): Phylogenetic Comparative Methods for Discrete Responses in Evolutionary Biology.
+[Thesis](files/Msc_Thesis_Biostats_S_Graber.pdf): Phylogenetic Comparative Methods for Discrete Responses in Evolutionary Biology.
 
 **2012 \| Master of Science in Biology**\
 Anthropological Institute and Museum, University of Zurich.\
-[Thesis](files/Msc_Thesis_Biology.pdf): Cooperative Breeding and the Evolution of Brain Size in Birds.
+[Thesis](files/Msc_Thesis_Biology_S_Graber.pdf): Cooperative Breeding and the Evolution of Brain Size in Birds.

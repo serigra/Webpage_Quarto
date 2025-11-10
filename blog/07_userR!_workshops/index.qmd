@@ -3,6 +3,7 @@ title: ""
 title-block-banner: useR_banner.png
 author: "Sereina M. Graber"
 date: "2024-07-11"
+description: "The useR! brings together `R` users from around the world. Here, I share my highlight **workshops** with their key takeaways and materials."
 css: "../styles_blog_individual.css"
 image: useR.png
 ---

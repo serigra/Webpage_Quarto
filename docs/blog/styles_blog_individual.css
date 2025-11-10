@@ -123,6 +123,12 @@ margin-bottom: 0.9rem;
 }
 
 
+
+/* Hide description in individual blog posts (they should be only shown in the overwiew grid listing) */
+.description {
+  display: none !important;
+}
+
 /* ===================== Hex Sticker Gallery ======================== */
 
 .hex-stickers {

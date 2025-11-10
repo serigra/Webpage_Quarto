@@ -2,6 +2,7 @@
 title: "From Boring Tables to Beautiful Plots"
 author: "Sereina M. Graber"
 date: "2025-06-07"
+description: "The post shows how to transform analysis result data into a nicely designed forest plot using `{ggplot2}`, step by step. "
 image: cover-png.png
 toc: false
 format:
@@ -29,7 +30,7 @@ code-summary: "R code: data manipulation"
 
 \
 
-For presenting model estimates (e.g., odds ratios and confidence intervals with corresponding p-values) in reports or publications, I find figures are far more helpful than tables.
+For presenting analysis result data (e.g., odds ratios and confidence intervals with corresponding p-values) in reports or publications, I find figures are far more helpful than tables.
 
 The following post shows how to transform a model output into a nicely designed plot, step by step. The example is based on a hypothetical model output that includes odds ratios of sociodemographic and health variables on some binary outcome.
 
@@ -61,7 +62,7 @@ source("functions/model_plot.R")
 source("functions/empty_plot.R")
 source("functions/theme_type.R")
 
-d <- model_data()
+d <- model_data() # analysis result data
 ```
 
 

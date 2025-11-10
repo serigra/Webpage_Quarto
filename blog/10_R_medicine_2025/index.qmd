@@ -2,6 +2,7 @@
 title: "R/ Medicine 2025 · Personal Highlights"
 author: "Sereina M. Graber"
 date: "2025-07-01"
+description: "I joined the 2025 R/ Medicine virtual conference, centered on `R` in healthcare and medical research. I share my highlights, and useful resources."
 css: "../styles_blog_individual.css"
 image: cover_R_medicine.png
 ---
