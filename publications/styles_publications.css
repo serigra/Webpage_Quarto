@@ -37,6 +37,22 @@
   display: none;
 }
 
+
+/* Thumbnail image: shadow, hover highlight, pointer cursor */
+.thumbnail-image {
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.18);
+  border-radius: 3px;
+  transition: box-shadow 0.25s ease, transform 0.25s ease, filter 0.25s ease;
+  display: block;
+  cursor: pointer;
+}
+
+.thumbnail-image:hover {
+  box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.32);
+  transform: translateY(-3px);
+  filter: brightness(1.06);
+}
+
 /* =================== Format Single Publications in List ====================*/
 .listing-pub-title {
   font-family: 'Petrona';

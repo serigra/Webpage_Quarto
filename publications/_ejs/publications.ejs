@@ -40,7 +40,13 @@ items.forEach(item => {
         <div class="thumbnail">
             <p>
                 <% if (item.image) { %>
-                <img alt="<%= item.title %>" src="<%= item.image %>" class="thumbnail-image">
+                  <% if (item.url_source) { %>
+                  <a href="<%- item.url_source %>" target="_blank" rel="noopener noreferrer">
+                    <img alt="<%= item.title %>" src="<%= item.image %>" class="thumbnail-image">
+                  </a>
+                  <% } else { %>
+                  <img alt="<%= item.title %>" src="<%= item.image %>" class="thumbnail-image">
+                  <% } %>
                 <% } %>
             </p>
         </div>
