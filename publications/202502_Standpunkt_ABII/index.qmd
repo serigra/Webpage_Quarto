@@ -1,7 +1,7 @@
 ---
 title: 'Antibiotika-Verschreibungen: Packungsgrösse spielt eine entscheidende Rolle'
 author: "Sabrina M. Stollberg, Sereina M. Graber"
-date: '2025-27-02'
+date: '2025-02-27'
 publication: ""
 image: featured-pdf.png
 css: "../styles_publications_individual.css"

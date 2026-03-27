@@ -1,6 +1,11 @@
 ---
 title: "Notes · Thoughts · Blog"
-subtitle: "This blog serves as my personal repository of various topics related to statistics, R programming and visualizations. It's my way of transforming gained knowledge into well-structured and accessible notes."
+subtitle:
+  This blog serves as my personal repository of various topics related to statistics, 
+  R programming and visualizations. 
+  It's my way of transforming gained knowledge into well-structured and accessible notes.<br>
+  <br>
+  A list of some useful resources I collected can be found here   [LINK](https://serigra.github.io/Resources/).
 css: styles_blog.css
 listing: 
   contents: 

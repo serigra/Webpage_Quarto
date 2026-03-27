@@ -1,0 +1,20 @@
+---
+title: 'Post-fracture care and predictors of anti-osteoporotic treatment in Switzerland'
+author: "Judith Everts-Graber, Gernot Schmid, Hans-Jörg Häuselmann, Carola Huber, Sven Streit, Willeke Ravensbergen, Stephan Reichenbach, Britta Maurer, Thomas Lehmann, Rafael Pinedo-Villanueva, Sereina M. Graber"
+date: '2026-01-12'
+publication: ""
+image: featured-pdf.png
+css: "../styles_publications_individual.css"
+description: "Osteoporosis-related fractures trigger a dangerous cycle: each fracture raises the risk of the next. This analysis of Swiss insurance claims found that 88% of hip fracture patients and 77% of vertebral fracture patients received no osteoporosis therapy within 6 months. The consequences extend well beyond bone: rehabilitation, nursing home care, and higher mortality follow."
+categories:
+  - "health services research"
+  - "claims data"
+  - "osteoporosis"
+url_source: https://pubmed.ncbi.nlm.nih.gov/41524786/
+url_preprint:
+pdf_file: 
+journ: "Osteoporosis International"
+issue: 
+page: 
+year: 2026
+---

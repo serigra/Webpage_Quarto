@@ -1,0 +1,20 @@
+---
+title: 'Use of antidepressants before, during, and after pregnancy between 2015 and 2021 in Switzerland: a retrospective analysis of Swiss health care claims data'
+author: "Alessia Danelli, Carole A. Marxer, Sereina M. Graber, Carola Huber, Simeon J. Zürcher, Alice Panchaud, Daniel Surbek, Christoph R. Meier, Julia Spoendlin"
+date: '2026-03-02'
+publication: ""
+image: featured-pdf.png
+css: "../styles_publications_individual.css"
+description: "Depression and anxiety are common during pregnancy, but antidepressant use in Switzerland is not well documented. This analysis of Swiss insurance claims data (2015–2021) showed that 4% of women used antidepressants before pregnancy, but 60% discontinued treatment during pregnancy, with use declining from trimester one to three. Given the potential long-term consequences of untreated maternal depression, these findings highlight a need for careful management of mental health in pregnancy."
+categories:
+  - "health services research"
+  - "claims data"
+  - "drugs pregnancy"
+url_source: https://pubmed.ncbi.nlm.nih.gov/41740757/
+url_preprint:
+pdf_file: "paper.pdf"
+journ: "Journal of Affective Disorders"
+issue: Volume 403
+page: 
+year: 2026
+---

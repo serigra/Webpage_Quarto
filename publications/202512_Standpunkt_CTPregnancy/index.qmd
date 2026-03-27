@@ -1,0 +1,19 @@
+---
+title: 'Mehr Computertomographien – Risiko für Schwangere?'
+author: "Sabrina M. Stollberg, Sereina M. Graber"
+date: '2025-12-03'
+publication: ""
+image: featured-pdf.png
+css: "../styles_publications_individual.css"
+description: "Die Computertomographie (CT) ist ein unverzichtbares Instrument der modernen Medizin. Aber es birgt Risiken, gerade für Frauen im reproduktiven Alter. Eine neue Auswertung von Helsana zeigt, dass bei dieser Gruppe die CT-Anwendungen zunehmen."
+categories:
+  - "health services research"
+  - "claims data"
+url_source: https://standpunkt.helsana.ch/de/mehr-computertomographien-risiko-fuer-schwangere
+url_preprint:
+pdf_file: 
+journ: "Helsana Standpunkt"
+issue: Nr. 4
+page: 
+year: 2025
+---
