@@ -1,0 +1,20 @@
+---
+title: 'Potentially inappropriate medication: prevalence, risk of hospitalisation and associated healthcare costs in the general older population of Switzerland'
+author: "Renato Farcher, Sereina M. Graber, Stefan Boes, Carola A. Huber"
+date: '2026-04-27'
+publication: ""
+image: featured-pdf.png
+css: "../styles_publications_individual.css"
+description: "This study showed a high PIM prevalence and associated public health burden in terms of hospitalisations and healthcare costs in the general older population of Switzerland. These findings may indicate limited awareness in prescribing PIMs in primary care and the challenge associated with managing conflicting therapeutic recommendations in vulnerable patients. Given the ageing population and rising healthcare costs, the study highlights the urgent need for targeted strategies to reduce PIMs."
+categories:
+  - "health services research"
+  - "claims data"
+  - "potentially inapropriate drug"
+url_source: https://doi.org/10.57187/4613
+url_preprint:
+pdf_file: "paper.pdf"
+journ: "Swiss Medical Weekly"
+issue: Volume 156 No. 4
+page: 
+year: 2026
+---
