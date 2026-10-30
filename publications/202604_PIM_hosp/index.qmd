@@ -9,7 +9,7 @@ description: "This study showed a high PIM prevalence and associated public heal
 categories:
   - "health services research"
   - "claims data"
-  - "potentially inapropriate drug"
+  - "drug safety"
 url_source: https://doi.org/10.57187/4613
 url_preprint:
 pdf_file: "paper.pdf"

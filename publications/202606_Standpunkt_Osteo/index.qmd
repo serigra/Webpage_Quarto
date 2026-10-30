@@ -1,0 +1,20 @@
+---
+title: 'Nach der Fraktur ist vor der Fraktur – Versorgungslücke bei Osteoporose'
+author: "Sereina M. Graber"
+date: '2026-06-10'
+publication: ""
+image: featured-pdf.png
+css: "../styles_publications_individual.css"
+description: "Knochenbrüche im Alter stehen meistens in Zusammenhang mit Osteoporose. Eine aktuelle schweizweite Analyse zeigt: Nach einer solchen Fraktur bleibt die empfohlene Nachbehandlung meistens aus – was hohe Risiken für Betroffene und erhebliche Folgekosten für das Gesundheitssystem verursacht."
+categories:
+  - "health services research"
+  - "claims data"
+  - "osteoporosis"
+url_source: https://standpunkt.helsana.ch/de/versorgungsluecke-osteoporose
+url_preprint:
+pdf_file: 
+journ: "Helsana Standpunkt"
+issue: 
+page: 
+year: 2026
+---
