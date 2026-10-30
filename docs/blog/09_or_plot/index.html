@@ -81,7 +81,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-c7afea87eca6b90ab36c1d35c560039e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-782d062921f3a959b175905ee57fc3f9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/intersection-observer-polyfill-1.0.0/intersection-observer.js"></script>
+<script src="../../site_libs/quarto-contrib/scrollama-3.2.0/scrollama.min.js"></script>
+<script src="../../site_libs/quarto-contrib/closeread-0.1.0/closeread.js"></script>
 <link href="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
@@ -109,12 +112,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<meta cr-debug-mode="false">
+<meta cr-remove-header-space="false">
 
 
-<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../../site_libs/quarto-contrib/quarto-project/qmd-lab/closeread/closeread.css">
+<link rel="stylesheet" href="../styles_blog_individual.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -168,12 +174,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-page" id="quarto-document-content">
+      <!-- user-provided yaml closeread style options -->
+      <style>
+        :root {
+          --cr-narrative-font-size: 1em;
+--cr-narrative-text-color-sidebar: #666260;
+--cr-section-background-color: #D1D7D3;
+        }
+      </style>
+    
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -187,7 +202,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-page">
 
     <div>
     <div class="quarto-title-meta-heading">Author</div>
@@ -221,25 +236,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </p>
 <div class="quarto-layout-panel" data-layout="[40,10,50]">
 <div class="quarto-layout-row quarto-layout-valign-center">
-<div class="cell quarto-layout-cell" style="flex-basis: 40.0%;justify-content: center;">
+<div class="cell quarto-layout-cell" style="flex-basis: 40.0%;justify-content: flex-start;">
 <div class="cell-output-display">
-<div id="mevcrppmfr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#mevcrppmfr table {
+<div id="eupwcpacpk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#eupwcpacpk table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mevcrppmfr thead, #mevcrppmfr tbody, #mevcrppmfr tfoot, #mevcrppmfr tr, #mevcrppmfr td, #mevcrppmfr th {
+#eupwcpacpk thead, #eupwcpacpk tbody, #eupwcpacpk tfoot, #eupwcpacpk tr, #eupwcpacpk td, #eupwcpacpk th {
   border-style: none;
 }
 
-#mevcrppmfr p {
+#eupwcpacpk p {
   margin: 0;
   padding: 0;
 }
 
-#mevcrppmfr .gt_table {
+#eupwcpacpk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -265,12 +280,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#mevcrppmfr .gt_caption {
+#eupwcpacpk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mevcrppmfr .gt_title {
+#eupwcpacpk .gt_title {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -282,7 +297,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#mevcrppmfr .gt_subtitle {
+#eupwcpacpk .gt_subtitle {
   color: #333333;
   font-size: 14px;
   font-weight: initial;
@@ -294,7 +309,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#mevcrppmfr .gt_heading {
+#eupwcpacpk .gt_heading {
   background-color: #F8F8F6;
   text-align: center;
   border-bottom-color: #F8F8F6;
@@ -306,13 +321,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#mevcrppmfr .gt_bottom_border {
+#eupwcpacpk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mevcrppmfr .gt_col_headings {
+#eupwcpacpk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -327,7 +342,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#mevcrppmfr .gt_col_heading {
+#eupwcpacpk .gt_col_heading {
   color: #333333;
   background-color: #F8F8F6;
   font-size: 14px;
@@ -347,7 +362,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#mevcrppmfr .gt_column_spanner_outer {
+#eupwcpacpk .gt_column_spanner_outer {
   color: #333333;
   background-color: #F8F8F6;
   font-size: 14px;
@@ -359,15 +374,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#mevcrppmfr .gt_column_spanner_outer:first-child {
+#eupwcpacpk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mevcrppmfr .gt_column_spanner_outer:last-child {
+#eupwcpacpk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mevcrppmfr .gt_column_spanner {
+#eupwcpacpk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -379,11 +394,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#mevcrppmfr .gt_spanner_row {
+#eupwcpacpk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mevcrppmfr .gt_group_heading {
+#eupwcpacpk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -409,7 +424,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#mevcrppmfr .gt_empty_group_heading {
+#eupwcpacpk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #F8F8F6;
@@ -424,15 +439,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#mevcrppmfr .gt_from_md > :first-child {
+#eupwcpacpk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mevcrppmfr .gt_from_md > :last-child {
+#eupwcpacpk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mevcrppmfr .gt_row {
+#eupwcpacpk .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -451,7 +466,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#mevcrppmfr .gt_stub {
+#eupwcpacpk .gt_stub {
   color: #333333;
   background-color: #F8F8F6;
   font-size: 100%;
@@ -464,7 +479,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#mevcrppmfr .gt_stub_row_group {
+#eupwcpacpk .gt_stub_row_group {
   color: #333333;
   background-color: #F8F8F6;
   font-size: 100%;
@@ -478,15 +493,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#mevcrppmfr .gt_row_group_first td {
+#eupwcpacpk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mevcrppmfr .gt_row_group_first th {
+#eupwcpacpk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mevcrppmfr .gt_summary_row {
+#eupwcpacpk .gt_summary_row {
   color: #333333;
   background-color: #F8F8F6;
   text-transform: inherit;
@@ -496,16 +511,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#mevcrppmfr .gt_first_summary_row {
+#eupwcpacpk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mevcrppmfr .gt_first_summary_row.thick {
+#eupwcpacpk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mevcrppmfr .gt_last_summary_row {
+#eupwcpacpk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -515,7 +530,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#mevcrppmfr .gt_grand_summary_row {
+#eupwcpacpk .gt_grand_summary_row {
   color: #333333;
   background-color: #F8F8F6;
   text-transform: inherit;
@@ -525,7 +540,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#mevcrppmfr .gt_first_grand_summary_row {
+#eupwcpacpk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -535,7 +550,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#mevcrppmfr .gt_last_grand_summary_row_top {
+#eupwcpacpk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -545,11 +560,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#mevcrppmfr .gt_striped {
+#eupwcpacpk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mevcrppmfr .gt_table_body {
+#eupwcpacpk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -558,7 +573,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#mevcrppmfr .gt_footnotes {
+#eupwcpacpk .gt_footnotes {
   color: #333333;
   background-color: #F8F8F6;
   border-bottom-style: none;
@@ -572,7 +587,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#mevcrppmfr .gt_footnote {
+#eupwcpacpk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -581,7 +596,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#mevcrppmfr .gt_sourcenotes {
+#eupwcpacpk .gt_sourcenotes {
   color: #333333;
   background-color: #F8F8F6;
   border-bottom-style: none;
@@ -595,7 +610,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#mevcrppmfr .gt_sourcenote {
+#eupwcpacpk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -603,227 +618,187 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#mevcrppmfr .gt_left {
+#eupwcpacpk .gt_left {
   text-align: left;
 }
 
-#mevcrppmfr .gt_center {
+#eupwcpacpk .gt_center {
   text-align: center;
 }
 
-#mevcrppmfr .gt_right {
+#eupwcpacpk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mevcrppmfr .gt_font_normal {
+#eupwcpacpk .gt_font_normal {
   font-weight: normal;
 }
 
-#mevcrppmfr .gt_font_bold {
+#eupwcpacpk .gt_font_bold {
   font-weight: bold;
 }
 
-#mevcrppmfr .gt_font_italic {
+#eupwcpacpk .gt_font_italic {
   font-style: italic;
 }
 
-#mevcrppmfr .gt_super {
+#eupwcpacpk .gt_super {
   font-size: 65%;
 }
 
-#mevcrppmfr .gt_footnote_marks {
+#eupwcpacpk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mevcrppmfr .gt_asterisk {
+#eupwcpacpk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mevcrppmfr .gt_indent_1 {
+#eupwcpacpk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mevcrppmfr .gt_indent_2 {
+#eupwcpacpk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mevcrppmfr .gt_indent_3 {
+#eupwcpacpk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mevcrppmfr .gt_indent_4 {
+#eupwcpacpk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mevcrppmfr .gt_indent_5 {
+#eupwcpacpk .gt_indent_5 {
   text-indent: 25px;
 }
 
-#mevcrppmfr .katex-display {
+#eupwcpacpk .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#mevcrppmfr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#eupwcpacpk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
-
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
-<colgroup>
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-</colgroup>
-<thead>
-<tr class="gt_heading header">
-<td colspan="5" class="gt_heading gt_title gt_font_normal" style="text-align: left;"><strong>Model Estimates of <br> Sociodemographic and Health Variables</strong></td>
-</tr>
-<tr class="gt_heading even">
-<td colspan="5" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="text-align: left;">Odds Ratios (OR), Confidence Intervals (CI), p-values</td>
-</tr>
-<tr class="gt_col_headings header">
-<th id="variable" class="gt_col_heading gt_columns_bottom_border gt_left" style="text-align: left;" data-quarto-table-cell-role="th" scope="col">variable</th>
-<th id="OR" class="gt_col_heading gt_columns_bottom_border gt_right" style="text-align: left;" data-quarto-table-cell-role="th" scope="col">OR</th>
-<th id="CI_lower" class="gt_col_heading gt_columns_bottom_border gt_right" style="text-align: left;" data-quarto-table-cell-role="th" scope="col">CI_lower</th>
-<th id="CI_upper" class="gt_col_heading gt_columns_bottom_border gt_right" style="text-align: left;" data-quarto-table-cell-role="th" scope="col">CI_upper</th>
-<th id="p_value" class="gt_col_heading gt_columns_bottom_border gt_right" style="text-align: left;" data-quarto-table-cell-role="th" scope="col">p_value</th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-<tr class="odd">
-<td class="gt_row gt_left" style="text-align: left;" headers="variable">age</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="OR">1.25</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_lower">1.05</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_upper">1.33</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="p_value">0.01100</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" style="text-align: left;" headers="variable">sex_w_vs_m</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="OR">0.90</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_lower">0.72</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_upper">1.13</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="p_value">0.18000</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" style="text-align: left;" headers="variable">region_urban_vs_rural</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="OR">1.19</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_lower">0.97</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_upper">1.29</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="p_value">0.06200</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" style="text-align: left;" headers="variable">region_suburban_vs_rural</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="OR">1.12</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_lower">0.95</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_upper">1.20</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="p_value">0.06200</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" style="text-align: left;" headers="variable">education</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="OR">0.81</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_lower">0.65</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_upper">0.92</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="p_value">0.00900</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" style="text-align: left;" headers="variable">income</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="OR">0.81</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_lower">0.56</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_upper">1.03</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="p_value">0.07300</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" style="text-align: left;" headers="variable">employment_yes_vs_no</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="OR">0.62</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_lower">0.52</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_upper">0.75</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="p_value">0.00200</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" style="text-align: left;" headers="variable">smoking_yes_vs_no</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="OR">1.10</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_lower">0.92</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_upper">1.23</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="p_value">0.19000</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" style="text-align: left;" headers="variable">alcohol</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="OR">1.70</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_lower">1.50</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_upper">1.89</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="p_value">0.00100</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" style="text-align: left;" headers="variable">hypertension_yes_vs_no</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="OR">1.92</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_lower">1.86</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_upper">2.02</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="p_value">0.00010</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" style="text-align: left;" headers="variable">diabetes</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="OR">1.35</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_lower">1.16</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_upper">1.45</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="p_value">0.00400</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" style="text-align: left;" headers="variable">BMI</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="OR">1.32</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_lower">1.23</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_upper">1.44</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="p_value">0.01300</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" style="text-align: left;" headers="variable">physical_activity</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="OR">0.88</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_lower">0.80</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_upper">0.95</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="p_value">0.02100</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" style="text-align: left;" headers="variable">cholesterol</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="OR">1.02</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_lower">0.74</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_upper">1.13</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="p_value">0.81000</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" style="text-align: left;" headers="variable">total_healthcare_costs</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="OR">1.33</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_lower">1.11</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_upper">1.42</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="p_value">0.00030</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" style="text-align: left;" headers="variable">number_hospital_visits</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="OR">1.45</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_lower">1.33</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_upper">1.52</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="p_value">0.00001</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" style="text-align: left;" headers="variable">number_outpatient_consultations</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="OR">1.30</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_lower">1.12</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="CI_upper">1.54</td>
-<td class="gt_row gt_right" style="text-align: left;" headers="p_value">0.00070</td>
-</tr>
-</tbody><tfoot class="gt_sourcenotes">
-<tr class="odd">
-<td colspan="5" class="gt_sourcenote" style="text-align: left;"><em>Note</em>: This model output is entirely hypothetical and was created solely for illustrative purposes. It does not represent real data or imply any real-world conclusions.</td>
-</tr>
-</tfoot>
-
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_heading">
+      <td colspan="5" class="gt_heading gt_title gt_font_normal" style=""><span data-qmd-base64="KipNb2RlbCBFc3RpbWF0ZXMgb2YgPGJyPiBTb2Npb2RlbW9ncmFwaGljIGFuZCBIZWFsdGggVmFyaWFibGVzKio="><span class="gt_from_md"><strong>Model Estimates of <br> Sociodemographic and Health Variables</strong></span></span></td>
+    </tr>
+    <tr class="gt_heading">
+      <td colspan="5" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="">Odds Ratios (OR), Confidence Intervals (CI), p-values</td>
+    </tr>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="variable">variable</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="OR">OR</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="CI_lower">CI_lower</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="CI_upper">CI_upper</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="p_value">p_value</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="variable" class="gt_row gt_left">age</td>
+<td headers="OR" class="gt_row gt_right">1.25</td>
+<td headers="CI_lower" class="gt_row gt_right">1.05</td>
+<td headers="CI_upper" class="gt_row gt_right">1.33</td>
+<td headers="p_value" class="gt_row gt_right">0.01100</td></tr>
+    <tr><td headers="variable" class="gt_row gt_left">sex_w_vs_m</td>
+<td headers="OR" class="gt_row gt_right">0.90</td>
+<td headers="CI_lower" class="gt_row gt_right">0.72</td>
+<td headers="CI_upper" class="gt_row gt_right">1.13</td>
+<td headers="p_value" class="gt_row gt_right">0.18000</td></tr>
+    <tr><td headers="variable" class="gt_row gt_left">region_urban_vs_rural</td>
+<td headers="OR" class="gt_row gt_right">1.19</td>
+<td headers="CI_lower" class="gt_row gt_right">0.97</td>
+<td headers="CI_upper" class="gt_row gt_right">1.29</td>
+<td headers="p_value" class="gt_row gt_right">0.06200</td></tr>
+    <tr><td headers="variable" class="gt_row gt_left">region_suburban_vs_rural</td>
+<td headers="OR" class="gt_row gt_right">1.12</td>
+<td headers="CI_lower" class="gt_row gt_right">0.95</td>
+<td headers="CI_upper" class="gt_row gt_right">1.20</td>
+<td headers="p_value" class="gt_row gt_right">0.06200</td></tr>
+    <tr><td headers="variable" class="gt_row gt_left">education</td>
+<td headers="OR" class="gt_row gt_right">0.81</td>
+<td headers="CI_lower" class="gt_row gt_right">0.65</td>
+<td headers="CI_upper" class="gt_row gt_right">0.92</td>
+<td headers="p_value" class="gt_row gt_right">0.00900</td></tr>
+    <tr><td headers="variable" class="gt_row gt_left">income</td>
+<td headers="OR" class="gt_row gt_right">0.81</td>
+<td headers="CI_lower" class="gt_row gt_right">0.56</td>
+<td headers="CI_upper" class="gt_row gt_right">1.03</td>
+<td headers="p_value" class="gt_row gt_right">0.07300</td></tr>
+    <tr><td headers="variable" class="gt_row gt_left">employment_yes_vs_no</td>
+<td headers="OR" class="gt_row gt_right">0.62</td>
+<td headers="CI_lower" class="gt_row gt_right">0.52</td>
+<td headers="CI_upper" class="gt_row gt_right">0.75</td>
+<td headers="p_value" class="gt_row gt_right">0.00200</td></tr>
+    <tr><td headers="variable" class="gt_row gt_left">smoking_yes_vs_no</td>
+<td headers="OR" class="gt_row gt_right">1.10</td>
+<td headers="CI_lower" class="gt_row gt_right">0.92</td>
+<td headers="CI_upper" class="gt_row gt_right">1.23</td>
+<td headers="p_value" class="gt_row gt_right">0.19000</td></tr>
+    <tr><td headers="variable" class="gt_row gt_left">alcohol</td>
+<td headers="OR" class="gt_row gt_right">1.70</td>
+<td headers="CI_lower" class="gt_row gt_right">1.50</td>
+<td headers="CI_upper" class="gt_row gt_right">1.89</td>
+<td headers="p_value" class="gt_row gt_right">0.00100</td></tr>
+    <tr><td headers="variable" class="gt_row gt_left">hypertension_yes_vs_no</td>
+<td headers="OR" class="gt_row gt_right">1.92</td>
+<td headers="CI_lower" class="gt_row gt_right">1.86</td>
+<td headers="CI_upper" class="gt_row gt_right">2.02</td>
+<td headers="p_value" class="gt_row gt_right">0.00010</td></tr>
+    <tr><td headers="variable" class="gt_row gt_left">diabetes</td>
+<td headers="OR" class="gt_row gt_right">1.35</td>
+<td headers="CI_lower" class="gt_row gt_right">1.16</td>
+<td headers="CI_upper" class="gt_row gt_right">1.45</td>
+<td headers="p_value" class="gt_row gt_right">0.00400</td></tr>
+    <tr><td headers="variable" class="gt_row gt_left">BMI</td>
+<td headers="OR" class="gt_row gt_right">1.32</td>
+<td headers="CI_lower" class="gt_row gt_right">1.23</td>
+<td headers="CI_upper" class="gt_row gt_right">1.44</td>
+<td headers="p_value" class="gt_row gt_right">0.01300</td></tr>
+    <tr><td headers="variable" class="gt_row gt_left">physical_activity</td>
+<td headers="OR" class="gt_row gt_right">0.88</td>
+<td headers="CI_lower" class="gt_row gt_right">0.80</td>
+<td headers="CI_upper" class="gt_row gt_right">0.95</td>
+<td headers="p_value" class="gt_row gt_right">0.02100</td></tr>
+    <tr><td headers="variable" class="gt_row gt_left">cholesterol</td>
+<td headers="OR" class="gt_row gt_right">1.02</td>
+<td headers="CI_lower" class="gt_row gt_right">0.74</td>
+<td headers="CI_upper" class="gt_row gt_right">1.13</td>
+<td headers="p_value" class="gt_row gt_right">0.81000</td></tr>
+    <tr><td headers="variable" class="gt_row gt_left">total_healthcare_costs</td>
+<td headers="OR" class="gt_row gt_right">1.33</td>
+<td headers="CI_lower" class="gt_row gt_right">1.11</td>
+<td headers="CI_upper" class="gt_row gt_right">1.42</td>
+<td headers="p_value" class="gt_row gt_right">0.00030</td></tr>
+    <tr><td headers="variable" class="gt_row gt_left">number_hospital_visits</td>
+<td headers="OR" class="gt_row gt_right">1.45</td>
+<td headers="CI_lower" class="gt_row gt_right">1.33</td>
+<td headers="CI_upper" class="gt_row gt_right">1.52</td>
+<td headers="p_value" class="gt_row gt_right">0.00001</td></tr>
+    <tr><td headers="variable" class="gt_row gt_left">number_outpatient_consultations</td>
+<td headers="OR" class="gt_row gt_right">1.30</td>
+<td headers="CI_lower" class="gt_row gt_right">1.12</td>
+<td headers="CI_upper" class="gt_row gt_right">1.54</td>
+<td headers="p_value" class="gt_row gt_right">0.00070</td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="5"><span data-qmd-base64="Kk5vdGUqOiBUaGlzIG1vZGVsIG91dHB1dCBpcyBlbnRpcmVseSBoeXBvdGhldGljYWwgYW5kCiAgICAgICAgICAgICAgICAgICAgIHdhcyBjcmVhdGVkIHNvbGVseSBmb3IgaWxsdXN0cmF0aXZlIHB1cnBvc2VzLiAKICAgICAgICAgICAgICAgICAgICAgSXQgZG9lcyBub3QgcmVwcmVzZW50IHJlYWwgZGF0YSBvciBpbXBseSBhbnkgcmVhbC13b3JsZCBjb25jbHVzaW9ucy4="><span class="gt_from_md"><em>Note</em>: This model output is entirely hypothetical and
+was created solely for illustrative purposes.
+It does not represent real data or imply any real-world conclusions.</span></span></td>
+    </tr>
+  </tfoot>
+  
 </table>
-
 </div>
 </div>
 </div>
@@ -856,8 +831,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Now let`s start building up the plot step by step.</p>
 <p><br>
 </p>
-<div class="cr-section">
-<section id="setting-up-the-layout" class="level2" data-focus-on="cr-plot-layout-I">
+<div class="cr-section cr-column-screen sidebar-left">
+<div class="narrative-col">
+<div class="trigger new-trigger" data-focus-on="cr-plot-layout-I">
+<section id="setting-up-the-layout" class="level2 narrative">
 <h2 class="anchored" data-anchor-id="setting-up-the-layout">Setting Up the Layout</h2>
 <p>First, let’s arrange the grid with the main plot and the coefficients on the right side using <a href="https://patchwork.data-imaginist.com/"><code>{patchwork}</code></a>. (For simplicity, code for the assembled plot output is not shown in the following chunks.).</p>
 <div class="cell">
@@ -867,33 +844,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>mainPlot <span class="sc">+</span> rightPlot <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">widths =</span> <span class="fu">c</span>(<span class="fl">1.8</span>,<span class="fl">1.2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<div id="cr-plot-layout-I">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
 </div>
-</div>
-</div>
-</div>
-<section id="building-the-main-plot" class="level2" data-focus-on="cr-plot-layout-II">
+<div class="trigger new-trigger" data-focus-on="cr-plot-layout-II">
+<section id="building-the-main-plot" class="level2 narrative">
 <h2 class="anchored" data-anchor-id="building-the-main-plot">Building the Main Plot</h2>
 <p>Let’s focus on building up the main plot first.</p>
 </section>
-<div id="cr-plot-layout-II">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
 </div>
-</div>
-</div>
-</div>
-<div data-focus-on="cr-main-plot-1">
+<div class="trigger new-trigger" data-focus-on="cr-main-plot-1">
+<div class="narrative">
 <p>Let’s start by simply plotting the odds ratios and confidence intervals.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mainPlot <span class="ot">&lt;-</span> </span>
@@ -905,18 +864,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Rather than displaying variables in alphabetical order, it would be more intuitive to group them logically — e.g.&nbsp;with sociodemographic variables appearing at the top, followed by health variables below.</p>
 </div>
-<div id="cr-main-plot-1">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
 </div>
-</div>
-</div>
-</div>
-<div data-focus-on="cr-main-plot-2">
+<div class="trigger new-trigger" data-focus-on="cr-main-plot-2">
+<div class="narrative">
 <p>To reorder the variables, I converted them into an ordered factor with new labels (see data preparation code) and used <code>fct_rev()</code> from <a href="https://forcats.tidyverse.org/"><code>{forcats}</code></a> to reverse their order on the plot.</p>
 <div class="cell" data-source-line-numbers="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" data-source-line-numbers="3" data-code-line-numbers="3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mainPlot <span class="ot">&lt;-</span> </span>
@@ -927,18 +877,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">height =</span> <span class="fl">0.0</span>, <span class="at">size =</span> <span class="fl">0.70</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
-<div id="cr-main-plot-2">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
 </div>
-</div>
-</div>
-</div>
-<div data-focus-on="cr-main-plot-3">
+<div class="trigger new-trigger" data-focus-on="cr-main-plot-3">
+<div class="narrative">
 <p>To enhance the plot’s structure, we can add subtitles that categorize the variable types — <em>Sociodemographic</em> and <em>Health Status</em> (see data preparation).</p>
 <p>The subtitles can be formatted in bold by wrapping the text with <code>**...**</code> and using <code>element_markdown()</code> from <a href="https://wilkelab.org/ggtext/"><code>{ggtext}</code></a>.</p>
 <div class="cell" data-source-line-numbers="7">
@@ -951,18 +892,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.y =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
-<div id="cr-main-plot-3">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
 </div>
-</div>
-</div>
-</div>
-<div data-focus-on="cr-main-plot-4">
+<div class="trigger new-trigger" data-focus-on="cr-main-plot-4">
+<div class="narrative">
 <p>Next, let’s make our main plot look a bit more polished…</p>
 <div class="cell" data-source-line-numbers="7-8,10-14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" data-source-line-numbers="7-8,10-14" data-code-line-numbers="7-8,10-14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mainPlot <span class="ot">&lt;-</span> </span>
@@ -981,18 +913,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.position =</span> <span class="st">'none'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
-<div id="cr-main-plot-4">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
 </div>
-</div>
-</div>
-</div>
-<div data-focus-on="cr-main-plot-50">
+<div class="trigger new-trigger" data-focus-on="cr-main-plot-50">
+<div class="narrative">
 <p>… and add a vertical reference line at OR = 1 to support visual interpretation.</p>
 <div class="cell" data-source-line-numbers="7-8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" data-source-line-numbers="7-8" data-code-line-numbers="7-8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mainPlot <span class="ot">&lt;-</span> </span>
@@ -1013,18 +936,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.position =</span> <span class="st">'none'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
-<div id="cr-main-plot-50">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
 </div>
-</div>
-</div>
-</div>
-<div data-focus-on="cr-main-plot-5">
+<div class="trigger new-trigger" data-focus-on="cr-main-plot-5">
+<div class="narrative">
 <p>Finally, points and error-bars can be colored based on the p-value significance level, using the <code>p_value_sign</code> variable (see data preparation).</p>
 <div class="cell" data-source-line-numbers="4,10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" data-source-line-numbers="4,10" data-code-line-numbers="4,10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mainPlot <span class="ot">&lt;-</span> </span>
@@ -1047,33 +961,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.position =</span> <span class="st">'none'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
-<div id="cr-main-plot-5">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
 </div>
-</div>
-</div>
-</div>
-<section id="creating-the-right-panel" class="level2" data-focus-on="cr-right-plot-1">
+<div class="trigger new-trigger" data-focus-on="cr-right-plot-1">
+<section id="creating-the-right-panel" class="level2 narrative">
 <h2 class="anchored" data-anchor-id="creating-the-right-panel">Creating the Right Panel</h2>
 <p>Now let’s focus on the right side of the plot…</p>
 </section>
-<div id="cr-right-plot-1">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
 </div>
-</div>
-</div>
-</div>
-<div data-focus-on="cr-right-plot-2">
+<div class="trigger new-trigger" data-focus-on="cr-right-plot-2">
+<div class="narrative">
 <p>First, let’s plot the coefficients (OR and CI) and p-values as text. Looks horrible 😵.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>rightPlot <span class="ot">&lt;-</span>  </span>
@@ -1083,18 +979,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fl">0.5</span>, <span class="at">label =</span> p_value_cat), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">hjust =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
-<div id="cr-right-plot-2">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
 </div>
-</div>
-</div>
-</div>
-<div data-focus-on="cr-right-plot-3">
+<div class="trigger new-trigger" data-focus-on="cr-right-plot-3">
+<div class="narrative">
 <p>Remove axes, labels and grid lines. Much better 🤓.</p>
 <div class="cell" data-source-line-numbers="6,7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" data-source-line-numbers="6,7" data-code-line-numbers="6,7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>rightPlot <span class="ot">&lt;-</span>  </span>
@@ -1106,18 +993,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">'none'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
-<div id="cr-right-plot-3">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
 </div>
-</div>
-</div>
-</div>
-<div data-focus-on="cr-right-plot-4">
+<div class="trigger new-trigger" data-focus-on="cr-right-plot-4">
+<div class="narrative">
 <p>Next, let’s also color-code the coefficients and p-values based on significance level. To make significant p-values stand out, I’ve used <code>geom_richtext()</code> from <a href="https://wilkelab.org/ggtext/"><code>{ggtext}</code></a> to display them in bold.</p>
 <div class="cell" data-source-line-numbers="5,7-12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10" data-source-line-numbers="5,7-12" data-code-line-numbers="5,7-12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>rightPlot <span class="ot">&lt;-</span>  </span>
@@ -1136,18 +1014,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">'none'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
-<div id="cr-right-plot-4">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
 </div>
-</div>
-</div>
-</div>
-<div data-focus-on="cr-right-plot-5">
+<div class="trigger new-trigger" data-focus-on="cr-right-plot-5">
+<div class="narrative">
 <p>Let’s add titles for the <em>OR (CI)</em> and <em>p-value</em> columns. <code>coord_cartesian()</code> helps to adjust the y-axis limits so that the titles are positioned nicely within the plot.</p>
 <div class="cell" data-source-line-numbers="13-17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11" data-source-line-numbers="13-17" data-code-line-numbers="13-17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>rightPlot <span class="ot">&lt;-</span>  </span>
@@ -1171,18 +1040,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">'none'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
-<div id="cr-right-plot-5">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
 </div>
-</div>
-</div>
-</div>
-<section id="final-plot" class="level2" data-focus-on="cr-right-plot-6">
+<div class="trigger new-trigger" data-focus-on="cr-right-plot-6">
+<section id="final-plot" class="level2 narrative">
 <h2 class="anchored" data-anchor-id="final-plot">Final Plot</h2>
 <p>Let’s make sure the y-axes of both plots are aligned so they’re at exactly the same height, using the same <code>coord_cartesian()</code> setting in both the main plot and right plot.</p>
 <div class="cell">
@@ -1192,18 +1052,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fu">dim</span>(data)[<span class="dv">1</span>]<span class="sc">+</span><span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<div id="cr-right-plot-6">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
 </div>
-</div>
-</div>
-</div>
-<div data-focus-on="cr-right-plot-7">
+<div class="trigger new-trigger" data-focus-on="cr-right-plot-7">
+<div class="narrative">
 <p>To finalize, let’s add some annotation using <a href="https://patchwork.data-imaginist.com/"><code>{patchwork}</code></a>.</p>
 <div class="cell" data-source-line-numbers="2-8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13" data-source-line-numbers="2-8" data-code-line-numbers="2-8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mainPlot <span class="sc">+</span> rightPlot <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">widths =</span> <span class="fu">c</span>(<span class="fl">1.8</span>,<span class="fl">1.2</span>)) <span class="sc">+</span></span>
@@ -1214,7 +1065,165 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
-<div id="cr-right-plot-7">
+</div>
+</div>
+<div class="sticky-col">
+<div class="sticky-col-stack">
+<div id="cr-plot-layout-I" class="sticky">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="cr-plot-layout-II" class="sticky">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="cr-main-plot-1" class="sticky">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="cr-main-plot-2" class="sticky">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="cr-main-plot-3" class="sticky">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="cr-main-plot-4" class="sticky">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="cr-main-plot-50" class="sticky">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="cr-main-plot-5" class="sticky">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="cr-right-plot-1" class="sticky">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="cr-right-plot-2" class="sticky">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="cr-right-plot-3" class="sticky">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="cr-right-plot-4" class="sticky">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="cr-right-plot-5" class="sticky">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="cr-right-plot-6" class="sticky">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="cr-right-plot-7" class="sticky">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1226,12 +1235,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+</div>
+</div>
 <p><br>
 <br>
 </p>
 <p>That’s it! Now we have an informative plot of model estimates with odds ratios, confidence intervals, and p-values - all nicely formatted and aligned.</p>
 <p>Here you find the complete code:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>R code: data</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># library(R.utils)</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># library(tidyverse)</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1373,8 +1386,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-139"><a href="#cb14-139" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-140"><a href="#cb14-140" aria-hidden="true" tabindex="-1"></a><span class="co"># Example usage</span></span>
 <span id="cb14-141"><a href="#cb14-141" aria-hidden="true" tabindex="-1"></a><span class="co"># data &lt;- model_data()$data.final</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 </div>
 <div class="cell">
+<details class="code-fold">
+<summary>R code: plot</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># library(ggplot2)</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># library(patchwork)</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># library(ggtext)</span></span>
@@ -1442,6 +1458,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-65"><a href="#cb15-65" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-66"><a href="#cb15-66" aria-hidden="true" tabindex="-1"></a><span class="co"># Example usage:</span></span>
 <span id="cb15-67"><a href="#cb15-67" aria-hidden="true" tabindex="-1"></a><span class="co"># model_plot(data = data)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
